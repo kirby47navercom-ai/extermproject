@@ -1,0 +1,14 @@
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarDemo\bin\Release\PDollarDemo.exe.config
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarDemo\bin\Release\PDollarDemo.exe
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarDemo\bin\Release\PDollarDemo.pdb
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarDemo\bin\Release\PDollarGestureRecognizer.dll
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarDemo\bin\Release\PDollarGestureRecognizer.pdb
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarDemo\obj\x86\Release\PDollarDemo.csproj.AssemblyReference.cache
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarDemo\obj\x86\Release\PDollarDemo.FormIntro.resources
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarDemo\obj\x86\Release\PDollarDemo.FormMain.resources
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarDemo\obj\x86\Release\PDollarDemo.Properties.Resources.resources
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarDemo\obj\x86\Release\PDollarDemo.csproj.GenerateResource.cache
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarDemo\obj\x86\Release\PDollarDemo.csproj.CoreCompileInputs.cache
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarDemo\obj\x86\Release\PDollarD.4698711A.Up2Date
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarDemo\obj\x86\Release\PDollarDemo.exe
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarDemo\obj\x86\Release\PDollarDemo.pdb

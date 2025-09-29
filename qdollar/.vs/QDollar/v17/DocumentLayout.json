@@ -1,0 +1,263 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{19428BB1-E0E6-409E-A488-91A9CA731555}|PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj|C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\pdollargesturerecognizer\\geometry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{19428BB1-E0E6-409E-A488-91A9CA731555}|PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj|solutionrelative:pdollargesturerecognizer\\geometry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{19428BB1-E0E6-409E-A488-91A9CA731555}|PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj|C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\pdollargesturerecognizer\\point.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{19428BB1-E0E6-409E-A488-91A9CA731555}|PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj|solutionrelative:pdollargesturerecognizer\\point.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{19428BB1-E0E6-409E-A488-91A9CA731555}|PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj|C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\pdollargesturerecognizer\\gesture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{19428BB1-E0E6-409E-A488-91A9CA731555}|PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj|solutionrelative:pdollargesturerecognizer\\gesture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5B65AFB-B509-4FA3-A098-5DE56056EBB8}|PDollarDemo\\PDollarDemo.csproj|C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\pdollardemo\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5B65AFB-B509-4FA3-A098-5DE56056EBB8}|PDollarDemo\\PDollarDemo.csproj|solutionrelative:pdollardemo\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5B65AFB-B509-4FA3-A098-5DE56056EBB8}|PDollarDemo\\PDollarDemo.csproj|C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\pdollardemo\\gestureio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5B65AFB-B509-4FA3-A098-5DE56056EBB8}|PDollarDemo\\PDollarDemo.csproj|solutionrelative:pdollardemo\\gestureio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5B65AFB-B509-4FA3-A098-5DE56056EBB8}|PDollarDemo\\PDollarDemo.csproj|C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\pdollardemo\\experiment_classificationtime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5B65AFB-B509-4FA3-A098-5DE56056EBB8}|PDollarDemo\\PDollarDemo.csproj|solutionrelative:pdollardemo\\experiment_classificationtime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|PDollarGestureRecognizer||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5B65AFB-B509-4FA3-A098-5DE56056EBB8}|PDollarDemo\\PDollarDemo.csproj|c:\\users\\kirby\\onedrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\pdollardemo\\properties\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5B65AFB-B509-4FA3-A098-5DE56056EBB8}|PDollarDemo\\PDollarDemo.csproj|solutionrelative:pdollardemo\\properties\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5B65AFB-B509-4FA3-A098-5DE56056EBB8}|PDollarDemo\\PDollarDemo.csproj|C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\pdollardemo\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{D5B65AFB-B509-4FA3-A098-5DE56056EBB8}|PDollarDemo\\PDollarDemo.csproj|solutionrelative:pdollardemo\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5B65AFB-B509-4FA3-A098-5DE56056EBB8}|PDollarDemo\\PDollarDemo.csproj|c:\\users\\kirby\\onedrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\pdollardemo\\formintro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D5B65AFB-B509-4FA3-A098-5DE56056EBB8}|PDollarDemo\\PDollarDemo.csproj|solutionrelative:pdollardemo\\formintro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{19428BB1-E0E6-409E-A488-91A9CA731555}|PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj|C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\pdollargesturerecognizer\\qpointcloudrecognizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{19428BB1-E0E6-409E-A488-91A9CA731555}|PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj|solutionrelative:pdollargesturerecognizer\\qpointcloudrecognizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{19428BB1-E0E6-409E-A488-91A9CA731555}|PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj|C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\pdollargesturerecognizer\\properties\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{19428BB1-E0E6-409E-A488-91A9CA731555}|PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj|solutionrelative:pdollargesturerecognizer\\properties\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{19428BB1-E0E6-409E-A488-91A9CA731555}|PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj|C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\pdollargesturerecognizer\\pointcloudrecognizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{19428BB1-E0E6-409E-A488-91A9CA731555}|PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj|solutionrelative:pdollargesturerecognizer\\pointcloudrecognizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{19428BB1-E0E6-409E-A488-91A9CA731555}|PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj|C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\pdollargesturerecognizer\\pointcloudrecognizerplus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{19428BB1-E0E6-409E-A488-91A9CA731555}|PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj|solutionrelative:pdollargesturerecognizer\\pointcloudrecognizerplus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{19428BB1-E0E6-409E-A488-91A9CA731555}|PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj|c:\\users\\kirby\\onedrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\pdollargesturerecognizer\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 15,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{269a02dc-6af8-11d3-bdc4-00c04f688e50}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PDollarGestureRecognizer",
+              "DocumentMoniker": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj",
+              "RelativeDocumentMoniker": "PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj",
+              "ToolTip": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj",
+              "RelativeToolTip": "PDollarGestureRecognizer\\PDollarGestureRecognizer.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-09-28T16:18:01.943Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "FormIntro.cs [\uB514\uC790\uC778]",
+              "DocumentMoniker": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarDemo\\FormIntro.cs",
+              "RelativeDocumentMoniker": "PDollarDemo\\FormIntro.cs",
+              "ToolTip": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarDemo\\FormIntro.cs [\uB514\uC790\uC778]",
+              "RelativeToolTip": "PDollarDemo\\FormIntro.cs [\uB514\uC790\uC778]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T16:06:51.299Z",
+              "EditorCaption": " [\uB514\uC790\uC778]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AssemblyInfo.cs",
+              "DocumentMoniker": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarDemo\\Properties\\AssemblyInfo.cs",
+              "RelativeDocumentMoniker": "PDollarDemo\\Properties\\AssemblyInfo.cs",
+              "ToolTip": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarDemo\\Properties\\AssemblyInfo.cs",
+              "RelativeToolTip": "PDollarDemo\\Properties\\AssemblyInfo.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACIAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T16:05:16.662Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AssemblyInfo.cs",
+              "DocumentMoniker": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarGestureRecognizer\\Properties\\AssemblyInfo.cs",
+              "RelativeDocumentMoniker": "PDollarGestureRecognizer\\Properties\\AssemblyInfo.cs",
+              "ToolTip": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarGestureRecognizer\\Properties\\AssemblyInfo.cs",
+              "RelativeToolTip": "PDollarGestureRecognizer\\Properties\\AssemblyInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T16:04:54.507Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "app.config",
+              "DocumentMoniker": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarDemo\\app.config",
+              "RelativeDocumentMoniker": "PDollarDemo\\app.config",
+              "ToolTip": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarDemo\\app.config",
+              "RelativeToolTip": "PDollarDemo\\app.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-09-28T15:33:07.185Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GestureIO.cs",
+              "DocumentMoniker": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarDemo\\GestureIO.cs",
+              "RelativeDocumentMoniker": "PDollarDemo\\GestureIO.cs",
+              "ToolTip": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarDemo\\GestureIO.cs",
+              "RelativeToolTip": "PDollarDemo\\GestureIO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T12:45:14.674Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarDemo\\Program.cs",
+              "RelativeDocumentMoniker": "PDollarDemo\\Program.cs",
+              "ToolTip": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarDemo\\Program.cs",
+              "RelativeToolTip": "PDollarDemo\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T12:45:10.054Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PointCloudRecognizer.cs",
+              "DocumentMoniker": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarGestureRecognizer\\PointCloudRecognizer.cs",
+              "RelativeDocumentMoniker": "PDollarGestureRecognizer\\PointCloudRecognizer.cs",
+              "ToolTip": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarGestureRecognizer\\PointCloudRecognizer.cs",
+              "RelativeToolTip": "PDollarGestureRecognizer\\PointCloudRecognizer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFAAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T12:45:04.906Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "PointCloudRecognizerPlus.cs",
+              "DocumentMoniker": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarGestureRecognizer\\PointCloudRecognizerPlus.cs",
+              "RelativeDocumentMoniker": "PDollarGestureRecognizer\\PointCloudRecognizerPlus.cs",
+              "ToolTip": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarGestureRecognizer\\PointCloudRecognizerPlus.cs",
+              "RelativeToolTip": "PDollarGestureRecognizer\\PointCloudRecognizerPlus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T12:43:47.279Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "QPointCloudRecognizer.cs",
+              "DocumentMoniker": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarGestureRecognizer\\QPointCloudRecognizer.cs",
+              "RelativeDocumentMoniker": "PDollarGestureRecognizer\\QPointCloudRecognizer.cs",
+              "ToolTip": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarGestureRecognizer\\QPointCloudRecognizer.cs",
+              "RelativeToolTip": "PDollarGestureRecognizer\\QPointCloudRecognizer.cs",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T12:43:42.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Experiment_ClassificationTime.cs",
+              "DocumentMoniker": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarDemo\\Experiment_ClassificationTime.cs",
+              "RelativeDocumentMoniker": "PDollarDemo\\Experiment_ClassificationTime.cs",
+              "ToolTip": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarDemo\\Experiment_ClassificationTime.cs",
+              "RelativeToolTip": "PDollarDemo\\Experiment_ClassificationTime.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHQAAABXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-26T12:10:51.694Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Point.cs",
+              "DocumentMoniker": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarGestureRecognizer\\Point.cs",
+              "RelativeDocumentMoniker": "PDollarGestureRecognizer\\Point.cs",
+              "ToolTip": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarGestureRecognizer\\Point.cs",
+              "RelativeToolTip": "PDollarGestureRecognizer\\Point.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-26T12:10:48.232Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Gesture.cs",
+              "DocumentMoniker": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarGestureRecognizer\\Gesture.cs",
+              "RelativeDocumentMoniker": "PDollarGestureRecognizer\\Gesture.cs",
+              "ToolTip": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarGestureRecognizer\\Gesture.cs",
+              "RelativeToolTip": "PDollarGestureRecognizer\\Gesture.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAEgAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-26T12:10:42.414Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Geometry.cs",
+              "DocumentMoniker": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarGestureRecognizer\\Geometry.cs",
+              "RelativeDocumentMoniker": "PDollarGestureRecognizer\\Geometry.cs",
+              "ToolTip": "C:\\Users\\kirby\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git\\extermproject\\qdollar\\PDollarGestureRecognizer\\Geometry.cs",
+              "RelativeToolTip": "PDollarGestureRecognizer\\Geometry.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEUAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-26T12:10:39.213Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

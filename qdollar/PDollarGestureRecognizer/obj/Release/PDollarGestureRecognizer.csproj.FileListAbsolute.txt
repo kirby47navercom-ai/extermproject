@@ -1,0 +1,6 @@
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarGestureRecognizer\bin\Release\PDollarGestureRecognizer.dll
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarGestureRecognizer\bin\Release\PDollarGestureRecognizer.pdb
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarGestureRecognizer\obj\Release\PDollarGestureRecognizer.csproj.AssemblyReference.cache
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarGestureRecognizer\obj\Release\PDollarGestureRecognizer.csproj.CoreCompileInputs.cache
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarGestureRecognizer\obj\Release\PDollarGestureRecognizer.dll
+C:\Users\kirby\OneDrive\바탕 화면\qdollar\PDollarGestureRecognizer\obj\Release\PDollarGestureRecognizer.pdb
