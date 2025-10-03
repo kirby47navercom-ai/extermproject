@@ -179,27 +179,59 @@ ramona_coordinate = {'idle': ramona_coordinate, 'walk': ramona_walk_coordinate, 
                      'gameclear': ramona_gameclear_coordinate, 'action1': ramona_action1_coordinate, 'action2': ramona_action2_coordinate,
                      'action3': ramana_action3_coordinate, 'action4': ramona_action4_coordinate, 'action5': ramona_action5_coordinate, 'action6': ramona_action6_coordinate}
 
-image_idle = load_image('Ramona\\Ramona_idle.png')
-image_walk = load_image('Ramona\\Ramona_walk.png')
-image_run = load_image('Ramona\\Ramona_run.png')
-image_jump = load_image('Ramona\\Ramona_jump.png')
-image_double_jump = load_image('Ramona\\Ramona_double_jump.png')
-image_hit = load_image('Ramona\\Ramona_hit.png')
-image_evade = load_image('Ramona\\Ramona_evade.png')
-image_getup = load_image('Ramona\\Ramona_getup.png')
-image_dead = load_image('Ramona\\Ramona_dead.png')
-image_revived = load_image('Ramona\\Ramona_revived.png')
-image_stageclear = load_image('Ramona\\Ramona_stageclear.png')
-image_gameclear = load_image('Ramona\\Ramona_gameclear.png')
-image_action1 = load_image('Ramona\\Ramona_action1.png')
-image_action2 = load_image('Ramona\\Ramona_action2.png')
-image_action3 = load_image('Ramona\\Ramona_action3.png')
-image_action4 = load_image('Ramona\\Ramona_action4.png')
-image_action5 = load_image('Ramona\\Ramona_action5.png')
-image_action6 = load_image('Ramona\\Ramona_action6.png')
-ramona_image = {'idle': image_idle, 'walk': image_walk, 'run': image_run, 'jump': image_jump,
-              'double_jump': image_double_jump, 'hit': image_hit, 'evade':
-                  image_evade, 'getup': image_getup, 'dead': image_dead, 'revive': image_revived,
-              'stageclear': image_stageclear, 'gameclear': image_gameclear, 'action1': image_action1,
-              'action2': image_action2, 'action3': image_action3, 'action4': image_action4,
-              'action5': image_action5, 'action6': image_action6}
+image_idle = None
+image_walk = None
+image_run = None
+image_jump = None
+image_double_jump = None
+image_hit = None
+image_evade = None
+image_getup = None
+image_dead = None
+image_revived = None
+image_stageclear = None
+image_gameclear = None
+image_action1 = None
+image_action2 = None
+image_action3 = None
+image_action4 = None
+image_action5 = None
+image_action6 = None
+
+ramona_image = {}  # 비어있는 dict 준비
+
+# 함수로 묶기
+def load_resources():
+    global image_idle, image_walk, image_run, image_jump, image_double_jump
+    global image_hit, image_evade, image_getup, image_dead, image_revived
+    global image_stageclear, image_gameclear
+    global image_action1, image_action2, image_action3, image_action4, image_action5, image_action6
+    global ramona_image
+
+    image_idle = load_image('Ramona\\Ramona_idle.png')
+    image_walk = load_image('Ramona\\Ramona_walk.png')
+    image_run = load_image('Ramona\\Ramona_run.png')
+    image_jump = load_image('Ramona\\Ramona_jump.png')
+    image_double_jump = load_image('Ramona\\Ramona_double_jump.png')
+    image_hit = load_image('Ramona\\Ramona_hit.png')
+    image_evade = load_image('Ramona\\Ramona_evade.png')
+    image_getup = load_image('Ramona\\Ramona_getup.png')
+    image_dead = load_image('Ramona\\Ramona_dead.png')
+    image_revived = load_image('Ramona\\Ramona_revived.png')
+    image_stageclear = load_image('Ramona\\Ramona_stageclear.png')
+    image_gameclear = load_image('Ramona\\Ramona_gameclear.png')
+    image_action1 = load_image('Ramona\\Ramona_action1.png')
+    image_action2 = load_image('Ramona\\Ramona_action2.png')
+    image_action3 = load_image('Ramona\\Ramona_action3.png')
+    image_action4 = load_image('Ramona\\Ramona_action4.png')
+    image_action5 = load_image('Ramona\\Ramona_action5.png')
+    image_action6 = load_image('Ramona\\Ramona_action6.png')
+
+    ramona_image = {
+        'idle': image_idle, 'walk': image_walk, 'run': image_run, 'jump': image_jump,
+        'double_jump': image_double_jump, 'hit': image_hit, 'evade': image_evade,
+        'getup': image_getup, 'dead': image_dead, 'revive': image_revived,
+        'stageclear': image_stageclear, 'gameclear': image_gameclear, 'action1': image_action1,
+        'action2': image_action2, 'action3': image_action3, 'action4': image_action4,
+        'action5': image_action5, 'action6': image_action6
+    }

@@ -3,7 +3,7 @@ import resource
 
 
 class Ramona:
-    def init(self):
+    def __init__(self):
         self.x, self.y = 100, 150
         self.frame = 0
         self.dir = 0
@@ -19,11 +19,12 @@ class Ramona:
 
     def update(self,frame_time):
 
-        self.handle_event(self,frame_time)
+        self.handle_event(frame_time)
         pass
 
     def handle_event(self,frame_time):
         global events, state
+        state = self.state
         events = get_events()
         for event in events:
             if event.type == SDL_KEYDOWN:
@@ -34,7 +35,7 @@ class Ramona:
                     else:
                         state = 'walk'
                         self.dir= -1
-                        self.walk(self,self.flip,frame_time)
+                        self.walk(frame_time)
                 elif event.key == SDLK_RIGHT or event.key == ord("d") or event.key == ord("D"):
                     self.flip = False
                     if event.key == SDLK_LSHIFT:
@@ -42,7 +43,7 @@ class Ramona:
                     else:
                         state = 'walk'
                         self.dir = 1
-                        self.walk(self,  self.flip, frame_time)
+                        self.walk(frame_time)
 
                 elif event.key == SDLK_SPACE:
                     pass
@@ -50,28 +51,36 @@ class Ramona:
                 elif event.key == SDLK_ESCAPE:
                     quit()
             elif event.type == SDL_KEYUP:
-                self.state = 'idle'
-            elif self.state == 'idle':
-                self.idle(self,self.flip,frame_time)
+                state = 'idle'
 
-        if self.state != state:
-            self.frame = 0
 
-    def walk(self,flip,frame_time):
+
+            if state == 'idle':
+                self.idle(frame_time)
+
+            if self.state != state:
+                self.frame = 0
+
+            self.state = state
+
+    def move_update(self):
+        pass
+
+    def walk(self,frame_time):
         ramona_walk_speed = 200.0
         self.x+=ramona_walk_speed * frame_time * self.dir
         self.frame = (self.frame + self.animation_speed * frame_time) % 6
         pass
 
-    def idle(self,flip,frame_time):
+    def idle(self,frame_time):
         self.frame = (self.frame + self.animation_speed * frame_time) % 6
         pass
 
     def draw(self):
-        if self.flip == False:
-            left, bottom, width, height, jx, jy = self.coordinate[self.state]
+        frame_idx = int(self.frame)
+        left, bottom, width, height, jx, jy = self.coordinate[self.state][frame_idx]
+        if not self.flip:
             self.image[self.state].clip_composite_draw(left, bottom, width, height, 0, '', self.x, self.y, width * 2, height * 2)
         else:
-            left, bottom, width, height, jx, jy = self.coordinate[self.state]
             self.image[self.state].clip_composite_draw(left, bottom, width, height, 0, 'h', self.x, self.y, width * 2, height * 2)
         pass

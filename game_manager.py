@@ -2,18 +2,18 @@ from pico2d import *
 import ramona
 
 def init():
-    global ramona
-    ramona = ramona.Ramona()
+    global player
+    player = ramona.Ramona()
     pass
 
 def update(frame_time):
-    global ramona
-    ramona.update(frame_time)
+    global player
+    player.update(frame_time)
     pass
 
 def render():
-    global ramona
+    global player
     clear_canvas()
-    ramona.draw()
+    player.draw()
     update_canvas()
     pass
