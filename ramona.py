@@ -20,50 +20,46 @@ class Ramona:
     def update(self,frame_time):
 
         self.handle_event(frame_time)
+        self.move_update(frame_time)
         pass
 
     def handle_event(self,frame_time):
-        global events, state
         state = self.state
         events = get_events()
         for event in events:
             if event.type == SDL_KEYDOWN:
-                if event.key == SDLK_LEFT or event.key == ord("a") or event.key == ord("A"):
+                if event.key == ord("a") or event.key == ord("A"):
                     self.flip = True
                     if event.key == SDLK_LSHIFT:
                         state = 'run'
                     else:
                         state = 'walk'
                         self.dir= -1
-                        self.walk(frame_time)
-                elif event.key == SDLK_RIGHT or event.key == ord("d") or event.key == ord("D"):
+                elif event.key == ord("d") or event.key == ord("D"):
                     self.flip = False
                     if event.key == SDLK_LSHIFT:
                         state = 'run'
                     else:
                         state = 'walk'
                         self.dir = 1
-                        self.walk(frame_time)
 
                 elif event.key == SDLK_SPACE:
                     pass
 
                 elif event.key == SDLK_ESCAPE:
                     quit()
-            elif event.type == SDL_KEYUP:
-                state = 'idle'
-
-
-
-            if state == 'idle':
-                self.idle(frame_time)
+            else: state='idle'
 
             if self.state != state:
                 self.frame = 0
 
             self.state = state
 
-    def move_update(self):
+    def move_update(self,frame_time):
+        if self.state == 'idle':
+            self.idle(frame_time)
+        elif self.state == 'walk':
+            self.walk(frame_time)
         pass
 
     def walk(self,frame_time):
