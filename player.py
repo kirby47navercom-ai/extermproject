@@ -31,10 +31,39 @@ class Player:
         self.image_action6 = load_image('Ramona\\Ramona_action6.png')
 
     def update(self):
+
+        self.handle_event(self)
         pass
 
     def handle_event(self):
+        global events, state
+        events = get_events()
+        for event in events:
+            if event.type == SDL_KEYDOWN:
+                if event.key == SDLK_LEFT or event.key == ord("a") or event.key == ord("A"):
+                    if event.key == SDLK_LSHIFT:
+                        state = 'run'
+                    else:
+                        state = 'walk'
+                elif event.key == SDLK_RIGHT or event.key == ord("d") or event.key == ord("D"):
+                    if event.key == SDLK_LSHIFT:
+                        state = 'run'
+                    else:
+                        state = 'walk'
 
-        pass
+                elif event.key == SDLK_SPACE:
+                    pass
+
+                elif event.key == SDLK_ESCAPE:
+                    quit()
+            elif event.type == SDL_KEYUP:
+                self.state = 'idle'
+
+        if self.state != state:
+            self.frame = 0
+
+
+
     def draw(self):
+
         pass
