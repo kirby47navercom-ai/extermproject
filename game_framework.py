@@ -16,7 +16,7 @@ def ingame(game_manager):
     global frame_time
     frame_time = 0.0
     current_time = time.time()
-    game_manager.update()
+    game_manager.update(frame_time)
     game_manager.render()
     while running:
         frame_time = time.time() - current_time

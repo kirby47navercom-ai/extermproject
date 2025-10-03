@@ -45,6 +45,7 @@ class Player:
                         state = 'run'
                     else:
                         state = 'walk'
+                        self.walk(self,True)
                 elif event.key == SDLK_RIGHT or event.key == ord("d") or event.key == ord("D"):
                     if event.key == SDLK_LSHIFT:
                         state = 'run'
@@ -63,6 +64,7 @@ class Player:
             self.frame = 0
 
     def walk(self,flip):
+
         pass
 
     def draw(self):
