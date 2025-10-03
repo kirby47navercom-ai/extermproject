@@ -62,7 +62,8 @@ class Player:
         if self.state != state:
             self.frame = 0
 
-
+    def walk(self,flip):
+        pass
 
     def draw(self):
 
