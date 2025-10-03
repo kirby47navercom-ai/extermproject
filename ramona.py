@@ -181,6 +181,7 @@ class Ramona:
         self.hp = 5
         self.state = 'idle'
         self.hittime = 0
+        self.animation_speed = 8.0
         self.image_idle = load_image('Ramona\\Ramona_idle.png')
         self.image_walk = load_image('Ramona\\Ramona_walk.png')
         self.image_run = load_image('Ramona\\Ramona_run.png')
@@ -232,6 +233,8 @@ class Ramona:
                     quit()
             elif event.type == SDL_KEYUP:
                 self.state = 'idle'
+            elif self.state == 'idle':
+                self.idle(self,frame_time)
 
         if self.state != state:
             self.frame = 0
@@ -239,6 +242,10 @@ class Ramona:
     def walk(self,flip,frame_time):
         ramona_walk_speed = 200.0
         self.x+=ramona_walk_speed * frame_time * self.dir
+        self.frame = (self.frame + self.animation_speed * frame_time) % 6
+        pass
+    def idle(self,frame_time):
+        self.frame = (self.frame + self.animation_speed * frame_time) % 6
         pass
 
     def draw(self):
