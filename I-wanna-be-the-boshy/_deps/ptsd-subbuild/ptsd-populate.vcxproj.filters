@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\develop\I-wanna-be-the-boshy\_deps\ptsd-subbuild\CMakeFiles\458f16d64e3507cc18ede7c4063cc31c\ptsd-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\develop\I-wanna-be-the-boshy\_deps\ptsd-subbuild\CMakeFiles\458f16d64e3507cc18ede7c4063cc31c\ptsd-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\develop\I-wanna-be-the-boshy\_deps\ptsd-subbuild\CMakeFiles\458f16d64e3507cc18ede7c4063cc31c\ptsd-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\develop\I-wanna-be-the-boshy\_deps\ptsd-subbuild\CMakeFiles\458f16d64e3507cc18ede7c4063cc31c\ptsd-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\develop\I-wanna-be-the-boshy\_deps\ptsd-subbuild\CMakeFiles\458f16d64e3507cc18ede7c4063cc31c\ptsd-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\develop\I-wanna-be-the-boshy\_deps\ptsd-subbuild\CMakeFiles\458f16d64e3507cc18ede7c4063cc31c\ptsd-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\develop\I-wanna-be-the-boshy\_deps\ptsd-subbuild\CMakeFiles\458f16d64e3507cc18ede7c4063cc31c\ptsd-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\develop\I-wanna-be-the-boshy\_deps\ptsd-subbuild\CMakeFiles\458f16d64e3507cc18ede7c4063cc31c\ptsd-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\develop\I-wanna-be-the-boshy\_deps\ptsd-subbuild\CMakeFiles\d117954bfe7b14d9d74b3de2f2b37909\ptsd-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\develop\I-wanna-be-the-boshy\_deps\ptsd-subbuild\CMakeFiles\c70863ccc9e73682d4982e0ac72dd08b\ptsd-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\develop\I-wanna-be-the-boshy\_deps\ptsd-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\develop\I-wanna-be-the-boshy\_deps\ptsd-subbuild\CMakeFiles\ptsd-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{ED3B7B4A-7EBE-331F-B7D6-04F55705BCA6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

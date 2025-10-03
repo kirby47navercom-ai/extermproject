@@ -10,7 +10,6 @@ import re
 
 
 
-
 def ramona_idle_ani():
     ramona = load_image('Ramona\\Ramona_idle.png')
     ramona_idle_coordinate = [
@@ -253,7 +252,6 @@ def sqr_euclidean_distance(pt1, pt2):
 def euclidean_distance(pt1, pt2):
     return math.sqrt(sqr_euclidean_distance(pt1, pt2))
 
-
 #
 # QDollarRecognizer class
 #
@@ -417,7 +415,7 @@ class QDollarRecognizer:
                     points.append(Point(x, y, stroke_id))
             return self.add_gesture(name, points)
 
-#
+
 # Example of how to use the recognizer
 #
 if __name__ == "__main__":

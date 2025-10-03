@@ -1,0 +1,3 @@
+C:/develop/I-wanna-be-the-boshy/_deps/ptsd-subbuild/CMakeFiles/ptsd-populate.dir
+C:/develop/I-wanna-be-the-boshy/_deps/ptsd-subbuild/CMakeFiles/ALL_BUILD.dir
+C:/develop/I-wanna-be-the-boshy/_deps/ptsd-subbuild/CMakeFiles/ZERO_CHECK.dir

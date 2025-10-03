@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/develop/I-wanna-be-the-boshy/_deps/ptsd-subbuild/CMakeFiles/ptsd-populate"
+		},
+		{
+			"file" : "C:/develop/I-wanna-be-the-boshy/_deps/ptsd-subbuild/CMakeFiles/c70863ccc9e73682d4982e0ac72dd08b/ptsd-populate.rule"
+		},
+		{
+			"file" : "C:/develop/I-wanna-be-the-boshy/_deps/ptsd-subbuild/CMakeFiles/d117954bfe7b14d9d74b3de2f2b37909/ptsd-populate-complete.rule"
+		},
+		{
+			"file" : "C:/develop/I-wanna-be-the-boshy/_deps/ptsd-subbuild/CMakeFiles/458f16d64e3507cc18ede7c4063cc31c/ptsd-populate-build.rule"
+		},
+		{
+			"file" : "C:/develop/I-wanna-be-the-boshy/_deps/ptsd-subbuild/CMakeFiles/458f16d64e3507cc18ede7c4063cc31c/ptsd-populate-configure.rule"
+		},
+		{
+			"file" : "C:/develop/I-wanna-be-the-boshy/_deps/ptsd-subbuild/CMakeFiles/458f16d64e3507cc18ede7c4063cc31c/ptsd-populate-download.rule"
+		},
+		{
+			"file" : "C:/develop/I-wanna-be-the-boshy/_deps/ptsd-subbuild/CMakeFiles/458f16d64e3507cc18ede7c4063cc31c/ptsd-populate-install.rule"
+		},
+		{
+			"file" : "C:/develop/I-wanna-be-the-boshy/_deps/ptsd-subbuild/CMakeFiles/458f16d64e3507cc18ede7c4063cc31c/ptsd-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/develop/I-wanna-be-the-boshy/_deps/ptsd-subbuild/CMakeFiles/458f16d64e3507cc18ede7c4063cc31c/ptsd-populate-patch.rule"
+		},
+		{
+			"file" : "C:/develop/I-wanna-be-the-boshy/_deps/ptsd-subbuild/CMakeFiles/458f16d64e3507cc18ede7c4063cc31c/ptsd-populate-test.rule"
+		},
+		{
+			"file" : "C:/develop/I-wanna-be-the-boshy/_deps/ptsd-subbuild/CMakeFiles/458f16d64e3507cc18ede7c4063cc31c/ptsd-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"ptsd-populate"
+		],
+		"name" : "ptsd-populate"
+	}
+}
