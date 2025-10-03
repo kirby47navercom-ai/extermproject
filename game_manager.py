@@ -12,4 +12,8 @@ def update(frame_time):
     pass
 
 def render():
+    global ramona
+    clear_canvas()
+    ramona.draw()
+    update_canvas()
     pass

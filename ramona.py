@@ -9,6 +9,7 @@ class Ramona:
         self.dir = 0
         self.hp = 5
         self.state = 'idle'
+        self.flip = False
         self.hittime = 0
         self.animation_speed = 8.0
         self.image = resource.ramona_image
@@ -27,19 +28,21 @@ class Ramona:
         for event in events:
             if event.type == SDL_KEYDOWN:
                 if event.key == SDLK_LEFT or event.key == ord("a") or event.key == ord("A"):
+                    self.flip = True
                     if event.key == SDLK_LSHIFT:
                         state = 'run'
                     else:
                         state = 'walk'
                         self.dir= -1
-                        self.walk(self,True,frame_time)
+                        self.walk(self,self.flip,frame_time)
                 elif event.key == SDLK_RIGHT or event.key == ord("d") or event.key == ord("D"):
+                    self.flip = False
                     if event.key == SDLK_LSHIFT:
                         state = 'run'
                     else:
                         state = 'walk'
                         self.dir = 1
-                        self.walk(self, False, frame_time)
+                        self.walk(self,  self.flip, frame_time)
 
                 elif event.key == SDLK_SPACE:
                     pass
@@ -49,7 +52,7 @@ class Ramona:
             elif event.type == SDL_KEYUP:
                 self.state = 'idle'
             elif self.state == 'idle':
-                self.idle(self,frame_time)
+                self.idle(self,self.flip,frame_time)
 
         if self.state != state:
             self.frame = 0
@@ -60,10 +63,15 @@ class Ramona:
         self.frame = (self.frame + self.animation_speed * frame_time) % 6
         pass
 
-    def idle(self,frame_time):
+    def idle(self,flip,frame_time):
         self.frame = (self.frame + self.animation_speed * frame_time) % 6
         pass
 
     def draw(self):
-
+        if self.flip == False:
+            left, bottom, width, height, jx, jy = self.coordinate[self.state]
+            self.image[self.state].clip_composite_draw(left, bottom, width, height, 0, '', self.x, self.y, width * 2, height * 2)
+        else:
+            left, bottom, width, height, jx, jy = self.coordinate[self.state]
+            self.image[self.state].clip_composite_draw(left, bottom, width, height, 0, 'h', self.x, self.y, width * 2, height * 2)
         pass
