@@ -1,5 +1,5 @@
 from pico2d import *
-ramona_idle_coordinate = [
+ramona_coordinate = [
     (0, 0, 30, 64,0,0),
     (33, 0, 30, 64,0,0),
     (66, 0, 29, 64,0,0),
@@ -200,6 +200,13 @@ class Ramona:
         self.image_action4 = load_image('Ramona\\Ramona_action4.png')
         self.image_action5 = load_image('Ramona\\Ramona_action5.png')
         self.image_action6 = load_image('Ramona\\Ramona_action6.png')
+        self.image = {'idle':self.image_idle,'walk':self.image_walk,'run':self.image_run,'jump':self.image_jump,
+                      'double_jump':self.image_double_jump,'hit':self.image_hit,'evade':
+                      self.image_evade,'getup':self.image_getup,'dead':self.image_dead,'revive':self.image_revived,
+                      'stageclear':self.image_stageclear,'gameclear':self.image_gameclear,'action1':self.image_action1,
+                        'action2':self.image_action2,'action3':self.image_action3,'action4':self.image_action4,
+                        'action5':self.image_action5,'action6':self.image_action6}
+
 
     def update(self,frame_time):
 
@@ -244,6 +251,7 @@ class Ramona:
         self.x+=ramona_walk_speed * frame_time * self.dir
         self.frame = (self.frame + self.animation_speed * frame_time) % 6
         pass
+
     def idle(self,frame_time):
         self.frame = (self.frame + self.animation_speed * frame_time) % 6
         pass
