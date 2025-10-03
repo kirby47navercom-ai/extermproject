@@ -32,3 +32,8 @@ class Player:
 
     def update(self):
         pass
+
+    def handle_event(self):
+
+        pass
+
