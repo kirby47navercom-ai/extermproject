@@ -1,10 +1,6 @@
 from pico2d import *
 
-ramona = (load_image('Ramona\\Ramona_idle.png'),load_image('Ramona\\Ramona_walk.png'),load_image('Ramona\\Ramona_run.png'),load_image('Ramona\\Ramona_jump.png'),
-          load_image('Ramona\\Ramona_double_jump.png'),load_image('Ramona\\Ramona_hit.png'),load_image('Ramona\\Ramona_evade.png'),load_image('Ramona\\Ramona_getup.png'),
-          load_image('Ramona\\Ramona_dead.png'),load_image('Ramona\\Ramona_revived.png'),load_image('Ramona\\Ramona_stageclear.png'),
-          load_image('Ramona\\Ramona_gameclear.png'),load_image('Ramona\\Ramona_action1.png'),load_image('Ramona\\Ramona_action2.png'),load_image('Ramona\\Ramona_action3.png'),
-          load_image('Ramona\\Ramona_action4.png'),load_image('Ramona\\Ramona_action5.png'),load_image('Ramona\\Ramona_action6.png'))
+
 
 class Player:
     def init(self):
@@ -33,3 +29,6 @@ class Player:
         self.image_action4 = load_image('Ramona\\Ramona_action4.png')
         self.image_action5 = load_image('Ramona\\Ramona_action5.png')
         self.image_action6 = load_image('Ramona\\Ramona_action6.png')
+
+    def update(self):
+        pass
