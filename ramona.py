@@ -57,6 +57,8 @@ class IdleState:
         if event == A_DOWN or event == D_DOWN:
             self.change_state(WalkState, event)
         elif event == SPACE_DOWN:
+            if self.y > GROUND_LEVEL:
+                self.jump_count = 1
             self.change_state(JumpState, event)
         elif event == A_D_TAP or event == D_D_TAP:
             self.change_state(EvadeState, event)
@@ -64,10 +66,7 @@ class IdleState:
 
 class WalkState:
     def enter(self, event):
-        if event == A_DOWN:
-            self.dir = -1
-        elif event == D_DOWN:
-            self.dir = 1
+        pass
 
     def exit(self, event):
         pass
@@ -82,21 +81,17 @@ class WalkState:
         self.draw_sprite('walk')
 
     def handle_event(self, event):
-        if event == A_UP and self.dir == -1:
-            self.change_state(IdleState, event)
-        elif event == D_UP and self.dir == 1:
-            self.change_state(IdleState, event)
-        elif event == SHIFT_DOWN:
-            self.change_state(RunState, event)
-        elif event == SPACE_DOWN:
-            self.change_state(JumpState, event)
-        elif event == A_D_TAP or event == D_D_TAP:
-            self.change_state(EvadeState, event)
+        def handle_event(self, event):
+            if event == SPACE_DOWN:
+                if self.y > GROUND_LEVEL:
+                    self.jump_count = 1
+                self.change_state(JumpState, event)
+            elif event == A_D_TAP or event == D_D_TAP:
+                self.change_state(EvadeState, event)
 
 
 class RunState:
     def enter(self, event):
-
         pass
 
     def exit(self, event):
@@ -112,14 +107,12 @@ class RunState:
         self.draw_sprite('run')
 
     def handle_event(self, event):
-        if event == A_UP and self.dir == -1:
-            self.change_state(IdleState, event)
-        elif event == D_UP and self.dir == 1:
-            self.change_state(IdleState, event)
-        elif event == SHIFT_UP:
-            self.change_state(WalkState, event)
-        elif event == SPACE_DOWN:
+        if event == SPACE_DOWN:
+            if self.y > GROUND_LEVEL:
+                self.jump_count = 1
             self.change_state(JumpState, event)
+        elif event in [A_D_TAP, D_D_TAP]:
+            self.change_state(EvadeState, event)
 
 
 class EvadeState:
