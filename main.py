@@ -9,4 +9,4 @@ resource.load_resources()
 game_framework.ingame(game_manager)
 pico2d.close_canvas()
 
-# 2022180021 양현빈
+# 게임공학과 2022180021 양현빈
