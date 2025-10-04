@@ -259,7 +259,7 @@ class Ramona:
                     self.change_state(WalkState, None)
 
 
-        self.x = clamp(50, self.x, 1536 - 50)
+        self.x = clamp(25, self.x, canvaswidth - 25)
         self.y = clamp(GROUND_LEVEL, self.y, 864 - 50)
 
         if self.dir == -1:
