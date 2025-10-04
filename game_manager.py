@@ -1,12 +1,12 @@
 from pico2d import *
 import ramona
-import stage1_background
+import background
 
 def init():
     global player
     global stage1
     player = ramona.Ramona()
-    stage1 = stage1_background.Background('1')
+    stage1 = background.Background('1')
 
     pass
 

@@ -1,6 +1,12 @@
 from pico2d import *
 import resource
 
+stage1width = 1980
+stage1height = 1080
+
+canvaswidth = 1280
+canvasheight = 720
+
 class Background:
     def __init__(self, stage):
         if stage == '1':
@@ -16,4 +22,4 @@ class Background:
 
     def draw(self):
         for i in self.background:
-            i.draw(400, 300)
+            i.clip_draw(0, 0, stage1width, stage1height, canvaswidth//2,canvasheight//2  , stage1width, stage1height)
