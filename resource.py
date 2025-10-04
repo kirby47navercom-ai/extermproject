@@ -202,6 +202,8 @@ ramona_image = {}  # 비어있는 dict 준비
 
 # 함수로 묶기
 def load_resources():
+
+    #캐릭터
     global image_idle, image_walk, image_run, image_jump, image_double_jump
     global image_hit, image_evade, image_getup, image_dead, image_revived
     global image_stageclear, image_gameclear
