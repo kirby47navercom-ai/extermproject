@@ -214,7 +214,7 @@ class Ramona:
         self.dir = 0
         self.flip = False
         self.animation_speed = 8.0
-
+        self.hp = 3
         self.image = resource.ramona_image
         self.coordinate = resource.ramona_coordinate
 
