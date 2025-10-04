@@ -5,7 +5,7 @@ import resource
 
 # 물리
 GRAVITY = 2000.0
-GROUND_LEVEL = 150
+GROUND_LEVEL = 100
 # 속도 (pixel/sec)
 WALK_SPEED = 200.0
 RUN_SPEED = 350.0
@@ -16,6 +16,8 @@ EVADE_DURATION = 0.3
 DOUBLE_TAP_INTERVAL = 0.2
 EVADE_COOLDOWN = 1.5
 
+canvaswidth = 1280
+canvasheight = 720
 
 A_DOWN, D_DOWN, A_UP, D_UP = range(4)
 SHIFT_DOWN, SHIFT_UP, SPACE_DOWN, SPACE_UP = range(4, 8)
