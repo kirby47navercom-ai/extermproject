@@ -7,6 +7,7 @@ import pickle
 
 
 
+
 class Point:
     def __init__(self, x, y, id):
         self.x = x
