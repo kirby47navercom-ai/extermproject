@@ -1,6 +1,6 @@
 from pico2d import *
 import os
-from dtd import QDollarRecognizer, Point
+from QDollarRecognizer import QDollarRecognizer, Point
 
 SCREEN_WIDTH, SCREEN_HEIGHT = 1536, 864
 WHITE = (255, 255, 255)

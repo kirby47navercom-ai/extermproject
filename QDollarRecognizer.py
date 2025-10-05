@@ -1,58 +1,33 @@
-from pico2d import *
 import math
 import time
 import xml.etree.ElementTree as ET
 import os
 import pickle
-import re
-#
-# Point class
 
 
 
-def ramona_idle_ani():
-    ramona = load_image('Ramona\\Ramona_idle.png')
-    ramona_idle_coordinate = [
-        (0, 0, 30, 64, 0, 0),
-        (33, 0, 30, 64, 0, 0),
-        (66, 0, 29, 64, 0, 0),
-        (99, 0, 30, 64, 0, 0),
-        (131, 0, 31, 64, 0, 0),
-        (165, 0, 31, 64, 0, 0),
-    ]
-    x, y = 400, 300
-    for i in range(2):
-        for j in ramona_idle_coordinate:
-            clear_canvas()
-            left, bottom, width, height,jx,jy = j
-            ramona.clip_composite_draw(left, bottom, width, height, 0, '', x, y, width*2, height*2)
-            update_canvas()
-            delay(0.1)
+
 class Point:
     def __init__(self, x, y, id):
         self.x = x
         self.y = y
-        self.id = id  # stroke ID to which this point belongs (1, 2, 3, etc.)
-        self.int_x = 0  # for indexing into the LUT
-        self.int_y = 0  # for indexing into the LUT
+        self.id = id
+        self.int_x = 0
+        self.int_y = 0
 
 
-#
-# PointCloud class
-#
+
 class PointCloud:
     def __init__(self, name, points):
         self.name = name
         self.points = resample(points, NUM_POINTS)
         self.points = scale(self.points)
         self.points = translate_to(self.points, ORIGIN)
-        self.points = make_int_coords(self.points)  # fills in (int_x, int_y) values
+        self.points = make_int_coords(self.points)
         self.lut = compute_lut(self.points)
 
 
-#
-# Result class
-#
+
 class Result:
     def __init__(self, name, score, ms):
         self.name = name
@@ -60,20 +35,16 @@ class Result:
         self.time = ms
 
 
-#
-# QDollarRecognizer constants
-#
+
 NUM_POINT_CLOUDS = 16
 NUM_POINTS = 32
 ORIGIN = Point(0, 0, 0)
-MAX_INT_COORD = 1024  # (int_x, int_y) range from [0, MAX_INT_COORD - 1]
-LUT_SIZE = 64  # default size of the lookup table is 64 x 64
-LUT_SCALE_FACTOR = MAX_INT_COORD / LUT_SIZE  # used to scale from (int_x, int_y) to LUT
+MAX_INT_COORD = 1024
+LUT_SIZE = 64
+LUT_SCALE_FACTOR = MAX_INT_COORD / LUT_SIZE
 
 
-#
-# Private helper functions from here on down
-#
+
 def cloud_match(candidate, template, min_so_far):
     n = len(candidate.points)
     step = math.floor(n ** 0.5)
@@ -93,11 +64,11 @@ def cloud_match(candidate, template, min_so_far):
 
 def cloud_distance(pts1, pts2, start, min_so_far):
     n = len(pts1)
-    unmatched = list(range(n))  # indices for pts2 that are not matched
+    unmatched = list(range(n))
 
-    i = start  # start matching with point 'start' from pts1
-    weight = n  # weights decrease from n to 1
-    sum_dist = 0.0  # sum distance between the two clouds
+    i = start
+    weight = n
+    sum_dist = 0.0
 
     while True:
         u = -1
@@ -112,7 +83,7 @@ def cloud_distance(pts1, pts2, start, min_so_far):
         sum_dist += weight * b
 
         if sum_dist >= min_so_far:
-            return sum_dist  # early abandoning
+            return sum_dist
 
         weight -= 1
         i = (i + 1) % n
@@ -252,14 +223,12 @@ def sqr_euclidean_distance(pt1, pt2):
 def euclidean_distance(pt1, pt2):
     return math.sqrt(sqr_euclidean_distance(pt1, pt2))
 
-#
-# QDollarRecognizer class
-#
+
 class QDollarRecognizer:
     def __init__(self):
         self.point_clouds = []
 
-        # one predefined point-cloud for each gesture
+
         self.point_clouds.append(PointCloud("T", [
             Point(30, 7, 1), Point(103, 7, 1),
             Point(66, 7, 2), Point(66, 87, 2)
@@ -350,9 +319,7 @@ class QDollarRecognizer:
             Point(544, 544, 2), Point(546, 540, 2), Point(546, 536, 2)
         ]))
 
-    #
-    # The $Q Point-Cloud Recognizer API begins here -- 3 methods
-    #
+
     def save_gesture_cache(self, cache_path):
         with open(cache_path, 'wb') as f:
             pickle.dump(self.point_clouds, f)
@@ -371,8 +338,8 @@ class QDollarRecognizer:
         for i, template in enumerate(self.point_clouds):
             d = cloud_match(candidate, template, b)
             if d < b:
-                b = d  # best (least) distance
-                u = i  # point-cloud index
+                b = d
+                u = i
 
         t1 = time.time()
 
@@ -416,14 +383,12 @@ class QDollarRecognizer:
             return self.add_gesture(name, points)
 
 
-# Example of how to use the recognizer
-#
+
 if __name__ == "__main__":
-    # 1. Create a recognizer object
+
     recognizer = QDollarRecognizer()
 
-    # 2. Define a gesture to be recognized (e.g., a simple horizontal line)
-    #    In a real application, these points would come from a mouse or touch input.
+
     test_gesture_points = [
         Point(20, 200, 1),
         Point(35, 202, 1),
@@ -433,17 +398,17 @@ if __name__ == "__main__":
         Point(110, 198, 1)
     ]
 
-    # 3. Recognize the gesture
+
     result = recognizer.recognize(test_gesture_points)
 
-    # 4. Print the result
+
     print(f"Gesture Recognized: {result.name}")
     print(f"Score (Confidence): {result.score:.2f}")
     print(f"Time taken: {result.time:.2f} ms")
 
     print("-" * 20)
 
-    # Example of adding a new gesture
+
     print("Adding a new custom gesture: 'circle'")
     circle_points = []
     for i in range(0, 361, 10):
