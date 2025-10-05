@@ -10,8 +10,7 @@ class Mouse:
         self.y=0
         pass
 
-    def update(self, frame_time):
-        events = get_events()
+    def update(self, frame_time,events):
         for event in events:
             if event.type == SDL_MOUSEMOTION:
                 self.x, self.y = event.x, get_canvas_height() - 1 - event.y

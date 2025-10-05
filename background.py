@@ -19,7 +19,7 @@ class Background:
             self.stage = stage
         pass
 
-    def update(self, frame_time):
+    def update(self, frame_time,events=None):
         if self.stage == '1':
             for i in range(self.x.__len__()):
                 self.x[i] += self.speed * frame_time * (i+1) * 0.2

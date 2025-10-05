@@ -57,8 +57,6 @@ class IdleState:
         if event == A_DOWN or event == D_DOWN:
             self.change_state(WalkState, event)
         elif event == SPACE_DOWN:
-            if self.y > GROUND_LEVEL:
-                self.jump_count = 1
             self.change_state(JumpState, event)
         elif event == A_D_TAP or event == D_D_TAP:
             self.change_state(EvadeState, event)
@@ -66,7 +64,10 @@ class IdleState:
 
 class WalkState:
     def enter(self, event):
-        pass
+        if event == A_DOWN:
+            self.dir = -1
+        elif event == D_DOWN:
+            self.dir = 1
 
     def exit(self, event):
         pass
@@ -81,17 +82,21 @@ class WalkState:
         self.draw_sprite('walk')
 
     def handle_event(self, event):
-        def handle_event(self, event):
-            if event == SPACE_DOWN:
-                if self.y > GROUND_LEVEL:
-                    self.jump_count = 1
-                self.change_state(JumpState, event)
-            elif event == A_D_TAP or event == D_D_TAP:
-                self.change_state(EvadeState, event)
+        if event == A_UP and self.dir == -1:
+            self.change_state(IdleState, event)
+        elif event == D_UP and self.dir == 1:
+            self.change_state(IdleState, event)
+        elif event == SHIFT_DOWN:
+            self.change_state(RunState, event)
+        elif event == SPACE_DOWN:
+            self.change_state(JumpState, event)
+        elif event == A_D_TAP or event == D_D_TAP:
+            self.change_state(EvadeState, event)
 
 
 class RunState:
     def enter(self, event):
+
         pass
 
     def exit(self, event):
@@ -107,12 +112,14 @@ class RunState:
         self.draw_sprite('run')
 
     def handle_event(self, event):
-        if event == SPACE_DOWN:
-            if self.y > GROUND_LEVEL:
-                self.jump_count = 1
+        if event == A_UP and self.dir == -1:
+            self.change_state(IdleState, event)
+        elif event == D_UP and self.dir == 1:
+            self.change_state(IdleState, event)
+        elif event == SHIFT_UP:
+            self.change_state(WalkState, event)
+        elif event == SPACE_DOWN:
             self.change_state(JumpState, event)
-        elif event in [A_D_TAP, D_D_TAP]:
-            self.change_state(EvadeState, event)
 
 
 class EvadeState:
@@ -222,14 +229,16 @@ class Ramona:
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
 
+        self.shift_pressed = False
+
     def change_state(self, new_state, event):
         if self.cur_state != new_state:
             self.cur_state.exit(self, event)
             self.cur_state = new_state
             self.cur_state.enter(self, event)
 
-    def update(self, frame_time):
-        self.handle_event(frame_time)
+    def update(self, frame_time,events):
+        self.handle_event(frame_time,events)
         self.cur_state.do(self, frame_time)
 
 
@@ -260,8 +269,7 @@ class Ramona:
         elif self.dir == 1:
             self.flip = False
 
-    def handle_event(self, frame_time):
-        events = get_events()
+    def handle_event(self, frame_time,events):
         for event in events:
             if (event.type, event.key) in key_event_table:
                 key_event = key_event_table[(event.type, event.key)]
