@@ -1,10 +1,10 @@
 from pico2d import *
+from canvas_size import *
 
 stage1width = 1980
 stage1height = 1080
 
-canvaswidth = 1280
-canvasheight = 720
+
 
 class Background:
     def __init__(self, stage):

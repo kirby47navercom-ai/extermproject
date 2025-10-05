@@ -1,10 +1,8 @@
 import tkinter as tk
 import time
-
+from canvas_size import *
 root = tk.Tk()
 
-screen_width = 1280
-screen_height = 720
 
 
 

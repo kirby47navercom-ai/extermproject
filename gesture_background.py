@@ -1,7 +1,5 @@
 from pico2d import *
-
-canvaswidth = 1280
-canvasheight = 720
+from canvas_size import *
 
 class GestureBackground:
     def __init__(self):

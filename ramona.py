@@ -1,6 +1,7 @@
 from pico2d import *
 import time
 import resource
+from canvas_size import *
 
 
 # 물리
@@ -16,8 +17,6 @@ EVADE_DURATION = 0.3
 DOUBLE_TAP_INTERVAL = 0.2
 EVADE_COOLDOWN = 1.5
 
-canvaswidth = 1280
-canvasheight = 720
 
 A_DOWN, D_DOWN, A_UP, D_UP = range(4)
 SHIFT_DOWN, SHIFT_UP, SPACE_DOWN, SPACE_UP = range(4, 8)
