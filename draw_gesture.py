@@ -8,6 +8,7 @@ BLACK = (0, 0, 0)  # 선과 글자 모두 검은색으로 통일
 font = load_font('Font\\경기천년제목_Medium.ttf', 20)
 
 
+
 def draw_point(x, y):
     draw_rectangle(x, y, x + 1, y + 1)
 
