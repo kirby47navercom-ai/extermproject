@@ -228,59 +228,7 @@ def euclidean_distance(pt1, pt2):
 class QDollarRecognizer:
     def __init__(self):
         self.point_clouds = []
-
-
-        self.point_clouds.append(PointCloud("T", [
-            Point(30, 7, 1), Point(103, 7, 1),
-            Point(66, 7, 2), Point(66, 87, 2)
-        ]))
-        self.point_clouds.append(PointCloud("N", [
-            Point(177, 92, 1), Point(177, 2, 1),
-            Point(182, 1, 2), Point(246, 95, 2),
-            Point(247, 87, 3), Point(247, 1, 3)
-        ]))
-        self.point_clouds.append(PointCloud("D", [
-            Point(345, 9, 1), Point(345, 87, 1),
-            Point(351, 8, 2), Point(363, 8, 2), Point(372, 9, 2), Point(380, 11, 2), Point(386, 14, 2),
-            Point(391, 17, 2), Point(394, 22, 2), Point(397, 28, 2), Point(399, 34, 2), Point(400, 42, 2),
-            Point(400, 50, 2), Point(400, 56, 2), Point(399, 61, 2), Point(397, 66, 2), Point(394, 70, 2),
-            Point(391, 74, 2), Point(386, 78, 2), Point(382, 81, 2), Point(377, 83, 2), Point(372, 85, 2),
-            Point(367, 87, 2), Point(360, 87, 2), Point(355, 88, 2), Point(349, 87, 2)
-        ]))
-        self.point_clouds.append(PointCloud("P", [
-            Point(507, 8, 1), Point(507, 87, 1),
-            Point(513, 7, 2), Point(528, 7, 2), Point(537, 8, 2), Point(544, 10, 2), Point(550, 12, 2),
-            Point(555, 15, 2), Point(558, 18, 2), Point(560, 22, 2), Point(561, 27, 2), Point(562, 33, 2),
-            Point(561, 37, 2), Point(559, 42, 2), Point(556, 45, 2), Point(550, 48, 2), Point(544, 51, 2),
-            Point(538, 53, 2), Point(532, 54, 2), Point(525, 55, 2), Point(519, 55, 2), Point(513, 55, 2),
-            Point(510, 55, 2)
-        ]))
-        self.point_clouds.append(PointCloud("X", [
-            Point(30, 146, 1), Point(106, 222, 1),
-            Point(30, 225, 2), Point(106, 146, 2)
-        ]))
-        self.point_clouds.append(PointCloud("H", [
-            Point(188, 137, 1), Point(188, 225, 1),
-            Point(188, 180, 2), Point(241, 180, 2),
-            Point(241, 137, 3), Point(241, 225, 3)
-        ]))
-        self.point_clouds.append(PointCloud("I", [
-            Point(371, 149, 1), Point(371, 221, 1),
-            Point(341, 149, 2), Point(401, 149, 2),
-            Point(341, 221, 3), Point(401, 221, 3)
-        ]))
-        self.point_clouds.append(PointCloud("exclamation", [
-            Point(526, 142, 1), Point(526, 204, 1),
-            Point(526, 221, 2)
-        ]))
-        self.point_clouds.append(PointCloud("line", [
-            Point(12, 347, 1), Point(119, 347, 1)
-        ]))
-        self.point_clouds.append(PointCloud("five-point star", [
-            Point(177, 396, 1), Point(223, 299, 1), Point(262, 396, 1), Point(168, 332, 1), Point(278, 332, 1),
-            Point(184, 397, 1)
-        ]))
-        self.point_clouds.append(PointCloud("null", [
+        self.point_clouds.append(PointCloud("없어용", [
             Point(382, 310, 1), Point(377, 308, 1), Point(373, 307, 1), Point(366, 307, 1), Point(360, 310, 1),
             Point(356, 313, 1), Point(353, 316, 1), Point(349, 321, 1), Point(347, 326, 1), Point(344, 331, 1),
             Point(342, 337, 1), Point(341, 343, 1), Point(341, 350, 1), Point(341, 358, 1), Point(342, 362, 1),
@@ -291,35 +239,6 @@ class QDollarRecognizer:
             Point(410, 326, 1), Point(404, 320, 1), Point(400, 317, 1), Point(393, 313, 1), Point(392, 312, 1),
             Point(418, 309, 2), Point(337, 390, 2)
         ]))
-        self.point_clouds.append(PointCloud("arrowhead", [
-            Point(506, 349, 1), Point(574, 349, 1),
-            Point(525, 306, 2), Point(584, 349, 2), Point(525, 388, 2)
-        ]))
-        self.point_clouds.append(PointCloud("pitchfork", [
-            Point(38, 470, 1), Point(36, 476, 1), Point(36, 482, 1), Point(37, 489, 1), Point(39, 496, 1),
-            Point(42, 500, 1), Point(46, 503, 1), Point(50, 507, 1), Point(56, 509, 1), Point(63, 509, 1),
-            Point(70, 508, 1), Point(75, 506, 1), Point(79, 503, 1), Point(82, 499, 1), Point(85, 493, 1),
-            Point(87, 487, 1), Point(88, 480, 1), Point(88, 474, 1), Point(87, 468, 1),
-            Point(62, 464, 2), Point(62, 571, 2)
-        ]))
-        self.point_clouds.append(PointCloud("six-point star", [
-            Point(177, 554, 1), Point(223, 476, 1), Point(268, 554, 1), Point(183, 554, 1),
-            Point(177, 490, 2), Point(223, 568, 2), Point(268, 490, 2), Point(183, 490, 2)
-        ]))
-        self.point_clouds.append(PointCloud("asterisk", [
-            Point(325, 499, 1), Point(417, 557, 1),
-            Point(417, 499, 2), Point(325, 557, 2),
-            Point(371, 486, 3), Point(371, 571, 3)
-        ]))
-        self.point_clouds.append(PointCloud("half-note", [
-            Point(546, 465, 1), Point(546, 531, 1),
-            Point(540, 530, 2), Point(536, 529, 2), Point(533, 528, 2), Point(529, 529, 2), Point(524, 530, 2),
-            Point(520, 532, 2), Point(515, 535, 2), Point(511, 539, 2), Point(508, 545, 2), Point(506, 548, 2),
-            Point(506, 554, 2), Point(509, 558, 2), Point(512, 561, 2), Point(517, 564, 2), Point(521, 564, 2),
-            Point(527, 563, 2), Point(531, 560, 2), Point(535, 557, 2), Point(538, 553, 2), Point(542, 548, 2),
-            Point(544, 544, 2), Point(546, 540, 2), Point(546, 536, 2)
-        ]))
-
 
     def save_gesture_cache(self, cache_path):
         with open(cache_path, 'wb') as f:

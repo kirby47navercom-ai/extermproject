@@ -52,6 +52,7 @@ class GestureRecognizer:
         self.points = []
         self.stroke_id = 0
         self.result = None
+        self.shape = None
 
         self.check_image = load_image('Canvas\\2.png')
         self.canvas_image = load_image('Canvas\\1.png')
