@@ -47,7 +47,7 @@ class GestureRecognizer:
             self.recognizer.load_gesture_from_xml('NewGestures')
             self.recognizer.save_gesture_cache(CACHE_PATH)
 
-        self.font = load_font('Font\\경기천년제목_Medium.ttf', 20)
+        self.font = load_font('Font\\경기천년제목_Bold.ttf', 30)
         self.drawing = False
         self.points = []
         self.stroke_id = 0
@@ -119,7 +119,7 @@ class GestureRecognizer:
                         draw_line(self.points[i - 1].x, canvasheight - self.points[i - 1].y,
                                   self.points[i].x, canvasheight - self.points[i].y)
 
-            draw_text_on_screen(10, canvasheight - 30, "그림을 그리고 마우스를 떼세요.", self.font)
+            draw_text_on_screen(10, canvasheight - 90, "그림을 그리고 마우스를 떼세요.", self.font)
             if self.result:
-                draw_text_on_screen(10, canvasheight - 60,
+                draw_text_on_screen(10, canvasheight - 120,
                                 f"인식 결과: {self.result.name} (Score: {self.result.score:.2f})", self.font)

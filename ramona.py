@@ -17,7 +17,9 @@ JUMP_POWER = 600.0
 EVADE_DURATION = 0.3
 DOUBLE_TAP_INTERVAL = 0.2
 EVADE_COOLDOWN = 1.5
-
+#플레이어 체력
+MAX_HP = 3
+CURRENT_HP = 2
 
 A_DOWN, D_DOWN, A_UP, D_UP = range(4)
 SHIFT_DOWN, SHIFT_UP, SPACE_DOWN, SPACE_UP = range(4, 8)
@@ -214,7 +216,6 @@ class Ramona:
         self.dir = 0
         self.flip = False
         self.animation_speed = 8.0
-        self.hp = 3
         self.image = resource.ramona_image
         self.coordinate = resource.ramona_coordinate
 
