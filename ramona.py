@@ -19,7 +19,13 @@ DOUBLE_TAP_INTERVAL = 0.2
 EVADE_COOLDOWN = 1.5
 #플레이어 체력
 MAX_HP = 3
-CURRENT_HP = 2
+CURRENT_HP = 3
+#플레이어의 크기
+Ramona_SIZE_X=30
+Ramona_SIZE_Y=64
+#플레이어의 위치
+Ramona_POS_X=100
+Ramona_POS_Y=GROUND_LEVEL
 
 A_DOWN, D_DOWN, A_UP, D_UP = range(4)
 SHIFT_DOWN, SHIFT_UP, SPACE_DOWN, SPACE_UP = range(4, 8)
@@ -239,7 +245,7 @@ class Ramona:
             self.cur_state.enter(self, event)
 
     def update(self, frame_time,events):
-
+        global Ramona_POS_X, Ramona_POS_Y
         if not draw_gesture.f_pressed:
 
             self.a_pressed = False
@@ -283,6 +289,9 @@ class Ramona:
             self.flip = True
         elif self.dir == 1:
             self.flip = False
+
+        Ramona_POS_X = self.x
+        Ramona_POS_Y = self.y
 
 
 
