@@ -201,6 +201,13 @@ image_action6 = None
 ramona_image = {}  # 비어있는 dict 준비
 
 
+#패턴 리소스 128*128
+pattern_name=['가로선','세로선','여우귀','브이','번개','N','별','Z','다이아몬드','네모','세모','검정1','검정2','검정3','검정4','검정5']
+image_pattern = []
+pattern_string_dict = {}
+pattern_index_dict = {}
+
+
 #스테이지 1리소스
 ghost_image=None
 
@@ -225,7 +232,7 @@ def load_resources():
     global image_stageclear, image_gameclear
     global image_action1, image_action2, image_action3, image_action4, image_action5, image_action6
     global ramona_image,ghost_image
-
+    global image_pattern, pattern_string_dict, pattern_index_dict
     ghost_image = load_image('1stage\\level1-png-sprite.png')
     image_idle = load_image('Ramona\\Ramona_idle.png')
     image_walk = load_image('Ramona\\Ramona_walk.png')
@@ -245,6 +252,16 @@ def load_resources():
     image_action4 = load_image('Ramona\\Ramona_action4.png')
     image_action5 = load_image('Ramona\\Ramona_action5.png')
     image_action6 = load_image('Ramona\\Ramona_action6.png')
+
+    for i in range(16):
+        image_pattern.append(load_image(f'Pattern\\{str(i+1)}.png'))
+        pattern_index_dict[i+1] = image_pattern[i]
+        pattern_string_dict[pattern_name[i]] = i+1
+
+
+
+
+
 
     ramona_image = {
         'idle': image_idle, 'walk': image_walk, 'run': image_run, 'jump': image_jump,

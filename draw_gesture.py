@@ -121,5 +121,8 @@ class GestureRecognizer:
 
             draw_text_on_screen(10, canvasheight - 90, "그림을 그리고 마우스를 떼세요.", self.font)
             if self.result:
-                draw_text_on_screen(10, canvasheight - 120,
-                                f"인식 결과: {self.result.name} (Score: {self.result.score:.2f})", self.font)
+                if self.result.score < 0.3:
+                    draw_text_on_screen(10, canvasheight - 120,
+                                        f"인식 결과: 인식 실패 (Score: {self.result.score:.2f})", self.font)
+                else: draw_text_on_screen(10, canvasheight - 120,
+                                    f"인식 결과: {self.result.name} (Score: {self.result.score:.2f})", self.font)
