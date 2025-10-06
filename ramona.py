@@ -238,6 +238,14 @@ class Ramona:
             self.cur_state.enter(self, event)
 
     def update(self, frame_time,events):
+
+
+        if not draw_gesture.f_pressed:
+            if self.cur_state != IdleState:
+                self.change_state(IdleState, None)
+            self.cur_state.do(self, frame_time)
+            return
+
         self.handle_event(frame_time,events)
         self.cur_state.do(self, frame_time)
 
@@ -303,9 +311,6 @@ class Ramona:
                     self.last_key_time['d'] = time.time()
                 else:
                     self.cur_state.handle_event(self, key_event)
-
-            elif event.key == SDLK_ESCAPE:
-                quit()
 
     def draw_sprite(self, state_name, frame_idx=None):
         if frame_idx is None:

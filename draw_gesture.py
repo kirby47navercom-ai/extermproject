@@ -64,8 +64,8 @@ class GestureRecognizer:
 
 
     def update(self, frame_time, events):
-        self.handle_event(events,f_pressed)
         global f_pressed
+        self.handle_event(events)
 
         if f_pressed == False:
             if self.canvas_image_y > canvasheight // 2:
