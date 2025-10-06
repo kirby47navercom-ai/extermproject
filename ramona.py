@@ -239,34 +239,40 @@ class Ramona:
 
     def update(self, frame_time,events):
 
-
         if not draw_gesture.f_pressed:
+
+            self.a_pressed = False
+            self.d_pressed = False
+            self.shift_pressed = False
+            self.dir = 0
+
             if self.cur_state != IdleState:
                 self.change_state(IdleState, None)
             self.cur_state.do(self, frame_time)
-            return
 
-        self.handle_event(frame_time,events)
-        self.cur_state.do(self, frame_time)
+        else:
 
-
-        if self.evade_cooldown_timer > 0:
-            self.evade_cooldown_timer -= frame_time
+            self.handle_event(frame_time,events)
+            self.cur_state.do(self, frame_time)
 
 
-        if self.cur_state in [IdleState, WalkState, RunState]:
-            if self.a_pressed == self.d_pressed:
-                self.dir = 0
-                if self.cur_state in [WalkState, RunState]:
-                    self.change_state(IdleState, None)
-            elif self.a_pressed:
-                self.dir = -1
-                if self.cur_state == IdleState:
-                    self.change_state(WalkState, None)
-            elif self.d_pressed:
-                self.dir = 1
-                if self.cur_state == IdleState:
-                    self.change_state(WalkState, None)
+            if self.evade_cooldown_timer > 0:
+                self.evade_cooldown_timer -= frame_time
+
+
+            if self.cur_state in [IdleState, WalkState, RunState]:
+                if self.a_pressed == self.d_pressed:
+                    self.dir = 0
+                    if self.cur_state in [WalkState, RunState]:
+                        self.change_state(IdleState, None)
+                elif self.a_pressed:
+                    self.dir = -1
+                    if self.cur_state == IdleState:
+                        self.change_state(WalkState, None)
+                elif self.d_pressed:
+                    self.dir = 1
+                    if self.cur_state == IdleState:
+                        self.change_state(WalkState, None)
 
 
         self.x = clamp(25, self.x, canvaswidth - 25)
@@ -276,6 +282,9 @@ class Ramona:
             self.flip = True
         elif self.dir == 1:
             self.flip = False
+
+
+
 
     def handle_event(self, frame_time,events):
         for event in events:
@@ -311,6 +320,9 @@ class Ramona:
                     self.last_key_time['d'] = time.time()
                 else:
                     self.cur_state.handle_event(self, key_event)
+
+            elif event.key == SDLK_ESCAPE:
+                quit()
 
     def draw_sprite(self, state_name, frame_idx=None):
         if frame_idx is None:

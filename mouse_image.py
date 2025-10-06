@@ -1,5 +1,5 @@
 from pico2d import *
-
+import draw_gesture
 width, height = 128, 128
 
 class Mouse:
@@ -17,6 +17,10 @@ class Mouse:
         pass
 
     def draw(self):
-        self.normal.clip_draw(0, 0, 128, 128, self.x+30, self.y-30,
+        if draw_gesture.f_pressed == False:
+            self.paint.clip_draw(0, 0, 128, 128, self.x+30, self.y-30,
+                                 width * 0.5, height * 0.5)
+        else:
+            self.normal.clip_draw(0, 0, 128, 128, self.x+30, self.y-30,
                                      width * 0.5, height * 0.5)
         pass
