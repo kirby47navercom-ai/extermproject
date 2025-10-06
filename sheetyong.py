@@ -180,10 +180,77 @@ ramona_action6_coordinate =[
     (560, 0, 52, 65, 10, 8),
 ]
 
+ghost_image =  load_image('1stage\\level1-png-sprite.png')
+
+ghost_idle_coordinate = [1981,820-265-76,59,76,0,0]
+ghost_hit_coordinate = [[1175,820-539-89,101,89,0,0],[1289,820-539-90,100,90,0,0], [1406,820-554-80,100,80,0,0],[1535,820-554-80,62,80,0,0]]
+ghost_die_coordinate = [[1143,820-637-81,69,81,0,0],[1242,820-637-81,71,81,0,0],[1349,820-637-81,53,81,0,0]]
+
+boss_ghost_idle_coordinate = [[3313,820-709-104,70,104,0,0],[3385,820-709-104,67,104,0,0],[3457,820-709-106,66,106,0,0],[3529,820-709-104,66,104,0,0]]
+boss_ghost_hit_coordinate = [[2115,820-443-105,124,105,0,0],[2252,820-450-102,104,102,0,0], [2402,820-450-97,92,97,0,0]]
+boss_ghost_pattern1_coordinate = [[1020,820-670-127,83,127,0,0],[953,820-576-129,62,129,0,0]]
+boss_ghost_pattern2_coordinate = [[282,820-689-99,74,99,0,0],[363,820-689-97,74,97,0,0],[444,820-689-97,73,97,0,0],[525,820-689-97,76,97,0,0],[606,820-699-97,77,97,0,0]]
+boss_ghost_die_coordinate = [[436,820-566-106,81,106,0,0],[530,820-571-102,82,102,0,0],[629,820-578-108,86,108,0,0],[729,820-581-111,86,111,0,0],[829,820-591-105,86,105,0,0]]
 
 frame = 0
 x,y=400,300
 
+
+def ghost_idle_ani():
+    clear_canvas()
+    left, bottom, width, height, jx, jy = ghost_idle_coordinate
+    ghost_image.clip_composite_draw(left, bottom, width, height, 0, '',x + jx, y + jy, width * 2, height * 2)
+    update_canvas()
+    delay(0.1)
+def ghost_hit_ani():
+    for j in ghost_hit_coordinate:
+        clear_canvas()
+        left, bottom, width, height, jx, jy = j
+        ghost_image.clip_composite_draw(left, bottom, width, height, 0, '', x + jx, y + jy, width * 2, height * 2)
+        update_canvas()
+        delay(0.1)
+def ghost_die_ani():
+    for j in ghost_die_coordinate:
+        clear_canvas()
+        left, bottom, width, height, jx, jy = j
+        ghost_image.clip_composite_draw(left, bottom, width, height, 0, '', x + jx, y + jy, width * 2, height * 2)
+        update_canvas()
+        delay(0.1)
+def boss_ghost_idle_ani():
+    for j in boss_ghost_idle_coordinate:
+        clear_canvas()
+        left, bottom, width, height, jx, jy = j
+        ghost_image.clip_composite_draw(left, bottom, width, height, 0, '', x + jx, y + jy, width * 2, height * 2)
+        update_canvas()
+        delay(0.1)
+def boss_ghost_hit_ani():
+    for j in boss_ghost_hit_coordinate:
+        clear_canvas()
+        left, bottom, width, height, jx, jy = j
+        ghost_image.clip_composite_draw(left, bottom, width, height, 0, '', x + jx, y + jy, width * 2, height * 2)
+        update_canvas()
+        delay(0.1)
+def boss_ghost_pattern1_ani():
+    for j in boss_ghost_pattern1_coordinate:
+        clear_canvas()
+        left, bottom, width, height, jx, jy = j
+        ghost_image.clip_composite_draw(left, bottom, width, height, 0, '', x + jx, y + jy, width * 2, height * 2)
+        update_canvas()
+        delay(0.1)
+def boss_ghost_pattern2_ani():
+    for j in boss_ghost_pattern2_coordinate:
+        clear_canvas()
+        left, bottom, width, height, jx, jy = j
+        ghost_image.clip_composite_draw(left, bottom, width, height, 0, '', x + jx, y + jy, width * 2, height * 2)
+        update_canvas()
+        delay(0.1)
+def boss_ghost_die_ani():
+    for j in boss_ghost_die_coordinate:
+        clear_canvas()
+        left, bottom, width, height, jx, jy = j
+        ghost_image.clip_composite_draw(left, bottom, width, height, 0, '', x + jx, y + jy, width * 2, height * 2)
+        update_canvas()
+        delay(0.1)
 
 
 def ramona_idle_ani():
@@ -439,27 +506,41 @@ def ramona_action6_ani():
             delay(0.1)
     x, y = 400, 300
 
+
+
+
+
+
 while True:
 
 
-    ramona_idle_ani()
-    ramona_walk_ani()
-    ramona_run_ani()
-    ramona_jump_ani()
-    ramona_double_jump_ani()
-    ramona_hit_ani()
-    ramona_evade_ani()
-    ramona_getup_ani()
-    ramona_dead_ani()
-    ramona_revive_ani()
-    ramona_stageclear_ani()
-    ramona_gameclear_ani()
-    ramona_action1_ani()
-    ramona_action2_ani()
-    ramona_action3_ani()
-    ramona_action4_ani()
-    ramona_action5_ani()
-    ramona_action6_ani()
+    # ramona_idle_ani()
+    # ramona_walk_ani()
+    # ramona_run_ani()
+    # ramona_jump_ani()
+    # ramona_double_jump_ani()
+    # ramona_hit_ani()
+    # ramona_evade_ani()
+    # ramona_getup_ani()
+    # ramona_dead_ani()
+    # ramona_revive_ani()
+    # ramona_stageclear_ani()
+    # ramona_gameclear_ani()
+    # ramona_action1_ani()
+    # ramona_action2_ani()
+    # ramona_action3_ani()
+    # ramona_action4_ani()
+    # ramona_action5_ani()
+    # ramona_action6_ani()\
+    ghost_idle_ani()
+    ghost_hit_ani()
+    ghost_die_ani()
+    boss_ghost_idle_ani()
+    boss_ghost_hit_ani()
+    boss_ghost_pattern1_ani()
+    boss_ghost_pattern2_ani()
+    boss_ghost_die_ani()
+    ghost_die_ani()
 
     events = get_events()
 
@@ -467,5 +548,6 @@ while True:
         if event.type == SDL_KEYDOWN:
             if event.key == SDLK_ESCAPE:
                 close_canvas()
+                quit()
 
 

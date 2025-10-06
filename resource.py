@@ -200,6 +200,22 @@ image_action6 = None
 
 ramona_image = {}  # 비어있는 dict 준비
 
+
+#스테이지 1리소스
+ghost_image=None
+
+ghost_idle_coordinate = [1981,820-265-76,59,76,0,0]
+ghost_hit_coordinate = [[1175,820-539-89,101,89,0,0],[1289,820-539-90,100,90,0,0], [1406,820-554-80,100,80,0,0],[1535,820-554-80,62,80,0,0]]
+ghost_die_coordinate = [[1143,820-637-81,69,81,0,0],[1242,820-637-81,71,81,0,0],[1349,820-637-81,53,81,0,0]]
+
+boss_ghost_idle_coordinate = [[3313,820-709-104,70,104,0,0],[3385,820-709-104,67,104,0,0],[3457,820-709-106,66,106,0,0],[3529,820-709-104,66,104,0,0]]
+boss_ghost_hit_coordinate = [[2115,820-443-105,124,105,0,0],[2252,820-450-102,104,102,0,0], [2402,820-450-97,92,97,0,0]]
+boss_ghost_pattern1_coordinate = [[1020,820-670-127,83,127,0,0],[953,820-576-129,62,129,0,0]]
+boss_ghost_pattern2_coordinate = [[282,820-689-99,74,99,0,0],[363,820-689-97,74,97,0,0],[444,820-689-97,73,97,0,0],[525,820-689-97,76,97,0,0],[606,820-699-97,77,97,0,0]]
+boss_ghost_die_coordinate = [[436,820-566-106,81,106,0,0],[530,820-571-102,82,102,0,0],[629,820-578-108,86,108,0,0],[729,820-581-111,86,111,0,0],[829,820-591-105,86,105,0,0]]
+
+
+
 # 함수로 묶기
 def load_resources():
 
@@ -208,8 +224,9 @@ def load_resources():
     global image_hit, image_evade, image_getup, image_dead, image_revived
     global image_stageclear, image_gameclear
     global image_action1, image_action2, image_action3, image_action4, image_action5, image_action6
-    global ramona_image
+    global ramona_image,ghost_image
 
+    ghost_image = load_image('1stage\\level1-png-sprite.png')
     image_idle = load_image('Ramona\\Ramona_idle.png')
     image_walk = load_image('Ramona\\Ramona_walk.png')
     image_run = load_image('Ramona\\Ramona_run.png')
