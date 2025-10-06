@@ -216,7 +216,7 @@ class JumpState:
 
 class Ramona:
     def __init__(self):
-        self.x, self.y = 100, GROUND_LEVEL
+        self.x, self.y = canvaswidth//2, GROUND_LEVEL
         self.y_velocity = 0
         self.frame = 0.0
         self.dir = 0

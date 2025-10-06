@@ -130,7 +130,7 @@ ramona_action2_coordinate =[
     (206, 0, 60, 57,45,-4),
     (269, 0, 50, 62,35,-0)
 ]
-ramana_action3_coordinate =[
+ramona_action3_coordinate =[
     (0, 0, 45, 73, 0, 0),
     (48, 0, 45, 75, 0, 0),
     (96, 0, 46, 76, 0, 0),
@@ -177,7 +177,7 @@ ramona_coordinate = {'idle': ramona_coordinate, 'walk': ramona_walk_coordinate, 
                      'hit': ramona_hit_coordinate, 'evade': ramona_evade_coordinate, 'getup': ramona_getup_coordinate,
                      'dead': ramona_dead_coordinate, 'revive': ramona_revive_coordinate, 'stageclear': ramona_stageclear_coordinate,
                      'gameclear': ramona_gameclear_coordinate, 'action1': ramona_action1_coordinate, 'action2': ramona_action2_coordinate,
-                     'action3': ramana_action3_coordinate, 'action4': ramona_action4_coordinate, 'action5': ramona_action5_coordinate, 'action6': ramona_action6_coordinate}
+                     'action3': ramona_action3_coordinate, 'action4': ramona_action4_coordinate, 'action5': ramona_action5_coordinate, 'action6': ramona_action6_coordinate}
 
 image_idle = None
 image_walk = None
@@ -209,7 +209,6 @@ pattern_index_dict = {}
 
 
 #스테이지 1리소스
-
 ghost_idle_coordinate = [1981,820-265-76,59,76,0,0]
 ghost_hit_coordinate = [[1175,820-539-89,101,89,0,0],[1289,820-539-90,100,90,0,0], [1406,820-554-80,100,80,0,0],[1535,820-554-80,62,80,0,0]]
 ghost_die_coordinate = [[1143,820-637-81,69,81,0,0],[1242,820-637-81,71,81,0,0],[1349,820-637-81,53,81,0,0]]
@@ -232,7 +231,6 @@ def load_resources():
     global image_action1, image_action2, image_action3, image_action4, image_action5, image_action6
     global ramona_image,ghost_image
     global image_pattern, pattern_string_dict, pattern_index_dict
-    ghost_image = load_image('1stage\\level1-png-sprite.png')
     image_idle = load_image('Ramona\\Ramona_idle.png')
     image_walk = load_image('Ramona\\Ramona_walk.png')
     image_run = load_image('Ramona\\Ramona_run.png')
