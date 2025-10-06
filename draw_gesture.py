@@ -88,6 +88,9 @@ class GestureRecognizer:
             elif event.type == SDL_KEYUP:
                 if event.key == SDLK_f:
                     self.f_pressed=True
+                    self.points = []
+                    self.result = None
+                    self.drawing = False
 
             if self.go == True:
                 if event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
@@ -102,13 +105,19 @@ class GestureRecognizer:
 
 
     def draw(self):
-        if len(self.points) > 1:
-            for i in range(1, len(self.points)):
-                if self.points[i].id == self.points[i - 1].id:
-                    draw_line(self.points[i - 1].x, canvasheight - self.points[i - 1].y,
-                              self.points[i].x, canvasheight - self.points[i].y)
 
-        draw_text_on_screen(10, canvasheight - 30, "그림을 그리고 마우스를 떼세요.", self.font)
-        if self.result:
-            draw_text_on_screen(10, canvasheight - 60,
+        self.check_image.clip_draw(0, 0, check_image_width, check_image_height, self.check_image_x, self.check_image_y,
+                                   check_image_width * 0.4, check_image_height * 0.4)
+        self.canvas_image.draw(self.canvas_image_x, self.canvas_image_y)
+
+        if self.go:
+            if len(self.points) > 1:
+                for i in range(1, len(self.points)):
+                    if self.points[i].id == self.points[i - 1].id:
+                        draw_line(self.points[i - 1].x, canvasheight - self.points[i - 1].y,
+                                  self.points[i].x, canvasheight - self.points[i].y)
+
+            draw_text_on_screen(10, canvasheight - 30, "그림을 그리고 마우스를 떼세요.", self.font)
+            if self.result:
+                draw_text_on_screen(10, canvasheight - 60,
                                 f"인식 결과: {self.result.name} (Score: {self.result.score:.2f})", self.font)
