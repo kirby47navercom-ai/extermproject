@@ -3,9 +3,12 @@ import os
 from QDollarRecognizer import QDollarRecognizer, Point
 from canvas_size import *
 
+check_image_width = 825
+check_image_height = 216
+SIZE=20
+
 BLACK = (0, 0, 0)  # 선과 글자 모두 검은색으로 통일
 
-font = load_font('Font\\경기천년제목_Medium.ttf', 20)
 
 
 
@@ -27,7 +30,7 @@ def draw_line(x1, y1, x2, y2):
         y += y_inc
 
 
-def draw_text_on_screen(x, y, text):
+def draw_text_on_screen(x, y, text,font):
     font.draw(x, y, text, BLACK)
 
 
@@ -44,28 +47,59 @@ class GestureRecognizer:
             self.recognizer.load_gesture_from_xml('NewGestures')
             self.recognizer.save_gesture_cache(CACHE_PATH)
 
-
+        self.font = load_font('Font\\경기천년제목_Medium.ttf', 20)
         self.drawing = False
         self.points = []
         self.stroke_id = 0
         self.result = None
 
+        self.check_image = load_image('Canvas\\2.png')
+        self.canvas_image = load_image('Canvas\\1.png')
+        self.check_image_x = canvaswidth // 2
+        self.check_image_y = canvasheight - (check_image_height * 0.2)
+        self.canvas_image_x = canvaswidth // 2
+        self.canvas_image_y = canvasheight + canvasheight // 2
+        self.f_pressed = True
+        self.go = False
+
 
     def update(self, frame_time, events):
-        for e in events:
-            if e.type == SDL_KEYDOWN and e.key == SDLK_c:
-                self.points = []
-                self.result = None
-                self.stroke_id = 0
-            elif e.type == SDL_MOUSEBUTTONDOWN and e.button == SDL_BUTTON_LEFT:
-                self.points, self.result, self.drawing = [], None, True
-                self.stroke_id += 1
-            elif e.type == SDL_MOUSEBUTTONUP and e.button == SDL_BUTTON_LEFT:
-                self.drawing = False
-                if len(self.points) > 10:
-                    self.result = self.recognizer.recognize(self.points)
-            elif e.type == SDL_MOUSEMOTION and self.drawing:
-                self.points.append(Point(e.x, e.y, self.stroke_id))
+        self.handle_event(events)
+
+        if self.f_pressed == False:
+            if self.canvas_image_y > canvasheight // 2:
+                self.check_image_y -= SIZE
+                self.canvas_image_y -= SIZE
+            else:
+                self.go = True
+        else:
+            if self.canvas_image_y < canvasheight + canvasheight // 2:
+                self.check_image_y += SIZE
+                self.canvas_image_y += SIZE
+                self.go = False
+
+
+    def handle_event(self, events):
+        for event in events:
+            if event.type == SDL_KEYDOWN:
+                if event.key == SDLK_f:
+                    self.f_pressed=False
+
+            elif event.type == SDL_KEYUP:
+                if event.key == SDLK_f:
+                    self.f_pressed=True
+
+            if self.go == True:
+                if event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
+                    self.points, self.result, self.drawing = [], None, True
+                    self.stroke_id += 1
+                elif event.type == SDL_MOUSEBUTTONUP and event.button == SDL_BUTTON_LEFT:
+                    self.drawing = False
+                    if len(self.points) > 10:
+                        self.result = self.recognizer.recognize(self.points)
+                elif event.type == SDL_MOUSEMOTION and self.drawing:
+                    self.points.append(Point(event.x, event.y, self.stroke_id))
+
 
     def draw(self):
         if len(self.points) > 1:
@@ -74,7 +108,7 @@ class GestureRecognizer:
                     draw_line(self.points[i - 1].x, canvasheight - self.points[i - 1].y,
                               self.points[i].x, canvasheight - self.points[i].y)
 
-        draw_text_on_screen(10, canvasheight - 30, "그림을 그리고 마우스를 떼세요.")
+        draw_text_on_screen(10, canvasheight - 30, "그림을 그리고 마우스를 떼세요.", self.font)
         if self.result:
             draw_text_on_screen(10, canvasheight - 60,
-                                f"인식 결과: {self.result.name} (Score: {self.result.score:.2f})")
+                                f"인식 결과: {self.result.name} (Score: {self.result.score:.2f})", self.font)
