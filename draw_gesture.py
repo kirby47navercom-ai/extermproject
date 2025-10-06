@@ -9,7 +9,7 @@ SIZE=20
 
 BLACK = (0, 0, 0)  # 선과 글자 모두 검은색으로 통일
 
-
+f_pressed = True
 
 
 def draw_point(x, y):
@@ -60,14 +60,14 @@ class GestureRecognizer:
         self.check_image_y = canvasheight - (check_image_height * 0.2)
         self.canvas_image_x = canvaswidth // 2
         self.canvas_image_y = canvasheight + canvasheight // 2
-        self.f_pressed = True
         self.go = False
 
 
     def update(self, frame_time, events):
-        self.handle_event(events)
+        self.handle_event(events,f_pressed)
+        global f_pressed
 
-        if self.f_pressed == False:
+        if f_pressed == False:
             if self.canvas_image_y > canvasheight // 2:
                 self.check_image_y -= SIZE
                 self.canvas_image_y -= SIZE
@@ -81,14 +81,15 @@ class GestureRecognizer:
 
 
     def handle_event(self, events):
+        global f_pressed
         for event in events:
             if event.type == SDL_KEYDOWN:
                 if event.key == SDLK_f:
-                    self.f_pressed=False
+                    f_pressed=False
 
             elif event.type == SDL_KEYUP:
                 if event.key == SDLK_f:
-                    self.f_pressed=True
+                    f_pressed=True
                     self.points = []
                     self.result = None
                     self.drawing = False

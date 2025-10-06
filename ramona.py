@@ -2,6 +2,7 @@ from pico2d import *
 import time
 import resource
 from canvas_size import *
+import draw_gesture
 
 
 # 물리
