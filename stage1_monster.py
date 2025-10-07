@@ -13,18 +13,17 @@ ghost_phase1_pos=[-1,-1,1,1,1]
 
 ghost_speed=50
 
-
-
 class Stage1_Monster:
     def __init__(self):
-        self.ghost_imagen=load_image('1stage\\level1-png-sprite.png')
         self.phase1=[Ghost() for _ in range(5)]
 
-
+        for i in range(self.phase1.__len__()):
+            self.phase1[i].x=0 if ghost_phase1_pos[i] == -1 else canvaswidth+ghost_phase1_pos[i]*ghost_phase1_far
+            self.phase1[i].y=random.randint(0,canvasheight)
         pass
     def update(self, frame_time, events=None):
-        for i in self.phase1.__len__():
-            self.phase1[i].update(self.ghost_imagen)
+        for i in range(self.phase1.__len__()):
+            self.phase1[i].update(frame_time,events)
         pass
 
     def phase1(self,frame_time):
@@ -32,6 +31,6 @@ class Stage1_Monster:
         pass
 
     def draw(self):
-        for i in self.phase1.__len__():
+        for i in range(self.phase1.__len__()):
             self.phase1[i].draw()
         pass

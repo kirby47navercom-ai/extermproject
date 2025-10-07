@@ -5,17 +5,20 @@ from random import randint
 import ramona
 import math
 
+
 class Ghost:
     def __init__(self):
-        self.image = load_image('monster\\ghost_normal.png')
-        self.x, self.y = None, None
-        self.hp=None
+        pattern_set=get_pattern_set()
+
+        self.image = load_image('1stage\\level1-png-sprite.png')
+        self.x, self.y = 0, 0
+        self.hp=20
         self.width, self.height = 59, 76
         self.frame = 0
         self.dir = 1
         self.timer = 0.0
         self.speed = 50
-        self.shape=pattern_set[randint(0,pattern_set.__len__()-1)]
+        self.shape=pattern_set[randint(0,pattern_set.__len__()-6)]
 
     def update(self, frame_time, events=None):
 
@@ -24,8 +27,13 @@ class Ghost:
         self.y = self.y + (ramona.Ramona_POS_Y - self.y) * self.speed * frame_time / distance
 
         self.shape.x=self.x
-        self.shape.y=self.y+self.height//2
+        self.shape.y=self.y+self.height*0.7
         pass
+
+    def ramonatoghost(self):
+        pass
+
+
 
     def draw(self):
         left, bottom, width, height, jx, jy = ghost_idle_coordinate
