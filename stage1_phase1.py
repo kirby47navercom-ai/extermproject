@@ -1,11 +1,3 @@
-from pico2d import *
-
-import resource
-from canvas_size import *
-import ramona
-from resource import *
-import random
-import math
 from ghost_normal import *
 import draw_gesture
 
@@ -20,32 +12,29 @@ class Stage1_Phase1:
             self.phase1[i].y=random.randint(0,canvasheight)
 
 
+
         pass
     def update(self, frame_time, events=None):
-        for i in range(self.phase1.__len__()):
-            self.phase1[i].update(frame_time,events)
+        self.phase1[self.phase1.__len__()-1].update(frame_time,events)
 
         self.shape_check()
         self.monster_die()
         pass
 
     def shape_check(self):
-        for i in range(len(self.phase1) - 1, -1, -1):
-            if self.phase1[i].shape.name==draw_gesture.result:
-                self.phase1[i].hp-=ramona.Ramona_attack
-                self.phase1[i].hit_animation=True
-                self.phase1[i].hit_frame = 0
-                canvas_size.start_shake(0.5, 5.0)
+        if self.phase1[self.phase1.__len__()-1].shape.name==draw_gesture.result:
+            self.phase1[self.phase1.__len__()-1].hp-=ramona.Ramona_attack
+            self.phase1[self.phase1.__len__()-1].hit_animation=True
+            self.phase1[self.phase1.__len__()-1].hit_frame = 0
+            canvas_size.start_shake(0.5, 5.0)
 
         draw_gesture.result=None
 
         pass
     def monster_die(self):
-        for i in range(len(self.phase1) - 1, -1, -1):
-            if self.phase1[i].die:
-                self.phase1.pop(i)
+        if self.phase1[self.phase1.__len__()-1].die:
+            self.phase1.pop(self.phase1.__len__()-1)
         pass
     def draw(self):
-        for i in range(self.phase1.__len__()):
-            self.phase1[i].draw()
+        self.phase1[self.phase1.__len__()-1].draw()
         pass

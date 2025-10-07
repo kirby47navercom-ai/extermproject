@@ -18,7 +18,12 @@ class Ghost:
         self.dir = 1
         self.timer = 0.0
         self.speed = 50
+
         self.shape=self.pattern_set[randint(0,self.pattern_set.__len__()-6)]
+        self.shape.x = self.x
+        self.shape.y = self.y + self.height * 0.7
+
+
         self.die=False
         self.die_animation=False
         self.die_animation_speed = 8.0
