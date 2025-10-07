@@ -18,8 +18,9 @@ class Stage1_Monster:
 
         if self.phase[self.phase_num].phase1.__len__()==0:
             self.phase_num+=1
+            self.update(frame_time,events)
+
         pass
     def draw(self):
-        if self.phase_num==1:
-            self.phase[0].draw()
+        self.phase[self.phase_num].draw()
         pass

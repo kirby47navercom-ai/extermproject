@@ -26,6 +26,7 @@ class Stage1_Phase1:
             self.phase1[self.phase1.__len__()-1].hp-=ramona.Ramona_attack
             self.phase1[self.phase1.__len__()-1].hit_animation=True
             self.phase1[self.phase1.__len__()-1].hit_frame = 0
+            ramona.Ramona_smash = True
             canvas_size.start_shake(0.5, 5.0)
 
         draw_gesture.result=None

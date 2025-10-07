@@ -3,6 +3,7 @@ import time
 import resource
 import canvas_size
 import draw_gesture
+import random
 
 
 # 물리
@@ -33,6 +34,9 @@ Ramona_invincible=False
 hit_toggle=False
 #플레이어의 공격력
 Ramona_attack=20
+#플레이어의 공격
+Ramona_smash=False
+Ramona_smesh_toggle=False
 
 
 A_DOWN, D_DOWN, A_UP, D_UP = range(4)
@@ -52,6 +56,37 @@ key_event_table = {
 }
 
 
+class AttackState:
+    def enter(self, event):
+        self.frame = 0
+        attack_num = random.randint(1, 6)
+
+        self.attack_motion = f'action{attack_num}'
+
+        self.dir = 0
+
+    def exit(self, event):
+        pass
+
+    def do(self, frame_time):
+        global Ramona_smash, Ramona_smesh_toggle
+        total_frames = len(self.coordinate[self.attack_motion])
+
+        self.frame = (self.frame + self.animation_speed * frame_time)
+
+        if self.frame >= total_frames:
+            Ramona_smesh_toggle = False
+            self.change_state(IdleState, None)
+
+    def draw(self):
+        total_frames = len(self.coordinate[self.attack_motion])
+        frame_idx = int(self.frame)
+        if frame_idx >= total_frames:
+            frame_idx = total_frames - 1
+        self.draw_sprite(self.attack_motion, frame_idx=frame_idx)
+
+    def handle_event(self, event):
+        pass
 
 class IdleState:
     def enter(self, event):
@@ -260,7 +295,7 @@ class Ramona:
         self.animation_speed = 8.0
         self.image = resource.ramona_image
         self.coordinate = resource.ramona_coordinate
-
+        self.attack_motion = None
         self.last_key_time = {'a': 0, 'd': 0}
         self.jump_count = 0
         self.evade_cooldown_timer = 0.0
@@ -279,10 +314,16 @@ class Ramona:
             self.cur_state.exit(self, event)
             self.cur_state = new_state
             self.cur_state.enter(self, event)
+            self.frame = 0.0
 
     def update(self, frame_time,events):
-        global Ramona_POS_X, Ramona_POS_Y, Ramona_invincible_timer, Ramona_invincible
-        if not draw_gesture.f_pressed:
+        global Ramona_POS_X, Ramona_POS_Y, Ramona_invincible_timer, Ramona_invincible, hit_toggle, CURRENT_HP, Ramona_smash, Ramona_smesh_toggle
+
+        if Ramona_smash and self.cur_state not in [AttackState, HitState, EvadeState]and not Ramona_smesh_toggle:
+            self.change_state(AttackState, None)
+            Ramona_smash = False
+            Ramona_smesh_toggle=True
+        elif not draw_gesture.f_pressed and not Ramona_smash and not Ramona_smesh_toggle:
 
             self.a_pressed = False
             self.d_pressed = False

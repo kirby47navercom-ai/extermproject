@@ -78,7 +78,7 @@ class Ghost:
     def die_ghost(self):
         if self.hp<=0 and not self.die_animation:
             self.die_animation=True
-            self.shape.name=None
+            self.shape.name='No'
         pass
 
     def die_ghost_animation(self, frame_time):

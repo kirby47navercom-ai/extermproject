@@ -111,12 +111,18 @@ class GestureRecognizer:
                     self.drawing = False
                     if len(self.points) > 10:
                         self.result = self.recognizer.recognize(self.points)
+                        if self.result and self.result.score >= 0.3:
+
+                            result = self.result.name
+                        else:
+
+                            result = None
+                        self.points = []
                 elif event.type == SDL_MOUSEMOTION and self.drawing:
                     self.points.append(Point(event.x, event.y, self.stroke_id))
 
 
     def draw(self):
-        global result
         self.check_image.clip_draw(0, 0, check_image_width, check_image_height, self.check_image_x-canvas_size.camera_x, self.check_image_y-canvas_size.camera_y,
                                    check_image_width * 0.4, check_image_height * 0.4)
         self.canvas_image.draw(self.canvas_image_x-canvas_size.camera_x, self.canvas_image_y-canvas_size.camera_y,)
@@ -136,7 +142,4 @@ class GestureRecognizer:
                 else:
                     draw_text_on_screen(10-canvas_size.camera_x, canvas_size.canvasheight - 120-canvas_size.camera_y,
                                     f"인식 결과: {self.result.name} (Score: {self.result.score:.2f})", self.font)
-                    result = self.result.name
-                    self.result.name=None
-                    self.points = []
-                    self.result = None
+
