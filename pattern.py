@@ -1,17 +1,18 @@
 from pico2d import *
 from canvas_size import *
 
-width = 128
-height = 128
+
 class Pattern:
     def __init__(self):
+        self.width = 128
+        self.height = 128
         self.x = None
         self.y = None
         self.image = None
         self.name = None
 
     def draw(self):
-        self.image.clip_draw(0, 0, 128, 128,self.x , self.y, width*0.7, height*0.7)
+        self.image.clip_draw(0, 0, 128, 128,self.x , self.y, self.width*0.7, self.height*0.7)
 
 class Width(Pattern):
     def __init__(self):
