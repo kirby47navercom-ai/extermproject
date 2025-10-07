@@ -1,4 +1,6 @@
 from pico2d import *
+
+import canvas_size
 from canvas_size import *
 from resource import *
 
@@ -13,7 +15,7 @@ class Pattern:
         self.name = None
 
     def draw(self):
-        self.image.clip_draw(0, 0, 128, 128,self.x , self.y, self.width*0.2, self.height*0.2)
+        self.image.clip_draw(0, 0, 128, 128,self.x-canvas_size.camera_x, self.y-canvas_size.camera_y, self.width*0.2, self.height*0.2)
 
 class Width(Pattern):
     def __init__(self):

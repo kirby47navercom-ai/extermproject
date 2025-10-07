@@ -2,6 +2,7 @@ from pico2d import *
 from pattern import *
 from resource import *
 from random import randint
+import canvas_size
 import ramona
 import math
 
@@ -88,9 +89,9 @@ class Ghost:
         else:  left, bottom, width, height, jx, jy = ghost_idle_coordinate
 
         if ramona.Ramona_POS_X < self.x:
-            self.image.clip_composite_draw(left, bottom, width, height, 0, '', self.x + jx, self.y + jy, width, height)
+            self.image.clip_composite_draw(left, bottom, width, height, 0, '', self.x + jx-canvas_size.camera_x, self.y + jy-canvas_size.camera_y, width, height)
         else:
-            self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx, self.y + jy, width, height)
+            self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx-canvas_size.camera_x, self.y + jy-canvas_size.camera_y, width, height)
 
 
         if not self.die_animation:

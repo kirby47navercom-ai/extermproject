@@ -13,6 +13,7 @@ def start_shake(duration, magnitude):
     shake_magnitude = magnitude
 
 def update_shake(frame_time):
+    global camera_x, camera_y, shake_timer, shake_magnitude
     if shake_timer > 0:
         shake_timer -= frame_time
         # 카메라 위치를 -강도 ~ +강도 범위 내에서 무작위로 변경

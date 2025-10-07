@@ -3,6 +3,7 @@ import ramona
 import background
 import mouse_image
 import draw_gesture
+import canvas_size
 import ramona_ui
 import some_function
 import stage1_monster
@@ -27,6 +28,9 @@ def update(frame_time):
     ramona_ui.update(frame_time,events)
     draw_gest.update(frame_time,events)
     mouse.update(frame_time,events)
+
+    if canvas_size.shake_timer > 0:
+        canvas_size.update_shake(frame_time)
     pass
 
 def render():

@@ -1,7 +1,9 @@
 from pico2d import *
 import os
 from QDollarRecognizer import QDollarRecognizer, Point
-from canvas_size import *
+import canvas_size
+import ramona
+
 
 check_image_width = 825
 check_image_height = 216
@@ -57,28 +59,32 @@ class GestureRecognizer:
 
         self.check_image = load_image('Canvas\\2.png')
         self.canvas_image = load_image('Canvas\\1.png')
-        self.check_image_x = canvaswidth // 2
-        self.check_image_y = canvasheight - (check_image_height * 0.2)
-        self.canvas_image_x = canvaswidth // 2
-        self.canvas_image_y = canvasheight + canvasheight // 2
+        self.check_image_x = canvas_size.canvaswidth // 2
+        self.check_image_y = canvas_size.canvasheight - (check_image_height * 0.2)
+        self.canvas_image_x = canvas_size.canvaswidth // 2
+        self.canvas_image_y = canvas_size.canvasheight + canvas_size.canvasheight // 2
         self.go = False
 
 
     def update(self, frame_time, events):
-        global f_pressed
+        global f_pressed, result
         self.handle_event(events)
 
-        if f_pressed == False:
-            if self.canvas_image_y > canvasheight // 2:
+        if not f_pressed:
+            if self.canvas_image_y > canvas_size.canvasheight // 2:
                 self.check_image_y -= SIZE
                 self.canvas_image_y -= SIZE
             else:
                 self.go = True
         else:
-            if self.canvas_image_y < canvasheight + canvasheight // 2:
+            if self.canvas_image_y < canvas_size.canvasheight + canvas_size.canvasheight // 2:
                 self.check_image_y += SIZE
                 self.canvas_image_y += SIZE
                 self.go = False
+
+        if ramona.Ramona_invincible:
+            f_pressed=True
+
 
 
     def handle_event(self, events):
@@ -111,24 +117,24 @@ class GestureRecognizer:
 
     def draw(self):
         global result
-        self.check_image.clip_draw(0, 0, check_image_width, check_image_height, self.check_image_x, self.check_image_y,
+        self.check_image.clip_draw(0, 0, check_image_width, check_image_height, self.check_image_x-canvas_size.camera_x, self.check_image_y-canvas_size.camera_y,
                                    check_image_width * 0.4, check_image_height * 0.4)
-        self.canvas_image.draw(self.canvas_image_x, self.canvas_image_y)
+        self.canvas_image.draw(self.canvas_image_x-canvas_size.camera_x, self.canvas_image_y-canvas_size.camera_y,)
 
         if self.go:
             if len(self.points) > 1:
                 for i in range(1, len(self.points)):
                     if self.points[i].id == self.points[i - 1].id:
-                        draw_line(self.points[i - 1].x, canvasheight - self.points[i - 1].y,
-                                  self.points[i].x, canvasheight - self.points[i].y)
+                        draw_line(self.points[i - 1].x-canvas_size.camera_x, canvas_size.canvasheight - self.points[i - 1].y-canvas_size.camera_y,
+                                  self.points[i].x-canvas_size.camera_x, canvas_size.canvasheight - self.points[i].y-canvas_size.camera_y)
 
-            draw_text_on_screen(10, canvasheight - 90, "그림을 그리고 마우스를 떼세요.", self.font)
+            draw_text_on_screen(10-canvas_size.camera_x, canvas_size.canvasheight - 90-canvas_size.camera_y, "그림을 그리고 마우스를 떼세요.", self.font)
             if self.result:
                 if self.result.score < 0.3:
-                    draw_text_on_screen(10, canvasheight - 120,
+                    draw_text_on_screen(10-canvas_size.camera_x, canvas_size.canvasheight - 120-canvas_size.camera_y,
                                         f"인식 결과: 인식 실패 (Score: {self.result.score:.2f})", self.font)
                 else:
-                    draw_text_on_screen(10, canvasheight - 120,
+                    draw_text_on_screen(10-canvas_size.camera_x, canvas_size.canvasheight - 120-canvas_size.camera_y,
                                     f"인식 결과: {self.result.name} (Score: {self.result.score:.2f})", self.font)
                     result = self.result.name
                     self.result.name=None
