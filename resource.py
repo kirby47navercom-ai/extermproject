@@ -220,8 +220,8 @@ boss_ghost_pattern2_coordinate = [[282,820-689-99,74,99,0,0],[363,820-689-97,74,
 boss_ghost_die_coordinate = [[436,820-566-106,81,106,0,0],[530,820-571-102,82,102,0,0],[629,820-578-108,86,108,0,0],[729,820-581-111,86,111,0,0],[829,820-591-105,86,105,0,0]]
 
 def collide(a, b):
-    left_a, bottom_a, right_a, top_a = a.x - a.w/2, a.y - a.h/2, a.x + a.w/2, a.y + a.h/2
-    left_b, bottom_b, right_b, top_b = b.x - b.w/2, b.y - b.h/2, b.x + b.w/2, b.y + b.h/2
+    left_a, bottom_a, right_a, top_a = a[0] - a[2]/2, a[1] - a[3]/2, a[0] + a[2]/2, a[1] + a[3]/2
+    left_b, bottom_b, right_b, top_b = b[0] - b[2]/2, b[1] - b[3]/2, b[0] + b[2]/2, b[1] + b[3]/2
 
     if left_a > right_b: return False
     if right_a < left_b: return False

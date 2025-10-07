@@ -28,9 +28,18 @@ class Ghost:
 
         self.shape.x=self.x
         self.shape.y=self.y+self.height*0.7
+
+        self.ramonatoghost()
+
         pass
 
     def ramonatoghost(self):
+        if collide([ramona.Ramona_POS_X,ramona.Ramona_POS_Y,ramona.Ramona_SIZE_X,ramona.Ramona_SIZE_Y],[self.x,self.y,self.width,self.height]) and not ramona.Ramona_invincible and not ramona.Ramona_roll_invincible:
+            if ramona.CURRENT_HP>0:
+                ramona.CURRENT_HP-=1
+                ramona.Ramona_invincible=True
+                ramona.invincible_timer=0.0
+
         pass
 
 

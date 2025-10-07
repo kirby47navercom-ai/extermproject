@@ -26,6 +26,11 @@ Ramona_SIZE_Y=64
 #플레이어의 위치
 Ramona_POS_X=100
 Ramona_POS_Y=GROUND_LEVEL
+#플레이어 무적
+Ramona_invincible_timer=0.0
+Ramona_roll_invincible=False;
+Ramona_invincible=False
+
 
 A_DOWN, D_DOWN, A_UP, D_UP = range(4)
 SHIFT_DOWN, SHIFT_UP, SPACE_DOWN, SPACE_UP = range(4, 8)
@@ -132,14 +137,18 @@ class RunState:
 
 class EvadeState:
     def enter(self, event):
+        global Ramona_roll_invincible
         if event == A_D_TAP:
             self.dir = -1
         elif event == D_D_TAP:
             self.dir = 1
         self.evade_timer = EVADE_DURATION
         self.evade_cooldown_timer = EVADE_COOLDOWN
+        Ramona_roll_invincible = True
 
     def exit(self, event):
+        global Ramona_roll_invincible
+        Ramona_roll_invincible = False
         pass
 
     def do(self, frame_time):
@@ -212,7 +221,32 @@ class JumpState:
             if self.y_velocity > 0:
                 self.y_velocity *= 0.5
 
+class HitState:
+    def enter(self, event):
+        self.frame = 0
+        self.hit_timer = 0.5
+        self.x -= self.dir * 10
 
+    def exit(self, event):
+        pass
+
+    def do(self, frame_time):
+
+        self.frame = (self.frame + self.animation_speed * frame_time) % 4 # hit 애니메이션 프레임 수
+
+
+        self.y_velocity -= GRAVITY * frame_time
+        self.y += self.y_velocity * frame_time
+
+        self.hit_timer -= frame_time
+        if self.hit_timer <= 0:
+            self.change_state(IdleState, None)
+
+    def draw(self):
+        self.draw_sprite('hit')
+
+    def handle_event(self, event):
+        pass
 
 class Ramona:
     def __init__(self):
@@ -245,7 +279,7 @@ class Ramona:
             self.cur_state.enter(self, event)
 
     def update(self, frame_time,events):
-        global Ramona_POS_X, Ramona_POS_Y
+        global Ramona_POS_X, Ramona_POS_Y, Ramona_invincible_timer, Ramona_invincible
         if not draw_gesture.f_pressed:
 
             self.a_pressed = False
@@ -290,6 +324,24 @@ class Ramona:
         elif self.dir == 1:
             self.flip = False
 
+        global hit_toggle=False
+
+        if Ramona_invincible:
+
+            Ramona_invincible_timer += frame_time
+
+            if not hit_toggle
+                hit_toggle=True
+                if CURRENT_HP > 0:
+                    self.change_state(HitState, None)
+                else:
+                    # self.change_state(DeadState, None) # (DeadState가 있다면)
+                pass
+            if Ramona_invincible_timer >= 2.0:
+                Ramona_invincible = False
+                Ramona_invincible_timer = 0.0
+                hit_toggle=False
+
         Ramona_POS_X = self.x
         Ramona_POS_Y = self.y
 
@@ -331,8 +383,6 @@ class Ramona:
                 else:
                     self.cur_state.handle_event(self, key_event)
 
-            elif event.key == SDLK_ESCAPE:
-                quit()
 
     def draw_sprite(self, state_name, frame_idx=None):
         if frame_idx is None:
@@ -350,4 +400,10 @@ class Ramona:
                                                        height)
 
     def draw(self):
-        self.cur_state.draw(self)
+        global Ramona_invincible
+
+        if Ramona_invincible:
+            if (get_time() % 0.2) > 0.1:
+                self.cur_state.draw(self)
+        else:
+            self.cur_state.draw(self)

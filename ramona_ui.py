@@ -1,6 +1,6 @@
 from pico2d import *
 from canvas_size import *
-from ramona import *
+import ramona
 
 class Ramona_UI:
     def __init__(self):
@@ -13,11 +13,11 @@ class Ramona_UI:
         pass
 
     def draw(self):
-        for i in range(MAX_HP):
-            if i < MAX_HP - CURRENT_HP:
-                self.ramona_broken_hp_image.clip_draw(0, 0, 17, 17, (50+(MAX_HP-1)*70 )- i * 70, canvasheight - 50,
+        for i in range(ramona.MAX_HP):
+            if i < ramona.MAX_HP - ramona.CURRENT_HP:
+                self.ramona_broken_hp_image.clip_draw(0, 0, 17, 17, (50+(ramona.MAX_HP-1)*70 )- i * 70, canvasheight - 50,
                                                       50, 50)
             else:
-                self.ramona_hp_image.clip_draw(0, 0, 17, 17, (50+(MAX_HP-1)*70 )- i * 70, canvasheight - 50,
+                self.ramona_hp_image.clip_draw(0, 0, 17, 17, (50+(ramona.MAX_HP-1)*70 )- i * 70, canvasheight - 50,
                                                50, 50)
         pass
