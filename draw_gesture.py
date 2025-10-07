@@ -11,6 +11,7 @@ BLACK = (0, 0, 0)  # 선과 글자 모두 검은색으로 통일
 
 f_pressed = True
 
+result = None
 
 def draw_point(x, y):
     draw_rectangle(x, y, x + 1, y + 1)
@@ -81,7 +82,7 @@ class GestureRecognizer:
 
 
     def handle_event(self, events):
-        global f_pressed
+        global f_pressed, result
         for event in events:
             if event.type == SDL_KEYDOWN:
                 if event.key == SDLK_f:
@@ -93,11 +94,13 @@ class GestureRecognizer:
                     self.points = []
                     self.result = None
                     self.drawing = False
+                    result=None
 
             if self.go == True:
                 if event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
                     self.points, self.result, self.drawing = [], None, True
                     self.stroke_id += 1
+                    result = None
                 elif event.type == SDL_MOUSEBUTTONUP and event.button == SDL_BUTTON_LEFT:
                     self.drawing = False
                     if len(self.points) > 10:
@@ -107,7 +110,7 @@ class GestureRecognizer:
 
 
     def draw(self):
-
+        global result
         self.check_image.clip_draw(0, 0, check_image_width, check_image_height, self.check_image_x, self.check_image_y,
                                    check_image_width * 0.4, check_image_height * 0.4)
         self.canvas_image.draw(self.canvas_image_x, self.canvas_image_y)
@@ -124,5 +127,7 @@ class GestureRecognizer:
                 if self.result.score < 0.3:
                     draw_text_on_screen(10, canvasheight - 120,
                                         f"인식 결과: 인식 실패 (Score: {self.result.score:.2f})", self.font)
-                else: draw_text_on_screen(10, canvasheight - 120,
+                else:
+                    draw_text_on_screen(10, canvasheight - 120,
                                     f"인식 결과: {self.result.name} (Score: {self.result.score:.2f})", self.font)
+                    result = self.result.name

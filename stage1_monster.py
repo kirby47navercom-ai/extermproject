@@ -7,6 +7,7 @@ from resource import *
 import random
 import math
 from ghost_normal import *
+import draw_gesture
 
 ghost_phase1_far=50
 ghost_phase1_pos=[-1,-1,1,1,1]
@@ -24,9 +25,16 @@ class Stage1_Monster:
     def update(self, frame_time, events=None):
         for i in range(self.phase1.__len__()):
             self.phase1[i].update(frame_time,events)
+
+        self.shape_check()
         pass
 
-    def shape_check(self,frame_time):
+    def shape_check(self):
+        for i in range(len(self.phase1) - 1, -1, -1):
+            if self.phase1[i].shape.name==draw_gesture.result:
+                self.phase1.pop(i)
+
+        draw_gesture.result=None
 
         pass
 
