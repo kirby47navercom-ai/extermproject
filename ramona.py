@@ -37,6 +37,7 @@ Ramona_attack=20
 #플레이어의 공격
 Ramona_smash=False
 Ramona_smesh_toggle=False
+#ㅇㅅㅇ
 
 
 A_DOWN, D_DOWN, A_UP, D_UP = range(4)
