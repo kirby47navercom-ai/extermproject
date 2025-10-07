@@ -26,7 +26,7 @@ class Stage1_Monster:
             self.phase1[i].update(frame_time,events)
         pass
 
-    def phase1(self,frame_time):
+    def shape_check(self,frame_time):
 
         pass
 

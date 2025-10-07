@@ -30,6 +30,7 @@ Ramona_POS_Y=GROUND_LEVEL
 Ramona_invincible_timer=0.0
 Ramona_roll_invincible=False;
 Ramona_invincible=False
+hit_toggle=False
 
 
 A_DOWN, D_DOWN, A_UP, D_UP = range(4)
@@ -225,7 +226,7 @@ class HitState:
     def enter(self, event):
         self.frame = 0
         self.hit_timer = 0.5
-        self.x -= self.dir * 10
+        self.x -= self.dir * 30
 
     def exit(self, event):
         pass
@@ -233,7 +234,6 @@ class HitState:
     def do(self, frame_time):
 
         self.frame = (self.frame + self.animation_speed * frame_time) % 4 # hit 애니메이션 프레임 수
-
 
         self.y_velocity -= GRAVITY * frame_time
         self.y += self.y_velocity * frame_time
@@ -324,19 +324,20 @@ class Ramona:
         elif self.dir == 1:
             self.flip = False
 
-        global hit_toggle=False
+        global hit_toggle
+
 
         if Ramona_invincible:
 
             Ramona_invincible_timer += frame_time
 
-            if not hit_toggle
+            if not hit_toggle:
                 hit_toggle=True
                 if CURRENT_HP > 0:
                     self.change_state(HitState, None)
                 else:
                     # self.change_state(DeadState, None) # (DeadState가 있다면)
-                pass
+                    pass
             if Ramona_invincible_timer >= 2.0:
                 Ramona_invincible = False
                 Ramona_invincible_timer = 0.0
