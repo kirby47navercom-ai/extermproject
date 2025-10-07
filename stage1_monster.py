@@ -27,17 +27,23 @@ class Stage1_Monster:
             self.phase1[i].update(frame_time,events)
 
         self.shape_check()
+        self.monster_die()
         pass
 
     def shape_check(self):
         for i in range(len(self.phase1) - 1, -1, -1):
             if self.phase1[i].shape.name==draw_gesture.result:
-                self.phase1.pop(i)
+                self.phase1[i].hp-=ramona.Ramona_attack
+                self.phase1[i].hit_animation=True
 
         draw_gesture.result=None
 
         pass
-
+    def monster_die(self):
+        for i in range(len(self.phase1) - 1, -1, -1):
+            if self.phase1[i].die:
+                self.phase1.pop(i)
+        pass
     def draw(self):
         for i in range(self.phase1.__len__()):
             self.phase1[i].draw()
