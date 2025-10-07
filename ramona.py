@@ -252,7 +252,7 @@ class HitState:
 
 class Ramona:
     def __init__(self):
-        self.x, self.y = canvaswidth//2, GROUND_LEVEL
+        self.x, self.y = canvas_size.canvaswidth//2, GROUND_LEVEL
         self.y_velocity = 0
         self.frame = 0.0
         self.dir = 0
@@ -318,7 +318,7 @@ class Ramona:
                         self.change_state(WalkState, None)
 
 
-        self.x = clamp(25, self.x, canvaswidth - 25)
+        self.x = clamp(25, self.x, canvas_size.canvaswidth - 25)
         self.y = clamp(GROUND_LEVEL, self.y, 864 - 50)
 
         if self.dir == -1:

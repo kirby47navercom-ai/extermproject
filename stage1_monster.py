@@ -36,7 +36,7 @@ class Stage1_Monster:
                 self.phase1[i].hp-=ramona.Ramona_attack
                 self.phase1[i].hit_animation=True
                 self.phase1[i].hit_frame = 0
-                print('ㅇㅅㅇ')
+                canvas_size.start_shake(0.5, 5.0)
 
         draw_gesture.result=None
 
