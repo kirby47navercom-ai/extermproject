@@ -35,6 +35,8 @@ class Stage1_Monster:
             if self.phase1[i].shape.name==draw_gesture.result:
                 self.phase1[i].hp-=ramona.Ramona_attack
                 self.phase1[i].hit_animation=True
+                self.phase1[i].hit_frame = 0
+                print('ㅇㅅㅇ')
 
         draw_gesture.result=None
 

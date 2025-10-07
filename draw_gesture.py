@@ -131,3 +131,6 @@ class GestureRecognizer:
                     draw_text_on_screen(10, canvasheight - 120,
                                     f"인식 결과: {self.result.name} (Score: {self.result.score:.2f})", self.font)
                     result = self.result.name
+                    self.result.name=None
+                    self.points = []
+                    self.result = None

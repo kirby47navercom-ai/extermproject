@@ -8,8 +8,7 @@ import math
 
 class Ghost:
     def __init__(self):
-        pattern_set=get_pattern_set()
-
+        self.pattern_set = get_pattern_set()
         self.image = load_image('1stage\\level1-png-sprite.png')
         self.x, self.y = 0, 0
         self.hp=20
@@ -18,21 +17,24 @@ class Ghost:
         self.dir = 1
         self.timer = 0.0
         self.speed = 50
-        self.shape=pattern_set[randint(0,pattern_set.__len__()-6)]
+        self.shape=self.pattern_set[randint(0,self.pattern_set.__len__()-6)]
         self.die=False
         self.die_animation=False
+        self.die_animation_speed = 8.0
         self.die_frame=0
         self.hit=False
         self.hit_animation = False
+        self.hit_animation_speed = 8.0
         self.hit_frame=0
-        self.animation_speed = 8.0
 
     def update(self, frame_time, events=None):
 
-        if not self.die_animation and not self.hit:
+        if not self.die_animation and not self.hit_animation:
             self.move(frame_time)
         elif self.hit_animation and not self.die_animation:
-            pass
+            self.hit_ghost_animation(frame_time)
+        elif self.die_animation:
+            self.die_ghost_animation(frame_time)
 
         self.ramonatoghost()
         self.die_ghost()
@@ -48,7 +50,8 @@ class Ghost:
         self.shape.y = self.y + self.height * 0.7
 
     def ramonatoghost(self):
-        if collide([ramona.Ramona_POS_X,ramona.Ramona_POS_Y,ramona.Ramona_SIZE_X,ramona.Ramona_SIZE_Y],[self.x,self.y,self.width,self.height]) and not ramona.Ramona_invincible and not ramona.Ramona_roll_invincible:
+        if collide([ramona.Ramona_POS_X,ramona.Ramona_POS_Y,ramona.Ramona_SIZE_X,ramona.Ramona_SIZE_Y],
+                   [self.x,self.y,self.width,self.height]) and not ramona.Ramona_invincible and not ramona.Ramona_roll_invincible and not self.die_animation:
             if ramona.CURRENT_HP>0:
                 ramona.CURRENT_HP-=1
                 ramona.Ramona_invincible=True
@@ -56,23 +59,40 @@ class Ghost:
 
         pass
 
+    def hit_ghost_animation(self, frame_time):
+        self.hit_frame = (self.hit_frame + self.hit_animation_speed * frame_time) % 4
+        if int(self.hit_frame) == 3:
+            self.hit_animation = False
+            self.shape = self.pattern_set[randint(0, self.pattern_set.__len__() - 6)]
+            self.shape.x = self.x
+            self.shape.y = self.y + self.height * 0.7
+        pass
+
     def die_ghost(self):
         if self.hp<=0 and not self.die_animation:
             self.die_animation=True
+            self.shape.name=None
+        pass
+
+    def die_ghost_animation(self, frame_time):
+        self.die_frame = (self.die_frame + self.die_animation_speed * frame_time) % 4
+        if int(self.die_frame) == 3:
+            self.die = True
         pass
 
     def draw(self):
-        if not self.die_animation and not self.hit:
-            self.draw_idle()
-        elif self.die_animation:
-            pass
-        self.shape.draw()
+        if self.die_animation:
+            left, bottom, width, height, jx, jy = ghost_die_coordinate[int(self.die_frame)]
+        elif self.hit_animation:
+            left, bottom, width, height, jx, jy = ghost_hit_coordinate[int(self.die_frame)]
+        else:  left, bottom, width, height, jx, jy = ghost_idle_coordinate
 
-
-    def draw_idle(self):
-        left, bottom, width, height, jx, jy = ghost_idle_coordinate
         if ramona.Ramona_POS_X < self.x:
             self.image.clip_composite_draw(left, bottom, width, height, 0, '', self.x + jx, self.y + jy, width, height)
         else:
             self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx, self.y + jy, width, height)
+
+
+        if not self.die_animation:
+            self.shape.draw()
 
