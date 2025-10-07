@@ -10,7 +10,7 @@ import math
 ghost_phase1_far=50
 ghost_phase1_pos=[-1,-1,1,1,1]
 
-ghost_speed=100
+ghost_speed=50
 
 
 
