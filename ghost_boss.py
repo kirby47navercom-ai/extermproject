@@ -23,7 +23,7 @@ class Boss_Ghost:
         self.cutscene=False
         self.cutscene_time=7
         self.cutscene_timer=0.0
-        self.shape=self.pattern_set[randint(0,self.pattern_set.__len__()-1)]
+        self.shape=self.pattern_set[randint(0,pattern_number)]
         self.shape.x = self.x
         self.shape.y = self.y + self.height * 0.7
 
@@ -32,7 +32,7 @@ class Boss_Ghost:
 
         self.die=False
         self.die_animation=False
-        self.die_animation_speed = 8.0
+        self.die_animation_speed = 2.0
         self.die_frame=0
 
         self.hit=False
@@ -60,6 +60,8 @@ class Boss_Ghost:
         self.attack_timer=0.0
         self.attack_time=8.0
 
+        self.pattern_speed=1
+
         self.half_hp=False
         
         
@@ -82,12 +84,11 @@ class Boss_Ghost:
             self.boss_cutscene_on(frame_time)
 
         if self.hp<=120 and not self.half_hp:
-            self.speed=300
+            self.pattern_speed=2
 
 
 
-
-        self.idle_frame =(self.idle_frame + self.die_animation_speed * frame_time) % 4
+        self.idle_frame =(self.idle_frame + self.hit_animation_speed * frame_time) % 4
 
         pass
 
@@ -124,7 +125,7 @@ class Boss_Ghost:
             self.pattern0_ready_timer+=frame_time
         else:
             self.pattern_state=2
-            self.x+=self.speed*6*frame_time
+            self.x+=self.speed*6*frame_time*self.pattern_speed
 
 
             if self.x>=canvas_size.canvaswidth+50:
@@ -142,10 +143,9 @@ class Boss_Ghost:
             self.pattern1_x, self.pattern1_y = ramona.Ramona_POS_X, ramona.Ramona_POS_Y
         else:
             self.pattern_state=3
-            self.x, self.y = distance_funtion(self.x, self.y, self.pattern1_x, self.pattern1_y, frame_time,self.speed*6)
+            self.x, self.y = distance_funtion(self.x, self.y, self.pattern1_x, self.pattern1_y, frame_time,self.speed*6*self.pattern_speed)
             self.pattern1_frame = (self.pattern1_frame + self.die_animation_speed * frame_time) % 5
-
-            if abs(self.x - self.pattern1_x) <= 5 and abs(self.y - self.pattern1_y) <= 5 and self.pattern_ready:
+            if abs(self.x - self.pattern1_x) <= 5 and abs(self.y - self.pattern1_y) <= 5:
                 self.rereset()
 
         pass
@@ -171,7 +171,13 @@ class Boss_Ghost:
         self.pattern_state = 0
         self.x = randint(int(self.width), int(canvas_size.canvaswidth - self.width))
         self.y = canvas_size.canvasheight+self.height
-        self.hit= 5 if self.hp%100==0 else int((self.hp-int(self.hp/100))/20)
+        remainder = self.hp % 60
+        if remainder > 40 or remainder == 0:
+            self.hit_num = 3
+        elif remainder > 20:
+            self.hit_num = 2
+        else:
+            self.hit_num = 1
         self.pattern1_x, self.pattern1_y = randint(int(self.width),
         int(canvas_size.canvaswidth - self.width)), canvas_size.canvasheight // 2 + canvas_size.canvasheight // 4
 
@@ -191,19 +197,21 @@ class Boss_Ghost:
         self.hit_frame = (self.hit_frame + self.hit_animation_speed * frame_time) % 4
         if int(self.hit_frame) == 3:
             self.hit_animation = False
-            self.shape = self.pattern_set[randint(0, self.pattern_set.__len__() - 6)]
+            self.shape = self.pattern_set[randint(0,pattern_number)]
             self.shape.x = self.x
             self.shape.y = self.y + self.height * 0.7
         pass
 
     def die_ghost(self):
         if self.hp<=0 and not self.die_animation:
+            self.die_animation = True
             self.shape.name='No'
         pass
 
     def die_ghost_animation(self, frame_time):
-        self.die_frame = (self.die_frame + self.die_animation_speed * frame_time) % 4
-        if int(self.die_frame) == 3:
+        self.die_frame = (self.die_frame + self.die_animation_speed * frame_time) % 8
+        start_shake(0.5,0.5)
+        if int(self.die_frame) == 7:
             self.die = True
         pass
 
@@ -229,6 +237,6 @@ class Boss_Ghost:
             self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx-canvas_size.camera_x, self.y + jy-canvas_size.camera_y, width*SIZE, height*SIZE)
 
 
-            if not self.die_animation and self.cutscene and self.pattern_ready_timer>= self.pattern_ready_time and self.hit_num>0 and self.pattern_num==3:
+            if not self.die_animation and self.cutscene and self.pattern_ready_timer>= self.pattern_ready_time and self.hit_num>0 and self.pattern_num==2:
                 self.shape.draw()
 

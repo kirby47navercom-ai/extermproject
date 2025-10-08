@@ -206,6 +206,8 @@ pattern_name=['가로선','세로선','여우귀','브이','번개','N','별','Z
 image_pattern = []
 pattern_string_dict = {}
 pattern_index_dict = {}
+pattern_number=15
+
 
 
 #스테이지 1리소스

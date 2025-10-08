@@ -23,7 +23,7 @@ class Stage1_Phase5:
         pass
 
     def shape_check(self):
-        if self.boss.shape.name==draw_gesture.result and self.boss.hit_num>0:
+        if self.boss.shape.name==draw_gesture.result and self.boss.hit_num>0 and self.boss.pattern_num==2:
             self.boss.hp-=ramona.Ramona_attack
             self.boss.hit_animation=True
             self.boss.hit_frame = 0
@@ -35,7 +35,7 @@ class Stage1_Phase5:
         pass
     def monster_die(self):
         if self.boss.die:
-            self.boss=None
+            pass
         pass
     def draw(self):
         self.boss.draw()

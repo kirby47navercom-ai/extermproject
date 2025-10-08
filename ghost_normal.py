@@ -19,7 +19,7 @@ class Ghost:
         self.timer = 0.0
         self.speed = 50
 
-        self.shape=self.pattern_set[randint(0,self.pattern_set.__len__()-6)]
+        self.shape=self.pattern_set[randint(0,pattern_number)]
         self.shape.x = self.x
         self.shape.y = self.y + self.height * 0.7
 
@@ -72,7 +72,7 @@ class Ghost:
         self.hit_frame = (self.hit_frame + self.hit_animation_speed * frame_time) % 4
         if int(self.hit_frame) == 3:
             self.hit_animation = False
-            self.shape = self.pattern_set[randint(0, self.pattern_set.__len__() - 6)]
+            self.shape = self.pattern_set[randint(0, pattern_number)]
             self.shape.x = self.x
             self.shape.y = self.y + self.height * 0.7
         pass
