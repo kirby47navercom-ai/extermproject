@@ -88,18 +88,21 @@ class Ghost:
         pass
 
     def draw(self):
-        if self.die_animation:
-            left, bottom, width, height, jx, jy = ghost_die_coordinate[int(self.die_frame)]
-        elif self.hit_animation:
-            left, bottom, width, height, jx, jy = ghost_hit_coordinate[int(self.die_frame)]
-        else:  left, bottom, width, height, jx, jy = ghost_idle_coordinate
 
-        if ramona.Ramona_POS_X < self.x:
-            self.image.clip_composite_draw(left, bottom, width, height, 0, '', self.x + jx-canvas_size.camera_x, self.y + jy-canvas_size.camera_y, width, height)
-        else:
-            self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx-canvas_size.camera_x, self.y + jy-canvas_size.camera_y, width, height)
+        if not self.die:
+
+            if self.die_animation:
+                left, bottom, width, height, jx, jy = ghost_die_coordinate[int(self.die_frame)]
+            elif self.hit_animation:
+                left, bottom, width, height, jx, jy = ghost_hit_coordinate[int(self.die_frame)]
+            else:  left, bottom, width, height, jx, jy = ghost_idle_coordinate
+
+            if ramona.Ramona_POS_X < self.x:
+                self.image.clip_composite_draw(left, bottom, width, height, 0, '', self.x + jx-canvas_size.camera_x, self.y + jy-canvas_size.camera_y, width, height)
+            else:
+                self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx-canvas_size.camera_x, self.y + jy-canvas_size.camera_y, width, height)
 
 
-        if not self.die_animation:
-            self.shape.draw()
+            if not self.die_animation:
+                self.shape.draw()
 

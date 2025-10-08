@@ -1,5 +1,6 @@
 import stage1_phase1
 import stage1_phase2
+import stage1_phase3
 
 
 
@@ -10,6 +11,7 @@ class Stage1_Monster:
         self.phase=[]
         self.phase.append(stage1_phase1.Stage1_Phase1())
         self.phase.append(stage1_phase2.Stage1_Phase2())
+        self.phase.append(stage1_phase3.Stage1_Phase3())
 
     def update(self, frame_time, events=None):
 
