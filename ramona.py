@@ -14,6 +14,7 @@ WALK_SPEED = 200.0
 RUN_SPEED = 350.0
 EVADE_SPEED = 500.0
 JUMP_POWER = 600.0
+DEATH_KNOCKBACK_SPEED = 150.0
 # 시간
 EVADE_DURATION = 0.3
 DOUBLE_TAP_INTERVAL = 0.2
@@ -29,7 +30,7 @@ Ramona_POS_X=100
 Ramona_POS_Y=GROUND_LEVEL
 #플레이어 무적
 Ramona_invincible_timer=0.0
-Ramona_roll_invincible=False;
+Ramona_roll_invincible=False
 Ramona_invincible=False
 hit_toggle=False
 #플레이어의 공격력
@@ -39,6 +40,8 @@ Ramona_smash=False
 Ramona_smash_toggle=False
 #플레이어 점프할때 속도
 Ramona_jump_speed=0
+#플레이어 죽었다는 표시
+Ramona_dead=False
 
 
 A_DOWN, D_DOWN, A_UP, D_UP = range(4)
@@ -58,6 +61,35 @@ key_event_table = {
 }
 
 
+class DeadState:
+    def enter(self, event):
+        global Ramona_dead
+        self.frame = 0
+        Ramona_dead = True
+        self.knockback_timer = 2.0
+
+    def exit(self, event):
+        pass
+
+    def do(self, frame_time):
+        if self.knockback_timer > 0:
+            dir= 1 if self.flip else -1
+            self.x += dir * DEATH_KNOCKBACK_SPEED * frame_time
+            self.knockback_timer -= frame_time
+
+        total_frames = len(self.coordinate['dead'])
+        self.frame = self.frame + self.animation_speed * frame_time / 3
+        if self.frame >= total_frames:
+            self.frame = total_frames - 1
+
+        self.y_velocity -= GRAVITY * frame_time
+        self.y += self.y_velocity * frame_time
+
+    def draw(self):
+        self.draw_sprite('dead')
+
+    def handle_event(self, event):
+        pass
 class AttackState:
     def enter(self, event):
         self.frame = 0
@@ -313,7 +345,7 @@ class Ramona:
         self.last_key_time = {'a': 0, 'd': 0}
         self.jump_count = 0
         self.evade_cooldown_timer = 0.0
-
+        self.knockback_timer = 2.0
         # 키 눌림 상태 추적
         self.a_pressed = False
         self.d_pressed = False
@@ -393,7 +425,7 @@ class Ramona:
                 if CURRENT_HP > 0:
                     self.change_state(HitState, None)
                 else:
-                    # self.change_state(DeadState, None) # (DeadState가 있다면)
+                    self.change_state(DeadState, None)
                     pass
             if Ramona_invincible_timer >= 2.0:
                 Ramona_invincible = False

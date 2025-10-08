@@ -74,7 +74,7 @@ class Boss_Ghost:
                 pass
             elif self.hit_animation and not self.die_animation:
                 self.hit_ghost_animation(frame_time)
-            elif self.die_animation:
+            elif self.die_animation and not self.die:
                 self.die_ghost_animation(frame_time)
             self.ramonatoghost()
             self.die_ghost()
@@ -210,7 +210,7 @@ class Boss_Ghost:
 
     def die_ghost_animation(self, frame_time):
         self.die_frame = (self.die_frame + self.die_animation_speed * frame_time) % 8
-        start_shake(0.5,0.5)
+        start_shake(0.5,5)
         if int(self.die_frame) == 7:
             self.die = True
         pass

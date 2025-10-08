@@ -9,7 +9,7 @@ import stage1_phase5
 
 class Stage1_Monster:
     def __init__(self):
-        self.phase_num=4
+        self.phase_num=0
         self.phase=[]
         self.phase.append(stage1_phase1.Stage1_Phase1())
         self.phase.append(stage1_phase2.Stage1_Phase2())
