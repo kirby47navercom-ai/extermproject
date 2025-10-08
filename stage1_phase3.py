@@ -10,7 +10,7 @@ class Stage1_Phase3:
         for i in range(self.phase.__len__()):
             self.phase[i].x=0 if ghost_phase_pos[i] == -1 else canvaswidth+ghost_phase_pos[i]*ghost_phase_far
             self.phase[i].y=random.randint(0,canvasheight)
-            self.phase[i].hp = random.randint(20,30)
+            self.phase[i].hp = random.randint(10,25)
         pass
     def update(self, frame_time, events=None):
 

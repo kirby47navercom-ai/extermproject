@@ -13,12 +13,12 @@ class Boss_Ghost:
         self.image = load_image('1stage\\level1-png-sprite.png')
         self.x, self.y = -100, 0
         self.hp=500
-        self.width, self.height = 70, 104
+        self.width, self.height = canvas_size.canvaswidth//2, canvas_size.canvasheight+100
         self.frame = 0
         self.dir = 1
         self.timer = 0.0
         self.speed = 50
-
+        self.cutscene=False
         self.shape=self.pattern_set[randint(0,self.pattern_set.__len__()-6)]
         self.shape.x = self.x
         self.shape.y = self.y + self.height * 0.7
@@ -49,6 +49,9 @@ class Boss_Ghost:
         self.die_ghost()
         self.idle_frame =(self.idle_frame + self.die_animation_speed * frame_time) % 4
 
+        pass
+
+    def boss_cutscene_on(self):
         pass
 
     def move(self, frame_time):
@@ -92,7 +95,6 @@ class Boss_Ghost:
 
     def die_ghost(self):
         if self.hp<=0 and not self.die_animation:
-            self.die_animation=True
             self.shape.name='No'
         pass
 
@@ -118,6 +120,6 @@ class Boss_Ghost:
                 self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx-canvas_size.camera_x, self.y + jy-canvas_size.camera_y, width, height)
 
 
-            if not self.die_animation:
+            if not self.die_animation and self.cutscene:
                 self.shape.draw()
 

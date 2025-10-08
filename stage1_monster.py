@@ -23,7 +23,10 @@ class Stage1_Monster:
         self.phase[self.phase_num].update(frame_time,events)
 
 
-        if self.phase[self.phase_num].phase.__len__()==0:
+
+        if self.phase_num==4:
+            pass
+        elif self.phase[self.phase_num].phase.__len__()==0:
             self.phase_num+=1
             self.update(frame_time,events)
 
