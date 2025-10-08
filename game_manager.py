@@ -12,9 +12,9 @@ def init():
     global player,stage_background,mouse,draw_gest,ramona_ui,stage1_monster
     stage_background = background.Background('1')
     player = ramona.Ramona()
-    stage1_monster = stage1_monster.Stage1_Monster()
     ramona_ui = ramona_ui.Ramona_UI()
     draw_gest = draw_gesture.GestureRecognizer()
+    stage1_monster = stage1_monster.Stage1_Monster()
     mouse = mouse_image.Mouse()
 
     pass
@@ -24,9 +24,9 @@ def update(frame_time):
     events = get_events()
     stage_background.update(frame_time,events)
     player.update(frame_time,events)
-    stage1_monster.update(frame_time,events)
     ramona_ui.update(frame_time,events)
     draw_gest.update(frame_time,events)
+    stage1_monster.update(frame_time,events)
     mouse.update(frame_time,events)
 
     if canvas_size.shake_timer > 0:
@@ -38,9 +38,9 @@ def render():
     clear_canvas()
     stage_background.draw()
     player.draw()
-    stage1_monster.draw()
     ramona_ui.draw()
     draw_gest.draw()
+    stage1_monster.draw()
     mouse.draw()
     update_canvas()
     pass

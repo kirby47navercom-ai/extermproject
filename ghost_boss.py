@@ -14,7 +14,7 @@ class Boss_Ghost:
         self.pattern_set = get_pattern_set()
         self.image = load_image('1stage\\level1-png-sprite.png')
         self.x, self.y = canvas_size.canvaswidth//2, canvas_size.canvasheight+100
-        self.hp=400
+        self.hp=240
         self.width, self.height = 70*SIZE,104*SIZE
         self.frame = 0
         self.dir = 1
@@ -23,7 +23,7 @@ class Boss_Ghost:
         self.cutscene=False
         self.cutscene_time=7
         self.cutscene_timer=0.0
-        self.shape=self.pattern_set[randint(0,self.pattern_set.__len__()-6)]
+        self.shape=self.pattern_set[randint(0,self.pattern_set.__len__()-1)]
         self.shape.x = self.x
         self.shape.y = self.y + self.height * 0.7
 
@@ -49,13 +49,18 @@ class Boss_Ghost:
 
         self.pattern_state=0
 
-        self.pattern1_ready_timer=0.0
-        self.pattern1_ready_time=0.5
+        self.pattern0_ready_timer=0.0
+        self.pattern0_ready_time=0.5
 
-        self.hit_num=5
+        self.pattern1_x,self.pattern1_y=randint(int(self.width), int(canvas_size.canvaswidth - self.width)),canvas_size.canvasheight//2+canvas_size.canvasheight//4
+        self.pattern1_frame=0
+
+        self.hit_num=3
 
         self.attack_timer=0.0
-        self.attack_time=4.0
+        self.attack_time=8.0
+
+        self.half_hp=False
         
         
         
@@ -76,6 +81,9 @@ class Boss_Ghost:
         else:
             self.boss_cutscene_on(frame_time)
 
+        if self.hp<=120 and not self.half_hp:
+            self.speed=300
+
 
 
 
@@ -87,7 +95,7 @@ class Boss_Ghost:
         self.cutscene_timer+=frame_time
         if self.cutscene_timer>=self.cutscene_time:
             self.cutscene=True
-            self.speed=300
+            self.speed=100
         else:
             self.y -=self.speed*frame_time
             canvas_size.start_shake(0.1, 3)
@@ -103,8 +111,6 @@ class Boss_Ghost:
             self.pattern1(frame_time)
         elif self.pattern_num==2:
             self.pattern2(frame_time)
-        elif self.pattern_num==3:
-            self.pattern3(frame_time)
 
     def pattern0(self,frame_time):
 
@@ -114,13 +120,11 @@ class Boss_Ghost:
             self.x,self.y=distance_funtion(self.x,self.y,x,y,frame_time,self.pattern_ready_speed)
             if abs(self.x-x)<=5 and abs(self.y-y)<=5:
                 self.pattern_ready=True
-                if self.prev_pattern==0:
-                    self.pattern_state=1
-        elif self.pattern1_ready_timer<self.pattern1_ready_time:
-            self.pattern1_ready_timer+=frame_time
+        elif self.pattern0_ready_timer<self.pattern0_ready_time:
+            self.pattern0_ready_timer+=frame_time
         else:
             self.pattern_state=2
-            self.x+=self.speed*10*frame_time
+            self.x+=self.speed*6*frame_time
 
 
             if self.x>=canvas_size.canvaswidth+50:
@@ -128,12 +132,24 @@ class Boss_Ghost:
             
         pass
     def pattern1(self,frame_time):
-        
+
+        if not self.pattern_ready:
+            self.x,self.y=distance_funtion(self.x,self.y,self.pattern1_x,self.pattern1_y,frame_time,self.pattern_ready_speed)
+            if abs(self.x-self.pattern1_x)<=5 and abs(self.y-self.pattern1_y)<=5:
+                self.pattern_ready=True
+        elif self.pattern0_ready_timer<self.pattern0_ready_time:
+            self.pattern0_ready_timer+=frame_time
+            self.pattern1_x, self.pattern1_y = ramona.Ramona_POS_X, ramona.Ramona_POS_Y
+        else:
+            self.pattern_state=3
+            self.x, self.y = distance_funtion(self.x, self.y, self.pattern1_x, self.pattern1_y, frame_time,self.speed*6)
+            self.pattern1_frame = (self.pattern1_frame + self.die_animation_speed * frame_time) % 5
+
+            if abs(self.x - self.pattern1_x) <= 5 and abs(self.y - self.pattern1_y) <= 5 and self.pattern_ready:
+                self.rereset()
+
         pass
     def pattern2(self,frame_time):
-        
-        pass
-    def pattern3(self,frame_time):
 
         self.x,self.y=distance_funtion(self.x,self.y,ramona.Ramona_POS_X,ramona.Ramona_POS_Y,frame_time,self.speed)
 
@@ -141,27 +157,23 @@ class Boss_Ghost:
         self.shape.y = self.y + self.height * 0.7
 
         self.attack_timer+=frame_time
-        if self.attack_timer>=self.attack_time:
+        if self.attack_timer>=self.attack_time or self.hit_num<=0:
             self.attack_timer=0
             self.pattern_ready_timer=0
             self.pattern_num=self.prev_pattern
-
-
-
-
-
-
         pass
 
     def rereset(self):
-        self.pattern_num = 3
-        self.prev_pattern = (self.prev_pattern + 1) % 3
+        self.pattern_num = 2
+        self.prev_pattern = (self.prev_pattern + 1) % 2
         self.pattern_ready = False
-        self.pattern1_ready_timer = 0.0
+        self.pattern0_ready_timer = 0.0
         self.pattern_state = 0
         self.x = randint(int(self.width), int(canvas_size.canvaswidth - self.width))
-        self.y = randint(0, canvas_size.canvasheight)
+        self.y = canvas_size.canvasheight+self.height
         self.hit= 5 if self.hp%100==0 else int((self.hp-int(self.hp/100))/20)
+        self.pattern1_x, self.pattern1_y = randint(int(self.width),
+        int(canvas_size.canvaswidth - self.width)), canvas_size.canvasheight // 2 + canvas_size.canvasheight // 4
 
     def ramonatoghost(self):
         if collide([ramona.Ramona_POS_X,ramona.Ramona_POS_Y,ramona.Ramona_SIZE_X,ramona.Ramona_SIZE_Y],
@@ -170,7 +182,6 @@ class Boss_Ghost:
                 ramona.CURRENT_HP-=1
                 ramona.Ramona_invincible=True
                 ramona.invincible_timer=0.0
-                self.die_animation = True
                 canvas_size.start_shake(0.5, 5.0)
 
 
@@ -208,6 +219,8 @@ class Boss_Ghost:
                 a = boss_ghost_pattern1_coordinate[0]
             elif self.pattern_state==2:
                 a = boss_ghost_pattern1_coordinate[1]
+            elif self.pattern_state==3:
+                a = boss_ghost_pattern2_coordinate[int(self.pattern1_frame)]
             else:  a = boss_ghost_idle_coordinate[int(self.idle_frame)]
 
             left, bottom, width, height, jx, jy = a
@@ -216,6 +229,6 @@ class Boss_Ghost:
             self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx-canvas_size.camera_x, self.y + jy-canvas_size.camera_y, width*SIZE, height*SIZE)
 
 
-            if not self.die_animation and self.cutscene and self.pattern_ready_timer>= self.pattern_ready_time and self.hit_num>0:
+            if not self.die_animation and self.cutscene and self.pattern_ready_timer>= self.pattern_ready_time and self.hit_num>0 and self.pattern_num==3:
                 self.shape.draw()
 
