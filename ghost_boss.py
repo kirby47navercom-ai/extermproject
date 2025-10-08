@@ -3,6 +3,7 @@ from pattern import *
 from resource import *
 from random import randint
 import canvas_size
+from canvas_size import cout
 import ramona
 import math
 
@@ -11,14 +12,16 @@ class Boss_Ghost:
     def __init__(self):
         self.pattern_set = get_pattern_set()
         self.image = load_image('1stage\\level1-png-sprite.png')
-        self.x, self.y = -100, 0
+        self.x, self.y = canvas_size.canvaswidth//2, canvas_size.canvasheight+100
         self.hp=500
-        self.width, self.height = canvas_size.canvaswidth//2, canvas_size.canvasheight+100
+        self.width, self.height = 70*1.5,104*1.5
         self.frame = 0
         self.dir = 1
         self.timer = 0.0
         self.speed = 50
         self.cutscene=False
+        self.cutscene_time=7
+        self.cutscene_timer=0.0
         self.shape=self.pattern_set[randint(0,self.pattern_set.__len__()-6)]
         self.shape.x = self.x
         self.shape.y = self.y + self.height * 0.7
@@ -37,21 +40,35 @@ class Boss_Ghost:
         self.hit_frame=0
 
     def update(self, frame_time, events=None):
+        if self.cutscene:
+            if not self.die_animation and not self.hit_animation:
+                #self.move(frame_time)
+                pass
+            elif self.hit_animation and not self.die_animation:
+                self.hit_ghost_animation(frame_time)
+            elif self.die_animation:
+                self.die_ghost_animation(frame_time)
+            self.ramonatoghost()
+            self.die_ghost()
+        else:
+            self.boss_cutscene_on(frame_time)
 
-        if not self.die_animation and not self.hit_animation:
-            self.move(frame_time)
-        elif self.hit_animation and not self.die_animation:
-            self.hit_ghost_animation(frame_time)
-        elif self.die_animation:
-            self.die_ghost_animation(frame_time)
 
-        self.ramonatoghost()
-        self.die_ghost()
+
+
         self.idle_frame =(self.idle_frame + self.die_animation_speed * frame_time) % 4
 
         pass
 
-    def boss_cutscene_on(self):
+    def boss_cutscene_on(self,frame_time):
+        self.cutscene_timer+=frame_time
+        if self.cutscene_timer>=self.cutscene_time:
+            self.cutscene=True
+        else:
+            self.y -=self.speed*frame_time
+            canvas_size.start_shake(0.1,3)
+
+
         pass
 
     def move(self, frame_time):
@@ -115,9 +132,9 @@ class Boss_Ghost:
             else:  left, bottom, width, height, jx, jy = boss_ghost_idle_coordinate[int(self.idle_frame)]
 
             if ramona.Ramona_POS_X < self.x:
-                self.image.clip_composite_draw(left, bottom, width, height, 0, '', self.x + jx-canvas_size.camera_x, self.y + jy-canvas_size.camera_y, width, height)
+                self.image.clip_composite_draw(left, bottom, width, height, 0, '', self.x + jx-canvas_size.camera_x, self.y + jy-canvas_size.camera_y, width*1.5, height*1.5)
             else:
-                self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx-canvas_size.camera_x, self.y + jy-canvas_size.camera_y, width, height)
+                self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx-canvas_size.camera_x, self.y + jy-canvas_size.camera_y, width*1.5, height*1.5)
 
 
             if not self.die_animation and self.cutscene:

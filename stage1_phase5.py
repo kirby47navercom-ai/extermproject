@@ -14,10 +14,9 @@ class Stage1_Phase5:
         self.pattern_num=0
         pass
     def update(self, frame_time, events=None):
+        self.boss.update(frame_time, events)
 
         if self.boss.cutscene:
-            self.boss.update(frame_time,events)
-
             self.shape_check()
             self.monster_die()
         else:

@@ -22,3 +22,8 @@ def update_shake(frame_time):
         if shake_timer <= 0:
             camera_x, camera_y = 0, 0  # 흔들림이 끝나면 카메라 위치 초기화
 
+
+
+def cout(a):
+    print(a)
+
