@@ -1,0 +1,39 @@
+import ghost_normal
+import ghost_boss
+import draw_gesture
+import ramona
+import random
+
+ghost_phase_far=50
+ghost_phase_pos=[-1,1,-1,1,-1,1,-1,1,-1,1]
+
+class Stage1_Phase5:
+    def __init__(self):
+        self.boss=ghost_boss.Boss_Ghost()
+        self.monster=[]
+        self.pattern_num=0
+        pass
+    def update(self, frame_time, events=None):
+        self.boss.update(frame_time,events)
+
+        self.shape_check()
+        self.monster_die()
+        pass
+
+    def shape_check(self):
+        if self.boss.shape.name==draw_gesture.result:
+            self.boss.hp-=ramona.Ramona_attack
+            self.boss.hit_animation=True
+            self.boss.hit_frame = 0
+            ramona.Ramona_smash = True
+
+        draw_gesture.result=None
+
+        pass
+    def monster_die(self):
+        if self.boss.die:
+            self.boss=None
+        pass
+    def draw(self):
+        self.boss.draw()
+        pass

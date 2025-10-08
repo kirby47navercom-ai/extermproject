@@ -7,13 +7,13 @@ import ramona
 import math
 
 
-class Ghost:
+class Boss_Ghost:
     def __init__(self):
         self.pattern_set = get_pattern_set()
         self.image = load_image('1stage\\level1-png-sprite.png')
         self.x, self.y = -100, 0
-        self.hp=20
-        self.width, self.height = 59, 76
+        self.hp=500
+        self.width, self.height = 70, 104
         self.frame = 0
         self.dir = 1
         self.timer = 0.0
@@ -23,11 +23,14 @@ class Ghost:
         self.shape.x = self.x
         self.shape.y = self.y + self.height * 0.7
 
+        self.idle_frame=0
+
 
         self.die=False
         self.die_animation=False
         self.die_animation_speed = 8.0
         self.die_frame=0
+
         self.hit=False
         self.hit_animation = False
         self.hit_animation_speed = 8.0
@@ -44,6 +47,7 @@ class Ghost:
 
         self.ramonatoghost()
         self.die_ghost()
+        self.idle_frame =(self.idle_frame + self.die_animation_speed * frame_time) % 4
 
         pass
 
@@ -54,6 +58,15 @@ class Ghost:
 
         self.shape.x = self.x
         self.shape.y = self.y + self.height * 0.7
+
+    def pattern1(self):
+        pass
+    def pattern2(self):
+        pass
+    def pattern3(self):
+        pass
+    def pattern4(self):
+        pass
 
     def ramonatoghost(self):
         if collide([ramona.Ramona_POS_X,ramona.Ramona_POS_Y,ramona.Ramona_SIZE_X,ramona.Ramona_SIZE_Y],
@@ -94,10 +107,10 @@ class Ghost:
         if not self.die:
 
             if self.die_animation:
-                left, bottom, width, height, jx, jy = ghost_die_coordinate[int(self.die_frame)]
+                left, bottom, width, height, jx, jy = boss_ghost_die_coordinate[int(self.die_frame)]
             elif self.hit_animation:
-                left, bottom, width, height, jx, jy = ghost_hit_coordinate[int(self.hit_frame)]
-            else:  left, bottom, width, height, jx, jy = ghost_idle_coordinate
+                left, bottom, width, height, jx, jy = boss_ghost_hit_coordinate[int(self.hit_frame)]
+            else:  left, bottom, width, height, jx, jy = boss_ghost_idle_coordinate[int(self.idle_frame)]
 
             if ramona.Ramona_POS_X < self.x:
                 self.image.clip_composite_draw(left, bottom, width, height, 0, '', self.x + jx-canvas_size.camera_x, self.y + jy-canvas_size.camera_y, width, height)
