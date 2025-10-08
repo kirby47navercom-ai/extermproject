@@ -10,6 +10,7 @@ class Stage1_Phase3:
         for i in range(self.phase.__len__()):
             self.phase[i].x=0 if ghost_phase_pos[i] == -1 else canvaswidth+ghost_phase_pos[i]*ghost_phase_far
             self.phase[i].y=random.randint(0,canvasheight)
+            self.phase[i].hp = random.randint(20,30)
         pass
     def update(self, frame_time, events=None):
 
@@ -26,7 +27,6 @@ class Stage1_Phase3:
                 self.phase[i].hit_animation=True
                 self.phase[i].hit_frame = 0
                 ramona.Ramona_smash = True
-                canvas_size.start_shake(0.5, 5.0)
 
         draw_gesture.result=None
 

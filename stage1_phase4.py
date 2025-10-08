@@ -1,15 +1,17 @@
 from ghost_normal import *
 import draw_gesture
+import random
 
 ghost_phase_far=50
-ghost_phase_pos=[-1,-1,1,1,1]
+ghost_phase_pos=[-1,1,-1,1,-1,1,-1,1,-1,1]
 
-class Stage1_Phase1:
+class Stage1_Phase4:
     def __init__(self):
-        self.phase=[Ghost() for _ in range(5)]
+        self.phase=[Ghost() for _ in range(ghost_phase_pos.__len__())]
         for i in range(self.phase.__len__()):
             self.phase[i].x=0 if ghost_phase_pos[i] == -1 else canvaswidth+ghost_phase_pos[i]*ghost_phase_far
             self.phase[i].y=random.randint(0,canvasheight)
+            self.phase[i].speed=150
 
 
 

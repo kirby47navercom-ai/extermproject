@@ -36,8 +36,9 @@ hit_toggle=False
 Ramona_attack=20
 #플레이어의 공격
 Ramona_smash=False
-Ramona_smesh_toggle=False
-#ㅇㅅㅇ
+Ramona_smash_toggle=False
+#플레이어 점프할때 속도
+Ramona_jump_speed=0
 
 
 A_DOWN, D_DOWN, A_UP, D_UP = range(4)
@@ -70,13 +71,16 @@ class AttackState:
         pass
 
     def do(self, frame_time):
-        global Ramona_smash, Ramona_smesh_toggle
+        global Ramona_smash, Ramona_smash_toggle
         total_frames = len(self.coordinate[self.attack_motion])
 
-        self.frame = (self.frame + self.animation_speed * frame_time)
+        self.frame = (self.frame + self.animation_speed*1.5 * frame_time)
+
+        if self.frame+2 > total_frames and canvas_size.shake_timer<=0:
+            canvas_size.start_shake(0.5, 5.0)
 
         if self.frame >= total_frames:
-            Ramona_smesh_toggle = False
+            Ramona_smash_toggle = False
             self.change_state(IdleState, None)
 
     def draw(self):
@@ -106,10 +110,12 @@ class IdleState:
         self.draw_sprite('idle')
 
     def handle_event(self, event):
+        global Ramona_jump_speed
         if event == A_DOWN or event == D_DOWN:
             self.change_state(WalkState, event)
         elif event == SPACE_DOWN:
             self.change_state(JumpState, event)
+            Ramona_jump_speed=WALK_SPEED
         elif event == A_D_TAP or event == D_D_TAP:
             self.change_state(EvadeState, event)
 
@@ -134,6 +140,7 @@ class WalkState:
         self.draw_sprite('walk')
 
     def handle_event(self, event):
+        global Ramona_jump_speed
         if event == A_UP and self.dir == -1:
             self.change_state(IdleState, event)
         elif event == D_UP and self.dir == 1:
@@ -142,6 +149,7 @@ class WalkState:
             self.change_state(RunState, event)
         elif event == SPACE_DOWN:
             self.change_state(JumpState, event)
+            Ramona_jump_speed = WALK_SPEED
         elif event == A_D_TAP or event == D_D_TAP:
             self.change_state(EvadeState, event)
 
@@ -164,6 +172,7 @@ class RunState:
         self.draw_sprite('run')
 
     def handle_event(self, event):
+        global Ramona_jump_speed
         if event == A_UP and self.dir == -1:
             self.change_state(IdleState, event)
         elif event == D_UP and self.dir == 1:
@@ -172,6 +181,7 @@ class RunState:
             self.change_state(WalkState, event)
         elif event == SPACE_DOWN:
             self.change_state(JumpState, event)
+            Ramona_jump_speed = RUN_SPEED
 
 
 class EvadeState:
@@ -222,12 +232,15 @@ class JumpState:
         pass
 
     def do(self, frame_time):
+        global Ramona_jump_speed
         if self.a_pressed and not self.d_pressed:
             self.dir = -1
         elif self.d_pressed and not self.a_pressed:
             self.dir = 1
+        else:
+            self.dir = 0
 
-        self.x += self.dir * WALK_SPEED * frame_time
+        self.x += self.dir * Ramona_jump_speed * frame_time
 
 
         self.y_velocity -= GRAVITY * frame_time
@@ -318,13 +331,13 @@ class Ramona:
             self.frame = 0.0
 
     def update(self, frame_time,events):
-        global Ramona_POS_X, Ramona_POS_Y, Ramona_invincible_timer, Ramona_invincible, hit_toggle, CURRENT_HP, Ramona_smash, Ramona_smesh_toggle
+        global Ramona_POS_X, Ramona_POS_Y, Ramona_invincible_timer, Ramona_invincible, hit_toggle, CURRENT_HP, Ramona_smash, Ramona_smash_toggle
 
-        if Ramona_smash and self.cur_state not in [AttackState, HitState, EvadeState]and not Ramona_smesh_toggle:
+        if Ramona_smash and self.cur_state not in [AttackState, HitState, EvadeState]and not Ramona_smash_toggle:
             self.change_state(AttackState, None)
             Ramona_smash = False
-            Ramona_smesh_toggle=True
-        elif not draw_gesture.f_pressed and not Ramona_smash and not Ramona_smesh_toggle:
+            Ramona_smash_toggle=True
+        elif not draw_gesture.f_pressed and not Ramona_smash and not Ramona_smash_toggle:
 
             self.a_pressed = False
             self.d_pressed = False

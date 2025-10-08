@@ -111,7 +111,7 @@ class GestureRecognizer:
                     self.drawing = False
                     if len(self.points) > 10:
                         self.result = self.recognizer.recognize(self.points)
-                        if self.result and self.result.score >= 0.3:
+                        if self.result and self.result.score >= 0.25:
 
                             result = self.result.name
                         else:
@@ -136,7 +136,7 @@ class GestureRecognizer:
 
             draw_text_on_screen(10-canvas_size.camera_x, canvas_size.canvasheight - 90-canvas_size.camera_y, "그림을 그리고 마우스를 떼세요.", self.font)
             if self.result:
-                if self.result.score < 0.3:
+                if self.result.score < 0.25:
                     draw_text_on_screen(10-canvas_size.camera_x, canvas_size.canvasheight - 120-canvas_size.camera_y,
                                         f"인식 결과: 인식 실패 (Score: {self.result.score:.2f})", self.font)
                 else:

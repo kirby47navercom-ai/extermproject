@@ -62,7 +62,9 @@ class Ghost:
                 ramona.CURRENT_HP-=1
                 ramona.Ramona_invincible=True
                 ramona.invincible_timer=0.0
+                self.die_animation = True
                 canvas_size.start_shake(0.5, 5.0)
+
 
         pass
 
