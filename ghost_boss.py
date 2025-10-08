@@ -7,14 +7,15 @@ from canvas_size import cout
 import ramona
 import math
 
+SIZE=1.2
 
 class Boss_Ghost:
     def __init__(self):
         self.pattern_set = get_pattern_set()
         self.image = load_image('1stage\\level1-png-sprite.png')
         self.x, self.y = canvas_size.canvaswidth//2, canvas_size.canvasheight+100
-        self.hp=500
-        self.width, self.height = 70*1.5,104*1.5
+        self.hp=400
+        self.width, self.height = 70*SIZE,104*SIZE
         self.frame = 0
         self.dir = 1
         self.timer = 0.0
@@ -27,7 +28,7 @@ class Boss_Ghost:
         self.shape.y = self.y + self.height * 0.7
 
         self.idle_frame=0
-
+        
 
         self.die=False
         self.die_animation=False
@@ -38,11 +39,31 @@ class Boss_Ghost:
         self.hit_animation = False
         self.hit_animation_speed = 8.0
         self.hit_frame=0
+        
+        self.pattern_num=0
+        self.prev_pattern=0
+        self.pattern_ready=False
+        self.pattern_ready_timer=0.0
+        self.pattern_ready_time=1.0
+        self.pattern_ready_speed=1000
+
+        self.pattern_state=0
+
+        self.pattern1_ready_timer=0.0
+        self.pattern1_ready_time=0.5
+
+        self.hit_num=5
+
+        self.attack_timer=0.0
+        self.attack_time=4.0
+        
+        
+        
 
     def update(self, frame_time, events=None):
-        if self.cutscene:
+        if self.cutscene and self.pattern_ready_timer>= self.pattern_ready_time:
             if not self.die_animation and not self.hit_animation:
-                #self.move(frame_time)
+                self.move(frame_time)
                 pass
             elif self.hit_animation and not self.die_animation:
                 self.hit_ghost_animation(frame_time)
@@ -50,6 +71,8 @@ class Boss_Ghost:
                 self.die_ghost_animation(frame_time)
             self.ramonatoghost()
             self.die_ghost()
+        elif self.cutscene:
+            self.pattern_ready_timer+=frame_time
         else:
             self.boss_cutscene_on(frame_time)
 
@@ -64,29 +87,81 @@ class Boss_Ghost:
         self.cutscene_timer+=frame_time
         if self.cutscene_timer>=self.cutscene_time:
             self.cutscene=True
+            self.speed=300
         else:
             self.y -=self.speed*frame_time
-            canvas_size.start_shake(0.1,3)
+            canvas_size.start_shake(0.1, 3)
+
 
 
         pass
 
     def move(self, frame_time):
-        distance = math.sqrt((self.x - ramona.Ramona_POS_X) ** 2 + (self.y - ramona.Ramona_POS_Y) ** 2)
-        self.x = self.x + (ramona.Ramona_POS_X - self.x) * self.speed * frame_time / distance
-        self.y = self.y + (ramona.Ramona_POS_Y - self.y) * self.speed * frame_time / distance
+        if self.pattern_num==0:
+            self.pattern0(frame_time)
+        elif self.pattern_num==1:
+            self.pattern1(frame_time)
+        elif self.pattern_num==2:
+            self.pattern2(frame_time)
+        elif self.pattern_num==3:
+            self.pattern3(frame_time)
+
+    def pattern0(self,frame_time):
+
+
+        if not self.pattern_ready:
+            x,y=self.width,self.height
+            self.x,self.y=distance_funtion(self.x,self.y,x,y,frame_time,self.pattern_ready_speed)
+            if abs(self.x-x)<=5 and abs(self.y-y)<=5:
+                self.pattern_ready=True
+                if self.prev_pattern==0:
+                    self.pattern_state=1
+        elif self.pattern1_ready_timer<self.pattern1_ready_time:
+            self.pattern1_ready_timer+=frame_time
+        else:
+            self.pattern_state=2
+            self.x+=self.speed*10*frame_time
+
+
+            if self.x>=canvas_size.canvaswidth+50:
+                self.rereset()
+            
+        pass
+    def pattern1(self,frame_time):
+        
+        pass
+    def pattern2(self,frame_time):
+        
+        pass
+    def pattern3(self,frame_time):
+
+        self.x,self.y=distance_funtion(self.x,self.y,ramona.Ramona_POS_X,ramona.Ramona_POS_Y,frame_time,self.speed)
 
         self.shape.x = self.x
         self.shape.y = self.y + self.height * 0.7
 
-    def pattern1(self):
+        self.attack_timer+=frame_time
+        if self.attack_timer>=self.attack_time:
+            self.attack_timer=0
+            self.pattern_ready_timer=0
+            self.pattern_num=self.prev_pattern
+
+
+
+
+
+
         pass
-    def pattern2(self):
-        pass
-    def pattern3(self):
-        pass
-    def pattern4(self):
-        pass
+
+    def rereset(self):
+        self.pattern_num = 3
+        self.prev_pattern = (self.prev_pattern + 1) % 3
+        self.pattern_ready = False
+        self.pattern1_ready_timer = 0.0
+        self.pattern_state = 0
+        self.x = randint(int(self.width), int(canvas_size.canvaswidth - self.width))
+        self.y = randint(0, canvas_size.canvasheight)
+        self.hit= 5 if self.hp%100==0 else int((self.hp-int(self.hp/100))/20)
 
     def ramonatoghost(self):
         if collide([ramona.Ramona_POS_X,ramona.Ramona_POS_Y,ramona.Ramona_SIZE_X,ramona.Ramona_SIZE_Y],
@@ -126,17 +201,21 @@ class Boss_Ghost:
         if not self.die:
 
             if self.die_animation:
-                left, bottom, width, height, jx, jy = boss_ghost_die_coordinate[int(self.die_frame)]
+                a = boss_ghost_die_coordinate[int(self.die_frame)]
             elif self.hit_animation:
-                left, bottom, width, height, jx, jy = boss_ghost_hit_coordinate[int(self.hit_frame)]
-            else:  left, bottom, width, height, jx, jy = boss_ghost_idle_coordinate[int(self.idle_frame)]
+                a = boss_ghost_hit_coordinate[int(self.hit_frame)]
+            elif self.pattern_state==1:
+                a = boss_ghost_pattern1_coordinate[0]
+            elif self.pattern_state==2:
+                a = boss_ghost_pattern1_coordinate[1]
+            else:  a = boss_ghost_idle_coordinate[int(self.idle_frame)]
 
-            if ramona.Ramona_POS_X < self.x:
-                self.image.clip_composite_draw(left, bottom, width, height, 0, '', self.x + jx-canvas_size.camera_x, self.y + jy-canvas_size.camera_y, width*1.5, height*1.5)
-            else:
-                self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx-canvas_size.camera_x, self.y + jy-canvas_size.camera_y, width*1.5, height*1.5)
+            left, bottom, width, height, jx, jy = a
 
 
-            if not self.die_animation and self.cutscene:
+            self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx-canvas_size.camera_x, self.y + jy-canvas_size.camera_y, width*SIZE, height*SIZE)
+
+
+            if not self.die_animation and self.cutscene and self.pattern_ready_timer>= self.pattern_ready_time and self.hit_num>0:
                 self.shape.draw()
 

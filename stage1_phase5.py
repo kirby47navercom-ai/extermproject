@@ -15,7 +15,6 @@ class Stage1_Phase5:
         pass
     def update(self, frame_time, events=None):
         self.boss.update(frame_time, events)
-
         if self.boss.cutscene:
             self.shape_check()
             self.monster_die()
@@ -24,10 +23,11 @@ class Stage1_Phase5:
         pass
 
     def shape_check(self):
-        if self.boss.shape.name==draw_gesture.result:
+        if self.boss.shape.name==draw_gesture.result and self.boss.hit_num>0:
             self.boss.hp-=ramona.Ramona_attack
             self.boss.hit_animation=True
             self.boss.hit_frame = 0
+            self.boss.hit_num-=1
             ramona.Ramona_smash = True
 
         draw_gesture.result=None

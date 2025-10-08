@@ -1,5 +1,5 @@
 import random
-
+import math
 canvaswidth = 1280
 canvasheight = 720
 
@@ -22,6 +22,11 @@ def update_shake(frame_time):
         if shake_timer <= 0:
             camera_x, camera_y = 0, 0  # 흔들림이 끝나면 카메라 위치 초기화
 
+def distance_funtion(x1, y1, x2, y2,frame_time,speed):
+    distance = math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+    x3 = x1 + (x2 - x1) * speed * frame_time / distance
+    y3 = y1 + (y2 - y1) * speed * frame_time / distance
+    return x3, y3
 
 
 def cout(a):
