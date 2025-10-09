@@ -9,7 +9,7 @@ check_image_width = 825
 check_image_height = 216
 SIZE=20
 
-BLACK = (0, 0, 0)  # 선과 글자 모두 검은색으로 통일
+BLACK = (0, 0, 0)
 
 f_pressed = True
 
