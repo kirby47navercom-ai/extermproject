@@ -3,16 +3,14 @@ import ramona
 import background
 import draw_gesture
 import ramona_ui
-import stage1_monster
 import canvas_size
 
 def init():
-    global player,stage_background,mouse,draw_gest,ramona_ui_,stage1_monster_
-    stage_background = background.Background('1')
+    global player,stage_background,mouse,draw_gest,ramona_ui_
+    stage_background = background.Background('2')
     player = ramona.Ramona()
     ramona_ui_ = ramona_ui.Ramona_UI()
     draw_gest = draw_gesture.GestureRecognizer()
-    stage1_monster_ = stage1_monster.Stage1_Monster()
 
 
     player.x=canvas_size.canvaswidth//2
@@ -20,11 +18,10 @@ def init():
 
 
 def update(frame_time,events):
-    global player,stage_background,mouse,draw_gest,ramona_ui_,stage1_monster_
+    global player,stage_background,mouse,draw_gest,ramona_ui_
     if not ramona.Ramona_dead:
         stage_background.update(frame_time,events)
         draw_gest.update(frame_time,events)
-        stage1_monster_.update(frame_time,events)
         ramona_ui_.update(frame_time,events)
     else:
         for event in events:
@@ -39,9 +36,8 @@ def update(frame_time,events):
 
 
 def render():
-    global player,stage_background,mouse,draw_gest,ramona_ui_,stage1_monster_
+    global player,stage_background,mouse,draw_gest,ramona_ui_
     stage_background.draw()
     player.draw()
     ramona_ui_.draw()
     draw_gest.draw()
-    stage1_monster_.draw()

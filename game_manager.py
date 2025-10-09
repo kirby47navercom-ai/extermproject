@@ -4,17 +4,17 @@ import canvas_size
 import stage1_manager
 
 def init():
-    global stage1_manager,mouse
-    stage1_manager.init()
+    global stage1,mouse
+    stage1.init()
 
     mouse = mouse_image.Mouse()
 
     pass
 
 def update(frame_time):
-    global stage1_manager,mouse
+    global stage1,mouse
     events = get_events()
-    stage1_manager.update(frame_time,events)
+    stage1.update(frame_time,events)
 
     mouse.update(frame_time,events)
 
@@ -23,9 +23,9 @@ def update(frame_time):
     pass
 
 def render():
-    global stage1_manager,mouse
+    global stage1,mouse
     clear_canvas()
-    stage1_manager.render()
+    stage1.render()
     mouse.draw()
     update_canvas()
     pass
