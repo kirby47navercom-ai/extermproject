@@ -6,7 +6,7 @@ import ramona_ui
 import canvas_size
 
 def init():
-    global player,stage_background,mouse,draw_gest,ramona_ui_
+    global player,stage_background,draw_gest,ramona_ui_
     stage_background = background.Background('2')
     player = ramona.Ramona()
     ramona_ui_ = ramona_ui.Ramona_UI()
@@ -18,7 +18,7 @@ def init():
 
 
 def update(frame_time,events):
-    global player,stage_background,mouse,draw_gest,ramona_ui_
+    global player,stage_background,draw_gest,ramona_ui_
     if not ramona.Ramona_dead:
         stage_background.update(frame_time,events)
         draw_gest.update(frame_time,events)
@@ -36,7 +36,7 @@ def update(frame_time,events):
 
 
 def render():
-    global player,stage_background,mouse,draw_gest,ramona_ui_
+    global player,stage_background,draw_gest,ramona_ui_
     stage_background.draw()
     player.draw()
     ramona_ui_.draw()
