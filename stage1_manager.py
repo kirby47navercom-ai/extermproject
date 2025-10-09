@@ -26,8 +26,8 @@ def update(frame_time,events):
     if not ramona.Ramona_dead:
         stage_background.update(frame_time,events)
         draw_gest.update(frame_time,events)
-        stage1_monster_.update(frame_time,events)
         ramona_ui_.update(frame_time,events)
+        stage1_monster_.update(frame_time,events)
     else:
         for event in events:
             if event.type == SDL_KEYDOWN and event.key == SDLK_r:

@@ -366,10 +366,6 @@ class Ramona:
             if self.cur_state != IdleState:
                 self.change_state(IdleState, None)
 
-            if self.cur_state != JumpState:
-                self.y_velocity -= GRAVITY * frame_time
-                self.y += self.y_velocity * frame_time
-
             self.cur_state.do(self, frame_time)
 
 

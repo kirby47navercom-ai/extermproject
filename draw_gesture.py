@@ -45,8 +45,6 @@ class GestureRecognizer:
         if os.path.exists(CACHE_PATH):
             self.recognizer.load_gesture_cache(CACHE_PATH)
         else:
-            self.recognizer.load_gesture_from_xml('10-stylus-MEDIUM')
-            self.recognizer.load_gesture_from_xml('11-stylus-MEDIUM')
             self.recognizer.load_gesture_from_xml('NewGestures')
             self.recognizer.save_gesture_cache(CACHE_PATH)
 
@@ -111,7 +109,7 @@ class GestureRecognizer:
                     self.drawing = False
                     if len(self.points) > 10:
                         self.result = self.recognizer.recognize(self.points)
-                        if self.result and self.result.score >= 0.25:
+                        if self.result and self.result.score >= 0.3:
 
                             result = self.result.name
                         else:

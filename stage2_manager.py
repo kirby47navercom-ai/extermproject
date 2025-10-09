@@ -3,13 +3,15 @@ import ramona
 import background
 import draw_gesture
 import ramona_ui
+import stage2_monster
 import canvas_size
 
 def init():
-    global player,stage_background,draw_gest,ramona_ui_
+    global player,stage_background,draw_gest,ramona_ui_,stage2_monster_
     stage_background = background.Background('2')
     player = ramona.Ramona()
     ramona_ui_ = ramona_ui.Ramona_UI()
+    stage2_monster_ = stage2_monster.Stage2_Monster()
     draw_gest = draw_gesture.GestureRecognizer()
 
     ramona.GROUND_LEVEL = 70
@@ -20,11 +22,12 @@ def init():
 
 
 def update(frame_time,events):
-    global player,stage_background,draw_gest,ramona_ui_
+    global player,stage_background,draw_gest,ramona_ui_,stage2_monster_
     if not ramona.Ramona_dead:
         stage_background.update(frame_time,events)
-        draw_gest.update(frame_time,events)
         ramona_ui_.update(frame_time,events)
+        stage2_monster_.update(frame_time,events)
+        draw_gest.update(frame_time,events)
     else:
         for event in events:
             if event.type == SDL_KEYDOWN and event.key == SDLK_r:
@@ -38,8 +41,9 @@ def update(frame_time,events):
 
 
 def render():
-    global player,stage_background,draw_gest,ramona_ui_
+    global player,stage_background,draw_gest,ramona_ui_,stage2_monster_
     stage_background.draw()
     player.draw()
     ramona_ui_.draw()
+    stage2_monster_.draw()
     draw_gest.draw()
