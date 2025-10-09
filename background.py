@@ -4,11 +4,14 @@ import canvas_size
 stage1width = 1980
 stage1height = 1080
 
+blocks = []
 
 
 class Background:
     def __init__(self, stage):
+        global blocks
         self.stage = stage
+        blocks.clear()
         if stage == '1':
             self.background = [load_image('1stage\\1.png'), load_image('1stage\\2.png'),
                                    load_image('1stage\\3.png'),
@@ -24,16 +27,19 @@ class Background:
             self.floor1 = load_image('2stage\\floor_1.png')
             self.floor2 = load_image('2stage\\floor_2.png')
 
-            self.floor_pos = [(80, 24), (200, 24), (1280, 1080)]
-            self.floor_width=[274,48]
-            self.floor_height=[63,32]
+            self.floor_pos = [(80, 24), (200, 24), (80, 170), (80, 340), (80, 510)]
+            self.floor_width=[274,int(48*1.5)]
+            self.floor_height=[63,int(32*1.2)]
 
-            self. background_num=0
+            for i in range(3):
+                blocks.append((self.floor_pos[i+2][0], self.floor_pos[i+2][1], self.floor_width[1], self.floor_height[1]))
+
+            self.background_num=0
             self.start=False
             self.background_change_time=0
             self.background_change_timer=2.0
             self.speed=100
-            self.background_magnification=[1.6,]
+            self.background_magnification = [1.6, 1.8, 1.0]
         pass
 
     def update(self, frame_time,events=None):
@@ -43,6 +49,9 @@ class Background:
                 if self.x[i] >= stage1width * 0.7:
                     self.x[i] = 0
         elif self.stage == '2':
+            if self.background_change_time < self.background_change_timer:
+                self.background_change_time += frame_time
+
             pass
         pass
 
@@ -55,8 +64,47 @@ class Background:
                 else:
                     self.background[i].clip_draw(0, 0, stage1width, stage1height, canvas_size.canvaswidth//2-canvas_size.camera_x,canvas_size.canvasheight//2-canvas_size.camera_y, stage1width*0.7, stage1height*0.7)
         elif self.stage == '2':
-            self.background[self.background_num].clip_draw(0, 0, self.background_size[self.background_num][0], self.background_size[self.background_num][1],canvas_size.canvaswidth // 2 - canvas_size.camera_x,canvas_size.canvasheight // 2 - canvas_size.camera_y,self.background_size[self.background_num][0] * self.background_magnification[self.background_num], self.background_size[self.background_num][1] * self.background_magnification[self.background_num])
+            self.stage2_start()
 
+            for i in range(2):
+                self.floor1.clip_composite_draw(0, 0, self.floor_width[0], self.floor_height[0],0,'h',self.floor_pos[i][0],self.floor_pos[i][1],self.floor_width[0], self.floor_height[0])
 
-            self.floor1.clip_composite_draw(0, 0, self.floor_width[0], self.floor_height[0],0,'h',self.floor_pos[0][0],self.floor_pos[0][1],self.floor_width[0], self.floor_height[0])
-            self.floor1.clip_composite_draw(0, 0, self.floor_width[0], self.floor_height[0],0,'h',self.floor_pos[1][0],self.floor_pos[1][1],self.floor_width[0], self.floor_height[0])
+            for i in range(3):
+                self.floor2.clip_composite_draw(0, 0, self.floor_width[1], self.floor_height[1],0,'',self.floor_pos[i+2][0],self.floor_pos[i+2][1],self.floor_width[1], self.floor_height[1])
+    def stage2_start(self):
+        image_A = self.background[0]  # 사라질 이미지 (1.png)
+        image_B = self.background[1]  # 나타날 이미지 (2.png)
+
+        # 2. 페이드 진행률 계산 (0.0 ~ 1.0)
+        progress = self.background_change_time / self.background_change_timer
+        progress = min(1.0, progress)  # 값이 1.0을 넘지 않도록 고정
+
+        # 3. 그리기
+        if progress < 1.0:  # 페이드가 진행 중일 때
+            # 3-1. image_A를 점점 투명하게 그림
+            opacity_A = 1.0 - progress
+            image_A.opacify(opacity_A)
+            image_A.clip_draw(0, 0, self.background_size[0][0], self.background_size[0][1],
+                              canvas_size.canvaswidth // 2 - canvas_size.camera_x,
+                              canvas_size.canvasheight // 2 - canvas_size.camera_y,
+                              self.background_size[0][0] * self.background_magnification[0],
+                              self.background_size[0][1] * self.background_magnification[0])
+
+            # 3-2. image_B를 점점 선명하게 겹쳐서 그림
+            opacity_B = progress
+            image_B.opacify(opacity_B)
+            image_B.clip_draw(0, 0, self.background_size[1][0], self.background_size[1][1],
+                              canvas_size.canvaswidth // 2 - canvas_size.camera_x,
+                              canvas_size.canvasheight // 2 - canvas_size.camera_y,
+                              self.background_size[1][0] * self.background_magnification[1],
+                              self.background_size[1][1] * self.background_magnification[1])
+
+        else:  # 페이드가 끝났을 때 (progress >= 1.0)
+            # image_B만 완전히 선명하게 그림
+            image_B.opacify(1.0)
+            image_B.clip_draw(0, 0, self.background_size[1][0], self.background_size[1][1],
+                              canvas_size.canvaswidth // 2 - canvas_size.camera_x,
+                              canvas_size.canvasheight // 2 - canvas_size.camera_y,
+                              self.background_size[1][0] * self.background_magnification[1],
+                              self.background_size[1][1] * self.background_magnification[1])
+        pass

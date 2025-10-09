@@ -3,6 +3,7 @@ import mouse_image
 import canvas_size
 import stage1_manager
 import stage2_manager
+import background
 
 def init():
     global mouse
