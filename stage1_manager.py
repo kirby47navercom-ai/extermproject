@@ -15,6 +15,7 @@ def init():
     stage1_monster_ = stage1_monster.Stage1_Monster()
 
     ramona.GROUND_LEVEL = 100
+    ramona.WIDTH_LEVEL = canvas_size.canvaswidth-25
 
     player.x=canvas_size.canvaswidth//2
     player.y=ramona.GROUND_LEVEL

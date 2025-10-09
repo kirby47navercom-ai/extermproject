@@ -12,8 +12,10 @@ def init():
     ramona_ui_ = ramona_ui.Ramona_UI()
     draw_gest = draw_gesture.GestureRecognizer()
 
+    ramona.GROUND_LEVEL = 70
+    ramona.WIDTH_LEVEL = 320
 
-    player.x=canvas_size.canvaswidth//2
+    player.x=50
     player.y=ramona.GROUND_LEVEL
 
 

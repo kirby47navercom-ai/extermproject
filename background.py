@@ -21,12 +21,19 @@ class Background:
             self.background = [load_image('2stage\\1.png'), load_image('2stage\\2.png'),
                                    load_image('2stage\\3.png')]
             self.background_size=[(872, 479), (726, 574), (1280, 1080)]
-            self.floor = [load_image('2stage\\floor_1.png'), load_image('2stage\\floor_2.png'),]
+            self.floor1 = load_image('2stage\\floor_1.png')
+            self.floor2 = load_image('2stage\\floor_2.png')
+
+            self.floor_pos = [(80, 24), (200, 24), (1280, 1080)]
+            self.floor_width=[274,48]
+            self.floor_height=[63,32]
+
             self. background_num=0
             self.start=False
             self.background_change_time=0
             self.background_change_timer=2.0
             self.speed=100
+            self.background_magnification=[1.6,]
         pass
 
     def update(self, frame_time,events=None):
@@ -48,4 +55,8 @@ class Background:
                 else:
                     self.background[i].clip_draw(0, 0, stage1width, stage1height, canvas_size.canvaswidth//2-canvas_size.camera_x,canvas_size.canvasheight//2-canvas_size.camera_y, stage1width*0.7, stage1height*0.7)
         elif self.stage == '2':
-            self.background[0].clip_draw(0, 0, self.background_size[0][0], self.background_size[0][1],canvas_size.canvaswidth // 2 - canvas_size.camera_x,canvas_size.canvasheight // 2 - canvas_size.camera_y,self.background_size[0][0] * 1.6, self.background_size[0][1] * 1.6)
+            self.background[self.background_num].clip_draw(0, 0, self.background_size[self.background_num][0], self.background_size[self.background_num][1],canvas_size.canvaswidth // 2 - canvas_size.camera_x,canvas_size.canvasheight // 2 - canvas_size.camera_y,self.background_size[self.background_num][0] * self.background_magnification[self.background_num], self.background_size[self.background_num][1] * self.background_magnification[self.background_num])
+
+
+            self.floor1.clip_composite_draw(0, 0, self.floor_width[0], self.floor_height[0],0,'h',self.floor_pos[0][0],self.floor_pos[0][1],self.floor_width[0], self.floor_height[0])
+            self.floor1.clip_composite_draw(0, 0, self.floor_width[0], self.floor_height[0],0,'h',self.floor_pos[1][0],self.floor_pos[1][1],self.floor_width[0], self.floor_height[0])

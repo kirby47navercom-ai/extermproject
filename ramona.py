@@ -9,6 +9,7 @@ import random
 # 물리
 GRAVITY = 2000.0
 GROUND_LEVEL = 100
+WIDTH_LEVEL = canvas_size.canvaswidth-25
 # 속도 (pixel/sec)
 WALK_SPEED = 200.0
 RUN_SPEED = 350.0
@@ -405,7 +406,7 @@ class Ramona:
                         self.change_state(WalkState, None)
 
 
-        self.x = clamp(25, self.x, canvas_size.canvaswidth - 25)
+        self.x = clamp(25, self.x, WIDTH_LEVEL)
         self.y = clamp(GROUND_LEVEL, self.y, 864 - 50)
 
         if self.dir == -1:
