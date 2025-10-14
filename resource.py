@@ -203,9 +203,6 @@ ramona_image = {}  # 비어있는 dict 준비
 
 #패턴 리소스 128*128
 pattern_name=['가로선','세로선','여우귀','브이','번개','N','별','Z','다이아몬드','네모','세모','검정1','검정2','검정3','검정4','검정5']
-image_pattern = []
-pattern_string_dict = {}
-pattern_index_dict = {}
 pattern_number=15
 
 
@@ -220,6 +217,15 @@ boss_ghost_hit_coordinate = [[2115,820-443-105,124,105,0,0],[2252,820-450-102,10
 boss_ghost_pattern1_coordinate = [[1020,820-670-127,83,127,0,0],[953,820-576-129,62,129,0,0]]
 boss_ghost_pattern2_coordinate = [[282,820-689-99,74,99,0,0],[363,820-689-97,74,97,0,0],[444,820-689-97,73,97,0,0],[525,820-689-97,76,97,0,0],[606,820-699-97,77,97,0,0]]
 boss_ghost_die_coordinate = [[436,820-566-106,81,106,0,0],[530,820-571-102,82,102,0,0],[629,820-578-108,86,108,0,0],[729,820-581-111,86,111,0,0],[829,820-591-105,86,105,0,0],[1143,820-637-81,69,81,0,0],[1242,820-637-81,71,81,0,0],[1349,820-637-81,53,81,0,0]]
+
+#스테이지 2 리소스
+boss_kitty_idle_coordinate = [[0,0,362,288,0,0],[0,0,386,299,0,0]]
+boss_kitty_die_coordinate = [0,0,288,232,0,0]
+boss_kitty_attack_coordinate = [[0,0,27,27,0,0],[0,0,26,26,0,0],[0,0,25,25,0,0],[0,0,25,26,0,0],[0,0,25,27,0,0],[0,0,24,27,0,0],
+                                [0,0,27,26,0,0],[0,0,26,24,0,0],[0,0,27,26,0,0],[0,0,27,27,0,0],[0,0,26,26,0,0],[0,0,25,25,0,0],
+                                [0,0,25,26,0,0],[0,0,25,27,0,0],[0,0,25,27,0,0],[0,0,25,27,0,0],[0,0,26,26,0,0],[0,0,26,26,0,0],
+                                [0,0,25,25,0,0],[0,0,26,26,0,0],[0,0,26,26,0,0],[0,0,27,26,0,0]]
+boss_kitty_attack_image= []
 
 def collide(a, b):
     left_a, bottom_a, right_a, top_a = a[0] - a[2]/2, a[1] - a[3]/2, a[0] + a[2]/2, a[1] + a[3]/2
@@ -261,13 +267,8 @@ def load_resources():
     image_action5 = load_image('Ramona\\Ramona_action5.png')
     image_action6 = load_image('Ramona\\Ramona_action6.png')
 
-    for i in range(16):
-        image_pattern.append(load_image(f'Pattern\\{str(i+1)}.png'))
-        pattern_index_dict[i+1] = image_pattern[i]
-        pattern_string_dict[pattern_name[i]] = i+1
-
-
-
+    for i in range(28):
+        boss_kitty_attack_image.append(load_image(f'2stage\\attack_{str(i+1)}.png'))
 
 
 

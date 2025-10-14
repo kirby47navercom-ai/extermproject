@@ -10,9 +10,11 @@ import math
 SIZE=1.2
 
 class Boss_Ghost:
+    image=None
     def __init__(self):
         self.pattern_set = get_pattern_set()
-        self.image = load_image('1stage\\level1-png-sprite.png')
+        if Boss_Ghost.image==None:
+            Boss_Ghost.image=load_image('1stage\\level1-png-sprite.png')
         self.x, self.y = canvas_size.canvaswidth//2, canvas_size.canvasheight+100
         self.hp=240
         self.width, self.height = 70*SIZE,104*SIZE

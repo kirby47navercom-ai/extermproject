@@ -8,9 +8,11 @@ import math
 
 
 class Ghost:
+    image=None
     def __init__(self):
         self.pattern_set = get_pattern_set()
-        self.image = load_image('1stage\\level1-png-sprite.png')
+        if Ghost.image==None:
+            Ghost.image=load_image('1stage\\level1-png-sprite.png')
         self.x, self.y = -100, 0
         self.hp=20
         self.width, self.height = 59, 76
