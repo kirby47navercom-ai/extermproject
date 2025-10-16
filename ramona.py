@@ -317,6 +317,7 @@ class HitState:
         pass
 
 class Ramona:
+    image=None
     def __init__(self):
         self.x, self.y = canvas_size.canvaswidth//2, GROUND_LEVEL
         self.y_velocity = 0
@@ -324,7 +325,8 @@ class Ramona:
         self.dir = 0
         self.flip = False
         self.animation_speed = 8.0
-        self.image = resource.ramona_image
+        if Ramona.image==None:
+            Ramona.image=resource.ramona_image
         self.coordinate = resource.ramona_coordinate
         self.attack_motion = None
         self.last_key_time = {'a': 0, 'd': 0}

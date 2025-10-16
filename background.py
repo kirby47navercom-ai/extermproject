@@ -9,12 +9,16 @@ blocks = []
 start=False
 
 class Background:
+    background = None
+    floor1 = None
+    floor2 = None
     def __init__(self, stage):
         global blocks
         self.stage = stage
         blocks.clear()
         if stage == '1':
-            self.background = [load_image('1stage\\1.png'), load_image('1stage\\2.png'),
+            if Background.background == None:
+                Background.background =[load_image('1stage\\1.png'), load_image('1stage\\2.png'),
                                    load_image('1stage\\3.png'),
                                    load_image('1stage\\4.png'), load_image('1stage\\5.png'),
                                    load_image('1stage\\6.png'),
@@ -22,11 +26,16 @@ class Background:
             self.x = [0,0,0,0]
             self.speed=300
         elif stage == '2':
-            self.background = [load_image('2stage\\1.png'), load_image('2stage\\2.png'),
+            if Background.background == None:
+                Background.background =  [load_image('2stage\\1.png'), load_image('2stage\\2.png'),
                                    load_image('2stage\\3.png')]
             self.background_size=[(872, 479), (726, 574), (1280*1.5, 2048*1.5)]
-            self.floor1 = load_image('2stage\\floor_1.png')
-            self.floor2 = load_image('2stage\\floor_2.png')
+
+            if Background.floor1 == None:
+                Background.floor1 =  load_image('2stage\\floor_1.png')
+
+            if Background.floor2 == None:
+                Background.floor2 = load_image('2stage\\floor_2.png')
 
             self.floor_pos = [(80, 24), (200, 24), (80, 170), (80, 340), (80, 510)]
             self.floor_width=[274,int(48*1.5)]
