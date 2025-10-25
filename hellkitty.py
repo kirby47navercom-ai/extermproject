@@ -43,9 +43,10 @@ class Boss_Kitty:
         self.current_pattern = 0
 
         self.attack_start=False
+        self.attack_init=False
+
         self.attack1= []
         self.attack1_effect=[] #현재 위치  크기 프레임
-        self.attack_init=False
         self.attack1_time = 0.0
         self.attack1_timer = 0.2
         self.attack1_frame=0
@@ -53,6 +54,18 @@ class Boss_Kitty:
         self.attack1_player_speed=1200.0
         self.attack1_speed=40.0
         self.attack1_effect_speed=8.0
+
+        self.attack2=[]
+        self.attack2_init=False
+        self.attack2_init_speed = 300
+        self.attack2_effect = []
+        self.attack2_time = 0.0
+        self.attack2_timer = 0.2
+        self.attack2_frame = 0
+        self.attack2_num = 8
+        self.attack2_player_speed = 800.0
+        self.attack2_speed = 40.0
+        self.attack2_effect_speed = 8.0
 
         self.idle_frame = 0
         self.animation_speed = 4.0
@@ -64,7 +77,8 @@ class Boss_Kitty:
 
         self.idle_frame = (self.idle_frame + self.animation_speed * frame_time) % 2
 
-        self.move(frame_time)
+        if not self.attack2_init:
+            self.move(frame_time)
 
         if self.attack_start:
             if self.current_pattern == 0:
@@ -130,13 +144,20 @@ class Boss_Kitty:
 
             if self.attack1_num==0:
                 self.current_pattern=1
-                self.attack_init=True
+                self.attack_init=False
                 self.attack1_num=5
+                self.attack2_init=True
 
 
         pass
 
     def pattern1(self, frame_time):
+        if not self.attack_init:
+            x,self.y = canvas_size.distance_funtion(0,self.y,0,ramona.Ramona_POS_Y,frame_time,self.attack2_init_speed)
+
+            pass
+        else:
+            pass
 
         pass
 
@@ -184,7 +205,6 @@ class Boss_Kitty:
                     Boss_Kitty.attack1_image[int(i[2])].clip_draw(0,0,ax,ay,i[0]-canvas_size.camera_x,i[1]-canvas_size.camera_y,ax*1.5,ay*1.5)
             if self.attack1_effect.__len__()>0:
                 for i in self.attack1_effect:
-                    cout(int(i[4]))
                     ex,ey= boss_kitty_attack_coordinate[int(i[4])][2:4]
                     Boss_Kitty.attack1_image[int(i[2])].clip_draw(0,0,ex,ey,i[0]-canvas_size.camera_x,i[1]-canvas_size.camera_y,i[2],i[3])
 
