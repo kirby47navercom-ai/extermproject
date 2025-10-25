@@ -20,6 +20,8 @@ def init():
     player.x=50
     player.y=ramona.GROUND_LEVEL
 
+    background.start=False
+
 
 def update(frame_time,events):
     global player,stage_background,draw_gest,ramona_ui_,stage2_monster_
