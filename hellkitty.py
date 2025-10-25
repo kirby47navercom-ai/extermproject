@@ -14,12 +14,13 @@ SIZE = 1
 
 class Boss_Kitty:
     image = None
-
-
+    little_image = None
     def __init__(self):
         self.pattern_set = get_pattern_set()
         if Boss_Kitty.image == None:
             Boss_Kitty.image = [load_image('2stage\\boss1.png'),load_image('2stage\\boss2.png')]
+        if Boss_Kitty.little_image == None:
+            Boss_Kitty.little_image = load_image('2stage\\157.png')
 
         self.x, self.y = canvas_size.canvaswidth-300, canvas_size.canvasheight//2
         self.hp = 240
@@ -39,10 +40,10 @@ class Boss_Kitty:
 
         self.attack_start=False
         self.attack= []
+        self.attack_init=False
         self.attack1_time = 0.0
         self.attack1_timer = 1.0
         self.attack1_frame=0
-        self.current1_num=5
         self.attack1_num=5
 
         self.idle_frame = 0
@@ -84,6 +85,17 @@ class Boss_Kitty:
         pass
 
     def pattern0(self, frame_time):
+        if self.attack_init:
+            pass
+        else:
+
+
+            if self.attack1_num==0:
+                self.current_pattern=1
+                self.attack_init=True
+                self.attack1_num=5
+
+
         pass
 
     def pattern1(self, frame_time):
@@ -109,6 +121,9 @@ class Boss_Kitty:
         pass
 
     def draw(self):
+
+
+
         x,y = boss_kitty_idle_coordinate[int(self.idle_frame)][2:4]
         if background.start:
             self.image[int(self.idle_frame)].clip_draw(0, 0, x, y, self.x, self.y, x * SIZE, y * SIZE)
