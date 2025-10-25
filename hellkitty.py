@@ -52,9 +52,20 @@ class Boss_Kitty:
         pass
 
     def update(self, frame_time, events=None):
+
         self.idle_frame = (self.idle_frame + self.animation_speed * frame_time) % 2
 
         self.move(frame_time)
+
+        if not self.attack_start:
+            if self.current_pattern == 0:
+                self.pattern0(frame_time)
+            elif self.current_pattern == 1:
+                self.pattern1(frame_time)
+            elif self.current_pattern == 2:
+                self.pattern2(frame_time)
+            elif self.current_pattern == 3:
+                self.pattern2(frame_time)
 
 
         pass
