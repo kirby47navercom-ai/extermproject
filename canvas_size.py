@@ -28,6 +28,14 @@ def distance_funtion(x1, y1, x2, y2,frame_time,speed):
     y3 = y1 + (y2 - y1) * speed * frame_time / distance
     return x3, y3
 
+def distance_funtion2(x1, y1, x2, y2,frame_time,speed,x4,y4):
+    distance = math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+    x3 = x1 + (x2 - x1) * speed * frame_time / distance
+    y3 = y1 + (y2 - y1) * speed * frame_time / distance
+    x4 = x4 + (x2 - x1) * speed * frame_time / distance
+    y4 = y4 + (y2 - y1) * speed * frame_time / distance
+    return x3, y3,x4, y4
+
 
 def cout(a):
     print(a)
