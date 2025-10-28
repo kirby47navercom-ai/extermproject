@@ -228,8 +228,10 @@ boss_kitty_attack_coordinate = [[0,0,27,27,0,0],[0,0,26,26,0,0],[0,0,25,25,0,0],
                                 [0,0,25,26,0,0],[0,0,25,27,0,0],[0,0,25,27,0,0],[0,0,25,27,0,0],[0,0,26,26,0,0],[0,0,26,26,0,0],
                                 [0,0,25,25,0,0],[0,0,26,26,0,0],[0,0,26,26,0,0],[0,0,27,26,0,0],[0,0,26,26,0,0],[0,0,26,26,0,0],
                                 [0,0,25,26,0,0],[0,0,26,26,0,0],[0,0,26,26,0,0],[0,0,26,26,0,0]]
+boss_kitty_uibim_coordinate = [[0,0,1280,32,0,0],[0,0,1280,48,0,0],[0,0,1280,288,0,0],[0,0,1280,300,0,0]]
 little_kitty_idle_coordinate = [0,0,32,32,0,0]
 boss_kitty_attack_image= []
+boss_kitty_uibim_image= []
 
 def collide(a, b):
     left_a, bottom_a, right_a, top_a = a[0] - a[2]/2, a[1] - a[3]/2, a[0] + a[2]/2, a[1] + a[3]/2
@@ -278,7 +280,10 @@ def load_resources():
 
     for i in range(28):
         boss_kitty_attack_image.append(load_image(f'2stage\\attack_{str(i+1)}.png'))
-
+    for i in range(4):
+        boss_kitty_uibim_image.append(load_image(f'2stage\\lightAttack{str(i+1)}.png'))
+    for i in range(2,-1,-1):
+        boss_kitty_uibim_image.append(load_image(f'2stage\\lightAttack{str(i+1)}.png'))
 
 
     ramona_image = {
