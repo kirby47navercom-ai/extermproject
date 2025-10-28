@@ -16,13 +16,12 @@ SIZE = 1
 class Boss_Kitty:
     image = None
     attack1_image=None
+    attack2_image=None
     little_image = None
     def __init__(self):
         self.pattern_set = get_pattern_set()
         if Boss_Kitty.image == None:
             Boss_Kitty.image = [load_image('2stage\\boss1.png'),load_image('2stage\\boss2.png')]
-        if Boss_Kitty.attack1_image == None:
-            Boss_Kitty.attack1_image = resource.boss_kitty_attack_image
         if Boss_Kitty.little_image == None:
             Boss_Kitty.little_image = load_image('2stage\\157.png')
 
@@ -45,6 +44,9 @@ class Boss_Kitty:
         self.attack_start=False
         self.attack_init=False
 
+
+        if Boss_Kitty.attack1_image == None:
+            Boss_Kitty.attack1_image = resource.boss_kitty_attack_image
         self.attack1= []
         self.attack1_effect=[] #현재 위치  크기 프레임
         self.attack1_time = 0.0
@@ -55,14 +57,18 @@ class Boss_Kitty:
         self.attack1_speed=40.0
         self.attack1_effect_speed=8.0
 
+        if Boss_Kitty.attack2_image == None:
+            Boss_Kitty.attack2_image = resource.boss_kitty_uibim_image
         self.attack2=[]
         self.attack2_init=False
         self.attack2_init_speed = 300
+        self.attack2_init_time = 0.0
+        self.attack2_init_timer = 4.0
         self.attack2_effect = []
         self.attack2_time = 0.0
         self.attack2_timer = 0.2
         self.attack2_frame = 0
-        self.attack2_num = 8
+        self.attack2_num = 4
         self.attack2_player_speed = 800.0
         self.attack2_speed = 40.0
         self.attack2_effect_speed = 8.0
@@ -77,7 +83,7 @@ class Boss_Kitty:
 
         self.idle_frame = (self.idle_frame + self.animation_speed * frame_time) % 2
 
-        if not self.attack2_init:
+        if not (self.current_pattern==1 and self.attack2_init):
             self.move(frame_time)
 
         if self.attack_start:
@@ -144,22 +150,35 @@ class Boss_Kitty:
 
             if self.attack1_num==0:
                 self.current_pattern=1
-                self.attack_init=False
+                self.attack_init=True
+                self.attack2_init = True
                 self.attack1_num=5
-                self.attack2_init=True
 
 
         pass
 
     def pattern1(self, frame_time):
-        if not self.attack_init:
+        if self.attack_init:
             x,self.y = canvas_size.distance_funtion(0,self.y,0,ramona.Ramona_POS_Y,frame_time,self.attack2_init_speed)
 
+
+
+            self.attack2_init_time += frame_time
+            if self.attack2_init_time>self.attack2_init_timer:
+                self.attack_init=False
+                self.attack2_init_time=0.0
+                self.attack2.append([ramona.Ramona_POS_Y,0,0.0])#플레이어 y, 프레임, 타이머
             pass
+
         else:
+            for i in range(len(self.attack2)-1, -1, -1):
+                self.attack2[i][2]+=frame_time
+
+
             pass
 
         pass
+
 
     def pattern2(self, frame_time):
 
@@ -199,10 +218,16 @@ class Boss_Kitty:
 
         if background.start:
 
-            if self.attack1_num > 0 and self.current_pattern==0 and self.attack1.__len__()>0:
+            if self.attack1_num > 0 and self.attack1.__len__()>0:
                 for i in self.attack1:
                     ax,ay= boss_kitty_attack_coordinate[int(i[2])][2:4]
                     Boss_Kitty.attack1_image[int(i[2])].clip_draw(0,0,ax,ay,i[0]-canvas_size.camera_x,i[1]-canvas_size.camera_y,ax*1.5,ay*1.5)
+
+            if  self.attack2.__len__()>0:
+                for i in self.attack2:
+                    ax,ay= boss_kitty_uibim_coordinate[int(i[1])][2:4]
+                    Boss_Kitty.attack2_image[int(i[1])].clip_draw(0,0,ax,ay,self.x - 100 - canvas_size.camera_x,i[0]-canvas_size.camera_y,ax*1.5,ay*0.5)
+
             if self.attack1_effect.__len__()>0:
                 for i in self.attack1_effect:
                     ex,ey= boss_kitty_attack_coordinate[int(i[4])][2:4]
@@ -215,4 +240,3 @@ class Boss_Kitty:
 
 
         pass
-
