@@ -279,10 +279,6 @@ class QDollarRecognizer:
         return NUM_POINT_CLOUDS
 
     def load_gesture_from_xml(self, path, gesture_name=None):
-        """
-        XML 파일에서 제스처를 읽어와 recognizer에 추가합니다.
-        gesture_name을 지정하지 않으면 XML의 Name 속성을 사용합니다.
-        """
         if os.path.isdir(path):
             for filename in os.listdir(path):
                 if filename.lower().endswith('.xml'):
