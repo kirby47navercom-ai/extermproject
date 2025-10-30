@@ -207,7 +207,8 @@ pattern_index_dict = {}
 pattern_name=['가로선','세로선','여우귀','브이','번개','N','별','Z','다이아몬드','네모','세모','검정1','검정2','검정3','검정4','검정5']
 pattern_number=15
 
-
+#보스 체력
+boss_hp_coodinate = [0,0,288,16,0,0]
 
 #스테이지 1리소스
 ghost_idle_coordinate = [1981,820-265-76,59,76,0,0]
@@ -272,6 +273,7 @@ def load_resources():
     image_action4 = load_image('Ramona\\Ramona_action4.png')
     image_action5 = load_image('Ramona\\Ramona_action5.png')
     image_action6 = load_image('Ramona\\Ramona_action6.png')
+
 
     for i in range(16):
         image_pattern.append(load_image(f'Pattern\\{str(i + 1)}.png'))

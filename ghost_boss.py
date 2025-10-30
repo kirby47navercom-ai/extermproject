@@ -1,4 +1,6 @@
 from pico2d import *
+
+from boss_hp import Boss_HP
 from pattern import *
 from resource import *
 from random import randint
@@ -16,7 +18,9 @@ class Boss_Ghost:
         if Boss_Ghost.image==None:
             Boss_Ghost.image=load_image('1stage\\level1-png-sprite.png')
         self.x, self.y = canvas_size.canvaswidth//2, canvas_size.canvasheight+100
-        self.hp=240
+        self.boss_hp = 240
+        self.hp=self.boss_hp
+        self.hp_bar = Boss_HP()
         self.width, self.height = 70*SIZE,104*SIZE
         self.frame = 0
         self.dir = 1
@@ -241,4 +245,7 @@ class Boss_Ghost:
 
             if not self.die_animation and self.cutscene and self.pattern_ready_timer>= self.pattern_ready_time and self.hit_num>0 and self.pattern_num==2:
                 self.shape.draw()
+
+            self.hp_bar.draw(self.hp, self.boss_hp)
+
 

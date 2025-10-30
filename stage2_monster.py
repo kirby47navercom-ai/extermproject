@@ -1,6 +1,7 @@
 import draw_gesture
 import background
 import hellkitty
+import ramona
 
 
 class Stage2_Monster:
@@ -17,11 +18,24 @@ class Stage2_Monster:
             self.boss.attack_start=True
         elif background.start:
             self.boss.update(frame_time, events)
+            self.shape_check()
+            self.monster_die()
             pass
 
+    def shape_check(self):
+        if self.boss.shape.name == draw_gesture.result:
+            self.boss.hp -= ramona.Ramona_attack
+            ramona.Ramona_smash = True
+            self.boss.hit_animation=True
 
+        draw_gesture.result = None
 
+        pass
 
+    def monster_die(self):
+        if self.boss.die:
+            pass
+        pass
 
 
         pass
