@@ -495,6 +495,6 @@ class Boss_Kitty:
             else:
                 left, bottom, width, height = boss_kitty_die_coordinate[0:4]
                 self.die_image[int(self.die_frame)].clip_draw(left, bottom, width, height,self.x - canvas_size.camera_x,self.y - canvas_size.camera_y, width * SIZE,height * SIZE)
-
+            ##이부분도 수정 필요
 
 
