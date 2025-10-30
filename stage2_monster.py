@@ -23,10 +23,13 @@ class Stage2_Monster:
             pass
 
     def shape_check(self):
-        if self.boss.shape.name == draw_gesture.result:
+        if self.boss.shape.name == draw_gesture.result and self.boss.hp>0:
             self.boss.hp -= ramona.Ramona_attack
             ramona.Ramona_smash = True
             self.boss.hit_animation=True
+            if self.boss.hp <= 0:
+                self.boss.hp = 0
+                self.boss.die_animation=True
 
         draw_gesture.result = None
 

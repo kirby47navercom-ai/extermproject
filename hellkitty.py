@@ -19,13 +19,14 @@ class Boss_Kitty:
     attack1_image=None
     attack2_image=None
     little_image = None
+    die_image = None
     def __init__(self):
         self.pattern_set = get_pattern_set()
         if Boss_Kitty.image == None:
             Boss_Kitty.image = [load_image('2stage\\boss1.png'),load_image('2stage\\boss2.png')]
 
         self.x, self.y = canvas_size.canvaswidth-300, canvas_size.canvasheight//2
-        self.boss_hp=300
+        self.boss_hp=2
         self.hp = self.boss_hp
         self.hp_bar = Boss_HP()
         self.width, self.height = 386 * SIZE, 299 * SIZE
@@ -40,7 +41,7 @@ class Boss_Kitty:
         self.shape.x = self.x
         self.shape.y = self.y + self.height * 0.2
 
-        self.current_pattern = 2
+        self.current_pattern = 0
 
         self.attack_start=False
         self.attack_init=False
@@ -49,6 +50,9 @@ class Boss_Kitty:
         self.hit_animation = False
         self.hit_time = 0.0
 
+
+        if Boss_Kitty.die_image == None:
+            Boss_Kitty.die_image = resource.boss_kitty_uibim_image
         self.die = False
         self.die_animation = False
         self.die_animation_speed = 2.0
@@ -98,6 +102,21 @@ class Boss_Kitty:
         self.attack3_dance_amplitude = 50.0  # 좌우로 흔들리는 폭
         self.attack3_dance_frequency = 3.0  # 좌우로 흔들리는 빠르기
 
+        # ▼▼▼ [추가] 패턴 4 (pattern3)용 변수 ▼▼▼
+        self.attack4 = []  # 물결 탄환을 담을 리스트
+        self.attack4_init_time = 0.0  # 준비 시간 타이머
+        self.attack4_init_timer = 1.5  # 1.5초간 준비
+
+        self.attack4_duration_timer = 0.0  # 공격 지속 시간 타이머
+        self.attack4_duration = 8.0  # 5초 동안 탄막 발사
+
+        self.attack4_spawn_interval = 0.05  # 0.05초마다 1발씩 발사 (매우 빽빽하게)
+        self.attack4_spawn_time = 0.0
+
+        self.attack4_bullet_speed = 200.0  # 탄속
+        self.attack4_wave_amplitude = 250.0  # 물결의 진폭 (위아래로 흔들리는 폭)
+        self.attack4_wave_frequency = 5.0  # 물결의 빠르기
+
         # 리소스에서 꼬마 키티의 크기 정보를 미리 가져옴
         w, h = resource.little_kitty_idle_coordinate[2:4]
         self.attack3_kitty_size = (w, h)
@@ -112,35 +131,44 @@ class Boss_Kitty:
 
         self.idle_frame = (self.idle_frame + self.animation_speed * frame_time) % 2
 
-        if not (self.current_pattern==1 and self.attack2_init):
+        if self.die_animation:
+            self.y += self.speed * frame_time * -1/2
+            self.die_frame = (self.die_frame + self.die_animation_speed * frame_time)%4
+            start_shake(0.5, 5)
+            if self.y <-200:
+                self.die = True
+                self.die_animation=False
+            pass
+        elif not (self.current_pattern==1 and self.attack2_init) and not self.die:
             self.move(frame_time)
 
-        if self.attack_start:
-            if self.current_pattern == 0:
-                self.pattern0(frame_time)
-            elif self.current_pattern == 1:
-                self.pattern1(frame_time)
-            elif self.current_pattern == 2:
-                self.pattern2(frame_time)
-            elif self.current_pattern == 3:
-                self.pattern3(frame_time)
+        if not self.die_animation and self.hp > 0:
+            if self.attack_start:
+                if self.current_pattern == 0:
+                    self.pattern0(frame_time)
+                elif self.current_pattern == 1:
+                    self.pattern1(frame_time)
+                elif self.current_pattern == 2:
+                    self.pattern2(frame_time)
+                elif self.current_pattern == 3:
+                    self.pattern3(frame_time)
 
-        if self.attack1_effect.__len__()>0:
-            for i in range(len(self.attack1_effect)-1, -1, -1):
-                self.attack1_effect[i][4]=(self.attack1_effect[i][4] + self.attack1_speed * frame_time) % 28
-                self.attack1_effect[i][2]-=self.attack1_effect_speed*frame_time
-                self.attack1_effect[i][3]-=self.attack1_effect_speed*frame_time
-                if self.attack1_effect[i][2]<=0 or self.attack1_effect[i][3]<=0:
-                    self.attack1_effect.pop(i)
-                pass
-        if not self.die_animation and self.hp>0:
+            if self.attack1_effect.__len__()>0:
+                for i in range(len(self.attack1_effect)-1, -1, -1):
+                    self.attack1_effect[i][4]=(self.attack1_effect[i][4] + self.attack1_speed * frame_time) % 28
+                    self.attack1_effect[i][2]-=self.attack1_effect_speed*frame_time
+                    self.attack1_effect[i][3]-=self.attack1_effect_speed*frame_time
+                    if self.attack1_effect[i][2]<=0 or self.attack1_effect[i][3]<=0:
+                        self.attack1_effect.pop(i)
+                    pass
+
             self.shape.x = self.x
             self.shape.y = self.y + self.height * 0.2
 
-        if self.hit_animation:
-            self.hit_kitty_animation()
-        if self.hit:
-            self.hit_timer(frame_time)
+            if self.hit_animation:
+                self.hit_kitty_animation()
+            if self.hit:
+                self.hit_timer(frame_time)
 
         pass
 
@@ -250,7 +278,7 @@ class Boss_Kitty:
             # 8마리 미만으로 스폰했고, 스폰 간격이 되었다면
             if self.attack3_spawned_count < self.attack3_num and self.attack3_time >= self.attack3_spawn_interval:
                 # 화면 상단 랜덤 x 위치에 꼬마 키티 생성
-                origin_x = randint(5, canvas_size.canvaswidth//2 - 40)
+                origin_x = randint(5, canvas_size.canvaswidth//2 - 20)
                 # [중심x, 현재y, sin파동을 위한 내부시간]
                 self.attack3.append([origin_x, canvas_size.canvasheight + 50, 0.0])
                 self.attack3_time = 0.0  # 스폰 타이머 리셋
@@ -291,8 +319,79 @@ class Boss_Kitty:
                 self.attack3_init_time = 0.0
                 self.attack3_spawned_count = 0
         pass
+
     def pattern3(self, frame_time):
-        pass
+        # 1. 준비(Wind-up) 단계: 1.5초간 대기
+        if not self.attack_init:
+            self.attack_init = True  # 공격 시작
+            self.attack4_spawn_time = 0.0  # 스폰 타이머 초기화
+            self.attack4_duration_timer = 0.0  # 지속 시간 타이머 초기화
+            self.attack4 = []  # 탄환 리스트 초기화
+
+        # 2. 공격(Attack) 단계
+        else:
+            # --- 2-1. 스폰 로직 (정해진 시간 동안만) ---
+            is_spawning = self.attack4_duration_timer < self.attack4_duration
+
+            if is_spawning:
+                self.attack4_spawn_time += frame_time
+                self.attack4_duration_timer += frame_time
+
+                # 스폰 간격마다 탄환 생성
+                if self.attack4_spawn_time >= self.attack4_spawn_interval:
+                    self.attack4_spawn_time = 0.0
+
+                    # 스폰 위치: 보스 x, 화면 중앙 y
+                    spawn_x = self.x
+                    spawn_y = canvas_size.canvasheight // 2
+
+                    # 발사 각도: 왼쪽 상단(135도) ~ 왼쪽 하단(225도) 사이에서 무작위 각도
+                    angle_deg = random.uniform(135, 225)
+                    angle_rad = math.radians(angle_deg)
+
+                    # 각도에 따른 방향 벡터 계산
+                    dir_x = math.cos(angle_rad)
+                    dir_y = math.sin(angle_rad)
+
+                    # [x, y, 방향x, 방향y, 프레임] 5개 값을 리스트로 저장
+                    self.attack4.append([spawn_x, spawn_y, dir_x, dir_y, 0.0])
+
+            # --- 2-2. 탄환 이동 및 프레임 업데이트 ---
+            for i in range(len(self.attack4) - 1, -1, -1):
+                bullet = self.attack4[i]
+
+                # 저장된 방향 벡터(bullet[2], bullet[3])로 탄환 이동
+                bullet[0] += bullet[2] * self.attack4_bullet_speed * frame_time  # x 이동
+                bullet[1] += bullet[3] * self.attack4_bullet_speed * frame_time  # y 이동
+
+                # 탄환의 애니메이션 프레임(bullet[4]) 업데이트
+                bullet[4] = (bullet[4] + self.attack1_speed * frame_time) % 28
+
+                # 플레이어와 충돌 검사
+                ax, ay = bullet[0], bullet[1]
+                rx, ry = ramona.Ramona_POS_X, ramona.Ramona_POS_Y
+                threshold = 40
+                dx = ax - rx
+                dy = ay - ry
+                is_collided = (dx * dx + dy * dy <= threshold * threshold) and not ramona.Ramona_invincible and not ramona.Ramona_roll_invincible
+
+                if is_collided:
+                    if ramona.CURRENT_HP > 0:
+                        ramona.CURRENT_HP -= 1
+                        ramona.Ramona_invincible = True
+                        canvas_size.start_shake(0.5, 5.0)
+                    self.attack4.pop(i)
+
+                # 화면 밖(왼쪽, 위, 아래)으로 나가면 탄환 제거
+                elif bullet[0] < -50 or bullet[1] < -50 or bullet[1] > canvas_size.canvasheight + 50:
+                    self.attack4.pop(i)
+
+            # --- 2-3. 패턴 종료 로직 (스폰이 끝났고 && 화면에 탄환이 없으면) ---
+            if not is_spawning and len(self.attack4) == 0:
+                self.current_pattern = 0  # "패턴 1" (코드상 pattern0)로 되돌아감
+                self.attack_init = False
+                self.attack4_init_time = 0.0
+                self.attack4 = []
 
     def rereset(self):
         pass
@@ -343,13 +442,11 @@ class Boss_Kitty:
 
     def draw(self):
 
-
-
         bx,by = boss_kitty_idle_coordinate[int(self.idle_frame)][2:4]
 
         if background.start:
             # ▼▼▼ [추가] 꼬마 키티(attack3) 그리기 ▼▼▼
-            if len(self.attack3) > 0:
+            if len(self.attack3) > 0 and self.hp > 0 and not self.die_animation:
                 w, h = self.attack3_kitty_size
                 # 리소스 파일에서 꼬마 키티의 스프라이트 정보 가져오기
                 left, bottom, width, height, jx, jy = resource.little_kitty_idle_coordinate
@@ -360,32 +457,44 @@ class Boss_Kitty:
                     current_x = origin_x + self.attack3_dance_amplitude * math.sin(internal_time * self.attack3_dance_frequency)
 
                     self.little_image.clip_draw(left, bottom, width, height,current_x - canvas_size.camera_x,current_y - canvas_size.camera_y, w * 1.5, h * 1.5)
+            if len(self.attack4) > 0 and self.hp > 0 and not self.die_animation:
+                for bullet in self.attack4:
+                    frame_idx = int(bullet[4])  # 5번째 요소(인덱스 4)가 프레임 값
 
+                    # 해당 프레임의 너비/높이 정보 가져오기
+                    ax, ay = resource.boss_kitty_attack_coordinate[frame_idx][2:4]
 
-            if self.attack1_num > 0 and self.attack1.__len__()>0:
+                    # 해당 프레임의 이미지 그리기
+                    Boss_Kitty.attack1_image[frame_idx].clip_draw(0, 0, ax, ay,bullet[0] - canvas_size.camera_x,bullet[1] - canvas_size.camera_y,ax * 1.5, ay * 1.5)
+            if self.attack1_num > 0 and self.attack1.__len__()>0 and self.hp > 0 and not self.die_animation:
                 for i in self.attack1:
                     ax,ay= boss_kitty_attack_coordinate[int(i[2])][2:4]
                     Boss_Kitty.attack1_image[int(i[2])].clip_draw(0,0,ax,ay,i[0]-canvas_size.camera_x,i[1]-canvas_size.camera_y,ax*1.5,ay*1.5)
 
-            if  self.attack2.__len__()>0:
+            if  self.attack2.__len__()>0 and self.hp > 0 and not self.die_animation:
                 for i in self.attack2:
                     ax,ay= boss_kitty_uibim_coordinate[int(i[1])][2:4]
                     Boss_Kitty.attack2_image[int(i[1])].clip_draw(0,0,ax,ay,self.x - 100 - canvas_size.camera_x,i[0]-canvas_size.camera_y,ax*1.5,ay*0.5)
 
-            if self.attack1_effect.__len__()>0:
+            if self.attack1_effect.__len__()>0 and self.hp > 0 and not self.die_animation:
                 for i in self.attack1_effect:
                     ex,ey= boss_kitty_attack_coordinate[int(i[4])][2:4]
                     Boss_Kitty.attack1_image[int(i[2])].clip_draw(0,0,ex,ey,i[0]-canvas_size.camera_x,i[1]-canvas_size.camera_y,i[2],i[3])
 
-            if self.hit:
+            if self.hit and not self.die_animation:
                 if (get_time() % 0.2) > 0.1:
                     self.image[int(self.idle_frame)].clip_draw(0, 0, bx, by, self.x-canvas_size.camera_x, self.y-canvas_size.camera_y, bx * SIZE, by * SIZE)
             else:
                 self.image[int(self.idle_frame)].clip_draw(0, 0, bx, by, self.x-canvas_size.camera_x, self.y-canvas_size.camera_y, bx * SIZE, by * SIZE)
 
-            if not self.die_animation:
+
+
+            if not self.die_animation and self.hp > 0 and not self.die_animation:
                 self.shape.draw(0.6,0.6)
                 self.hp_bar.draw(self.hp, self.boss_hp)
+            else:
+                left, bottom, width, height = boss_kitty_die_coordinate[0:4]
+                self.die_image[int(self.die_frame)].clip_draw(left, bottom, width, height,self.x - canvas_size.camera_x,self.y - canvas_size.camera_y, width * SIZE,height * SIZE)
 
 
 
