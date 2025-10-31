@@ -1,6 +1,6 @@
 from pico2d import *
 import ramona
-import background
+import background_2stage
 import draw_gesture
 import ramona_ui
 import stage2_monster
@@ -8,10 +8,10 @@ import canvas_size
 
 def init():
     global player,stage_background,draw_gest,ramona_ui_,stage2_monster_
-    stage_background = background.Background('2')
+    stage_background = background_2stage.Background()
     player = ramona.Ramona()
-    ramona_ui_ = ramona_ui.Ramona_UI()
     stage2_monster_ = stage2_monster.Stage2_Monster()
+    ramona_ui_ = ramona_ui.Ramona_UI()
     draw_gest = draw_gesture.GestureRecognizer()
 
     ramona.GROUND_LEVEL = 70
@@ -20,15 +20,15 @@ def init():
     player.x=50
     player.y=ramona.GROUND_LEVEL
 
-    background.start=False
+    background_2stage.start=False
 
 
 def update(frame_time,events):
     global player,stage_background,draw_gest,ramona_ui_,stage2_monster_
     if not ramona.Ramona_dead:
         stage_background.update(frame_time,events)
-        ramona_ui_.update(frame_time,events)
         stage2_monster_.update(frame_time,events)
+        ramona_ui_.update(frame_time,events)
         draw_gest.update(frame_time,events)
     else:
         for event in events:
@@ -42,10 +42,10 @@ def update(frame_time,events):
 
 
 
-def render():
+def draw():
     global player,stage_background,draw_gest,ramona_ui_,stage2_monster_
     stage_background.draw()
     player.draw()
-    ramona_ui_.draw()
     stage2_monster_.draw()
+    ramona_ui_.draw()
     draw_gest.draw()

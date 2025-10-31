@@ -1,6 +1,6 @@
 from pico2d import *
 
-import background
+import background_1stage
 from boss_hp import Boss_HP
 from pattern import *
 from resource import *
@@ -394,7 +394,7 @@ class Boss_Kitty:
     def draw(self):
         bx, by = resource.boss_kitty_idle_coordinate[int(self.idle_frame)][2:4]
 
-        if background.start:
+        if background_1stage.start:
             # 현재 상태의 draw() 로직 실행 (각 패턴 그리기)
             self.cur_state.draw(self)
 

@@ -4,7 +4,7 @@ import resource
 import canvas_size
 import draw_gesture
 import random
-import background
+import background_1stage
 
 
 # 물리
@@ -399,7 +399,7 @@ class Ramona:
         self.y += self.y_velocity * frame_time
 
         on_ground = False
-        for bx, by, bw, bh in background.blocks:
+        for bx, by, bw, bh in resource.blocks:
             block_left, block_right = bx - bw / 2, bx + bw / 2
             block_bottom, block_top = by - bh / 2, by + bh / 2
 

@@ -235,6 +235,9 @@ boss_kitty_attack_image= []
 boss_kitty_die_image= []
 boss_kitty_uibim_image= []
 
+#블록
+blocks=[]
+
 def collide(a, b):
     left_a, bottom_a, right_a, top_a = a[0] - a[2]/2, a[1] - a[3]/2, a[0] + a[2]/2, a[1] + a[3]/2
     left_b, bottom_b, right_b, top_b = b[0] - b[2]/2, b[1] - b[3]/2, b[0] + b[2]/2, b[1] + b[3]/2

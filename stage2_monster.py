@@ -1,5 +1,5 @@
 import draw_gesture
-import background
+import background_1stage
 import hellkitty
 import ramona
 
@@ -13,10 +13,10 @@ class Stage2_Monster:
 
     def update(self, frame_time, events=None):
         if '하트' == draw_gesture.result:
-            background.start=True
+            background_1stage.start=True
             draw_gesture.result = None
             self.boss.attack_start=True
-        elif background.start:
+        elif background_1stage.start:
             self.boss.update(frame_time, events)
             self.shape_check()
             self.monster_die()
@@ -43,6 +43,6 @@ class Stage2_Monster:
 
         pass
     def draw(self):
-        if background.start:
+        if background_1stage.start:
             self.boss.draw()
             pass
