@@ -52,7 +52,7 @@ class Boss_Kitty:
 
 
         if Boss_Kitty.die_image == None:
-            Boss_Kitty.die_image = resource.boss_kitty_uibim_image
+            Boss_Kitty.die_image = resource.boss_kitty_die_image
         self.die = False
         self.die_animation = False
         self.die_animation_speed = 2.0
@@ -132,13 +132,7 @@ class Boss_Kitty:
         self.idle_frame = (self.idle_frame + self.animation_speed * frame_time) % 2
 
         if self.die_animation:
-            self.y += self.speed * frame_time * -1/2
-            self.die_frame = (self.die_frame + self.die_animation_speed * frame_time)%4
-            start_shake(0.5, 5)
-            if self.y <-200:
-                self.die = True
-                self.die_animation=False
-            pass
+            self.die_move(frame_time)
         elif not (self.current_pattern==1 and self.attack2_init) and not self.die:
             self.move(frame_time)
 
@@ -183,7 +177,15 @@ class Boss_Kitty:
             self.dir = -1
         elif self.y <= self.height // 2:
             self.dir = 1
-        pass
+
+    def die_move(self, frame_time):
+        self.y += self.speed * frame_time * -1 / 2
+        self.die_frame = (self.die_frame + self.die_animation_speed * frame_time*2) % 4
+        start_shake(0.5, 5)
+        if self.y < -200:
+            self.die = True
+            self.die_animation = False
+
 
     def pattern0(self, frame_time):
         if not self.attack_init:
@@ -494,7 +496,5 @@ class Boss_Kitty:
                 self.hp_bar.draw(self.hp, self.boss_hp)
             else:
                 left, bottom, width, height = boss_kitty_die_coordinate[0:4]
-                self.die_image[int(self.die_frame)].clip_draw(left, bottom, width, height,self.x - canvas_size.camera_x,self.y - canvas_size.camera_y, width * SIZE,height * SIZE)
-            ##이부분도 수정 필요해요
-            print(self.current_pattern)
+                self.die_image[int(self.die_frame)].draw(self.x - canvas_size.camera_x, self.y - canvas_size.camera_y, width * SIZE*1.5, height * SIZE*1.5)
 
