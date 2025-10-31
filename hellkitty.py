@@ -1,6 +1,6 @@
 from pico2d import *
 
-import background_1stage
+import background_2stage
 from boss_hp import Boss_HP
 from pattern import *
 from resource import *
@@ -136,7 +136,7 @@ class Pattern1_State:  # 레이저
             for i in self.attack2:
                 ax, ay = resource.boss_kitty_uibim_coordinate[int(i[1])][2:4]
                 Boss_Kitty.attack2_image[int(i[1])].clip_draw(0, 0, ax, ay, self.x - 100 - canvas_size.camera_x,
-                                                              i[0] - canvas_size.camera_y, ax * 1.5, ay * 0.5)
+                                                              i[0] - canvas_size.camera_y, ax * 1.5, ay * 0.7)
 
 
 class Pattern2_State:  # 꼬마 키티
@@ -394,7 +394,7 @@ class Boss_Kitty:
     def draw(self):
         bx, by = resource.boss_kitty_idle_coordinate[int(self.idle_frame)][2:4]
 
-        if background_1stage.start:
+        if background_2stage.start:
             # 현재 상태의 draw() 로직 실행 (각 패턴 그리기)
             self.cur_state.draw(self)
 
@@ -446,7 +446,7 @@ class Boss_Kitty:
         b = resource.collide([ramona.Ramona_POS_X, ramona.Ramona_POS_Y, ramona.Ramona_SIZE_X, ramona.Ramona_SIZE_Y],
                              [canvas_size.canvaswidth // 2, i[0], resource.boss_kitty_uibim_coordinate[int(i[1])][2],
                               int(resource.boss_kitty_uibim_coordinate[int(i[1])][
-                                      3] // 2)]) and not ramona.Ramona_invincible and not ramona.Ramona_roll_invincible
+                                      3] *0.7)]) and not ramona.Ramona_invincible and not ramona.Ramona_roll_invincible
         if b:
             if ramona.CURRENT_HP > 0:
                 ramona.CURRENT_HP -= 1
