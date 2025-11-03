@@ -22,6 +22,9 @@ def init():
 
     background_2stage.start=False
 
+    canvas_size.camera_x = 0
+    canvas_size.camera_y = 0
+
 
 def update(frame_time,events):
     global player,stage_background,draw_gest,ramona_ui_,stage2_monster_
@@ -39,6 +42,9 @@ def update(frame_time,events):
                 ramona.Ramona_POS_Y = ramona.GROUND_LEVEL
                 init()
     player.update(frame_time,events)
+
+    if canvas_size.shake_timer > 0:
+        canvas_size.update_shake(frame_time)
 
 
 

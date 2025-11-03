@@ -39,6 +39,8 @@ def draw_text_on_screen(x, y, text,font):
 
 
 class GestureRecognizer:
+    check_image=None
+    canvas_image=None
     def __init__(self):
         CACHE_PATH = 'gesture_cache.pkl'
         self.recognizer = QDollarRecognizer()
@@ -55,8 +57,11 @@ class GestureRecognizer:
         self.result = None
         self.shape = None
 
-        self.check_image = load_image('Canvas\\2.png')
-        self.canvas_image = load_image('Canvas\\1.png')
+
+        if GestureRecognizer.canvas_image is None:
+            GestureRecognizer.canvas_image = load_image('Canvas\\1.png')
+        if GestureRecognizer.check_image is None:
+            GestureRecognizer.check_image = load_image('Canvas\\2.png')
         self.check_image_x = canvas_size.canvaswidth // 2
         self.check_image_y = canvas_size.canvasheight - (check_image_height * 0.2)
         self.canvas_image_x = canvas_size.canvaswidth // 2
@@ -121,23 +126,21 @@ class GestureRecognizer:
 
 
     def draw(self):
-        self.check_image.clip_draw(0, 0, check_image_width, check_image_height, self.check_image_x-canvas_size.camera_x, self.check_image_y-canvas_size.camera_y,
+        self.check_image.clip_draw(0, 0, check_image_width, check_image_height, self.check_image_x, self.check_image_y,
                                    check_image_width * 0.4, check_image_height * 0.4)
-        self.canvas_image.draw(self.canvas_image_x-canvas_size.camera_x, self.canvas_image_y-canvas_size.camera_y,)
+        self.canvas_image.draw(self.canvas_image_x, self.canvas_image_y)
 
         if self.go:
             if len(self.points) > 1:
                 for i in range(1, len(self.points)):
-                    if self.points[i].id == self.points[i - 1].id:
-                        draw_line(self.points[i - 1].x-canvas_size.camera_x, canvas_size.canvasheight - self.points[i - 1].y-canvas_size.camera_y,
-                                  self.points[i].x-canvas_size.camera_x, canvas_size.canvasheight - self.points[i].y-canvas_size.camera_y)
+                    draw_line(self.points[i - 1].x, canvas_size.canvasheight - self.points[i - 1].y,
+                              self.points[i].x, canvas_size.canvasheight - self.points[i].y)
 
-            draw_text_on_screen(10-canvas_size.camera_x, canvas_size.canvasheight - 90-canvas_size.camera_y, "그림을 그리고 마우스를 떼세요.", self.font)
+            draw_text_on_screen(10, canvas_size.canvasheight - 90, "그림을 그리고 마우스를 떼세요.", self.font)
             if self.result:
                 if self.result.score < 0.25:
-                    draw_text_on_screen(10-canvas_size.camera_x, canvas_size.canvasheight - 120-canvas_size.camera_y,
+                    draw_text_on_screen(10, canvas_size.canvasheight - 120,
                                         f"인식 결과: 인식 실패 (Score: {self.result.score:.2f})", self.font)
                 else:
-                    draw_text_on_screen(10-canvas_size.camera_x, canvas_size.canvasheight - 120-canvas_size.camera_y,
+                    draw_text_on_screen(10, canvas_size.canvasheight - 120,
                                     f"인식 결과: {self.result.name} (Score: {self.result.score:.2f})", self.font)
-

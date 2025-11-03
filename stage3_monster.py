@@ -1,0 +1,45 @@
+import draw_gesture
+import background_3stage
+import stage3_topography
+import siho
+import ramona
+from random import randint
+
+
+class Stage3_Monster:
+    def __init__(self):
+        self.phase_num=0
+        self.phase=[]
+        self.boss=siho.Boss_Siho
+        self.floor_num=randint(0,2)
+        self.floor = stage3_topography.Topography(self.floor_num)
+
+
+
+    def update(self, frame_time, events=None):
+
+            pass
+
+    def shape_check(self):
+        if self.boss.shape.name == draw_gesture.result and self.boss.hp>0:
+            self.boss.hp -= ramona.Ramona_attack
+            ramona.Ramona_smash = True
+            self.boss.hit_animation=True
+            if self.boss.hp <= 0:
+                self.boss.hp = 0
+                self.boss.die_animation=True
+
+        draw_gesture.result = None
+
+        pass
+
+    def monster_die(self):
+        if self.boss.die:
+            pass
+
+
+
+
+    def draw(self):
+
+            pass

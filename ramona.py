@@ -4,7 +4,6 @@ import resource
 import canvas_size
 import draw_gesture
 import random
-import background_1stage
 
 
 # 물리

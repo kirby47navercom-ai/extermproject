@@ -24,9 +24,6 @@ def update(frame_time):
     stage3_manager.update(frame_time,events)
 
     mouse.update(frame_time,events)
-
-    if canvas_size.shake_timer > 0:
-        canvas_size.update_shake(frame_time)
     pass
 
 def draw():
