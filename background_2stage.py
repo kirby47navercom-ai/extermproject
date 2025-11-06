@@ -71,8 +71,8 @@ class Background:
             if progress < 1.0:  # 페이드가 진행 중일 때
                 # 3-1. image_A를 점점 투명하게 그림
                 image_A.clip_draw(0, 0, self.background_size[0][0], self.background_size[0][1],
-                                  canvas_size.canvaswidth // 2 - canvas_size.camera_x,
-                                  canvas_size.canvasheight // 2 - canvas_size.camera_y,
+                                  canvas_size.canvaswidth // 2 - canvas_size.shake_x,
+                                  canvas_size.canvasheight // 2 - canvas_size.shake_y,
                                   self.background_size[0][0] * self.background_magnification[0],
                                   self.background_size[0][1] * self.background_magnification[0])
 
@@ -80,8 +80,8 @@ class Background:
                 opacity_B = progress
                 image_B.opacify(opacity_B)
                 image_B.clip_draw(0, 0, self.background_size[1][0], self.background_size[1][1],
-                                  canvas_size.canvaswidth // 2 - canvas_size.camera_x,
-                                  canvas_size.canvasheight // 2 - canvas_size.camera_y,
+                                  canvas_size.canvaswidth // 2 - canvas_size.shake_x,
+                                  canvas_size.canvasheight // 2 - canvas_size.shake_y,
                                   self.background_size[1][0] * self.background_magnification[1],
                                   self.background_size[1][1] * self.background_magnification[1])
 
@@ -89,8 +89,8 @@ class Background:
                 # image_B만 완전히 선명하게 그림
                 image_B.opacify(1.0)
                 image_B.clip_draw(0, 0, self.background_size[1][0], self.background_size[1][1],
-                                  canvas_size.canvaswidth // 2 - canvas_size.camera_x,
-                                  canvas_size.canvasheight // 2 - canvas_size.camera_y,
+                                  canvas_size.canvaswidth // 2 - canvas_size.shake_x,
+                                  canvas_size.canvasheight // 2 - canvas_size.shake_y,
                                   self.background_size[1][0] * self.background_magnification[1],
                                   self.background_size[1][1] * self.background_magnification[1])
         else:

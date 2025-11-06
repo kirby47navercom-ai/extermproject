@@ -32,7 +32,7 @@ class Background:
     def draw(self):
         for i in range(self.background.__len__()):
             if i==2 or i==3 or i==4:
-                self.background[i].clip_draw(0, 0, stage1width, stage1height, canvas_size.canvaswidth // 2 + self.x[i-2]-(stage1width * 0.7)-canvas_size.camera_x,canvas_size.canvasheight // 2-canvas_size.camera_y, stage1width * 0.7, stage1height * 0.7)
-                self.background[i].clip_draw(0, 0, stage1width, stage1height, canvas_size.canvaswidth//2+self.x[i-2]-canvas_size.camera_x,canvas_size.canvasheight//2 -canvas_size.camera_y, stage1width*0.7, stage1height*0.7)
+                self.background[i].clip_draw(0, 0, stage1width, stage1height, canvas_size.canvaswidth // 2 + self.x[i-2]-(stage1width * 0.7)-canvas_size.shake_x,canvas_size.canvasheight // 2-canvas_size.shake_y, stage1width * 0.7, stage1height * 0.7)
+                self.background[i].clip_draw(0, 0, stage1width, stage1height, canvas_size.canvaswidth//2+self.x[i-2]-canvas_size.shake_x,canvas_size.canvasheight//2 -canvas_size.shake_y, stage1width*0.7, stage1height*0.7)
             else:
-                self.background[i].clip_draw(0, 0, stage1width, stage1height, canvas_size.canvaswidth//2-canvas_size.camera_x,canvas_size.canvasheight//2-canvas_size.camera_y, stage1width*0.7, stage1height*0.7)
+                self.background[i].clip_draw(0, 0, stage1width, stage1height, canvas_size.canvaswidth//2-canvas_size.shake_x,canvas_size.canvasheight//2-canvas_size.shake_y, stage1width*0.7, stage1height*0.7)

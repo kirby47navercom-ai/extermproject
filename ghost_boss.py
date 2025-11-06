@@ -32,8 +32,8 @@ class CutsceneState:
     def draw(self):
         a = boss_ghost_idle_coordinate[int(self.idle_frame)]
         left, bottom, width, height, jx, jy = a
-        self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx - canvas_size.camera_x,
-                                       self.y + jy - canvas_size.camera_y, width * SIZE, height * SIZE)
+        self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx - canvas_size.shake_x,
+                                       self.y + jy - canvas_size.shake_y, width * SIZE, height * SIZE)
 
 
 class ReadyState:
@@ -52,8 +52,8 @@ class ReadyState:
     def draw(self):
         a = boss_ghost_idle_coordinate[int(self.idle_frame)]
         left, bottom, width, height, jx, jy = a
-        self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx - canvas_size.camera_x,
-                                       self.y + jy - canvas_size.camera_y, width * SIZE, height * SIZE)
+        self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx - canvas_size.shake_x,
+                                       self.y + jy - canvas_size.shake_y, width * SIZE, height * SIZE)
 
 
 class Pattern0State:
@@ -86,8 +86,8 @@ class Pattern0State:
         else:
             a = boss_ghost_idle_coordinate[int(self.idle_frame)]
         left, bottom, width, height, jx, jy = a
-        self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx - canvas_size.camera_x,
-                                       self.y + jy - canvas_size.camera_y, width * SIZE, height * SIZE)
+        self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx - canvas_size.shake_x,
+                                       self.y + jy - canvas_size.shake_y, width * SIZE, height * SIZE)
 
 
 class Pattern1State:
@@ -126,8 +126,8 @@ class Pattern1State:
         else:
             a = boss_ghost_idle_coordinate[int(self.idle_frame)]
         left, bottom, width, height, jx, jy = a
-        self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx - canvas_size.camera_x,
-                                       self.y + jy - canvas_size.camera_y, width * SIZE, height * SIZE)
+        self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx - canvas_size.shake_x,
+                                       self.y + jy - canvas_size.shake_y, width * SIZE, height * SIZE)
 
 
 class Pattern2State:
@@ -157,8 +157,8 @@ class Pattern2State:
     def draw(self):
         a = boss_ghost_idle_coordinate[int(self.idle_frame)]
         left, bottom, width, height, jx, jy = a
-        self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx - canvas_size.camera_x,
-                                       self.y + jy - canvas_size.camera_y, width * SIZE, height * SIZE)
+        self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx - canvas_size.shake_x,
+                                       self.y + jy - canvas_size.shake_y, width * SIZE, height * SIZE)
         self.shape.draw()
 
 
@@ -180,8 +180,8 @@ class HitState:
     def draw(self):
         a = boss_ghost_hit_coordinate[int(self.hit_frame)]
         left, bottom, width, height, jx, jy = a
-        self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx - canvas_size.camera_x,
-                                       self.y + jy - canvas_size.camera_y, width * SIZE, height * SIZE)
+        self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx - canvas_size.shake_x,
+                                       self.y + jy - canvas_size.shake_y, width * SIZE, height * SIZE)
 
 
 class DieState:
@@ -203,8 +203,8 @@ class DieState:
     def draw(self):
         a = boss_ghost_die_coordinate[int(self.die_frame)]
         left, bottom, width, height, jx, jy = a
-        self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx - canvas_size.camera_x,
-                                       self.y + jy - canvas_size.camera_y, width * SIZE, height * SIZE)
+        self.image.clip_composite_draw(left, bottom, width, height, 0, 'h', self.x + jx - canvas_size.shake_x,
+                                       self.y + jy - canvas_size.shake_y, width * SIZE, height * SIZE)
 
 
 class Boss_Ghost:

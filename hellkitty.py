@@ -31,8 +31,8 @@ class IdleState:
 
     def draw(self):
         bx, by = resource.boss_kitty_idle_coordinate[int(self.idle_frame)][2:4]
-        self.image[int(self.idle_frame)].clip_draw(0, 0, bx, by, self.x - canvas_size.camera_x,
-                                                   self.y - canvas_size.camera_y, bx * SIZE, by * SIZE)
+        self.image[int(self.idle_frame)].clip_draw(0, 0, bx, by, self.x - canvas_size.shake_x,
+                                                   self.y - canvas_size.shake_y, bx * SIZE, by * SIZE)
 
 
 class Pattern0_State:  # 하트 유도탄
@@ -78,8 +78,8 @@ class Pattern0_State:  # 하트 유도탄
         if len(self.attack1) > 0:
             for i in self.attack1:
                 ax, ay = resource.boss_kitty_attack_coordinate[int(i[2])][2:4]
-                Boss_Kitty.attack1_image[int(i[2])].clip_draw(0, 0, ax, ay, i[0] - canvas_size.camera_x,
-                                                              i[1] - canvas_size.camera_y, ax * 1.5, ay * 1.5)
+                Boss_Kitty.attack1_image[int(i[2])].clip_draw(0, 0, ax, ay, i[0] - canvas_size.shake_x,
+                                                              i[1] - canvas_size.shake_y, ax * 1.5, ay * 1.5)
         # (이펙트 그리기 로직은 Boss_Kitty.draw()로 이동)
 
 
@@ -135,8 +135,8 @@ class Pattern1_State:  # 레이저
         if len(self.attack2) > 0:
             for i in self.attack2:
                 ax, ay = resource.boss_kitty_uibim_coordinate[int(i[1])][2:4]
-                Boss_Kitty.attack2_image[int(i[1])].clip_draw(0, 0, ax, ay, self.x - 100 - canvas_size.camera_x,
-                                                              i[0] - canvas_size.camera_y, ax * 1.5, ay * 0.7)
+                Boss_Kitty.attack2_image[int(i[1])].clip_draw(0, 0, ax, ay, self.x - 100 - canvas_size.shake_x,
+                                                              i[0] - canvas_size.shake_y, ax * 1.5, ay * 0.7)
 
 
 class Pattern2_State:  # 꼬마 키티
@@ -188,8 +188,8 @@ class Pattern2_State:  # 꼬마 키티
                 origin_x, current_y, internal_time = kitty
                 current_x = origin_x + self.attack3_dance_amplitude * math.sin(
                     internal_time * self.attack3_dance_frequency)
-                self.little_image.clip_draw(left, bottom, width, height, current_x - canvas_size.camera_x,
-                                            current_y - canvas_size.camera_y, w * 1.5, h * 1.5)
+                self.little_image.clip_draw(left, bottom, width, height, current_x - canvas_size.shake_x,
+                                            current_y - canvas_size.shake_y, w * 1.5, h * 1.5)
 
 
 class Pattern3_State:  # 부채꼴 탄막
@@ -246,8 +246,8 @@ class Pattern3_State:  # 부채꼴 탄막
             for bullet in self.attack4:
                 frame_idx = int(bullet[4])
                 ax, ay = resource.boss_kitty_attack_coordinate[frame_idx][2:4]
-                Boss_Kitty.attack1_image[frame_idx].clip_draw(0, 0, ax, ay, bullet[0] - canvas_size.camera_x,
-                                                              bullet[1] - canvas_size.camera_y, ax * 1.5, ay * 1.5)
+                Boss_Kitty.attack1_image[frame_idx].clip_draw(0, 0, ax, ay, bullet[0] - canvas_size.shake_x,
+                                                              bullet[1] - canvas_size.shake_y, ax * 1.5, ay * 1.5)
 
 
 class DieState:
@@ -267,7 +267,7 @@ class DieState:
 
     def draw(self):
         left, bottom, width, height = boss_kitty_die_coordinate[0:4]
-        self.die_image[int(self.die_frame)].draw(self.x - canvas_size.camera_x, self.y - canvas_size.camera_y,
+        self.die_image[int(self.die_frame)].draw(self.x - canvas_size.shake_x, self.y - canvas_size.shake_y,
                                                  width * SIZE * 1.5, height * SIZE * 1.5)
 
 
@@ -402,18 +402,18 @@ class Boss_Kitty:
             if len(self.attack1_effect) > 0 and self.hp > 0 and self.cur_state != DieState:
                 for i in self.attack1_effect:
                     ex, ey = resource.boss_kitty_attack_coordinate[int(i[4])][2:4]
-                    Boss_Kitty.attack1_image[int(i[2])].clip_draw(0, 0, ex, ey, i[0] - canvas_size.camera_x,
-                                                                  i[1] - canvas_size.camera_y, i[2], i[3])
+                    Boss_Kitty.attack1_image[int(i[2])].clip_draw(0, 0, ex, ey, i[0] - canvas_size.shake_x,
+                                                                  i[1] - canvas_size.shake_y, i[2], i[3])
 
             if self.hit and self.cur_state != DieState:
                 if (get_time() % 0.2) > 0.1:
-                    self.image[int(self.idle_frame)].clip_draw(0, 0, bx, by, self.x - canvas_size.camera_x,
-                                                               self.y - canvas_size.camera_y, bx * SIZE, by * SIZE)
+                    self.image[int(self.idle_frame)].clip_draw(0, 0, bx, by, self.x - canvas_size.shake_x,
+                                                               self.y - canvas_size.shake_y, bx * SIZE, by * SIZE)
 
             # DieState가 아닐 때만 보스 본체를 그림 (DieState는 스스로를 그림)
             if self.cur_state != DieState:
-                self.image[int(self.idle_frame)].clip_draw(0, 0, bx, by, self.x - canvas_size.camera_x,
-                                                           self.y - canvas_size.camera_y, bx * SIZE, by * SIZE)
+                self.image[int(self.idle_frame)].clip_draw(0, 0, bx, by, self.x - canvas_size.shake_x,
+                                                           self.y - canvas_size.shake_y, bx * SIZE, by * SIZE)
 
             if self.hp > 0 and self.cur_state != DieState:
                 self.shape.draw(0.6, 0.6)

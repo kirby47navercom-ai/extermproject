@@ -23,5 +23,5 @@ class Stage3_Terrain:
 
     def draw(self):
         for i in range(5):
-            resource.terrain3.clip_composite_draw(0, 0, 128, 32, 0, '', self.terrain_x[i]-canvas_size.camera_x, self.terrain_y[i]-canvas_size.camera_y, self.terrain_width, self.terrain_height)
+            resource.terrain3.clip_composite_draw(0, 0, 128, 32, 0, '', self.terrain_x[i]-canvas_size.shake_x, self.terrain_y[i]-canvas_size.shake_y, self.terrain_width, self.terrain_height)
         pass
