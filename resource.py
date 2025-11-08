@@ -236,19 +236,32 @@ boss_kitty_die_image= []
 boss_kitty_uibim_image= []
 
 #스테이지 3리소스
+#시호 인간
 boss_siho_coordinate = [0,0,64,64,0,0]
-boss_fox_coordinate = [0,0,128,64,0,0]
 
 
 boss_siho_appear_image = []
 
 boss_siho_jump_prepare_image = []
 boss_siho_jump_up_image = []
-boss_siho_jump_down_image = []
+boss_siho_jump_cast_image = []
 boss_siho_jump_over_image = []
 
+boss_siho_scratch_prepare_image = []
+boss_siho_scratch_cast_image = []
+boss_siho_scratch_over_image = []
 
+boss_siho_scratch_rush_prepare_image = []
+boss_siho_scratch_rush_cast_image = []
+boss_siho_scratch_rush_over_image = []
 
+boss_siho_fire_prepare_image = []
+boss_siho_fire_cast_a_image = []
+boss_siho_fire_cast_b_image = []
+boss_siho_fire_over_image = []
+
+#시호 여우
+boss_fox_coordinate = [0,0,128,64,0,0]
 
 
 #블록
@@ -309,6 +322,8 @@ def load_resources():
     for i in range(4):
         boss_kitty_die_image.append(load_image(f'2stage\\blast{str(i+1)}.png'))
 
+
+
     for i in range(8):
         boss_siho_appear_image.append(load_image(f'3stage\\Appear{str(i+1)}.png'))
     for i in range(3):
@@ -317,10 +332,49 @@ def load_resources():
     boss_siho_jump_up_image.append(load_image(f'3stage\\Fox Human Jump Cast a.png'))
 
     for i in range(4):
-        boss_siho_jump_down_image.append(load_image(f'3stage\\Fox Human Jump Cast b{str(i + 1)}.png'))
+        boss_siho_jump_cast_image.append(load_image(f'3stage\\Fox Human Jump Cast b{str(i + 1)}.png'))
 
-    for i in range(5):
-        boss_siho_jump_over_image.append(load_image(f'3stage\\Fox Human Jump Over{str(i + 1)}.png'))
+
+
+    for i in range(3):
+        boss_siho_scratch_prepare_image.append(load_image(f'3stage\\Fox Human Scratch Prepare{str(i + 1)}.png'))
+
+    for i in range(4):
+        boss_siho_scratch_cast_image.append(load_image(f'3stage\\Fox Human Scratch Cast{str(i + 1)}.png'))
+
+    for i in range(3):
+        boss_siho_scratch_over_image.append(load_image(f'3stage\\Fox Human Scratch Over{str(i + 1)}.png'))
+
+
+
+    for i in range(3):
+        boss_siho_scratch_rush_prepare_image.append(load_image(f'3stage\\Fox Human Scratch Rush Prepare{str(i + 1)}.png'))
+
+    for i in range(3):
+        boss_siho_scratch_rush_cast_image.append(load_image(f'3stage\\Fox Human Scratch Rush Cast{str(i + 1)}.png'))
+
+    for i in range(3):
+        boss_siho_scratch_rush_over_image.append(load_image(f'3stage\\Fox Human Scratch Rush Over{str(i + 1)}.png'))
+
+
+
+    for i in range(4):
+        boss_siho_fire_prepare_image.append(load_image(f'3stage\\Fox Human Spread Fire Prepare{str(i + 1)}.png'))
+
+    for i in range(3):
+        boss_siho_fire_cast_a_image.append(load_image(f'3stage\\Fox Human Spread Fire Cast a{str(i + 1)}.png'))
+
+    for i in range(4):
+        boss_siho_fire_cast_b_image.append(load_image(f'3stage\\Fox Human Spread Fire Cast b{str(i + 1)}.png'))
+
+    for i in range(3):
+        boss_siho_fire_over_image.append(load_image(f'3stage\\Fox Human Spread Fire Over{str(i + 1)}.png'))
+
+
+
+
+
+
 
     ramona_image = {
         'idle': image_idle, 'walk': image_walk, 'run': image_run, 'jump': image_jump,
