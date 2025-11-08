@@ -260,11 +260,88 @@ boss_siho_fire_cast_a_image = []
 boss_siho_fire_cast_b_image = []
 boss_siho_fire_over_image = []
 
-#시호 인간 공격
-
 
 #시호 여우
-boss_fox_coordinate = [0,0,128,64,0,0]
+boss_fox_change_coordinate = [0,0,128,64,0,0]
+boss_fox_change_image = []
+
+boss_fox_idle_coordinate = [0,0,96,64,0,0]
+boss_fox_idle_image = []
+
+boss_fox_bite_prepare_coordinate = [0,0,96,64,0,0]
+boss_fox_bite_prepare_image = []
+boss_fox_bite_cast_coordinate = [0,0,128,64,0,0]
+boss_fox_bite_cast_image = []
+boss_fox_bite_over_coordinate = [0,0,96,64,0,0]
+boss_fox_bite_over_image = []
+
+boss_fox_jump_prepare_coordinate = [0,0,96,64,0,0]
+boss_fox_jump_prepare_image = []
+boss_fox_jump_up_coordinate = [0,0,96,96,0,0]
+boss_fox_jump_up_image = []
+boss_fox_jump_cast_coordinate = [0,0,96,96,0,0]
+boss_fox_jump_cast_image = []
+boss_fox_jump_over_coordinate = [0,0,96,64,0,0]
+boss_fox_jump_over_image = []
+
+boss_fox_scratch_prepare_coordinate = [0,0,96,64,0,0]
+boss_fox_scratch_prepare_image = []
+boss_fox_scratch_cast_coordinate = [0,0,96,64,0,0]
+boss_fox_scratch_cast_a_image = []
+boss_fox_scratch_cast_b_image = []
+boss_fox_scratch_over_coordinate = [0,0,96,64,0,0]
+boss_fox_scratch_over_image = []
+
+boss_fox_spread_prepare_coordinate = [0,0,96,64,0,0]
+boss_fox_spread_prepare_image = []
+boss_fox_spread_cast_coordinate = [0,0,96,64,0,0]
+boss_fox_spread_cast_image = []
+boss_fox_spread_over_coordinate = [0,0,96,64,0,0]
+boss_fox_spread_over_image = []
+
+
+boss_fox_burning_coordinate =  [0,0,96,64,0,0]
+boss_fox_burning_a_image = []
+boss_fox_burning_b_image = []
+boss_fox_burning_c_image = []
+
+boss_fox_burning_idle_coordinate = [0,0,96,64,0,0]
+boss_fox_burning_idle_image = []
+
+boss_fox_rush_prepare_coordinate = [0,0,192,64,0,0]
+boss_fox_rush_prepare_image = []
+boss_fox_rush_over_coordinate = [0,0,192,64,0,0]
+boss_fox_rush_over_image = []
+
+
+
+
+#공격
+boss_siho_scratch_coordinate = [0,0,128,256,0,0]
+boss_siho_scratch_image = []
+
+boss_siho_rush_scratch_coordinate = [0,0,128,128,0,0]
+boss_siho_rush_scratch_image = []
+
+boss_siho_fire_coordinate = [0,0,32,32,0,0]
+boss_siho_fire_a_appear_image = []
+boss_siho_fire_a_image = []
+boss_siho_fire_b_appear_image = []
+boss_siho_fire_b_image = []
+
+boss_siho_bite_coordinate = [0,0,160,160,0,0]
+boss_siho_bite_image = []
+
+boss_siho_rush_warning_coordinate = [0,0,16,16,0,0]
+boss_siho_rush_warning_image = []
+
+boss_siho_rush_particle_coordinate = [0,0,32,32,0,0]
+boss_siho_rush_particle_image = []
+
+#씬전환용
+white_image=[]
+
+
 
 
 
@@ -329,7 +406,7 @@ def load_resources():
         boss_kitty_die_image.append(load_image(f'2stage\\blast{str(i+1)}.png'))
 
 
-
+    #시호 인간
     for i in range(8):
         boss_siho_appear_image.append(load_image(f'3stage\\Appear{str(i+1)}.png'))
     for i in range(3):
@@ -376,9 +453,108 @@ def load_resources():
     for i in range(3):
         boss_siho_fire_over_image.append(load_image(f'3stage\\Fox Human Spread Fire Over{str(i + 1)}.png'))
 
+    # 시호 여우
+    for i in range(18):
+        boss_fox_change_image.append(load_image(f'3stage\\Change Phase 1-{str(i + 1)}.png'))
+
+    for i in range(8):
+        boss_fox_idle_image.append(load_image(f'3stage\\Idle{str(i + 1)}.png'))
+
+    boss_fox_bite_prepare_image.append(load_image(f'3stage\\Bite Prepare 1.png'))
+
+    for i in range(3):
+        boss_fox_bite_cast_image.append(load_image(f'3stage\\Bite Cast {str(i + 1)}.png'))
+
+    for i in range(3):
+        boss_fox_bite_over_image.append(load_image(f'3stage\\Bite Over {str(i + 1)}.png'))
+
+    for i in range(2):
+        boss_fox_jump_prepare_image.append(load_image(f'3stage\\Jump Prepare{str(i + 1)}.png'))
+
+
+    boss_fox_jump_up_image.append(load_image(f'3stage\\Jump Cast a1.png'))
+
+    for i in range(5):
+        boss_fox_jump_cast_image.append(load_image(f'3stage\\Jump Cast b{str(i + 1)}.png'))
+
+    for i in range(6):
+        boss_fox_jump_over_image.append(load_image(f'3stage\\Jump Over{str(i + 1)}.png'))
+
+    for i in range(3):
+        boss_fox_scratch_prepare_image.append(load_image(f'3stage\\Jump Over{str(i + 1)}.png'))
+
+    for i in range(2):
+        boss_fox_scratch_cast_a_image.append(load_image(f'3stage\\Scratch Cast a{str(i + 1)}.png'))
+
+    for i in range(2):
+        boss_fox_scratch_cast_b_image.append(load_image(f'3stage\\Scratch Cast b{str(i + 1)}.png'))
+
+    for i in range(2):
+        boss_fox_scratch_over_image.append(load_image(f'3stage\\Scratch Over{str(i + 1)}.png'))
+
+    for i in range(3):
+        boss_fox_spread_prepare_image.append(load_image(f'3stage\\Spread Fire Prepare{str(i + 1)}.png'))
+
+    for i in range(8):
+        boss_fox_spread_cast_image.append(load_image(f'3stage\\Spread Fire Cast{str(i + 1)}.png'))
+
+    for i in range(3):
+        boss_fox_spread_over_image.append(load_image(f'3stage\\Spread Fire Over{str(i + 1)}.png'))
+
+    for i in range(8):
+        boss_fox_burning_a_image.append(load_image(f'3stage\\Change Phase 2-a{str(i + 1)}.png'))
+
+    for i in range(8):
+        boss_fox_burning_b_image.append(load_image(f'3stage\\Change Phase 2-b{str(i + 1)}.png'))
+
+    for i in range(8):
+        boss_fox_burning_c_image.append(load_image(f'3stage\\Change Phase 2-c{str(i + 1)}.png'))
+
+
+    for i in range(8):
+        boss_fox_burning_idle_image.append(load_image(f'3stage\\Fox Burning Idle{str(i + 1)}.png'))
+
+    for i in range(3):
+        boss_fox_rush_prepare_image.append(load_image(f'3stage\\Rush Prepare{str(i + 1)}.png'))
+
+    for i in range(8):
+        boss_fox_rush_over_image.append(load_image(f'3stage\\Rush Over{str(i + 1)}.png'))
+
+
+    # 시호 공격
+    boss_siho_scratch_image.append(load_image(f'3stage\\Fox Scratch Warning.png'))
+    for i in range(3):
+        boss_siho_scratch_image.append(load_image(f'3stage\\Fox Scratch{str(i + 1)}.png'))
+
+    for i in range(11):
+        boss_siho_rush_scratch_image.append(load_image(f'3stage\\Fox Rushed Scratch{str(i + 1)}.png'))
+
+    for i in range(4):
+        boss_siho_fire_a_appear_image.append(load_image(f'3stage\\Fox Fire Appear{str(i + 1)}.png'))
+
+    for i in range(4):
+        boss_siho_fire_a_image.append(load_image(f'3stage\\Fox Fire{str(i + 1)}.png'))
+
+    for i in range(4):
+        boss_siho_fire_b_appear_image.append(load_image(f'3stage\\Fox Fire b Appear{str(i + 1)}.png'))
+
+    for i in range(4):
+        boss_siho_fire_b_image.append(load_image(f'3stage\\Fox Fire b{str(i + 1)}.png'))
+
+    boss_siho_fire_b_image.append(load_image(f'3stage\\Fox Bite Warning.png'))
+    for i in range(5):
+        boss_siho_bite_image.append(load_image(f'3stage\\Fox Bite{str(i + 1)}.png'))
 
 
 
+    boss_siho_rush_warning_image.append(load_image(f'3stage\\Rush Warning.png'))
+
+    boss_siho_rush_particle_image.append(load_image(f'3stage\\Rush Particle.png'))
+
+
+
+
+    white_image.append(load_image(f'3stage\\White.png'))
 
 
 
