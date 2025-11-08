@@ -54,20 +54,23 @@ class Stage3_Terrain:
     def update(self, frame_time, events=None):
         if self.pattern==2:
             self.water_frame = (self.water_frame + frame_time * self.speed) % 8
+            self.water_wave_frame = (self.water_wave_frame + frame_time * self.speed) % 8
         elif self.pattern==3:
             self.flame_frame = (self.flame_frame + frame_time * self.speed) % 5
 
         self.falldown()
 
     def falldown(self):
-        if ramona.Ramona_POS_Y<self.terrain_height-10:
-            print (ramona.Ramona_POS_Y, self.terrain_height)
-
-
+        if ramona.Ramona_POS_Y < self.terrain_height - 10:
+            if not ramona.Ramona_invincible:  # 무적 상태가 아닐 때만 피해
+                ramona.CURRENT_HP -= 3
+                ramona.Ramona_invincible = True
+                ramona.Ramona_invincible_timer = 0.0  # 변수명 수정
+                canvas_size.start_shake(0.5, 5.0)
 
     def draw(self):
-        camerax = canvas_size.shake_x+ canvas_size.camera_x
-        cameray= canvas_size.shake_y+ canvas_size.camera_y
+        camerax = canvas_size.camera_x
+        cameray= canvas_size.camera_y
         if self.pattern==1:
             Stage3_Terrain.vine_image[0].clip_draw(0, 0, self.terrain_width, self.terrain_height,
                                                 width // 2 - camerax,
@@ -75,10 +78,18 @@ class Stage3_Terrain:
                                                 self.terrain_width*2.5, self.terrain_height*2)
 
         elif self.pattern==2:
+            Stage3_Terrain.water_wave_image[int(self.water_wave_frame)].clip_draw(0, 0, 224, 160,
+                                                                        width // 2 - camerax,
+                                                                        200- cameray,
+                                                                        224 * 2,
+                                                                        160 * 2)
             Stage3_Terrain.water_image[int(self.water_frame)].clip_draw(0, 0, self.terrain_width, self.terrain_height,
                                                 width // 2 - camerax,
                                                 -10 - cameray,
                                                 self.terrain_width*2.5, self.terrain_height*2)
+
+
+
         elif self.pattern==3:
             Stage3_Terrain.flame_image[int(self.flame_frame)].clip_draw(0, 0, self.terrain_width, self.terrain_height,
                                                 width // 2 - camerax,

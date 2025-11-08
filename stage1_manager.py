@@ -5,6 +5,7 @@ import draw_gesture
 import ramona_ui
 import stage1_monster
 import canvas_size
+import game_framework
 
 
 def init():
@@ -26,6 +27,8 @@ def init():
     canvas_size.camera_x = 0
     canvas_size.camera_y = 0
 
+    ramona.Ramona_retry = False
+
 
 def update(frame_time,events):
     global player,stage_background,draw_gest,ramona_ui_,stage1_monster_
@@ -34,7 +37,7 @@ def update(frame_time,events):
         ramona_ui_.update(frame_time,events)
         stage1_monster_.update(frame_time,events)
         draw_gest.update(frame_time,events)
-    else:
+    elif ramona.Ramona_retry:
         for event in events:
             if event.type == SDL_KEYDOWN and event.key == SDLK_r:
                 ramona.Ramona_dead = False
@@ -47,6 +50,8 @@ def update(frame_time,events):
         if event.type == SDL_KEYDOWN:
             if event.key == SDLK_F1:
                 canvas_size.collide_check= not canvas_size.collide_check
+            elif event.key == SDLK_ESCAPE:
+                game_framework.quit()
 
 
     player.update(frame_time,events)
