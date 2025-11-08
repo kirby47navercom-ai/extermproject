@@ -6,6 +6,7 @@ import ramona_ui
 import stage1_monster
 import canvas_size
 
+
 def init():
     global player,stage_background,draw_gest,ramona_ui_,stage1_monster_
     stage_background = background_1stage.Background()
@@ -39,6 +40,13 @@ def update(frame_time,events):
                 ramona.Ramona_POS_X = 100
                 ramona.Ramona_POS_Y = ramona.GROUND_LEVEL
                 init()
+
+    for event in events:
+        if event.type == SDL_KEYDOWN:
+            if event.key == SDLK_F1:
+                canvas_size.collide_check= not canvas_size.collide_check
+
+
     player.update(frame_time,events)
 
     if canvas_size.shake_timer > 0:

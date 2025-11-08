@@ -34,6 +34,12 @@ class IdleState:
         self.image[int(self.idle_frame)].clip_draw(0, 0, bx, by, self.x - canvas_size.shake_x,
                                                    self.y - canvas_size.shake_y, bx * SIZE, by * SIZE)
 
+        if canvas_size.collide_check:
+            draw_rectangle(self.x - bx * SIZE,
+                           self.y - by * SIZE,
+                           self.x + bx * SIZE,
+                           self.y + by * SIZE)
+
 
 class Pattern0_State:  # 하트 유도탄
     def enter(self, event):
@@ -80,6 +86,11 @@ class Pattern0_State:  # 하트 유도탄
                 ax, ay = resource.boss_kitty_attack_coordinate[int(i[2])][2:4]
                 Boss_Kitty.attack1_image[int(i[2])].clip_draw(0, 0, ax, ay, i[0] - canvas_size.shake_x,
                                                               i[1] - canvas_size.shake_y, ax * 1.5, ay * 1.5)
+                if canvas_size.collide_check:
+                    draw_rectangle(i[0] - ax * 1.5 / 2,
+                                   i[1] - ay * 1.5 / 2,
+                                   i[0] + ax * 1.5 / 2,
+                                   i[1] + ay * 1.5 / 2)
         # (이펙트 그리기 로직은 Boss_Kitty.draw()로 이동)
 
 
@@ -138,6 +149,12 @@ class Pattern1_State:  # 레이저
                 Boss_Kitty.attack2_image[int(i[1])].clip_draw(0, 0, ax, ay, self.x - 100 - canvas_size.shake_x,
                                                               i[0] - canvas_size.shake_y, ax * 1.5, ay * 0.7)
 
+                if canvas_size.collide_check:
+                    draw_rectangle(self.x - 100 - ax * 1.5 / 2,
+                                   i[0] - ay * 1.5 / 2,
+                                   self.x - 100 + ax * 1.5 / 2,
+                                   i[0] + ay * 1.5 / 2)
+
 
 class Pattern2_State:  # 꼬마 키티
     def enter(self, event):
@@ -190,6 +207,11 @@ class Pattern2_State:  # 꼬마 키티
                     internal_time * self.attack3_dance_frequency)
                 self.little_image.clip_draw(left, bottom, width, height, current_x - canvas_size.shake_x,
                                             current_y - canvas_size.shake_y, w * 1.5, h * 1.5)
+                if canvas_size.collide_check:
+                    draw_rectangle(current_x - w * 1.5 / 2,
+                                   current_y - h * 1.5 / 2,
+                                   current_x + w * 1.5 / 2,
+                                   current_y + h * 1.5 / 2)
 
 
 class Pattern3_State:  # 부채꼴 탄막
@@ -249,6 +271,12 @@ class Pattern3_State:  # 부채꼴 탄막
                 Boss_Kitty.attack1_image[frame_idx].clip_draw(0, 0, ax, ay, bullet[0] - canvas_size.shake_x,
                                                               bullet[1] - canvas_size.shake_y, ax * 1.5, ay * 1.5)
 
+                if canvas_size.collide_check:
+                    draw_rectangle(bullet[0] - ax * 1.5 / 2,
+                                   bullet[1] - ay * 1.5 / 2,
+                                   bullet[0] + ax * 1.5 / 2,
+                                   bullet[1] + ay * 1.5 / 2)
+
 
 class DieState:
     def enter(self, event):
@@ -269,6 +297,11 @@ class DieState:
         left, bottom, width, height = boss_kitty_die_coordinate[0:4]
         self.die_image[int(self.die_frame)].draw(self.x - canvas_size.shake_x, self.y - canvas_size.shake_y,
                                                  width * SIZE * 1.5, height * SIZE * 1.5)
+        if canvas_size.collide_check:
+            draw_rectangle(self.x - width * SIZE * 1.5 / 2,
+                           self.y - height * SIZE * 1.5 / 2,
+                           self.x + width * SIZE * 1.5 / 2,
+                           self.y + height * SIZE * 1.5 / 2)
 
 
 class Boss_Kitty:

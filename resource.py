@@ -260,12 +260,18 @@ boss_siho_fire_cast_a_image = []
 boss_siho_fire_cast_b_image = []
 boss_siho_fire_over_image = []
 
+#시호 인간 공격
+
+
 #시호 여우
 boss_fox_coordinate = [0,0,128,64,0,0]
 
 
+
+
 #블록
 blocks=[]
+
 
 def collide(a, b):
     left_a, bottom_a, right_a, top_a = a[0] - a[2]/2, a[1] - a[3]/2, a[0] + a[2]/2, a[1] + a[3]/2
