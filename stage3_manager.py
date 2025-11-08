@@ -20,6 +20,8 @@ def init():
 
     player.x=canvas_size.canvaswidth//2
     player.y=260
+    ramona.Ramona_POS_X = player.x
+    ramona.Ramona_POS_Y = player.y
 
     canvas_size.camera_x=0
     canvas_size.camera_y=0
@@ -28,7 +30,7 @@ def update(frame_time,events):
     global player,stage_background,draw_gest,ramona_ui_,stage3_monster_
     if not ramona.Ramona_dead:
         stage_background.update(frame_time,events)
-        stage3_monster_ = stage3_monster.Stage3_Monster()
+        stage3_monster_.update(frame_time,events)
         ramona_ui_.update(frame_time,events)
         draw_gest.update(frame_time,events)
     else:
@@ -36,8 +38,8 @@ def update(frame_time,events):
             if event.type == SDL_KEYDOWN and event.key == SDLK_r:
                 ramona.Ramona_dead = False
                 ramona.CURRENT_HP= ramona.MAX_HP
-                ramona.Ramona_POS_X = 100
-                ramona.Ramona_POS_Y = ramona.GROUND_LEVEL
+                ramona.Ramona_POS_X = canvas_size.canvaswidth//2
+                ramona.Ramona_POS_Y = 260
                 init()
 
 
@@ -60,6 +62,6 @@ def draw():
     global player,stage_background,draw_gest,ramona_ui_,stage3_monster_
     stage_background.draw()
     player.draw()
-    stage3_monster_ = stage3_monster.Stage3_Monster()
+    stage3_monster_.draw()
     ramona_ui_.draw()
     draw_gest.draw()

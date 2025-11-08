@@ -11,14 +11,16 @@ class Stage3_Monster:
         self.phase_num=0
         self.phase=[]
         self.boss=siho.Boss_Siho
-        self.floor_num=randint(0,2)
+        self.floor_num=randint(1,3)
         self.floor = stage3_topography.Stage3_Terrain(self.floor_num)
+
 
 
 
     def update(self, frame_time, events=None):
 
-            pass
+            self.floor.update(frame_time, events)
+            #self.shape_check()
 
     def shape_check(self):
         if self.boss.shape.name == draw_gesture.result and self.boss.hp>0:
@@ -41,5 +43,5 @@ class Stage3_Monster:
 
 
     def draw(self):
+        self.floor.draw()
 
-            pass

@@ -19,6 +19,8 @@ def init():
 
     player.x=50
     player.y=ramona.GROUND_LEVEL
+    ramona.Ramona_POS_X = player.x
+    ramona.Ramona_POS_Y = player.y
 
     background_2stage.start=False
 
@@ -38,7 +40,7 @@ def update(frame_time,events):
             if event.type == SDL_KEYDOWN and event.key == SDLK_r:
                 ramona.Ramona_dead = False
                 ramona.CURRENT_HP= ramona.MAX_HP
-                ramona.Ramona_POS_X = 100
+                ramona.Ramona_POS_X = 50
                 ramona.Ramona_POS_Y = ramona.GROUND_LEVEL
                 init()
 
