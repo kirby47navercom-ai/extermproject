@@ -236,6 +236,23 @@ boss_kitty_die_image= []
 boss_kitty_uibim_image= []
 
 #스테이지 3리소스
+#배경
+fox_background_coordinate = [0,0,960,128,0,0]
+fox_vine_background_image = []
+fox_water_background_image = []
+fox_flame_background_image = []
+
+fox_vine_needle_coordinate = [0,0,128,176,0,0]
+fox_vine_needle_appear_image = []
+fox_vine_needle_disappear_image = []
+
+fox_water_wave_coordinate = [0,0,224,160,0,0]
+fox_water_wave_image = []
+
+fox_flame_ball_coordinate = [0,0,64,80,0,0]
+fox_flame_ball_image = []
+
+
 #시호 인간
 boss_siho_coordinate = [0,0,64,64,0,0]
 
@@ -555,6 +572,29 @@ def load_resources():
 
 
     white_image.append(load_image(f'3stage\\White.png'))
+
+    #3 배경
+
+    fox_vine_background_image.append(load_image(f'3stage\\Fox Vine1.png'))
+
+    for i in range(8):
+        fox_water_background_image.append(load_image(f'3stage\\Fox Water{str(i + 1)}.png'))
+
+    for i in range(5):
+        fox_flame_background_image.append(load_image(f'3stage\\Fox Flame{str(i + 1)}.png'))
+
+
+    for i in range(12):
+        fox_vine_needle_appear_image.append(load_image(f'3stage\\Fox Vine Needle Appear{str(i + 1)}.png'))
+
+    for i in range(12):
+        fox_vine_needle_disappear_image.append(load_image(f'3stage\\Fox Vine Needle Disappear{str(i + 1)}.png'))
+
+    for i in range(8):
+        fox_water_wave_image.append(load_image(f'3stage\\Fox Wave{str(i + 1)}.png'))
+
+    for i in range(5):
+        fox_flame_ball_image.append(load_image(f'3stage\\Fox Flame Ball{str(i + 1)}.png'))
 
 
 
