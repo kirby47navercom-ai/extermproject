@@ -92,8 +92,8 @@ class Background:
                                        480 * 2)
         self.fox_platform.clip_draw(
             0, 0, self.fox_platform_size[0], self.fox_platform_size[1],
-            width // 2 - canvas_size.shake_x,
-            self.fox_platform_size[1] - canvas_size.shake_y,
+            width // 2 - canvas_size.camera_x-canvas_size.shake_x,
+            self.fox_platform_size[1] - canvas_size.camera_y-canvas_size.shake_y,
             self.fox_platform_size[0] * 2,
             self.fox_platform_size[1] * 2
         )

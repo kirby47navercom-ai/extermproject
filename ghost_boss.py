@@ -1,12 +1,10 @@
-from pico2d import *
 from boss_hp import Boss_HP
 from pattern import *
 from resource import *
 from random import randint
 import canvas_size
-from canvas_size import cout
 import ramona
-import math
+
 
 SIZE = 1.2
 

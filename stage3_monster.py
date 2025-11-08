@@ -12,7 +12,7 @@ class Stage3_Monster:
         self.phase=[]
         self.boss=siho.Boss_Siho
         self.floor_num=randint(0,2)
-        self.floor = stage3_topography.Topography(self.floor_num)
+        self.floor = stage3_topography.Stage3_Terrain(self.floor_num)
 
 
 

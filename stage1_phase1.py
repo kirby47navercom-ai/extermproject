@@ -1,6 +1,7 @@
 from ghost_normal import *
 import draw_gesture
 
+
 ghost_phase_far=50
 ghost_phase_pos=[-1,-1,1,1,1]
 
