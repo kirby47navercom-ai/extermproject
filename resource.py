@@ -259,6 +259,8 @@ boss_siho_coordinate = [0,0,64,64,0,0]
 
 boss_siho_appear_image = []
 
+boss_siho_idle_image = []
+
 boss_siho_jump_prepare_image = []
 boss_siho_jump_up_image = []
 boss_siho_jump_cast_image = []
@@ -438,6 +440,10 @@ def load_resources():
     #시호 인간
     for i in range(8):
         boss_siho_appear_image.append(load_image(f'3stage\\Appear{str(i+1)}.png'))
+
+    for i in range(2):
+        boss_siho_idle_image.append(load_image(f'3stage\\Fox Human Idle{str(i+1)}.png'))
+
     for i in range(3):
         boss_siho_jump_prepare_image.append(load_image(f'3stage\\Fox Human Jump Prepare{str(i+1)}.png'))
 
@@ -445,6 +451,9 @@ def load_resources():
 
     for i in range(4):
         boss_siho_jump_cast_image.append(load_image(f'3stage\\Fox Human Jump Cast b{str(i + 1)}.png'))
+
+    for i in range(5):
+        boss_siho_jump_over_image.append(load_image(f'3stage\\Fox Human Jump Over{str(i + 1)}.png'))
 
 
 

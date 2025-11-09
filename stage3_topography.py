@@ -77,7 +77,7 @@ class Stage3_Terrain:
 
         self.pattern_transition = False
         self.transition_opacity = 0.0
-        self.transition_speed = 1.0
+        self.transition_speed = 2.0
         self.transition_phase = 0
 
     def update(self, frame_time, events=None):
