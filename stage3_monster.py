@@ -1,5 +1,4 @@
 import draw_gesture
-import background_3stage
 import stage3_topography
 import siho
 import ramona
@@ -10,17 +9,18 @@ class Stage3_Monster:
     def __init__(self):
         self.phase_num=0
         self.phase=[]
-        self.boss=siho.Boss_Siho
-        self.floor_num=randint(1,3)
-        self.floor = stage3_topography.Stage3_Terrain(self.floor_num)
+        self.boss=siho.Boss_Siho()
+        self.floor = stage3_topography.Stage3_Terrain()
 
 
 
 
     def update(self, frame_time, events=None):
+        self.boss.update(frame_time, events)
 
+        if self.boss.appear_animation:
             self.floor.update(frame_time, events)
-            #self.shape_check()
+            self.shape_check()
 
     def shape_check(self):
         if self.boss.shape.name == draw_gesture.result and self.boss.hp>0:
@@ -43,5 +43,7 @@ class Stage3_Monster:
 
 
     def draw(self):
-        self.floor.draw()
+        self.boss.draw()
+        if self.boss.appear_animation:
+            self.floor.draw()
 
