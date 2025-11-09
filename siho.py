@@ -72,6 +72,7 @@ class Boss_Siho:
         #패턴 3
         self.pattern3_state = 0
         self.pattern3_fireball=[]
+        self.pattern3_fireball_index=6
         self.pattern3_fireball_speed = 100.0
         self.spread_frame = 0
 
@@ -103,6 +104,7 @@ class Boss_Siho:
 
         if not self.die_animation:
             self.update_fireballs(frame_time)
+            self.update_pattern3_fireball(frame_time)
 
 
 
@@ -256,12 +258,23 @@ class Boss_Siho:
             if self.spread_frame >= 2:
                 self.pattern3_state = 2
                 self.spread_frame = 0
+                self.pattern3_fireball.append([self.x+50,self.y+100,0,0,0,False,False])
         elif self.pattern3_state == 2:
             self.spread_frame = (self.spread_frame + self.animation_speed * frame_time)%4
 
 
+    def update_pattern3_fireball(self, frame_time):
+        for i in range(len(self.pattern3_fireball) - 1, -1, -1):
+            if not self.pattern3_fireball[i][5]:
+                self.pattern3_fireball[i][4]= self.pattern3_fireball[i][4] + self.animation_speed  * frame_time
+                if self.pattern3_fireball[i][4]>=3:
+                    self.pattern3_fireball[i][5]=True
+                    self.pattern3_fireball[i][4]=0
 
-            pass
+
+            else:
+                self.pattern3_fireball[i][4] = (self.pattern3_fireball[i][4] + self.animation_speed * frame_time)%4
+
     def pattern4(self, frame_time):
 
             pass
@@ -326,37 +339,40 @@ class Boss_Siho:
                                                   self.x - canvas_size.camera_x,
                                                   self.y - canvas_size.camera_y,
                                                   64 * SIZE, 64 * SIZE)
+        if self.hp > 0 and not self.die_animation:
+            for ball_a in self.fireballs:
+                if ball_a[6]:
+                    frame_idx = int(ball_a[5])
+                    fire_image = resource.boss_siho_fire_a_image[frame_idx]
 
-        for ball_a in self.fireballs:
-            if ball_a[6]:
-                frame_idx = int(ball_a[5])
-                fire_image = resource.boss_siho_fire_a_image[frame_idx]
+                    fire_image.draw(ball_a[0] - canvas_size.camera_x,
+                                    ball_a[1] - canvas_size.camera_y,
+                                    32 * 2, 32 * 2)
 
-                fire_image.draw(ball_a[0] - canvas_size.camera_x,
-                                ball_a[1] - canvas_size.camera_y,
+                    if canvas_size.collide_check:
+                        draw_rectangle(ball_a[0] - 16 - canvas_size.camera_x,
+                                       ball_a[1] - 16 - canvas_size.camera_y,
+                                       ball_a[0] + 16 - canvas_size.camera_x,
+                                       ball_a[1] + 16 - canvas_size.camera_y)
+
+            for ball_b in self.pattern3_fireball:
+                frame_idx = int(ball_b[4])
+                if ball_b[5]:
+                    fire_image = resource.boss_siho_fire_b_image[frame_idx]
+                else: fire_image = resource.boss_siho_fire_b_appear_image[frame_idx]
+
+                fire_image.draw(ball_b[0] - canvas_size.camera_x,
+                                ball_b[1] - canvas_size.camera_y,
                                 32 * 2, 32 * 2)
 
                 if canvas_size.collide_check:
-                    draw_rectangle(ball_a[0] - 16 - canvas_size.camera_x,
-                                   ball_a[1] - 16 - canvas_size.camera_y,
-                                   ball_a[0] + 16 - canvas_size.camera_x,
-                                   ball_a[1] + 16 - canvas_size.camera_y)
+                    draw_rectangle(ball_b[0] - 16 - canvas_size.camera_x,
+                                   ball_b[1] - 16 - canvas_size.camera_y,
+                                   ball_b[0] + 16 - canvas_size.camera_x,
+                                   ball_b[1] + 16 - canvas_size.camera_y)
 
-        for ball_b in self.fireballs:
-            frame_idx = int(ball_b[5])
-            fire_image = resource.boss_siho_fire_b_image[frame_idx]
 
-            fire_image.draw(ball_b[0] - canvas_size.camera_x,
-                            ball_b[1] - canvas_size.camera_y,
-                            32 * 2, 32 * 2)
 
-            if canvas_size.collide_check:
-                draw_rectangle(ball_b[0] - 16 - canvas_size.camera_x,
-                               ball_b[1] - 16 - canvas_size.camera_y,
-                               ball_b[0] + 16 - canvas_size.camera_x,
-                               ball_b[1] + 16 - canvas_size.camera_y)
-
-        if self.hp > 0 and not self.die_animation:
             self.shape.draw(0.4, 0.4)
             self.hp_bar.draw(self.hp, self.boss_hp)
 

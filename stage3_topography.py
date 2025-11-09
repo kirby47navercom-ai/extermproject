@@ -76,8 +76,9 @@ class Stage3_Terrain:
                                   int(self.flame_ball_x) - self.camerax + 19,int(self.flame_ball_y) - self.cameray + 74]
 
         self.pattern_transition = False
+        self.pattern_start = False
         self.transition_opacity = 0.0
-        self.transition_speed = 2.0
+        self.transition_speed = 1.0
         self.transition_phase = 0
 
     def update(self, frame_time, events=None):
@@ -212,7 +213,7 @@ class Stage3_Terrain:
             self.transition_phase = 1
             self.old_pattern = self.pattern[self.current_pattern]
 
-        elif self.transition_phase == 1:  # 천천히 사라짐
+        elif self.transition_phase == 1:
             self.transition_opacity -= self.transition_speed * frame_time
             if self.transition_opacity <= 0.0:
                 self.transition_opacity = 0.0

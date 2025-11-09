@@ -45,8 +45,7 @@ class Stage3_Monster:
     def draw(self):
         if self.boss.appear_animation:
             self.floor.draw()
-        if not self.floor.pattern_transition:
-            self.boss.draw()
+        self.boss.draw()
 
 
 
