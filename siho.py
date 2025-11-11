@@ -72,8 +72,8 @@ class Boss_Siho:
         #패턴 3
         self.pattern3_state = 0
         self.pattern3_fireball=[]
-        self.pattern3_fireball_index=6
-        self.pattern3_fireball_speed = 100.0
+        self.pattern3_fireball_index=0
+        self.pattern3_fireball_speed = 600.0
         self.spread_frame = 0
 
 
@@ -253,6 +253,7 @@ class Boss_Siho:
             if self.spread_frame >= 3:
                 self.pattern3_state = 1
                 self.spread_frame = 0
+                self.pattern3_fireball_index +=6 ##이거 이용하기
         elif self.pattern3_state == 1:
             self.spread_frame = (self.spread_frame + self.animation_speed * frame_time)
             if self.spread_frame >= 2:
@@ -261,19 +262,49 @@ class Boss_Siho:
                 self.pattern3_fireball.append([self.x+50,self.y+100,0,0,0,False,False])
         elif self.pattern3_state == 2:
             self.spread_frame = (self.spread_frame + self.animation_speed * frame_time)%4
+            if self.pattern3_fireball[-1][6]:
+                self.pattern3_state=3
+                self.spread_frame=0
+        elif self.pattern3_state == 3:
+            self.spread_frame = (self.spread_frame + self.animation_speed * frame_time)
+            if self.spread_frame >= 3:
+                self.pattern3_state = 0
+                self.spread_frame = 0
+                self.pattern_num = 1
+
 
 
     def update_pattern3_fireball(self, frame_time):
+        ball_idx =[[-50,100],[-100,0],[-50,-100],[50,-100],[100,0]]
         for i in range(len(self.pattern3_fireball) - 1, -1, -1):
             if not self.pattern3_fireball[i][5]:
                 self.pattern3_fireball[i][4]= self.pattern3_fireball[i][4] + self.animation_speed  * frame_time
                 if self.pattern3_fireball[i][4]>=3:
                     self.pattern3_fireball[i][5]=True
                     self.pattern3_fireball[i][4]=0
+                    if len(self.pattern3_fireball)<self.pattern3_fireball_index:
+                        current_idx = len(self.pattern3_fireball) - (self.pattern3_fireball_index%6)
+                    #불이 왜 적게 나옴????    self.pattern3_fireball.append([self.x + ball_idx[(self.pattern3_fireball_index - len(self.pattern3_fireball)) % len(ball_idx)][0], self.y +ball_idx[(self.pattern3_fireball_index - len(self.pattern3_fireball)) % len(ball_idx)][1], 0, 0, 0, False,False])
+
+            elif self.pattern3_fireball[i][6]:
+                self.pattern3_fireball[i][:4]=canvas_size.distance_funtion2(self.pattern3_fireball[i][0],self.pattern3_fireball[i][1],
+                self.pattern3_fireball[i][2],self.pattern3_fireball[i][3],
+                frame_time,self.pattern3_fireball_speed,self.pattern3_fireball[i][2],self.pattern3_fireball[i][3])
+                if self.pattern3_fireball[i][1]<-50 or self.pattern3_fireball[i][1]>2000:
+                    self.pattern3_fireball.pop(i)
+                    self.pattern3_fireball_index=-1
+                    continue
+                self.ramonatofireballs(self.pattern3_fireball[i])
+                self.pattern3_fireball[i][4] = (self.pattern3_fireball[i][4] + self.animation_speed * 0.5 * frame_time)%4
 
 
             else:
+                self.ramonatofireballs(self.pattern3_fireball[i])
                 self.pattern3_fireball[i][4] = (self.pattern3_fireball[i][4] + self.animation_speed * frame_time)%4
+                if len(self.pattern3_fireball) == self.pattern3_fireball_index and  self.pattern3_fireball[len(self.pattern3_fireball)-1][5]:
+                    self.pattern3_fireball[i][6] = True
+                    self.pattern3_fireball[i][2]=ramona.Ramona_POS_X
+                    self.pattern3_fireball[i][3]=ramona.Ramona_POS_Y
 
     def pattern4(self, frame_time):
 
