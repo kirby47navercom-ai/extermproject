@@ -77,6 +77,10 @@ class Boss_Siho:
         self.spread_frame = 0
         self.current_idx=0
 
+        #패턴 4
+        self.pattern4_state = 0
+        #self.s
+
 
         self.hit = False
         self.hit_animation = False
@@ -132,7 +136,7 @@ class Boss_Siho:
         self.idle_timer += frame_time
         if self.idle_timer >= self.idle_time:
             #self.pattern_num=random.randint(2, 5)
-            self.pattern_num = 3
+            self.pattern_num = 4
             self.idle_timer = 0.0
 
     def pattern2(self, frame_time):
