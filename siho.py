@@ -282,10 +282,9 @@ class Boss_Siho:
                 if self.pattern3_fireball[i][4]>=3:
                     self.pattern3_fireball[i][5]=True
                     self.pattern3_fireball[i][4]=0
-                    if len(self.pattern3_fireball)<self.pattern3_fireball_index:
+                    if len(self.pattern3_fireball)<self.pattern3_fireball_index:#이거 왜 안댐??
                         current_idx = len(self.pattern3_fireball) - (self.pattern3_fireball_index%6)
-                    #불이 왜 적게 나옴????    self.pattern3_fireball.append([self.x + ball_idx[(self.pattern3_fireball_index - len(self.pattern3_fireball)) % len(ball_idx)][0], self.y +ball_idx[(self.pattern3_fireball_index - len(self.pattern3_fireball)) % len(ball_idx)][1], 0, 0, 0, False,False])
-
+                        self.pattern3_fireball.append([self.x + ball_idx[current_idx-1][0], self.y + ball_idx[current_idx-1][1], 0, 0, 0, False, False])
             elif self.pattern3_fireball[i][6]:
                 self.pattern3_fireball[i][:4]=canvas_size.distance_funtion2(self.pattern3_fireball[i][0],self.pattern3_fireball[i][1],
                 self.pattern3_fireball[i][2],self.pattern3_fireball[i][3],
