@@ -108,7 +108,15 @@ class Boss_Siho:
         self.change_phase_1_frame_duration = 3.0
 
         #패턴 7
+        self.fox_idle_frame = 0
+        self.fox_idle_timer = 0.0
+        self.fox_idle_time = 1.0
 
+        #패턴 8
+        self.pattern8_state = 0
+        self.pattern8_timer = 0.0
+        self.pattern8_target_x = 0  # ★★★ 점프 목표 X좌표
+        self.pattern8_landing_x = 0
 
 
 
@@ -174,7 +182,6 @@ class Boss_Siho:
 
     def pattern2(self, frame_time):
 
-        # State 0: 점프 준비 (3프레임 애니메이션)
         if self.pattern2_state == 0:
             self.jump_frame = (self.jump_frame + self.animation_speed * frame_time) % 3
 
@@ -435,7 +442,6 @@ class Boss_Siho:
             self.change_phase_1_frame_timer += frame_time
         if self.change_phase_1_frame_timer >= self.change_phase_1_frame_duration:
             self.change_phase_1_frame = self.change_phase_1_frame + self.animation_speed * frame_time
-            print(self.change_phase_1_frame,self.animation_speed,frame_time)
             if self.change_phase_1_frame >= 17:
                 self.pattern_num = 7
                 self.change_phase_1_frame = 0.0
@@ -444,7 +450,73 @@ class Boss_Siho:
 
 
     def pattern7(self, frame_time):
-        pass
+        self.fox_idle_frame = (self.fox_idle_frame + self.animation_speed * frame_time) % 8
+        self.fox_idle_timer += frame_time
+        if self.fox_idle_timer >= self.fox_idle_time:
+            self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
+            #self.pattern_num=random.randint(8, 11)
+            self.pattern_num = 8
+            self.fox_idle_timer = 0.0
+
+
+    def pattern8(self, frame_time):
+        if self.pattern8_state == 0:
+            self.jump_frame = (self.jump_frame + self.animation_speed * frame_time) % 2
+
+            if self.jump_frame >= 1.9:
+                self.pattern8_state = 1
+
+                self.pattern8_target_x = ramona.Ramona_POS_X
+
+                distance_x = self.pattern8_target_x - self.x
+                self.v_x = distance_x / self.jump_duration
+
+                self.y_velocity = (self.gravity * (self.jump_duration / 2.0))
+
+                self.jump_frame = 0
+
+        # State 1: 점프 및 상승
+        elif self.pattern8_state == 1:
+            self.x += self.v_x * frame_time
+            self.y_velocity -= self.gravity * frame_time
+            self.y += self.y_velocity * frame_time
+
+            if self.y_velocity < 0:
+                self.pattern8_state = 2
+                self.jump_frame = 0
+
+        # State 2: 하강 및 착지
+        elif self.pattern8_state == 2:
+            self.x += self.v_x * frame_time
+            self.y_velocity -= self.gravity * frame_time
+            self.y += self.y_velocity * frame_time
+
+            self.jump_frame = (self.jump_frame + self.animation_speed * frame_time) % 5
+
+            if self.y <= self.boss_ground_level:
+                self.y = self.boss_ground_level  #
+                self.y_velocity = 0
+                self.v_x = 0
+
+                self.pattern8_landing_x = self.x
+                self.launch_fireballs()
+
+                self.pattern8_state = 3
+                self.pattern8_timer = 0.0
+                self.jump_frame = 0
+                canvas_size.start_shake(0.5, 2.5)
+
+        # State 3: 정리 및 다음 패턴 대기
+        elif self.pattern8_state == 3:
+            self.jump_frame = (self.jump_frame + self.animation_speed * frame_time) % 6
+
+            if int(self.jump_frame) == 5:
+                self.pattern_num = 7
+                self.pattern8_state = 0
+                self.pattern8_timer = 0.0
+                self.pattern8_target_x = 0
+                self.pattern8_landing_x = 0
+                self.jump_frame = 0.0
 
 
 
@@ -561,6 +633,35 @@ class Boss_Siho:
                                                                                                                   self.x - canvas_size.camera_x,
                                                                                                                   self.y - canvas_size.camera_y,
                                                                                                                   128 * SIZE, 64 * SIZE)
+            elif self.appear_animation and self.pattern_num == 7:
+                resource.boss_fox_idle_image[int(self.fox_idle_frame)].clip_composite_draw(0, 0, 96, 64, 0, self.dir,
+                                                                                                                  self.x - canvas_size.camera_x,
+                                                                                                                  self.y - canvas_size.camera_y,
+                                                                                                                  96 * SIZE, 64 * SIZE)
+            elif self.appear_animation and self.pattern_num == 8:
+                if self.pattern8_state == 0:
+                    frame_list = resource.boss_fox_jump_prepare_image
+                elif self.pattern8_state == 1:
+                    frame_list = resource.boss_fox_jump_up_image  # 단일 프레임
+                elif self.pattern8_state == 2:
+                    frame_list = resource.boss_fox_jump_cast_image
+                elif self.pattern8_state == 3:
+                    frame_list = resource.boss_fox_jump_over_image
+                else:
+                    return
+
+                current_frame = frame_list[min(int(self.jump_frame), len(frame_list) - 1)]
+
+                if self.pattern8_state == 0:
+                    current_frame.clip_composite_draw(0, 0, 96, 64, 0, self.dir,
+                                                  self.x - canvas_size.camera_x,
+                                                  self.y - canvas_size.camera_y,
+                                                  96 * SIZE, 64 * SIZE)
+                else:
+                    current_frame.clip_composite_draw(0, 0, 96, 96, 0, self.dir,
+                                                  self.x - canvas_size.camera_x,
+                                                  self.y - canvas_size.camera_y,
+                                                  96 * SIZE, 96 * SIZE)
 
 
 
