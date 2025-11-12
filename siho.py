@@ -79,7 +79,15 @@ class Boss_Siho:
 
         #패턴 4
         self.pattern4_state = 0
-        #self.s
+        self.pattern4_enter=False
+        self.pattern4_player_x=0.0
+        self.pattern4_move_timer = 0.0
+        self.pattern4_move_duration = 0.5
+        self.pattern4_speed = 1000.0
+        self.scratch_frame=0.0
+        self.pattern4_attack=False
+        self.pattern4_attack_frame=0.0
+
 
 
         self.hit = False
@@ -312,8 +320,49 @@ class Boss_Siho:
                     self.pattern3_fireball[i][3]=ramona.Ramona_POS_Y
 
     def pattern4(self, frame_time):
+        if self.pattern4_state == 0:
+            if not self.pattern4_enter:
+                self.pattern4_player_x = ramona.Ramona_POS_X
+                self.pattern4_enter = True
+            self.pattern4_move_timer += frame_time
+            if math.fabs(self.x - ramona.Ramona_POS_X) >0.5:
+                self.x,non=canvas_size.distance_funtion(self.x,0,self.pattern4_player_x,0,frame_time,self.pattern4_speed)
+            self.scratch_frame = min((self.scratch_frame + self.animation_speed * frame_time),2)
+            if self.pattern4_move_timer >= self.pattern4_move_duration:
+                self.pattern4_state = 1
+                self.pattern4_move_timer = 0.0
+                self.scratch_frame=0
+                self.pattern4_enter = False
+        elif self.pattern4_state == 1:
+            self.scratch_frame = min((self.scratch_frame + self.animation_speed * frame_time),2)
+            if int(self.scratch_frame) == 2:
+                self.pattern4_attack=True
 
-            pass
+            if self.pattern4_attack:
+                self.pattern4_attack_frame = (self.pattern4_attack_frame + self.animation_speed * frame_time*2)
+                self.ramonatoscratch()
+                if self.pattern4_attack_frame >= 11:
+                    self.pattern4_attack = False
+                    self.pattern4_attack_frame = 0.0
+                    self.pattern4_state = 2
+                    self.scratch_frame = 0.0
+        elif self.pattern4_state == 2:
+            self.scratch_frame = (self.scratch_frame + self.animation_speed * frame_time)
+            if self.scratch_frame >= 3:
+                self.pattern4_state = 0
+                self.scratch_frame = 0.0
+                self.pattern_num = 1
+
+    def ramonatoscratch(self):
+        if collide([ramona.Ramona_POS_X, ramona.Ramona_POS_Y, ramona.Ramona_SIZE_X, ramona.Ramona_SIZE_Y],
+                   [self.x,self.y,128 * 3,
+                        128 * 3]) and not ramona.Ramona_invincible and not ramona.Ramona_roll_invincible:
+            if ramona.CURRENT_HP > 0:
+                ramona.CURRENT_HP -= 1
+                ramona.Ramona_invincible = True
+                ramona.invincible_timer = 0.0
+                canvas_size.start_shake(0.5, 5.0)
+
     def pattern5(self, frame_time):
 
             pass
@@ -375,6 +424,32 @@ class Boss_Siho:
                                                   self.x - canvas_size.camera_x,
                                                   self.y - canvas_size.camera_y,
                                                   64 * SIZE, 64 * SIZE)
+            elif self.appear_animation and self.pattern_num == 4:
+                if self.pattern4_state == 0:
+                    frame_list = resource.boss_siho_scratch_rush_prepare_image
+                elif self.pattern4_state == 1:
+                    frame_list = resource.boss_siho_scratch_rush_cast_image
+                elif self.pattern4_state == 2:
+                    frame_list = resource.boss_siho_scratch_rush_over_image
+                else:
+                    return
+
+                current_frame = frame_list[min(int(self.scratch_frame), len(frame_list) - 1)]
+
+                current_frame.clip_composite_draw(0, 0, 64, 64, 0, self.dir,
+                                                  self.x - canvas_size.camera_x,
+                                                  self.y - canvas_size.camera_y,
+                                                  64 * SIZE, 64 * SIZE)
+                if self.pattern4_attack:
+                    resource.boss_siho_rush_scratch_image[int(self.pattern4_attack_frame)].clip_composite_draw(0, 0, 128, 128, 0, self.dir,
+                                                                                                                  self.x - canvas_size.camera_x,
+                                                                                                                  self.y - canvas_size.camera_y,
+                                                                                                                  128 * 3, 128 * 3)
+                    if canvas_size.collide_check:
+                        draw_rectangle(self.x - canvas_size.camera_x -128 * 3/2 ,
+                                       self.y - canvas_size.camera_y-128 * 3/2,
+                                       self.x - canvas_size.camera_x+128 * 3/2,
+                                       self.y - canvas_size.camera_y+128 * 3/2)
         if self.hp > 0 and not self.die_animation:
             for ball_a in self.fireballs:
                 if ball_a[6]:
