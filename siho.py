@@ -22,8 +22,8 @@ class Boss_Siho:
         self.pattern_set = get_pattern_set()
 
         self.x, self.y = 1000, 300
-        #self.boss_hp = 800
-        self.boss_hp = 600
+        #self.boss_hp = 700
+        self.boss_hp = 550
         self.hp = self.boss_hp
         self.hp_bar = Boss_HP()
         self.width, self.height = 386 * SIZE, 299 * SIZE
@@ -169,7 +169,7 @@ class Boss_Siho:
             self.pattern_num=random.randint(2, 5)
             self.idle_timer = 0.0
             self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
-            if self.hp<=600:
+            if self.hp<=550:
                 self.pattern_num=6
 
     def pattern2(self, frame_time):
@@ -430,13 +430,17 @@ class Boss_Siho:
 
 
     def pattern6(self, frame_time):
-        self.change_phase_1_frame = min((self.change_phase_1_frame + self.animation_speed * frame_time), 2)
-        self.change_phase_1_frame_timer += frame_time
+        if self.change_phase_1_frame_timer < self.change_phase_1_frame_duration:
+            self.change_phase_1_frame = min((self.change_phase_1_frame + self.animation_speed * frame_time), 2)
+            self.change_phase_1_frame_timer += frame_time
         if self.change_phase_1_frame_timer >= self.change_phase_1_frame_duration:
+            self.change_phase_1_frame = self.change_phase_1_frame + self.animation_speed * frame_time
+            print(self.change_phase_1_frame,self.animation_speed,frame_time)
             if self.change_phase_1_frame >= 17:
                 self.pattern_num = 7
                 self.change_phase_1_frame = 0.0
                 self.change_graphycs=True
+                self.change_phase_1_frame_timer=0.0
 
 
     def pattern7(self, frame_time):
