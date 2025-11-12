@@ -75,6 +75,7 @@ class Boss_Siho:
         self.pattern3_fireball_index=0
         self.pattern3_fireball_speed = 600.0
         self.spread_frame = 0
+        self.current_idx=0
 
 
         self.hit = False
@@ -254,6 +255,7 @@ class Boss_Siho:
                 self.pattern3_state = 1
                 self.spread_frame = 0
                 self.pattern3_fireball_index +=6 ##이거 이용하기
+                self.current_idx=0
         elif self.pattern3_state == 1:
             self.spread_frame = (self.spread_frame + self.animation_speed * frame_time)
             if self.spread_frame >= 2:
@@ -282,9 +284,9 @@ class Boss_Siho:
                 if self.pattern3_fireball[i][4]>=3:
                     self.pattern3_fireball[i][5]=True
                     self.pattern3_fireball[i][4]=0
-                    if len(self.pattern3_fireball)<self.pattern3_fireball_index:#이거 왜 안댐??
-                        current_idx = len(self.pattern3_fireball) - (self.pattern3_fireball_index%6)
-                        self.pattern3_fireball.append([self.x + ball_idx[current_idx-1][0], self.y + ball_idx[current_idx-1][1], 0, 0, 0, False, False])
+                    if self.current_idx<5:#이거 왜 안댐??
+                        self.pattern3_fireball.append([self.x + ball_idx[self.current_idx][0], self.y + ball_idx[self.current_idx][1], 0, 0, 0, False, False])
+                        self.current_idx+=1
             elif self.pattern3_fireball[i][6]:
                 self.pattern3_fireball[i][:4]=canvas_size.distance_funtion2(self.pattern3_fireball[i][0],self.pattern3_fireball[i][1],
                 self.pattern3_fireball[i][2],self.pattern3_fireball[i][3],
@@ -300,7 +302,7 @@ class Boss_Siho:
             else:
                 self.ramonatofireballs(self.pattern3_fireball[i])
                 self.pattern3_fireball[i][4] = (self.pattern3_fireball[i][4] + self.animation_speed * frame_time)%4
-                if len(self.pattern3_fireball) == self.pattern3_fireball_index and  self.pattern3_fireball[len(self.pattern3_fireball)-1][5]:
+                if self.current_idx>=5 and  self.pattern3_fireball[len(self.pattern3_fireball)-1][5]:
                     self.pattern3_fireball[i][6] = True
                     self.pattern3_fireball[i][2]=ramona.Ramona_POS_X
                     self.pattern3_fireball[i][3]=ramona.Ramona_POS_Y
