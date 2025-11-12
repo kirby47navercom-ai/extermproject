@@ -22,7 +22,8 @@ class Boss_Siho:
         self.pattern_set = get_pattern_set()
 
         self.x, self.y = 1000, 300
-        self.boss_hp = 800
+        #self.boss_hp = 800
+        self.boss_hp = 600
         self.hp = self.boss_hp
         self.hp_bar = Boss_HP()
         self.width, self.height = 386 * SIZE, 299 * SIZE
@@ -37,6 +38,7 @@ class Boss_Siho:
         self.animation_speed = 8.0
 
         self.pattern_num=0
+        self.change_graphycs=False
 
         #패턴 0
         self.appear_animation = False
@@ -47,7 +49,7 @@ class Boss_Siho:
         #패턴 1
         self.idle_frame = 0
         self.idle_timer = 0.0
-        self.idle_time = 0.5
+        self.idle_time = 1.0
 
         #패턴 2
         self.y_velocity = 0.0
@@ -101,6 +103,11 @@ class Boss_Siho:
         self.pattern5_attack_duration = 0.5
 
         #패턴 6
+        self.change_phase_1_frame=0.0
+        self.change_phase_1_frame_timer = 0.0
+        self.change_phase_1_frame_duration = 3.0
+
+        #패턴 7
 
 
 
@@ -422,6 +429,21 @@ class Boss_Siho:
                 canvas_size.start_shake(0.5, 5.0)
 
 
+    def pattern6(self, frame_time):
+        self.change_phase_1_frame = min((self.change_phase_1_frame + self.animation_speed * frame_time), 2)
+        self.change_phase_1_frame_timer += frame_time
+        if self.change_phase_1_frame_timer >= self.change_phase_1_frame_duration:
+            if self.change_phase_1_frame >= 17:
+                self.pattern_num = 7
+                self.change_phase_1_frame = 0.0
+                self.change_graphycs=True
+
+
+    def pattern7(self, frame_time):
+        pass
+
+
+
 
 
 
@@ -529,6 +551,12 @@ class Boss_Siho:
                                        300 - canvas_size.camera_y - 220,
                                        self.pattern5_player_x - canvas_size.camera_x + 54,
                                        300 - canvas_size.camera_y + 220)
+
+            elif self.appear_animation and self.pattern_num == 6:
+                resource.boss_fox_change_image[int(self.change_phase_1_frame)].clip_composite_draw(0, 0, 128, 64, 0, self.dir,
+                                                                                                                  self.x - canvas_size.camera_x,
+                                                                                                                  self.y - canvas_size.camera_y,
+                                                                                                                  128 * SIZE, 64 * SIZE)
 
 
 
