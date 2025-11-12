@@ -88,6 +88,11 @@ class Boss_Siho:
         self.pattern4_attack=False
         self.pattern4_attack_frame=0.0
 
+        #패턴 5
+        self.pattern5_state = 0
+        self.pattern5_player_x = 0.0
+        self.scratch_frame2=0.0
+
 
 
         self.hit = False
@@ -123,7 +128,7 @@ class Boss_Siho:
 
 
 
-        self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
+
 
         self.shape.x = self.x - canvas_size.camera_x
         self.shape.y = self.y - canvas_size.camera_y + self.height * 0.2
@@ -143,9 +148,10 @@ class Boss_Siho:
         self.idle_frame = (self.idle_frame + self.animation_speed * frame_time) % 2
         self.idle_timer += frame_time
         if self.idle_timer >= self.idle_time:
-            #self.pattern_num=random.randint(2, 5)
-            self.pattern_num = 4
+            self.pattern_num=random.randint(2, 4)
+            #self.pattern_num = 5
             self.idle_timer = 0.0
+            self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
 
     def pattern2(self, frame_time):
 
@@ -355,8 +361,8 @@ class Boss_Siho:
 
     def ramonatoscratch(self):
         if collide([ramona.Ramona_POS_X, ramona.Ramona_POS_Y, ramona.Ramona_SIZE_X, ramona.Ramona_SIZE_Y],
-                   [self.x,self.y,128 * 3,
-                        128 * 3]) and not ramona.Ramona_invincible and not ramona.Ramona_roll_invincible:
+                   [self.x,self.y,128 * 2,
+                        128 * 2]) and not ramona.Ramona_invincible and not ramona.Ramona_roll_invincible:
             if ramona.CURRENT_HP > 0:
                 ramona.CURRENT_HP -= 1
                 ramona.Ramona_invincible = True
@@ -364,7 +370,8 @@ class Boss_Siho:
                 canvas_size.start_shake(0.5, 5.0)
 
     def pattern5(self, frame_time):
-
+        if self.pattern5_state == 0:
+            self.scratch_frame2 = min((self.scratch_frame2 + self.animation_speed * frame_time),2)
             pass
 
 
@@ -444,12 +451,26 @@ class Boss_Siho:
                     resource.boss_siho_rush_scratch_image[int(self.pattern4_attack_frame)].clip_composite_draw(0, 0, 128, 128, 0, self.dir,
                                                                                                                   self.x - canvas_size.camera_x,
                                                                                                                   self.y - canvas_size.camera_y,
-                                                                                                                  128 * 3, 128 * 3)
+                                                                                                                  128 * 2, 128 * 2)
                     if canvas_size.collide_check:
-                        draw_rectangle(self.x - canvas_size.camera_x -128 * 3/2 ,
-                                       self.y - canvas_size.camera_y-128 * 3/2,
-                                       self.x - canvas_size.camera_x+128 * 3/2,
-                                       self.y - canvas_size.camera_y+128 * 3/2)
+                        draw_rectangle(self.x - canvas_size.camera_x -128,
+                                       self.y - canvas_size.camera_y-128,
+                                       self.x - canvas_size.camera_x+128,
+                                       self.y - canvas_size.camera_y+128)
+            elif self.appear_animation and self.pattern_num == 5:
+                if self.pattern5_state == 0:
+                    frame_list = resource.boss_siho_scratch_prepare_image
+                elif self.pattern5_state == 1:
+                    frame_list = resource.boss_siho_scratch_cast_image
+                elif self.pattern5_state == 2:
+                    frame_list = resource.boss_siho_scratch_over_image
+                else:
+                    return
+                current_frame = frame_list[min(int(self.scratch_frame2), len(frame_list) - 1)]
+                current_frame.clip_composite_draw(0, 0, 64, 64, 0, self.dir,
+                                                  self.x - canvas_size.camera_x,
+                                                  self.y - canvas_size.camera_y,
+                                                  64 * SIZE, 64 * SIZE)
         if self.hp > 0 and not self.die_animation:
             for ball_a in self.fireballs:
                 if ball_a[6]:
