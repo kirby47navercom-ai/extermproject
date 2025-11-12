@@ -392,6 +392,9 @@ def collide2(a, b):
 
     return True
 
+
+
+
 # 함수로 묶기
 def load_resources():
 

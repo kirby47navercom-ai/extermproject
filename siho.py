@@ -22,7 +22,7 @@ class Boss_Siho:
         self.pattern_set = get_pattern_set()
 
         self.x, self.y = 1000, 300
-        self.boss_hp = 600
+        self.boss_hp = 800
         self.hp = self.boss_hp
         self.hp_bar = Boss_HP()
         self.width, self.height = 386 * SIZE, 299 * SIZE
@@ -90,8 +90,19 @@ class Boss_Siho:
 
         #패턴 5
         self.pattern5_state = 0
+        self.pattern5_enter = False
         self.pattern5_player_x = 0.0
         self.scratch_frame2=0.0
+        self.pattern5_attack_frame = 0.0
+        self.pattern5_attack_prepare_timer = 0.0
+        self.pattern5_attack_prepare_duration = 1.0
+        self.pattern5_attack = False
+        self.pattern5_attack_timer = 0.0
+        self.pattern5_attack_duration = 0.5
+
+        #패턴 6
+
+
 
 
 
@@ -148,10 +159,11 @@ class Boss_Siho:
         self.idle_frame = (self.idle_frame + self.animation_speed * frame_time) % 2
         self.idle_timer += frame_time
         if self.idle_timer >= self.idle_time:
-            self.pattern_num=random.randint(2, 4)
-            #self.pattern_num = 5
+            self.pattern_num=random.randint(2, 5)
             self.idle_timer = 0.0
             self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
+            if self.hp<=600:
+                self.pattern_num=6
 
     def pattern2(self, frame_time):
 
@@ -371,8 +383,44 @@ class Boss_Siho:
 
     def pattern5(self, frame_time):
         if self.pattern5_state == 0:
+            if not self.pattern5_enter:
+                self.pattern5_player_x = ramona.Ramona_POS_X
+                self.pattern5_enter = True
+                self.pattern5_attack = True
             self.scratch_frame2 = min((self.scratch_frame2 + self.animation_speed * frame_time),2)
-            pass
+            self.pattern5_attack_prepare_timer += frame_time
+            if self.pattern5_attack_prepare_timer >= self.pattern5_attack_prepare_duration:
+                self.pattern5_state = 1
+                self.pattern5_attack_prepare_timer = 0.0
+                self.scratch_frame2=0
+                self.pattern5_enter = False
+        elif self.pattern5_state == 1:
+            self.scratch_frame2 = self.scratch_frame2 + self.animation_speed * frame_time
+            self.pattern5_attack_frame = min((self.pattern5_attack_frame + self.animation_speed * frame_time*2),3)
+            self.ramonatoscratch2()
+            self.pattern5_attack_timer += frame_time
+            if self.pattern5_attack_timer >= self.pattern5_attack_duration:
+                self.pattern5_attack_frame = 0.0
+                self.pattern5_attack_timer = 0.0
+                self.pattern5_state = 2
+                self.scratch_frame2 = 0
+                self.pattern5_attack= False
+        elif self.pattern5_state == 2:
+            self.scratch_frame2 = (self.scratch_frame2 + self.animation_speed * frame_time)
+            if self.scratch_frame2 >= 3:
+                self.pattern5_state = 0
+                self.scratch_frame2 = 0.0
+                self.pattern_num = 1
+
+    def ramonatoscratch2(self):
+        if collide([ramona.Ramona_POS_X, ramona.Ramona_POS_Y, ramona.Ramona_SIZE_X, ramona.Ramona_SIZE_Y],
+                   [self.pattern5_player_x, 300, 54 * 2,220 * 2]) and not ramona.Ramona_invincible and not ramona.Ramona_roll_invincible:
+            if ramona.CURRENT_HP > 0:
+                ramona.CURRENT_HP -= 1
+                ramona.Ramona_invincible = True
+                ramona.invincible_timer = 0.0
+                canvas_size.start_shake(0.5, 5.0)
+
 
 
 
@@ -471,6 +519,19 @@ class Boss_Siho:
                                                   self.x - canvas_size.camera_x,
                                                   self.y - canvas_size.camera_y,
                                                   64 * SIZE, 64 * SIZE)
+                if self.pattern5_attack:
+                    resource.boss_siho_scratch_image[int(self.pattern5_attack_frame)].clip_composite_draw(0, 0, 128, 256, math.radians(-30), '',
+                                                                                                                  self.pattern5_player_x - canvas_size.camera_x,
+                                                                                                                    300 - canvas_size.camera_y,
+                                                                                                                  128 * 2, 256 * 2)
+                    if canvas_size.collide_check:
+                        draw_rectangle(self.pattern5_player_x - canvas_size.camera_x - 54,
+                                       300 - canvas_size.camera_y - 220,
+                                       self.pattern5_player_x - canvas_size.camera_x + 54,
+                                       300 - canvas_size.camera_y + 220)
+
+
+
         if self.hp > 0 and not self.die_animation:
             for ball_a in self.fireballs:
                 if ball_a[6]:
