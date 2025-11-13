@@ -27,7 +27,7 @@ def init():
     canvas_size.camera_x=0
     canvas_size.camera_y=0
 
-    ramona.Ramona_retry
+    ramona.Ramona_retry = False
 
 def update(frame_time,events):
     global player,stage_background,draw_gest,ramona_ui_,stage3_monster_

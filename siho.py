@@ -115,8 +115,11 @@ class Boss_Siho:
         #패턴 8
         self.pattern8_state = 0
         self.pattern8_timer = 0.0
-        self.pattern8_target_x = 0  # ★★★ 점프 목표 X좌표
+        self.pattern8_target_x = 0
         self.pattern8_landing_x = 0
+
+        #패턴 9
+
 
 
 
@@ -244,7 +247,10 @@ class Boss_Siho:
 
 
     def launch_fireballs(self):
-        start_x = self.pattern2_landing_x
+        if self.pattern_num == 2:
+            start_x = self.pattern2_landing_x
+        if self.pattern_num == 8:
+            start_x = self.pattern8_landing_x
         start_y = self.boss_ground_level
 
         # ★★★ 중앙(0도)을 기준으로 좌우로 퍼지는 각도 ★★★
@@ -455,7 +461,7 @@ class Boss_Siho:
         if self.fox_idle_timer >= self.fox_idle_time:
             self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
             #self.pattern_num=random.randint(8, 11)
-            self.pattern_num = 8
+            self.pattern_num = 9
             self.fox_idle_timer = 0.0
 
 
@@ -517,6 +523,8 @@ class Boss_Siho:
                 self.pattern8_target_x = 0
                 self.pattern8_landing_x = 0
                 self.jump_frame = 0.0
+    def pattern9(self, frame_time):
+        pass
 
 
 
