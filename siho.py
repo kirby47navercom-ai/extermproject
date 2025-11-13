@@ -137,7 +137,7 @@ class Boss_Siho:
         self.pattern11_enter = False
         self.pattern11_x = 0.0
         self.pattern11_move_timer = 0.0
-        self.pattern11_move_duration = 0.5
+        self.pattern11_move_duration = 1.0
         self.pattern11_speed = 1000.0
         self.spread_frame2 = 0
         self.pattern4_attack = []
@@ -653,22 +653,32 @@ class Boss_Siho:
     def pattern11(self, frame_time):
         if self.pattern11_state == 0:
             if not self.pattern11_enter:
-                self.pattern11_x = 200
+                self.pattern11_x = (1800 if randint(0,1)==0 else 200)+ canvas_size.camera_x
+                self.dir = '' if self.pattern11_x == 1800 else 'h'
                 self.pattern11_enter = True
             self.pattern11_move_timer += frame_time
-            if math.fabs(self.x - ramona.Ramona_POS_X) > 0.5:
+            if math.fabs(self.x - self.pattern11_x) > 0.5:
                 self.x, non = canvas_size.distance_funtion(self.x, 0, self.pattern11_x, 0, frame_time,
                                                            self.pattern11_speed)
-            self.scratch_frame = min((self.scratch_frame + self.animation_speed * frame_time), 2)
+            self.scratch_frame = min((self.scratch_frame + self.animation_speed * frame_time), 3)
             if self.pattern11_move_timer >= self.pattern11_move_duration:
                 self.pattern11_state = 1
                 self.pattern11_move_timer = 0.0
                 self.scratch_frame = 0
                 self.pattern11_enter = False
+                self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
         elif self.pattern11_state == 1:
-            pass
-
-
+            self.scratch_frame = (self.scratch_frame + self.animation_speed * frame_time)
+            if self.scratch_frame >= 8:
+                self.pattern11_state = 2
+                self.scratch_frame = 0.0
+        elif self.pattern11_state == 2:
+            self.scratch_frame = (self.scratch_frame + self.animation_speed * frame_time)
+            if self.scratch_frame >= 3:
+                self.pattern11_state = 0
+                self.scratch_frame = 0.0
+                self.pattern_num = 7
+#좌표 카메라 이상함
 
 
 
