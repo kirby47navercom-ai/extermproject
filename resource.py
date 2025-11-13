@@ -582,7 +582,7 @@ def load_resources():
     for i in range(4):
         boss_siho_fire_b_image.append(load_image(f'3stage\\Fox Fire b{str(i + 1)}.png'))
 
-    boss_siho_fire_b_image.append(load_image(f'3stage\\Fox Bite Warning.png'))
+    boss_siho_bite_image.append(load_image(f'3stage\\Fox Bite Warning.png'))
     for i in range(5):
         boss_siho_bite_image.append(load_image(f'3stage\\Fox Bite{str(i + 1)}.png'))
 
