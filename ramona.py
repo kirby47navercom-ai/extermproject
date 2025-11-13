@@ -188,10 +188,8 @@ class WalkState:
             self.change_state(EvadeState, event)
 
 
-
 class RunState:
     def enter(self, event):
-
         pass
 
     def exit(self, event):
@@ -298,8 +296,7 @@ class JumpState:
 class HitState:
     def enter(self, event):
         self.frame = 0
-        self.hit_timer = 0.5
-        self.x -= self.dir * 30
+        self.hit_timer = 0.2
 
     def exit(self, event):
         pass
@@ -385,7 +382,6 @@ class Ramona:
             if self.evade_cooldown_timer > 0:
                 self.evade_cooldown_timer -= frame_time
 
-
             if self.cur_state in [IdleState, WalkState, RunState]:
                 if self.a_pressed == self.d_pressed:
                     self.dir = 0
@@ -394,11 +390,21 @@ class Ramona:
                 elif self.a_pressed:
                     self.dir = -1
                     if self.cur_state == IdleState:
-                        self.change_state(WalkState, None)
+                        if self.shift_pressed:
+                            self.change_state(RunState, None)
+                        else:
+                            self.change_state(WalkState, None)
+                    elif self.cur_state == WalkState and self.shift_pressed:
+                        self.change_state(RunState, None)
                 elif self.d_pressed:
                     self.dir = 1
                     if self.cur_state == IdleState:
-                        self.change_state(WalkState, None)
+                        if self.shift_pressed:
+                            self.change_state(RunState, None)
+                        else:
+                            self.change_state(WalkState, None)
+                    elif self.cur_state == WalkState and self.shift_pressed:
+                        self.change_state(RunState, None)
 
         self.y_velocity -= GRAVITY * frame_time
         self.y += self.y_velocity * frame_time

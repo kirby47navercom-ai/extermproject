@@ -119,10 +119,18 @@ class Boss_Siho:
         self.pattern8_landing_x = 0
 
         #패턴 9
+        self.pattern9_state = 0
+        self.pattern9_attack_num = 0
+        self.scratch_frame3 = 0.0
+        self.pattern9_attack=[] # 플레이어 위치 x, 300 ,프레임, 준비시간, 지속시간
+        self.pattern9_attack_prepare_duration = 0.5
+        self.pattern9_attack_duration = 0.2
 
-
-
-
+        #패턴 10
+        self.pattern10_state = 0
+        self.bite_frame = 0.0
+        self.pattern10_attack = [] # x,y,프레임,준비시간,첫번째
+        self.pattern10_attack_prepare_duration = 0.5
 
         self.hit = False
         self.hit_animation = False
@@ -152,6 +160,7 @@ class Boss_Siho:
         if not self.die_animation:
             self.update_fireballs(frame_time)
             self.update_pattern3_fireball(frame_time)
+            self.update_pattern9_scratch(frame_time)
 
 
 
@@ -461,7 +470,7 @@ class Boss_Siho:
         if self.fox_idle_timer >= self.fox_idle_time:
             self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
             #self.pattern_num=random.randint(8, 11)
-            self.pattern_num = 9
+            self.pattern_num = 10
             self.fox_idle_timer = 0.0
 
 
@@ -524,7 +533,97 @@ class Boss_Siho:
                 self.pattern8_landing_x = 0
                 self.jump_frame = 0.0
     def pattern9(self, frame_time):
-        pass
+        if self.pattern9_state == 0:
+            self.scratch_frame3 = min((self.scratch_frame3 + self.animation_speed * frame_time),2)
+            if self.scratch_frame3 >= 2:
+                self.pattern9_state = 1
+                self.scratch_frame3=0
+                self.pattern9_attack.append( [ramona.Ramona_POS_X, 300, 0.0, 0.0, 0.0])
+                self.pattern9_attack_num+=1
+        elif self.pattern9_state == 1:
+            self.scratch_frame3 = min((self.scratch_frame3 + self.animation_speed * frame_time),1)
+            if self.pattern9_attack_num == 1 and self.pattern9_attack[-1][2]>0.0:
+                self.pattern9_attack.append( [ramona.Ramona_POS_X, 300, 0.0, 0.0, 0.0])
+                self.pattern9_attack_num+=1
+            elif self.pattern9_attack_num == 2 and self.pattern9_attack[-1][2]>0.0:
+                self.pattern9_attack.append( [ramona.Ramona_POS_X, 300, 0.0, 0.0, 0.0])
+                self.pattern9_attack_num += 1
+                self.pattern9_state = 2
+                self.scratch_frame3 = 0
+        elif self.pattern9_state == 2:
+            self.scratch_frame3 = min((self.scratch_frame3 + self.animation_speed * frame_time), 1)
+            if self.pattern9_attack_num == 3 and self.pattern9_attack[-1][2] >0.0:
+                self.pattern9_attack.append( [ramona.Ramona_POS_X, 300, 0.0, 0.0, 0.0])
+                self.pattern9_attack_num += 1
+            elif self.pattern9_attack_num == 4 and self.pattern9_attack[-1][2] >= 3:
+                self.pattern9_state = 3
+                self.scratch_frame3 = 0
+        elif self.pattern9_state == 3:
+            self.scratch_frame3 = (self.scratch_frame3 + self.animation_speed * frame_time)
+            if self.scratch_frame3 >= 3:
+                self.pattern9_state = 0
+                self.scratch_frame3 = 0.0
+                self.pattern_num = 7
+                self.pattern9_attack_num=0
+
+    def update_pattern9_scratch(self, frame_time):
+       for i in range(len(self.pattern9_attack) - 1, -1, -1):
+              self.pattern9_attack[i][3] +=frame_time
+              if self.pattern9_attack[i][3] >= self.pattern9_attack_prepare_duration:
+                    self.pattern9_attack[i][2] = min((self.pattern9_attack[i][2] + self.animation_speed * frame_time*2),3)
+                    if self.pattern9_attack[i][2]>=3:
+                        self.pattern9_attack[i][4] +=frame_time
+                        self.ramonatoscratch3(self.pattern9_attack[i])
+                        if self.pattern9_attack[i][4]>=self.pattern9_attack_duration:
+                            self.pattern9_attack.pop(i)
+                            continue
+
+    def ramonatoscratch3(self,attack):
+        if collide([ramona.Ramona_POS_X, ramona.Ramona_POS_Y, ramona.Ramona_SIZE_X, ramona.Ramona_SIZE_Y],
+                   [attack[0], attack[1], 54 * 2,
+                        220 * 2]) and not ramona.Ramona_invincible and not ramona.Ramona_roll_invincible:
+            if ramona.CURRENT_HP > 0:
+                ramona.CURRENT_HP -= 1
+                ramona.Ramona_invincible = True
+                ramona.invincible_timer = 0.0
+                canvas_size.start_shake(0.5, 5.0)
+
+    def pattern10(self, frame_time):
+        if self.pattern10_state == 0:
+            self.bite_frame =self.bite_frame + self.animation_speed * frame_time
+            if self.bite_frame >= 0:
+                self.pattern10_state = 1
+                self.bite_frame=0
+        elif self.pattern10_state == 1:
+            self.bite_frame = self.bite_frame + self.animation_speed * frame_time
+            if self.bite_frame >= 3:
+                self.pattern10_state = 2
+                self.bite_frame=0
+                self.pattern10_attack.append( [self.x + (1 if self.dir=='' else -1)*(i+1)*200, self.y, 0.0,0.0,True if i==0 else False] for i in range(1,3))
+        elif self.pattern10_state == 2:
+            self.bite_frame = (self.bite_frame + self.animation_speed * frame_time)
+            if self.bite_frame >= 3:
+                self.pattern10_state = 0
+                self.bite_frame = 0.0
+                self.pattern_num = 7
+
+    def update_pattern10_bite(self,frame_time):
+        for i in range(len(self.pattern10_attack) - 1, -1, -1):
+            if self.pattern10_attack[i][2]<3.0:
+                self.pattern10_attack[i][2] = min((self.pattern10_attack[i][2] + self.animation_speed * frame_time*2),3)
+            else:
+                self.ramonatobite(self.pattern10_attack[i])
+                if self.pattern10_attack[i][3]:
+                    self.pattern10_attack[i][0] += (300 * frame_time if self.dir == '' else -300 * frame_time)
+                else:
+                    self.pattern10_attack[i][0] += (200 * frame_time if self.dir == '' else -200 * frame_time)
+                if self.pattern10_attack[i][0]<-100 or self.pattern10_attack[i][0]>background_2stage.BACKGROUND_WIDTH+100:
+                    self.pattern10_attack.pop(i)
+                    continue
+
+
+
+
 
 
 
@@ -671,6 +770,43 @@ class Boss_Siho:
                                                   self.y - canvas_size.camera_y,
                                                   96 * SIZE, 96 * SIZE)
 
+            elif self.appear_animation and self.pattern_num == 9:
+                if self.pattern9_state == 0:
+                    frame_list = resource.boss_fox_scratch_prepare_image
+                elif self.pattern9_state == 1:
+                    frame_list = resource.boss_fox_scratch_cast_a_image
+                elif  self.pattern9_state ==2:
+                    frame_list = resource.boss_fox_scratch_cast_b_image
+                elif self.pattern9_state == 3:
+                    frame_list = resource.boss_fox_scratch_over_image
+
+                else:
+                    return
+
+                current_frame = frame_list[min(int(self.scratch_frame3), len(frame_list) - 1)]
+
+                current_frame.clip_composite_draw(0, 0, 96, 64, 0, self.dir,
+                                                  self.x - canvas_size.camera_x,
+                                                  self.y - canvas_size.camera_y,
+                                                  96 * SIZE, 64 * SIZE)
+
+            elif self.appear_animation and self.pattern_num == 10:
+                if self.pattern10_state == 0:
+                    frame_list = resource.boss_fox_bite_prepare_image
+                elif self.pattern10_state == 1:
+                    frame_list = resource.boss_fox_bite_cast_image
+                elif self.pattern10_state == 2:
+                    frame_list = resource.boss_fox_bite_over_image
+                else:
+                    return
+                current_frame = frame_list[min(int(self.bite_frame), len(frame_list) - 1)]
+
+                current_frame.clip_composite_draw(0, 0, 96 if self.pattern10_state != 1 else 128, 64,
+                                                    0, self.dir,
+                                                    self.x - canvas_size.camera_x,
+                                                    self.y - canvas_size.camera_y,
+                                                  (96 if self.pattern10_state != 1 else 128) * SIZE, 64 * SIZE)
+
 
 
         if self.hp > 0 and not self.die_animation:
@@ -704,6 +840,17 @@ class Boss_Siho:
                                    ball_b[1] - 16 - canvas_size.camera_y,
                                    ball_b[0] + 16 - canvas_size.camera_x,
                                    ball_b[1] + 16 - canvas_size.camera_y)
+
+            for attack in self.pattern9_attack:
+                resource.boss_siho_scratch_image[int(attack[2])].clip_composite_draw(0, 0, 128, 256, math.radians(-30), '',
+                                                                                                                  attack[0] - canvas_size.camera_x,
+                                                                                                                    attack[1] - canvas_size.camera_y,
+                                                                                                                  128 * 2, 256 * 2)
+                if canvas_size.collide_check:
+                    draw_rectangle(attack[0] - canvas_size.camera_x - 54,
+                                   attack[1] - canvas_size.camera_y - 220,
+                                   attack[0] - canvas_size.camera_x + 54,
+                                   attack[1] - canvas_size.camera_y + 220)
 
 
 

@@ -522,7 +522,7 @@ def load_resources():
         boss_fox_jump_over_image.append(load_image(f'3stage\\Jump Over{str(i + 1)}.png'))
 
     for i in range(3):
-        boss_fox_scratch_prepare_image.append(load_image(f'3stage\\Jump Over{str(i + 1)}.png'))
+        boss_fox_scratch_prepare_image.append(load_image(f'3stage\\Scratch Prepare{str(i + 1)}.png'))
 
     for i in range(2):
         boss_fox_scratch_cast_a_image.append(load_image(f'3stage\\Scratch Cast a{str(i + 1)}.png'))
