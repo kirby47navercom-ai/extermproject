@@ -139,6 +139,11 @@ class Boss_Siho:
         self.change_phase_2_frame_timer = 0.0
         self.change_phase_2_frame_duration = 3.0
 
+        # 패턴 12
+        self.burn_idle_frame = 0
+        self.burn_idle_timer = 0.0
+        self.burn_idle_time = 2.0
+
 
 
 
@@ -674,6 +679,14 @@ class Boss_Siho:
                 self.change_phase_2_frame = 0.0
                 self.change_phase_2_frame_timer = 0.0
 
+    def pattern12(self, frame_time):
+        self.burn_idle_frame = (self.burn_idle_frame + self.animation_speed * frame_time) % 4
+        self.burn_idle_timer += frame_time
+        # if self.burn_idle_timer >= self.burn_idle_time:
+        #     self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
+        #     self.pattern_num=random.randint(2,5)
+        #     self.burn_idle_timer = 0.0
+
 
 
 
@@ -875,6 +888,12 @@ class Boss_Siho:
                                                     self.x - canvas_size.camera_x,
                                                     self.y - canvas_size.camera_y,
                                                     96 * SIZE, 64 * SIZE)
+
+            elif self.appear_animation and self.pattern_num == 12:
+                resource.boss_fox_burning_idle_image[int(self.burn_idle_frame)].clip_composite_draw(0, 0, 96, 64, 0, self.dir,
+                                                                                                                  self.x - canvas_size.camera_x,
+                                                                                                                  self.y - canvas_size.camera_y,
+                                                                                                                  96 * SIZE, 64 * SIZE)
 
 
 
