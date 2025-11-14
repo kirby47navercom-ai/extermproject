@@ -716,8 +716,10 @@ class Boss_Siho:
                 self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
                 self.check = self.x < 0
                 self.rush_frame = 0
+                self.pattern
         elif self.pattern13_state < 4:
             self.rush_prepare_timer += frame_time
+            self.ramonatosiho_rush()
             if self.rush_prepare_timer >= self.rush_prepare_time:
                 if self.check:
                     self.x+= self.rush_speed * frame_time
@@ -739,10 +741,19 @@ class Boss_Siho:
                     self.check = self.x < 0
         elif self.pattern13_state == 4:
             self.rush_frame = (self.rush_frame + self.animation_speed * frame_time)
-            if self.rush_frame >= 3:
+            if self.rush_frame >= 7:
                 self.pattern13_state = 0
                 self.rush_frame = 0.0
                 self.pattern_num = 7
+
+    def ramonatosiho_rush(self):
+        if collide([ramona.Ramona_POS_X, ramona.Ramona_POS_Y, ramona.Ramona_SIZE_X, ramona.Ramona_SIZE_Y],
+                   [self.x, self.y, 192*SIZE,64*SIZE]) and not ramona.Ramona_invincible and not ramona.Ramona_roll_invincible:
+            if ramona.CURRENT_HP > 0:
+                ramona.CURRENT_HP -= 1
+                ramona.Ramona_invincible = True
+                ramona.invincible_timer = 0.0
+                canvas_size.start_shake(0.5, 5.0)
 
 
 
@@ -969,6 +980,22 @@ class Boss_Siho:
                                                   self.x - canvas_size.camera_x,
                                                   self.y - canvas_size.camera_y,
                                                   192 * SIZE, 64 * SIZE)
+                if self.rush_prepare_timer <= self.rush_prepare_time and 4 > self.pattern13_state > 0:
+                    x =0
+                    y =self.y
+                    for i in range(40):
+                        boss_siho_rush_warning_image[0].clip_composite_draw(0, 0, 32, 32, 0, self.dir,
+                                                          x - canvas_size.camera_x+ i*64,
+                                                          y - canvas_size.camera_y,
+                                                          32* 2, 32 * 2)
+
+
+
+                if canvas_size.collide_check and 4 > self.pattern13_state > 0:
+                    draw_rectangle(self.x - canvas_size.camera_x - 192/2,
+                                   self.y - canvas_size.camera_y - 64*1.8/2,
+                                   self.x - canvas_size.camera_x + 192/2,
+                                   self.y - canvas_size.camera_y + 64/2)
 
 
 
