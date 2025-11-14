@@ -22,10 +22,12 @@ class Boss_Siho:
         self.pattern_set = get_pattern_set()
 
         self.x, self.y = 1000, 300
-        #self.boss_hp = 800
+        self.boss_hp = 800
         #self.boss_hp = 550
-        self.boss_hp = 250
+        #self.boss_hp = 250
+        #self.boss_hp = 0
         self.hp = self.boss_hp
+        self.hp=0
         self.hp_bar = Boss_HP()
         self.width, self.height = 386 * SIZE, 299 * SIZE
         self.frame = 0
@@ -159,6 +161,12 @@ class Boss_Siho:
 
 
 
+        # 패턴 14
+        self.pattern14_state = 0
+        self.die = False
+        self.die_frame = 0
+        self.die_timer=0.0
+        self.die_time= 4.0
 
 
 
@@ -166,10 +174,6 @@ class Boss_Siho:
         self.hit = False
         self.hit_animation = False
         self.hit_time = 0.0
-        self.die = False
-        self.die_animation = False
-        self.die_animation_speed = 2.0
-        self.die_frame = 0
 
 
 
@@ -191,7 +195,7 @@ class Boss_Siho:
                 pattern_method(frame_time)
 
 
-        if not self.die_animation:
+        if self.pattern_num!=14:
             self.update_fireballs(frame_time)
             self.update_pattern3_fireball(frame_time)
             self.update_pattern9_scratch(frame_time)
@@ -705,6 +709,7 @@ class Boss_Siho:
             self.burn_idle_timer = 0.0
             if self.hp<=0:
                 self.pattern_num=14
+                start_shake(4.0, 5.0)
 
 
     def pattern13(self, frame_time):
@@ -793,7 +798,20 @@ class Boss_Siho:
                         continue
 
     def pattern14(self, frame_time):
-        pass
+        if self.pattern14_state == 0:
+            self.die_frame = min((self.die_frame + self.animation_speed * frame_time),8)
+            if self.die_frame >= 8:
+                self.die_timer += frame_time
+
+            if self.die_timer >= self.die_time:
+                self.pattern14_state = 1
+                self.die_timer = 0.0
+        elif self.pattern14_state == 1:
+            self.die_frame = min((self.die_frame + self.animation_speed * frame_time),17)
+            if self.die_frame >= 17:
+                self.die_timer += frame_time
+            if  self.die_timer >= self.die_time/2:
+                self.die=True
 
 
 
@@ -1042,12 +1060,18 @@ class Boss_Siho:
                                    self.x - canvas_size.camera_x + 192/2,
                                    self.y - canvas_size.camera_y + 64/2)
 
+            elif self.appear_animation and self.pattern_num == 14:
+                resource.boss_fox_die_image[int(self.die_frame)].clip_composite_draw(0, 0, 96, 64, 0, self.dir,
+                                                                                  self.x - canvas_size.camera_x,
+                                                                                  self.y - canvas_size.camera_y,
+                                                                                  96 * SIZE, 64 * SIZE)
 
 
 
 
 
-        if self.hp > 0 and not self.die_animation:
+
+        if self.hp >= 0 and self.pattern_num!=14:
             for ball_a in self.fireballs:
                 if ball_a[6]:
                     frame_idx = int(ball_a[5])

@@ -18,7 +18,7 @@ class Stage3_Monster:
     def update(self, frame_time, events=None):
         self.boss.update(frame_time, events)
 
-        if self.boss.appear_animation:
+        if self.boss.appear_animation and self.boss.pattern_num!=14:
             self.floor.update(frame_time, events)
             self.shape_check()
 
@@ -31,9 +31,6 @@ class Stage3_Monster:
             self.boss.hp -= ramona.Ramona_attack
             ramona.Ramona_smash = True
             self.boss.hit_animation=True
-            if self.boss.hp <= 0:
-                self.boss.hp = 0
-                self.boss.die_animation=True
 
         draw_gesture.result = None
 
