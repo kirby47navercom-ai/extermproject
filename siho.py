@@ -22,8 +22,9 @@ class Boss_Siho:
         self.pattern_set = get_pattern_set()
 
         self.x, self.y = 1000, 300
-        #self.boss_hp = 700
-        self.boss_hp = 550
+        #self.boss_hp = 800
+        #self.boss_hp = 550
+        self.boss_hp = 250
         self.hp = self.boss_hp
         self.hp_bar = Boss_HP()
         self.width, self.height = 386 * SIZE, 299 * SIZE
@@ -134,13 +135,9 @@ class Boss_Siho:
 
         #패턴 11
         self.pattern11_state = 0
-        self.pattern11_enter = False
-        self.pattern11_x = 0.0
-        self.pattern11_move_timer = 0.0
-        self.pattern11_move_duration = 1.0
-        self.pattern11_speed = 1000.0
-        self.spread_frame2 = 0
-        self.pattern4_attack = []
+        self.change_phase_2_frame = 0.0
+        self.change_phase_2_frame_timer = 0.0
+        self.change_phase_2_frame_duration = 3.0
 
 
 
@@ -486,9 +483,11 @@ class Boss_Siho:
         self.fox_idle_timer += frame_time
         if self.fox_idle_timer >= self.fox_idle_time:
             self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
-            #self.pattern_num=random.randint(8, 11)
-            self.pattern_num = 11
+            self.pattern_num=random.randint(8, 10)
             self.fox_idle_timer = 0.0
+        if self.hp<=300:
+            self.pattern_num=11
+
 
 
     def pattern8(self, frame_time):
@@ -650,35 +649,33 @@ class Boss_Siho:
                 ramona.invincible_timer = 0.0
                 canvas_size.start_shake(0.5, 5.0)
 
+
+
     def pattern11(self, frame_time):
         if self.pattern11_state == 0:
-            if not self.pattern11_enter:
-                self.pattern11_x = (1800 if randint(0,1)==0 else 200)+ canvas_size.camera_x
-                self.dir = '' if self.pattern11_x == 1800 else 'h'
-                self.pattern11_enter = True
-            self.pattern11_move_timer += frame_time
-            if math.fabs(self.x - self.pattern11_x) > 0.5:
-                self.x, non = canvas_size.distance_funtion(self.x, 0, self.pattern11_x, 0, frame_time,
-                                                           self.pattern11_speed)
-            self.scratch_frame = min((self.scratch_frame + self.animation_speed * frame_time), 3)
-            if self.pattern11_move_timer >= self.pattern11_move_duration:
+            self.change_phase_2_frame = self.change_phase_2_frame + self.animation_speed * frame_time
+            if self.change_phase_2_frame >= 8:
                 self.pattern11_state = 1
-                self.pattern11_move_timer = 0.0
-                self.scratch_frame = 0
-                self.pattern11_enter = False
-                self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
+                self.change_phase_2_frame=0.0
+                canvas_size.start_shake(3.0, 5.0)
+
         elif self.pattern11_state == 1:
-            self.scratch_frame = (self.scratch_frame + self.animation_speed * frame_time)
-            if self.scratch_frame >= 8:
+            self.change_phase_2_frame = min((self.change_phase_2_frame + self.animation_speed * frame_time),7)
+            self.change_phase_2_frame_timer += frame_time
+            if self.change_phase_2_frame_timer >= self.change_phase_2_frame_duration:
                 self.pattern11_state = 2
-                self.scratch_frame = 0.0
+                self.change_phase_2_frame = 0.0
+                self.change_phase_2_frame_timer = 0.0
+                self.change_graphycs = True
         elif self.pattern11_state == 2:
-            self.scratch_frame = (self.scratch_frame + self.animation_speed * frame_time)
-            if self.scratch_frame >= 3:
-                self.pattern11_state = 0
-                self.scratch_frame = 0.0
-                self.pattern_num = 7
-#좌표 카메라 이상함
+            self.change_phase_2_frame = (self.change_phase_2_frame + self.animation_speed * frame_time)
+            if self.change_phase_2_frame >= 8:
+                self.pattern_num = 12
+                self.change_phase_2_frame = 0.0
+                self.change_phase_2_frame_timer = 0.0
+
+
+
 
 
 
@@ -866,20 +863,20 @@ class Boss_Siho:
 
             elif self.appear_animation and self.pattern_num == 11:
                 if self.pattern11_state == 0:
-                    frame_list = resource.boss_fox_spread_prepare_image
+                    frame_list = resource.boss_fox_burning_a_image
                 elif self.pattern11_state == 1:
-                    frame_list = resource.boss_fox_spread_cast_image
+                    frame_list = resource.boss_fox_burning_b_image
                 elif self.pattern11_state == 2:
-                    frame_list = resource.boss_fox_spread_over_image
+                    frame_list = resource.boss_fox_burning_c_image
                 else:
                     return
-
-                current_frame = frame_list[min(int(self.scratch_frame), len(frame_list) - 1)]
-
+                current_frame = frame_list[min(int(self.change_phase_2_frame), len(frame_list) - 1)]
                 current_frame.clip_composite_draw(0, 0, 96, 64, 0, self.dir,
-                                                  self.x - canvas_size.camera_x,
-                                                  self.y - canvas_size.camera_y,
-                                                  96 * SIZE, 64 * SIZE)
+                                                    self.x - canvas_size.camera_x,
+                                                    self.y - canvas_size.camera_y,
+                                                    96 * SIZE, 64 * SIZE)
+
+
 
 
 
