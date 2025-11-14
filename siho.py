@@ -144,6 +144,19 @@ class Boss_Siho:
         self.burn_idle_timer = 0.0
         self.burn_idle_time = 2.0
 
+        # 패턴 13
+        self.pattern13_state = 0
+        self.rush_frame = 0.0
+        self.rush_fire=[] #x y 프레임
+        self.rush_direction=[]
+        self.rush_fire_speed = 400.0
+        self.rush_prepare_timer=0.0
+        self.rush_prepare_time=1.0
+        self.rush_speed = 2000.0
+        self.check=False
+
+
+
 
 
 
@@ -680,12 +693,60 @@ class Boss_Siho:
                 self.change_phase_2_frame_timer = 0.0
 
     def pattern12(self, frame_time):
-        self.burn_idle_frame = (self.burn_idle_frame + self.animation_speed * frame_time) % 4
+        self.burn_idle_frame = (self.burn_idle_frame + self.animation_speed * frame_time) % 7
         self.burn_idle_timer += frame_time
-        # if self.burn_idle_timer >= self.burn_idle_time:
-        #     self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
-        #     self.pattern_num=random.randint(2,5)
-        #     self.burn_idle_timer = 0.0
+        if self.burn_idle_timer >= self.burn_idle_time:
+            self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
+            self.pattern_num=13
+            self.burn_idle_timer = 0.0
+
+
+    def pattern13(self, frame_time):
+        if self.pattern13_state == 0:
+            self.rush_frame = (self.rush_frame + self.animation_speed * frame_time)
+            if self.rush_frame >= 2.8:
+                del self.rush_direction
+                if randint(0,1)==0:
+                    self.rush_direction = [0,1,0] # 아래 위 아래
+                else:
+                    self.rush_direction = [1,0,1] # 위 아래 위
+                self.pattern13_state = 1
+                self.x= -500 if self.dir == 'h' else 2480
+                self.y=300 if self.rush_direction[0]==0 else 380
+                self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
+                self.check = self.x < 0
+                self.rush_frame = 0
+        elif self.pattern13_state < 4:
+            self.rush_prepare_timer += frame_time
+            if self.rush_prepare_timer >= self.rush_prepare_time:
+                if self.check:
+                    self.x+= self.rush_speed * frame_time
+                else:
+                    self.x-= self.rush_speed * frame_time
+
+                if self.pattern13_state == 3 and ((self.check and self.x >= 2480) or (not self.check and self.x <= -500)):
+                    self.pattern13_state = 4
+                    self.rush_frame = 0.0
+                    self.rush_prepare_timer=0.0
+                    self.x=1000
+                    self.y=300
+
+                elif (self.check and self.x >= 2480) or (not self.check and self.x <= -500):
+                    self.pattern13_state += 1
+                    self.rush_prepare_timer=0.0
+                    self.y = 300 if self.rush_direction[ self.pattern13_state-1] == 0 else 380
+                    self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
+                    self.check = self.x < 0
+        elif self.pattern13_state == 4:
+            self.rush_frame = (self.rush_frame + self.animation_speed * frame_time)
+            if self.rush_frame >= 3:
+                self.pattern13_state = 0
+                self.rush_frame = 0.0
+                self.pattern_num = 7
+
+
+
+
 
 
 
@@ -894,6 +955,21 @@ class Boss_Siho:
                                                                                                                   self.x - canvas_size.camera_x,
                                                                                                                   self.y - canvas_size.camera_y,
                                                                                                                   96 * SIZE, 64 * SIZE)
+            elif self.appear_animation and self.pattern_num == 13:
+                if self.pattern13_state <4:
+                    frame_list = resource.boss_fox_rush_prepare_image
+                elif self.pattern13_state == 4:
+                    frame_list = resource.boss_fox_rush_over_image
+                else:
+                    return
+
+                current_frame = frame_list[min(int(self.rush_frame), len(frame_list) - 1)]
+
+                current_frame.clip_composite_draw(0, 0, 192, 64, 0, self.dir,
+                                                  self.x - canvas_size.camera_x,
+                                                  self.y - canvas_size.camera_y,
+                                                  192 * SIZE, 64 * SIZE)
+
 
 
 
