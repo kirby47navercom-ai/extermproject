@@ -147,13 +147,16 @@ class Boss_Siho:
         # 패턴 13
         self.pattern13_state = 0
         self.rush_frame = 0.0
-        self.rush_fire=[] #x y 프레임
+        self.rush_fire=[] #x y 프레임 방향 스테이트
+        self.rush_fire_direction = 0
         self.rush_direction=[]
-        self.rush_fire_speed = 400.0
+        self.rush_fire_speed = 200.0
+        self.rush_fire_num=0
         self.rush_prepare_timer=0.0
         self.rush_prepare_time=1.0
         self.rush_speed = 2000.0
         self.check=False
+
 
 
 
@@ -193,6 +196,7 @@ class Boss_Siho:
             self.update_pattern3_fireball(frame_time)
             self.update_pattern9_scratch(frame_time)
             self.update_pattern10_bite(frame_time)
+            self.update_pattern13_rush(frame_time)
 
 
 
@@ -699,6 +703,8 @@ class Boss_Siho:
             self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
             self.pattern_num=13
             self.burn_idle_timer = 0.0
+            if self.hp<=0:
+                self.pattern_num=14
 
 
     def pattern13(self, frame_time):
@@ -716,7 +722,8 @@ class Boss_Siho:
                 self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
                 self.check = self.x < 0
                 self.rush_frame = 0
-                self.pattern
+                self.rush_fire_direction = randint(0,1)
+                self.rush_fire_num=15
         elif self.pattern13_state < 4:
             self.rush_prepare_timer += frame_time
             self.ramonatosiho_rush()
@@ -754,6 +761,44 @@ class Boss_Siho:
                 ramona.Ramona_invincible = True
                 ramona.invincible_timer = 0.0
                 canvas_size.start_shake(0.5, 5.0)
+
+    def update_pattern13_rush(self, frame_time):
+        if self.rush_fire_num==15:
+            # x y 프레임 방향 스테이트 갈지말지
+            self.rush_fire.append([100 if self.rush_fire_direction==0 else 1900, 50, 0.0, self.rush_fire_direction, 0,False])
+            self.rush_fire_num-=1
+        for i in range(len(self.rush_fire) - 1, -1, -1):
+            if self.rush_fire[i][4]==0:
+                self.rush_fire[i][2] = self.rush_fire[i][2] + self.animation_speed * frame_time
+                if self.rush_fire[i][2]>=4 and self.rush_fire_num>0:
+                    if self.rush_fire_num>1:
+                        self.rush_fire.append([self.rush_fire[i][0]-30 if self.rush_fire_num%2==1 else self.rush_fire[i][0]+30, 50+(15-self.rush_fire_num)*50, 0.0, self.rush_fire_direction, 0,False])
+                    self.rush_fire_num-=1
+                    self.rush_fire[i][4]=1
+                    self.rush_fire[i][2] = 0.0
+                    if self.rush_fire_num==0:
+                        for j in range(len(self.rush_fire) - 1, -1, -1):
+                            self.rush_fire[j][5]=True
+
+            elif self.rush_fire[i][4]==1:
+                self.rush_fire[i][2] = (self.rush_fire[i][2] + self.animation_speed * frame_time)%4
+                self.ramonatofireballs(self.rush_fire[i])
+                if self.rush_fire[i][5]:
+                    if self.rush_fire[i][3]==0:
+                        self.rush_fire[i][0]+= self.rush_fire_speed * frame_time
+                    else:
+                        self.rush_fire[i][0]-= self.rush_fire_speed * frame_time
+                    if self.rush_fire[i][0]<-50 or self.rush_fire[i][0]>2100:
+                        self.rush_fire.pop(i)
+                        continue
+
+    def pattern14(self, frame_time):
+        pass
+
+
+
+
+
 
 
 
@@ -1055,6 +1100,25 @@ class Boss_Siho:
                                    bite[1] - canvas_size.camera_y - 80,
                                    bite[0] - canvas_size.camera_x + 80,
                                    bite[1] - canvas_size.camera_y + 80)
+
+            for fire in self.rush_fire:
+                if fire[4]==0:
+                    frame_list = resource.boss_siho_fire_a_appear_image
+                elif fire[4]==1:
+                    frame_list = resource.boss_siho_fire_a_image
+                else:
+                    continue
+                current_frame = frame_list[min(int(fire[2]), len(frame_list) - 1)]
+
+                current_frame.draw(fire[0] - canvas_size.camera_x,
+                                   fire[1] - canvas_size.camera_y,
+                                   32 * 2, 32 * 2)
+
+                if canvas_size.collide_check and fire[4]==1:
+                    draw_rectangle(fire[0] - canvas_size.camera_x - 16,
+                                   fire[1] - canvas_size.camera_y - 16,
+                                   fire[0] - canvas_size.camera_x + 16,
+                                   fire[1] - canvas_size.camera_y + 16)
 
 
 

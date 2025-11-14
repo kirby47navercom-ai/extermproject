@@ -332,6 +332,9 @@ boss_fox_rush_prepare_image = []
 boss_fox_rush_over_coordinate = [0,0,192,64,0,0]
 boss_fox_rush_over_image = []
 
+boss_fox_die_coordinate = [0,0,96,64,0,0]
+boss_fox_die_image = []
+
 
 
 
@@ -585,6 +588,9 @@ def load_resources():
     boss_siho_bite_image.append(load_image(f'3stage\\Fox Bite Warning.png'))
     for i in range(5):
         boss_siho_bite_image.append(load_image(f'3stage\\Fox Bite{str(i + 1)}.png'))
+
+    for i in range(19):
+        boss_fox_die_image.append(load_image(f'3stage\\Die{str(i + 1)}.png'))
 
 
 
