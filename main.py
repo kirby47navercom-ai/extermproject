@@ -1,7 +1,7 @@
 import pico2d
 from sdl2 import SDL_SetRelativeMouseMode, SDL_TRUE
 import game_framework
-import stage3_manager as start_mode
+import title_mode as start_mode
 import resource
 from canvas_size import *
 

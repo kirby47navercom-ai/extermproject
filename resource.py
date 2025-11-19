@@ -395,7 +395,10 @@ def collide2(a, b):
 
     return True
 
-
+def collide3(mouse_pos, a):
+    mx, my = mouse_pos
+    x1, y1, x2, y2 = a
+    return x1 <= mx <= x2 and y1 <= my <= y2
 
 
 # 함수로 묶기
