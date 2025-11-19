@@ -70,7 +70,8 @@ def ingame(start_mode):
 
         stack[-1].update(frame_time,events)
         clear_canvas()
-        stack[-1].draw()
+        for mode in stack:
+            mode.draw()
         mouse.draw()
         update_canvas()
         frame_time = time.time() - current_time

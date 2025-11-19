@@ -364,6 +364,15 @@ boss_siho_rush_particle_image = []
 white_image=[]
 
 
+#소리 설정
+bgm=3
+effect=3
+#스테이지 클리어 여부
+stage1_clear=0
+stage2_clear=0
+stage3_clear=0
+#coin
+coin=0
 
 
 
