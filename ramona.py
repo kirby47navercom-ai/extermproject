@@ -321,6 +321,7 @@ class HitState:
 class Ramona:
     image=None
     def __init__(self):
+        global CURRENT_HP, MAX_HP
         self.x, self.y = canvas_size.canvaswidth//2, GROUND_LEVEL
         self.y_velocity = 0
         self.frame = 0.0
@@ -343,6 +344,8 @@ class Ramona:
         self.cur_state.enter(self, None)
 
         self.shift_pressed = False
+        CURRENT_HP = MAX_HP
+
 
     def change_state(self, new_state, event):
         if self.cur_state != new_state:

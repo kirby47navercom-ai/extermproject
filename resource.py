@@ -372,7 +372,17 @@ stage1_clear=0
 stage2_clear=0
 stage3_clear=0
 #coin
-coin=0
+coin=8
+#weapon
+weapon1=1
+weapon2=2
+weapon3=2
+weapon4=2
+#talk
+talk = 0
+#nanahira
+nanahira = 0
+
 
 
 

@@ -287,11 +287,12 @@ class DieState:
         pass
 
     def do(self, frame_time):
-        self.y += self.speed * frame_time * -1 / 2
-        self.die_frame = (self.die_frame + self.die_animation_speed * frame_time * 2) % 4
-        canvas_size.start_shake(0.5, 5)
         if self.y < -200:
             self.die = True
+        else:
+            self.y += self.speed * frame_time * -1 / 2
+            self.die_frame = (self.die_frame + self.die_animation_speed * frame_time * 2) % 4
+            canvas_size.start_shake(0.5, 5)
 
     def draw(self):
         left, bottom, width, height = boss_kitty_die_coordinate[0:4]
@@ -333,7 +334,7 @@ class Boss_Kitty:
         self.dir = 1
         self.timer = 0.0
         self.speed = 300
-        self.shape = self.pattern_set[randint(0, pattern_number)]
+        self.shape = self.pattern_set[randint(0, resource.pattern_number)]
         self.shape.x = self.x
         self.shape.y = self.y + self.height * 0.2
         self.idle_frame = 0
@@ -488,7 +489,7 @@ class Boss_Kitty:
                 canvas_size.start_shake(0.5, 5.0)
 
     def hit_kitty_animation(self):
-        self.shape = self.pattern_set[randint(0, pattern_number)]
+        self.shape = self.pattern_set[randint(0, resource.pattern_number)]
         self.shape.x = self.x
         self.shape.y = self.y + self.height * 0.2
         self.hit_animation = False
