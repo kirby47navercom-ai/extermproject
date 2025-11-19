@@ -27,7 +27,6 @@ class Boss_Siho:
         #self.boss_hp = 250
         #self.boss_hp = 0
         self.hp = self.boss_hp
-        self.hp=0
         self.hp_bar = Boss_HP()
         self.width, self.height = 386 * SIZE, 299 * SIZE
         self.frame = 0

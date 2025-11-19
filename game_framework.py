@@ -1,5 +1,9 @@
 import tkinter as tk
 import time
+
+import canvas_size
+import mouse_image
+from pico2d import *
 from canvas_size import *
 root = tk.Tk()
 
@@ -48,13 +52,27 @@ def ingame(start_mode):
     running = True
     stack = [start_mode]
     start_mode.init()
-
+    mouse = mouse_image.Mouse()
     global frame_time
     frame_time = 0.0
     current_time = time.time()
     while running:
-        stack[-1].update(frame_time)
+        events = get_events()
+        mouse.update(frame_time,events)
+
+        for event in events:
+            if event.type == SDL_KEYDOWN:
+                if event.key == SDLK_F1:
+                    canvas_size.collide_check = not canvas_size.collide_check
+                elif event.key == SDLK_ESCAPE:
+                    quit()
+
+
+        stack[-1].update(frame_time,events)
+        clear_canvas()
         stack[-1].draw()
+        mouse.draw()
+        update_canvas()
         frame_time = time.time() - current_time
         current_time += frame_time
 

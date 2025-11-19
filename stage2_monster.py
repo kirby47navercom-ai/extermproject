@@ -6,8 +6,6 @@ import ramona
 
 class Stage2_Monster:
     def __init__(self):
-        self.phase_num=0
-        self.phase=[]
         self.boss = hellkitty.Boss_Kitty()
 
 

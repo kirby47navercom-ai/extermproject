@@ -1,4 +1,4 @@
-world = [[], [], []] # layers for game objects
+world = [[] for _ in range(8)] # layers for game objects
 
 def add_object(o, depth):
     world[depth].append(o)
@@ -15,10 +15,10 @@ def remove_object(o):
     raise Exception("World 에 존재하지 않는 오브젝트를 지우려고 시도함")
 
 
-def update():
+def update(frame_time, events):
     for layer in world:
         for o in layer:
-            o.update()
+            o.update(frame_time, events)
 
 def render():
     for layer in world:

@@ -114,7 +114,7 @@ class GestureRecognizer:
                     self.drawing = False
                     if len(self.points) > 10:
                         self.result = self.recognizer.recognize(self.points)
-                        if self.result and self.result.score >= 0.25:
+                        if self.result and self.result.score >= 0.20:
 
                             result = self.result.name
                         else:
