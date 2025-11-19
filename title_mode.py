@@ -1,25 +1,28 @@
 from pico2d import *
 import canvas_size
 import game_framework
-import stage1_manager
+import option_mode
+import  home_mode
 
 image = None
 
 def init():
     # 로고 이미지를 로드
-    global image, logo_start_time
+    global image
 
     image = load_image('배경//main.png')
-    pass
+
 
 def update(frame_time,events):
     for event in events:
         if event.type == SDL_MOUSEBUTTONDOWN:
             x, y = event.x, get_canvas_height() - 1 - event.y
             if 250 <= x <= 600 and 140 <= y <= 235:
-                canvas_size.collide_check = True
+                game_framework.push_mode(option_mode)
             elif 250 <= x <= 600 and 260 <= y <= 355:
-                game_framework.change_mode(stage1_manager)
+                game_framework.change_mode(home_mode)
+            elif 560 <= x <= 700 and 20 <= y <= 135:
+                game_framework.quit()
 
 def draw():
     # 로고 이미지를 그려준다
@@ -29,7 +32,7 @@ def draw():
         j=100
         draw_rectangle(250, 140+i, 600, 235+i)#시작
         draw_rectangle(250,140,600,235)#환경
-        draw_rectangle(250+j, 140, 600+j, 235)  # 환경
+        draw_rectangle(460+j, 20, 600+j, 135)  # 환경
 
     pass
 
