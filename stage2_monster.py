@@ -2,7 +2,7 @@ import draw_gesture
 import background_2stage
 import hellkitty
 import ramona
-
+import resource
 
 class Stage2_Monster:
     def __init__(self):
@@ -35,8 +35,7 @@ class Stage2_Monster:
 
     def monster_die(self):
         if self.boss.die:
-            pass
-        pass
+            resource.boss2=True
 
 
         pass

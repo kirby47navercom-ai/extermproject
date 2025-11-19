@@ -3,7 +3,7 @@ import stage3_topography
 import siho
 import ramona
 from random import randint
-
+import resource
 
 class Stage3_Monster:
     def __init__(self):
@@ -38,7 +38,7 @@ class Stage3_Monster:
 
     def monster_die(self):
         if self.boss.die:
-            pass
+            resource.boss3 = True
 
 
 

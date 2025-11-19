@@ -382,6 +382,10 @@ weapon4=2
 talk = 0
 #nanahira
 nanahira = 0
+#보스 죽었는지 확인
+boss1=False
+boss2=False
+boss3=False
 
 
 

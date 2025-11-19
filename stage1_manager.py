@@ -7,6 +7,8 @@ import stage1_monster
 import canvas_size
 import game_framework
 import game_world
+import stage_clear_mode
+import resource
 
 ramona_instance = None
 monster_instance = None
@@ -57,6 +59,10 @@ def update(frame_time, events):
     if ramona.Ramona_dead:
         if ramona_instance:
             ramona_instance.update(frame_time, events)
+
+
+    if resource.boss1:
+        game_framework.push_mode(stage_clear_mode)
 
 
 

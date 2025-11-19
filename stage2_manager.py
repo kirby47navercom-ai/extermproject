@@ -7,6 +7,8 @@ import stage2_monster
 import canvas_size
 import game_framework
 import game_world
+import stage_clear_mode
+import resource
 
 ramona_instance = None
 monster_instance = None
@@ -61,6 +63,9 @@ def update(frame_time, events):
 
     if canvas_size.shake_timer > 0:
         canvas_size.update_shake(frame_time)
+
+    if resource.boss2:
+        game_framework.push_mode(stage_clear_mode)
 
     canvas_size.camera_x = canvas_size.scroll_x + canvas_size.shake_x
     canvas_size.camera_y = canvas_size.scroll_y + canvas_size.shake_y

@@ -3,6 +3,7 @@ import ghost_boss
 import draw_gesture
 import ramona
 import random
+import resource
 
 ghost_phase_far=50
 ghost_phase_pos=[-1,1,-1,1,-1,1,-1,1,-1,1]
@@ -35,8 +36,8 @@ class Stage1_Phase5:
         pass
     def monster_die(self):
         if self.boss.die:
-            pass
-        pass
+            resource.boss1=True
+
     def draw(self):
         self.boss.draw()
         pass
