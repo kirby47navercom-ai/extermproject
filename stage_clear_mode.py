@@ -21,6 +21,52 @@ def init():
             load_image('배경\\lemon.png')]
     perfect = load_image('배경\\perfect_no.png')
 
+    if resource.boss1:
+        if ramona.MAX_HP != ramona.CURRENT_HP:
+            if resource.stage1_clear != 2:
+                resource.stage1_clear = 1
+            if resource.stage1_coin == 0:
+                resource.coin += 1
+                resource.stage1_coin=1
+        else:
+            resource.stage1_clear = 2
+            if resource.stage1_coin == 0:
+                resource.coin += 2
+                resource.stage1_coin = 2
+            elif resource.stage1_coin == 1:
+                resource.coin += 1
+                resource.stage1_coin = 2
+    elif resource.boss2:
+        if ramona.MAX_HP != ramona.CURRENT_HP:
+            if resource.stage2_clear != 2:
+                resource.stage2_clear = 1
+            if resource.stage2_coin == 0:
+                resource.coin += 1
+                resource.stage2_coin = 1
+        else:
+            resource.stage2_clear = 2
+            if resource.stage2_coin == 0:
+                resource.coin += 2
+                resource.stage2_coin = 2
+            elif resource.stage2_coin == 1:
+                resource.coin += 1
+                resource.stage2_coin = 2
+    elif resource.boss3:
+        if ramona.MAX_HP != ramona.CURRENT_HP:
+            if resource.stage3_clear != 2:
+                resource.stage3_clear = 1
+            if resource.stage3_coin == 0:
+                resource.coin += 1
+                resource.stage3_coin = 1
+        else:
+            resource.stage3_clear = 2
+            if resource.stage3_coin == 0:
+                resource.coin += 2
+                resource.stage3_coin = 2
+            elif resource.stage3_coin == 1:
+                resource.coin += 1
+                resource.stage3_coin = 2
+
 
 
 def update(frame_time,events):
@@ -28,6 +74,12 @@ def update(frame_time,events):
         if event.type == SDL_MOUSEBUTTONDOWN:
             x, y = event.x, canvas_size.canvasheight - 1 - event.y
             if 478 <= x <= 584 and 67 <= y <= 175:
+                if resource.boss1:
+                    resource.boss1 = False
+                elif resource.boss2:
+                    resource.boss2 = False
+                elif resource.boss3:
+                    resource.boss3 = False
                 game_framework.change_mode(home_mode)
             elif 678 <= x <= 784 and 67 <= y <= 175:
                 import stage1_manager

@@ -18,6 +18,8 @@ def init():
     global ramona_instance, monster_instance
     game_world.clear()
 
+    canvas_size.start_shake(0,0)
+
     stage_background = background_1stage.Background()
     ramona.GROUND_LEVEL = 100
     ramona.WIDTH_LEVEL = canvas_size.canvaswidth - 25

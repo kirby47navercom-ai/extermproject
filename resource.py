@@ -372,7 +372,10 @@ stage1_clear=0
 stage2_clear=0
 stage3_clear=0
 #coin
-coin=8
+coin=0
+stage1_coin=0
+stage2_coin=0
+stage3_coin=0
 #weapon
 weapon1=1
 weapon2=2
