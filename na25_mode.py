@@ -184,7 +184,8 @@ def draw():
 
 
 def finish():
-
+    global  background,nanahira, inventory,coin,coin_font,weapon1,weapon2,weapon3,weapon4,talk
+    del background,nanahira,inventory,coin,coin_font,weapon1,weapon2,weapon3,weapon4,talk
     pass
 
 

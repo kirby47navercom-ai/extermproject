@@ -87,7 +87,8 @@ def draw():
 
 
 def finish():
-
+    global  home,stage1,stage2,stage3,coin,sugar,water,lemon,coin_font
+    del home,stage1,stage2,stage3,coin,sugar,water,lemon,coin_font
     pass
 
 
