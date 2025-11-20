@@ -9,6 +9,7 @@ import game_framework
 import game_world
 import stage_clear_mode
 import resource
+import stage_fail_mode
 
 ramona_instance = None
 monster_instance = None
@@ -51,12 +52,10 @@ def update(frame_time, events):
     if not ramona.Ramona_dead:
         game_world.update(frame_time, events)
     elif ramona.Ramona_retry:
-        for event in events:
-            if event.type == SDL_KEYDOWN and event.key == SDLK_r:
-                ramona.Ramona_dead = False
-                ramona.CURRENT_HP = ramona.MAX_HP
-                init()
-                return
+        resource.boss1 =True
+        ramona.Ramona_dead = False
+        ramona.CURRENT_HP = ramona.MAX_HP
+        game_framework.change_mode(stage_fail_mode)
 
     if ramona.Ramona_dead:
         if ramona_instance:

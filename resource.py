@@ -389,6 +389,8 @@ nanahira = 0
 boss1=False
 boss2=False
 boss3=False
+#누구한테 죽었는지
+
 
 
 
