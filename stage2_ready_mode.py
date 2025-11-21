@@ -26,7 +26,7 @@ def update(frame_time,events):
             if 240 <= x <= 530 and 230 <= y <= 360:
                 game_framework.change_mode(stage2_manager)
             elif 750 <= x <= 1040 and 230 <= y <= 360:
-                game_framework.change_mode(home_mode)
+                game_framework.pop_mode()
 
 
 
