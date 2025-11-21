@@ -64,7 +64,7 @@ def update(frame_time, events):
     if canvas_size.shake_timer > 0:
         canvas_size.update_shake(frame_time)
 
-    if resource.boss3:
+    if resource.boss3 and not ramona.Ramona_retry:
         game_framework.push_mode(stage_clear_mode)
 
     canvas_size.camera_x = canvas_size.scroll_x + canvas_size.shake_x

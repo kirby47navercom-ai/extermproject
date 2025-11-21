@@ -15,11 +15,13 @@ perfect = None
 def init():
     # 로고 이미지를 로드
     global black_background,clear,food,perfect
-    black_background = load_image('배경\\black_background.png')
-    clear = load_image('배경\\clear.png')
-    food = [load_image('배경\\sugar.png'),load_image('배경\\water.png'),
-            load_image('배경\\lemon.png')]
-    perfect = load_image('배경\\perfect_no.png')
+
+    if black_background == None:
+        black_background = load_image('배경\\black_background.png')
+        clear = load_image('배경\\clear.png')
+        food = [load_image('배경\\sugar.png'),load_image('배경\\water.png'),
+                load_image('배경\\lemon.png')]
+        perfect = load_image('배경\\perfect_no.png')
 
     if resource.boss1:
         if ramona.MAX_HP != ramona.CURRENT_HP:
@@ -127,8 +129,7 @@ def draw():
 
 
 def finish():
-    global black_background, clear, food, perfect
-    del black_background,clear,food,perfect
+
     pass
 
 

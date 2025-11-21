@@ -62,7 +62,7 @@ def update(frame_time, events):
             ramona_instance.update(frame_time, events)
 
 
-    if resource.boss1:
+    if resource.boss1 and not ramona.Ramona_retry:
         game_framework.push_mode(stage_clear_mode)
 
 
