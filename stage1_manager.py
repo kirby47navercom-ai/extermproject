@@ -55,7 +55,7 @@ def update(frame_time, events):
         resource.boss1 =True
         ramona.Ramona_dead = False
         ramona.CURRENT_HP = ramona.MAX_HP
-        game_framework.change_mode(stage_fail_mode)
+        game_framework.push_mode(stage_fail_mode)
 
     if ramona.Ramona_dead:
         if ramona_instance:
