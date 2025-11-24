@@ -366,7 +366,10 @@ white_image=[]
 
 #소리 설정
 bgm=3
+bgm_volume=[0,32,64,128,256]
 effect=3
+effect_volume=[0,32,64,128,256]
+
 #스테이지 클리어 여부
 stage1_clear=0
 stage2_clear=0
