@@ -395,6 +395,21 @@ boss3=False
 #누구한테 죽었는지
 
 
+#사운드
+background_sound=[]
+#메인, 인게임, 상점,
+# 스테이지1,스테이지 1 보스, 스테이지2, 스테이지3
+#엔딩
+attack_effect_sound=[]
+ramona_effect_sound=[]
+click_effect_sound=[]
+main_effect_sound=[]
+shop_effect_sound=[]
+stage1_effect_sound=[]
+stage2_effect_sound=[]
+stage3_effect_sound=[]
+
+
 
 
 
@@ -659,6 +674,49 @@ def load_resources():
 
     for i in range(5):
         fox_flame_ball_image.append(load_image(f'3stage\\Fox Flame Ball{str(i + 1)}.png'))
+
+    #사운드
+    background_sound.append(load_music('sound\\10. Ib Title.mp3'))
+    background_sound[-1].set_volume(bgm_volume[bgm])
+    background_sound.append(load_music('sound\\02. Menu.mp3'))
+    background_sound[-1].set_volume(bgm_volume[bgm])
+    background_sound.append(load_music('sound\\16. Cascade.mp3'))
+    background_sound[-1].set_volume(bgm_volume[bgm])
+    background_sound.append(load_music('sound\\source_Resources_backgroundsound.mp3'))
+    background_sound[-1].set_volume(bgm_volume[bgm])
+    background_sound.append(load_music('sound\\01. Final Boss Theme.mp3'))
+    background_sound[-1].set_volume(bgm_volume[bgm])
+    background_sound.append(load_music('2stage\\boss_scene.ogg'))
+    background_sound[-1].set_volume(bgm_volume[bgm])
+    background_sound.append(load_music('2stage\\hellokitty.ogg'))
+    background_sound[-1].set_volume(bgm_volume[bgm])
+    background_sound.append(load_music('3stage\\Battle with Fox.wav'))
+    background_sound[-1].set_volume(bgm_volume[bgm])
+
+    attack_effect_sound.append(load_music('sound\\hamer-90566.mp3'))
+    attack_effect_sound[-1].set_volume(effect_volume[effect])
+    attack_effect_sound.append(load_music('sound\\mixkit-heavy-sword-smashes-metal-2795.wav'))
+    attack_effect_sound[-1].set_volume(effect_volume[effect])
+    attack_effect_sound.append(load_music('sound\\mixkit-metallic-sword-strike-2160.wav'))
+    attack_effect_sound[-1].set_volume(effect_volume[effect])
+    attack_effect_sound.append(load_music('sound\\mixkit-samurai-sword-impact-2789.wav'))
+    attack_effect_sound[-1].set_volume(effect_volume[effect])
+
+    stage1_effect_sound.append(load_music('sound\\NPC_Killed_6.wav'))
+    stage1_effect_sound[-1].set_volume(effect_volume[effect])
+    stage1_effect_sound.append(load_music('sound\\NPC_Killed_52.wav'))
+    stage1_effect_sound[-1].set_volume(effect_volume[effect])
+    stage1_effect_sound.append(load_music('sound\\NPC_Killed_59.wav'))
+    stage1_effect_sound[-1].set_volume(effect_volume[effect])
+    stage1_effect_sound.append(load_music('sound\\EoC_Expert_Roar.wav'))
+    stage1_effect_sound[-1].set_volume(effect_volume[effect])
+    stage1_effect_sound.append(load_music('sound\\NPC_Killed_65.wav'))
+    stage1_effect_sound[-1].set_volume(effect_volume[effect])
+
+    stage2_effect_sound.append(load_music('sound\\BLAAHLouder.ogg'))
+    stage2_effect_sound[-1].set_volume(effect_volume[effect])
+    stage2_effect_sound.append(load_music('sound\\explosion.ogg'))
+    stage2_effect_sound[-1].set_volume(effect_volume[effect])
 
 
 
