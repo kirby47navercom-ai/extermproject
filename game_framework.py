@@ -5,6 +5,8 @@ import canvas_size
 import mouse_image
 from pico2d import *
 from canvas_size import *
+import resource
+import ramona
 root = tk.Tk()
 
 
@@ -64,6 +66,14 @@ def ingame(start_mode):
             if event.type == SDL_KEYDOWN:
                 if event.key == SDLK_F1:
                     canvas_size.collide_check = not canvas_size.collide_check
+                elif event.key == SDLK_F2:
+                    resource.coin = 9999
+                elif event.key == SDLK_F3:
+                    ramona.Ramona_attack=1000
+                elif event.key == SDLK_F4:
+                    resource.stage1_clear = 2
+                    resource.stage2_clear = 2
+                    resource.stage3_clear = 2
                 elif event.key == SDLK_ESCAPE:
                     quit()
 

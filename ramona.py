@@ -35,7 +35,7 @@ Ramona_roll_invincible=False
 Ramona_invincible=False
 hit_toggle=False
 #플레이어의 공격력
-Ramona_attack=300
+Ramona_attack=20
 #플레이어의 공격
 Ramona_smash=False
 Ramona_smash_toggle=False

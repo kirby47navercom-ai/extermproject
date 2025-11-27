@@ -110,7 +110,7 @@ def update(frame_time,events):
                     ramona.MAX_HP = 3
                     ramona.CURRENT_HP = 3
 
-                    ramona.Ramona_attack = 15
+                    ramona.Ramona_attack = 20
 
                     resource.pattern_number = 10
 

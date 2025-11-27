@@ -1,5 +1,6 @@
 from pico2d import *
 import canvas_size
+import ending_mode
 import game_framework
 import option_mode
 import resource
@@ -33,6 +34,10 @@ def init():
         water = load_image('배경\\clear2.png')
         lemon = load_image('배경\\clear3.png')
         coin_font = load_font('Font\\경기천년바탕_Bold.ttf', 80)
+
+    if not resource.ending and resource.stage1_clear !=0 and resource.stage2_clear !=0 and resource.stage3_clear !=0:
+        resource.ending = True
+        game_framework.push_mode(ending_mode)
 
 
 def update(frame_time,events):

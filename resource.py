@@ -394,6 +394,10 @@ boss2=False
 boss3=False
 #누구한테 죽었는지
 
+#엔딩
+end_image=[]
+ending=False
+
 
 #사운드
 background_sound=[]
@@ -675,6 +679,9 @@ def load_resources():
     for i in range(5):
         fox_flame_ball_image.append(load_image(f'3stage\\Fox Flame Ball{str(i + 1)}.png'))
 
+    for i in range(7):
+        end_image.append(load_image(f'배경\\end_{str(i)}.png'))
+
     #사운드
     background_sound.append(load_music('sound\\10. Ib Title.mp3'))
     background_sound[-1].set_volume(bgm_volume[bgm])
@@ -713,10 +720,12 @@ def load_resources():
     stage1_effect_sound.append(load_music('sound\\NPC_Killed_65.wav'))
     stage1_effect_sound[-1].set_volume(effect_volume[effect])
 
-    stage2_effect_sound.append(load_music('sound\\BLAAHLouder.ogg'))
+    stage2_effect_sound.append(load_music('2stage\\BLAAHLouder.ogg'))
     stage2_effect_sound[-1].set_volume(effect_volume[effect])
-    stage2_effect_sound.append(load_music('sound\\explosion.ogg'))
+    stage2_effect_sound.append(load_music('2stage\\explosion.ogg'))
     stage2_effect_sound[-1].set_volume(effect_volume[effect])
+
+    #stage3_effect_sound.append(load_music('3stage\\NPC_Killed_65.wav'))
 
 
 

@@ -831,6 +831,7 @@ class Boss_Siho:
 
 
 
+
     def draw(self):
         if not self.hit or (self.hit and (get_time() % 0.2) > 0.1):
             if not self.appear_animation:
