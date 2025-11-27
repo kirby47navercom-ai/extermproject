@@ -25,6 +25,7 @@ class Stage3_Monster:
             if self.boss.change_graphycs:
                 self.floor.current_pattern+=1
                 self.boss.change_graphycs=False
+        self.monster_die()
 
     def shape_check(self):
         if self.boss.shape.name == draw_gesture.result and self.boss.hp>0:

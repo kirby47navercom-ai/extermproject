@@ -39,13 +39,13 @@ def init():
 
     background_2stage.start = False
 
+    canvas_size.camera_x = 0
+    canvas_size.camera_y = 0
     ramona_instance.x = 50
     ramona_instance.y = ramona.GROUND_LEVEL
     ramona.Ramona_POS_X = ramona_instance.x
     ramona.Ramona_POS_Y = ramona_instance.y
 
-    canvas_size.camera_x = 0
-    canvas_size.camera_y = 0
     ramona.Ramona_retry = False
     ramona.Ramona_dead = False
 
@@ -69,8 +69,6 @@ def update(frame_time, events):
     if resource.boss2 and not ramona.Ramona_retry:
         game_framework.push_mode(stage_clear_mode)
 
-    canvas_size.camera_x = canvas_size.scroll_x + canvas_size.shake_x
-    canvas_size.camera_y = canvas_size.scroll_y + canvas_size.shake_y
 
 
 def draw():

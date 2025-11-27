@@ -37,13 +37,13 @@ def init():
     game_world.add_object(ramona_ui_instance, 3)
     game_world.add_object(draw_gest_instance, 3)
 
+    canvas_size.camera_x = 0
+    canvas_size.camera_y = 0
     ramona_instance.x = canvas_size.canvaswidth // 2
     ramona_instance.y = ramona.GROUND_LEVEL
     ramona.Ramona_POS_X = ramona_instance.x
     ramona.Ramona_POS_Y = ramona_instance.y
 
-    canvas_size.camera_x = 0
-    canvas_size.camera_y = 0
     ramona.Ramona_retry = False
     ramona.Ramona_dead = False
 
@@ -69,6 +69,7 @@ def update(frame_time, events):
 
     if canvas_size.shake_timer > 0:
         canvas_size.update_shake(frame_time)
+
 
 
 

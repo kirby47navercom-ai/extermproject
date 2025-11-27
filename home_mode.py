@@ -61,6 +61,8 @@ def draw():
 
     home.draw(canvas_size.canvaswidth//2,canvas_size.canvasheight//2)
 
+    #print(resource.stage1_clear,resource.stage2_clear,resource.stage3_clear)
+
     if resource.stage1_clear==1:
         stage1[0].draw(canvas_size.canvaswidth//2,canvas_size.canvasheight//2)
     elif resource.stage1_clear==2:
