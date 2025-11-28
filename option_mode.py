@@ -24,25 +24,25 @@ def update(frame_time,events):
         if event.type == SDL_MOUSEBUTTONDOWN:
             x, y = event.x, canvas_size.canvasheight - 1 - event.y
             if 475 <= x <= 545 and 360 <= y <= 430:
-                resource.bgm = 1
+                resource.bgm = 0
             elif 585 <= x <= 655 and 360 <= y <= 430:
-                resource.bgm = 2
+                resource.bgm = 1
             elif 705 <= x <= 775 and 360 <= y <= 430:
-                resource.bgm = 3
+                resource.bgm = 2
             elif 830 <= x <= 905 and 360 <= y <= 430:
-                resource.bgm = 4
+                resource.bgm = 3
             elif 955 <= x <= 1025 and 360 <= y <= 430:
-                resource.bgm = 5
+                resource.bgm = 4
             elif 475 <= x <= 545 and 190 <= y <= 260:
-                resource.effect = 1
+                resource.effect = 0
             elif 585 <= x <= 655 and 190 <= y <= 260:
-                resource.effect = 2
+                resource.effect = 1
             elif 705 <= x <= 775 and 190 <= y <= 260:
-                resource.effect = 3
+                resource.effect = 2
             elif 830 <= x <= 905 and 190 <= y <= 260:
-                resource.effect = 4
+                resource.effect = 3
             elif 955 <= x <= 1025 and 190 <= y <= 260:
-                resource.effect = 5
+                resource.effect = 4
             elif 1055 <= x <= 1185 and 515 <= y <= 640:
                 game_framework.pop_mode()
 
@@ -51,8 +51,8 @@ def update(frame_time,events):
 def draw():
     black_background.draw(canvas_size.canvaswidth // 2, canvas_size.canvasheight // 2)
     option.draw(canvas_size.canvaswidth // 2, canvas_size.canvasheight // 2)
-    circle0[resource.bgm-1].draw(canvas_size.canvaswidth // 2, canvas_size.canvasheight // 2)
-    circle1[resource.effect-1].draw(canvas_size.canvaswidth // 2, canvas_size.canvasheight // 2)
+    circle0[resource.bgm].draw(canvas_size.canvaswidth // 2, canvas_size.canvasheight // 2)
+    circle1[resource.effect].draw(canvas_size.canvaswidth // 2, canvas_size.canvasheight // 2)
 
     if canvas_size.collide_check:
         draw_rectangle(475, 360, 545, 430)  # 1

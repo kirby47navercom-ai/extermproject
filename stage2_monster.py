@@ -7,13 +7,24 @@ import resource
 class Stage2_Monster:
     def __init__(self):
         self.boss = hellkitty.Boss_Kitty()
-
+        self.game_start=False
+        resource.background_sound[5].set_volume(
+            (resource.background_sound_offset[5] * resource.bgm) // 2)
+        resource.background_sound[5].play(-1)
 
     def update(self, frame_time, events=None):
-        if '하트' == draw_gesture.result:
+        if '하트' == draw_gesture.result and not self.game_start:
+            self.game_start=True
             background_2stage.start=True
             draw_gesture.result = None
             self.boss.attack_start=True
+            resource.background_sound[5].stop()
+            resource.background_sound[6].set_volume(
+                (resource.background_sound_offset[6] * resource.bgm) // 2)
+            resource.background_sound[6].play(1)
+            resource.background_sound[7].set_volume(
+                (resource.background_sound_offset[7] * resource.bgm) // 2)
+            resource.background_sound[7].play(-1)
         elif background_2stage.start:
             self.boss.update(frame_time, events)
             self.shape_check()

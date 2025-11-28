@@ -24,6 +24,7 @@ def update(frame_time,events):
         if event.type == SDL_MOUSEBUTTONDOWN:
             x, y = event.x, canvas_size.canvasheight - 1 - event.y
             if 240 <= x <= 530 and 230 <= y <= 360:
+                game_framework.pop_mode()
                 game_framework.change_mode(stage3_manager)
             elif 750 <= x <= 1040 and 230 <= y <= 360:
                 game_framework.pop_mode()

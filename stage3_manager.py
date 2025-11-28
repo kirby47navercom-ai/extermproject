@@ -77,6 +77,7 @@ def draw():
 
 def finish():
     game_world.clear()
+    resource.background_sound[8].stop()
 
 
 def pause(): pass

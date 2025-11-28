@@ -35,12 +35,16 @@ def init():
         lemon = load_image('배경\\clear3.png')
         coin_font = load_font('Font\\경기천년바탕_Bold.ttf', 80)
 
-    if not resource.ending and resource.stage1_clear !=0 and resource.stage2_clear !=0 and resource.stage3_clear !=0:
-        resource.ending = True
-        game_framework.push_mode(ending_mode)
+    resource.background_sound[1].set_volume(
+        (resource.background_sound_offset[1] * resource.bgm) // 2)
+    resource.background_sound[1].play(-1)
+
 
 
 def update(frame_time,events):
+    if not resource.ending and resource.stage1_clear !=0 and resource.stage2_clear !=0 and resource.stage3_clear !=0:
+        resource.ending = True
+        game_framework.push_mode(ending_mode)
     for event in events:
         if event.type == SDL_MOUSEBUTTONDOWN:
             x, y = event.x, canvas_size.canvasheight - 1 - event.y
@@ -97,6 +101,7 @@ def draw():
 
 
 def finish():
+    resource.background_sound[1].stop()
     pass
 
 

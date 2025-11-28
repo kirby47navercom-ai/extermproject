@@ -11,6 +11,10 @@ class Stage3_Monster:
         self.phase=[]
         self.boss=siho.Boss_Siho()
         self.floor = stage3_topography.Stage3_Terrain()
+        resource.background_sound[8].set_volume(
+            (resource.background_sound_offset[8] * resource.bgm) // 2)
+        resource.background_sound[8].play(-1)
+
 
 
 

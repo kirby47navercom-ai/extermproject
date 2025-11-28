@@ -3,6 +3,7 @@ import canvas_size
 import game_framework
 import option_mode
 import  home_mode
+import resource
 
 image = None
 
@@ -12,6 +13,10 @@ def init():
 
     image = load_image('배경//main.png')
 
+    resource.background_sound[0].set_volume(
+        (resource.background_sound_offset[0] * resource.bgm) // 2)
+    resource.background_sound[0].play(-1)
+
 
 def update(frame_time,events):
     for event in events:
@@ -19,6 +24,7 @@ def update(frame_time,events):
             x, y = event.x, get_canvas_height() - 1 - event.y
             if 410 <= x <= 618 and 30 <= y <= 100:
                 game_framework.change_mode(home_mode)
+
             elif 660 <= x <= 868 and 30 <= y <= 100:
                 game_framework.push_mode(option_mode)
 
@@ -36,6 +42,7 @@ def draw():
 def finish():
     global image
     del image
+    resource.background_sound[0].stop()
     pass
 
 

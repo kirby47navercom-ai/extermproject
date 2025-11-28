@@ -365,9 +365,9 @@ white_image=[]
 
 
 #소리 설정
-bgm=3
-bgm_volume=[0,32,64,128,256]
-effect=3
+bgm=2
+bgm_volume=[0,32,64,96,128]
+effect=2
 effect_volume=[0,32,64,128,256]
 
 #스테이지 클리어 여부
@@ -401,18 +401,26 @@ ending=False
 
 #사운드
 background_sound=[]
+background_sound_offset=[]
 #메인, 인게임, 상점,
 # 스테이지1,스테이지 1 보스, 스테이지2, 스테이지3
 #엔딩
 attack_effect_sound=[]
+attack_effect_sound_offset=[]
 ramona_effect_sound=[]
+ramona_effect_sound_offset=[]
 click_effect_sound=[]
+click_effect_sound_offset=[]
 main_effect_sound=[]
+main_effect_sound_offset=[]
 shop_effect_sound=[]
+shop_effect_sound_offset=[]
 stage1_effect_sound=[]
+stage1_effect_sound_offset=[]
 stage2_effect_sound=[]
+stage2_effect_sound_offset=[]
 stage3_effect_sound=[]
-
+stage3_effect_sound_offset=[]
 
 
 
@@ -683,22 +691,35 @@ def load_resources():
         end_image.append(load_image(f'배경\\end_{str(i)}.png'))
 
     #사운드
-    background_sound.append(load_music('sound\\10. Ib Title.mp3'))
-    background_sound[-1].set_volume(bgm_volume[bgm])
+    background_sound.append(load_music('sound\\Main Menu.wav'))
+    background_sound_offset.append(64)
+
     background_sound.append(load_music('sound\\02. Menu.mp3'))
-    background_sound[-1].set_volume(bgm_volume[bgm])
+    background_sound_offset.append(10)
+
+
     background_sound.append(load_music('sound\\16. Cascade.mp3'))
-    background_sound[-1].set_volume(bgm_volume[bgm])
+    background_sound_offset.append(10)
+
     background_sound.append(load_music('sound\\source_Resources_backgroundsound.mp3'))
-    background_sound[-1].set_volume(bgm_volume[bgm])
+    background_sound_offset.append(10)
+
     background_sound.append(load_music('sound\\01. Final Boss Theme.mp3'))
-    background_sound[-1].set_volume(bgm_volume[bgm])
-    background_sound.append(load_music('2stage\\boss_scene.ogg'))
-    background_sound[-1].set_volume(bgm_volume[bgm])
+    background_sound_offset.append(10)
+
+
     background_sound.append(load_music('2stage\\hellokitty.ogg'))
-    background_sound[-1].set_volume(bgm_volume[bgm])
+    background_sound_offset.append(10)
+
+    background_sound.append(load_wav('2stage\\boss_scene.ogg'))
+    background_sound_offset.append(10)
+
+    background_sound.append(load_music('2stage\\Boss1.mp3'))
+    background_sound_offset.append(10)
+
     background_sound.append(load_music('3stage\\Battle with Fox.wav'))
-    background_sound[-1].set_volume(bgm_volume[bgm])
+    background_sound_offset.append(10)
+
 
     attack_effect_sound.append(load_music('sound\\hamer-90566.mp3'))
     attack_effect_sound[-1].set_volume(effect_volume[effect])
@@ -725,8 +746,11 @@ def load_resources():
     stage2_effect_sound.append(load_music('2stage\\explosion.ogg'))
     stage2_effect_sound[-1].set_volume(effect_volume[effect])
 
+
     #stage3_effect_sound.append(load_music('3stage\\NPC_Killed_65.wav'))
 
+    click_effect_sound.append(load_music('sound\\Minimum_11.wav'))
+    click_effect_sound.append(64)
 
 
     ramona_image = {

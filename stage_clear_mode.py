@@ -83,7 +83,7 @@ def update(frame_time,events):
                 elif resource.boss3:
                     resource.boss3 = False
                 game_framework.pop_mode()
-                game_framework.pop_mode()
+                game_framework.change_mode(home_mode)
             elif 678 <= x <= 784 and 67 <= y <= 175:
                 import stage1_manager
                 import stage2_manager

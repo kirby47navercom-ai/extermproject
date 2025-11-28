@@ -33,6 +33,10 @@ def init():
         coin = load_image('배경\\coin.png')
         coin_font = load_font('Font\\경기천년바탕_Bold.ttf', 80)
 
+    resource.background_sound[2].set_volume(
+        (resource.background_sound_offset[2] * resource.bgm) // 2)
+    resource.background_sound[2].play(-1)
+
 def update(frame_time,events):
     for event in events:
         if event.type == SDL_MOUSEBUTTONDOWN:
@@ -161,7 +165,7 @@ def draw():
         talk[3].draw(canvas_size.canvaswidth // 2, canvas_size.canvasheight // 2)
 
     coin.draw(canvas_size.canvaswidth // 2, canvas_size.canvasheight // 2)
-    coin_font.draw(80, canvas_size.canvasheight-40, 'X '+str(resource.coin), (255, 255, 255))
+    coin_font.draw(80, canvas_size.canvasheight-40, 'X '+str(resource.coin), (0, 0, 0))
     if canvas_size.collide_check:
         draw_rectangle(495, 605, 855, 670)  #집
 
@@ -185,7 +189,7 @@ def draw():
 
 
 def finish():
-
+    resource.background_sound[2].stop()
     pass
 
 
