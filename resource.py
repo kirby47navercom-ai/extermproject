@@ -722,13 +722,13 @@ def load_resources():
 
 
     attack_effect_sound.append(load_wav('sound\\hamer-90566.mp3'))
-    attack_effect_sound[-1].set_volume(effect_volume[effect])
+    attack_effect_sound_offset.append(16)
     attack_effect_sound.append(load_wav('sound\\mixkit-heavy-sword-smashes-metal-2795.wav'))
-    attack_effect_sound[-1].set_volume(effect_volume[effect])
+    attack_effect_sound_offset.append(16)
     attack_effect_sound.append(load_wav('sound\\mixkit-metallic-sword-strike-2160.wav'))
-    attack_effect_sound[-1].set_volume(effect_volume[effect])
+    attack_effect_sound_offset.append(16)
     attack_effect_sound.append(load_wav('sound\\mixkit-samurai-sword-impact-2789.wav'))
-    attack_effect_sound[-1].set_volume(effect_volume[effect])
+    attack_effect_sound_offset.append(16)
 
     ramona_effect_sound.append(load_wav('sound\\[31] hop.ogg'))
     ramona_effect_sound_offset.append(64)
@@ -739,21 +739,17 @@ def load_resources():
     ramona_effect_sound.append(load_wav('sound\\Hit.wav'))
 
 
-    stage1_effect_sound.append(load_wav('sound\\NPC_Killed_6.wav'))
 
+    stage1_effect_sound.append(load_wav('sound\\NPC_Hit_52.wav'))
+    stage1_effect_sound_offset.append(64)
     stage1_effect_sound.append(load_wav('sound\\NPC_Killed_52.wav'))
-
+    stage1_effect_sound_offset.append(64)
     stage1_effect_sound.append(load_wav('sound\\NPC_Killed_59.wav'))
-
+    stage1_effect_sound_offset.append(64)
     stage1_effect_sound.append(load_wav('sound\\EoC_Expert_Roar.wav'))
-
-    stage1_effect_sound.append(load_wav('sound\\source_Resources_diesound.wav'))
-
-    stage1_effect_sound.append(load_wav('sound\\source_Resources_swipeeffect1.wav'))
-
-    stage1_effect_sound.append(load_wav('sound\\source_Resources_swipeeffect2.wav'))
-
-    stage1_effect_sound.append(load_wav('sound\\source_Resources_swipeeffect3.wav'))
+    stage1_effect_sound_offset.append(64)
+    stage1_effect_sound.append(load_wav('sound\\NPC_Killed_6.wav'))
+    stage1_effect_sound_offset.append(64)
 
 
     stage2_effect_sound.append(load_wav('2stage\\BLAAHLouder.ogg'))
@@ -826,15 +822,6 @@ def load_resources():
     ui_effect_sound.append(load_wav('sound\\Message.wav'))
     ui_effect_sound_offset.append(32)
 
-    ui_effect_sound.append(load_wav('sound\\Click.wav'))
-
-
-
-    ui_effect_sound.append(load_wav('sound\\Coin_0.wav'))
-
-    ui_effect_sound.append(load_wav('sound\\Coins.wav'))
-
-    ui_effect_sound.append(load_wav('sound\\Get Coin.wav'))
 
 
 

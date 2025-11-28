@@ -1,4 +1,6 @@
 from pico2d import *
+
+import resource
 from pattern import *
 from resource import *
 from random import randint
@@ -73,6 +75,10 @@ class Ghost:
     def hit_ghost_animation(self, frame_time):
         self.hit_frame = (self.hit_frame + self.hit_animation_speed * frame_time) % 4
         if int(self.hit_frame) == 3:
+            if self.hp>0:
+                resource.stage1_effect_sound[0].set_volume(
+                    (resource.stage1_effect_sound_offset[0] * resource.effect) // 2)
+                resource.stage1_effect_sound[0].play(1)
             self.hit_animation = False
             self.shape = self.pattern_set[randint(0, pattern_number-5)]
             self.shape.x = self.x
@@ -83,6 +89,10 @@ class Ghost:
         if self.hp<=0 and not self.die_animation:
             self.die_animation=True
             self.shape.name='No'
+            resource.stage1_effect_sound[1].set_volume(
+                (resource.stage1_effect_sound_offset[1] * resource.effect) // 2)
+            resource.stage1_effect_sound[1].play(1)
+
         pass
 
     def die_ghost_animation(self, frame_time):

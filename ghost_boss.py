@@ -73,6 +73,7 @@ class Pattern0State:
         self.pattern0_ready_timer = 0.0
         self.pattern_state = 0
         self.pattern_num = 0
+        self.sound = False
 
     def exit(self, event):
         self.pattern_state = 0
@@ -86,6 +87,12 @@ class Pattern0State:
         elif self.pattern0_ready_timer < self.pattern0_ready_time:
             self.pattern0_ready_timer += frame_time
         else:
+            if not self.sound:
+                resource.stage1_effect_sound[3].set_volume(
+                    (resource.stage1_effect_sound_offset[3] * resource.effect) // 2)
+                resource.stage1_effect_sound[3].play(1)
+                self.sound=True
+
             self.pattern_state = 2
             self.x += self.speed * 6 * frame_time * self.pattern_speed
             if self.x >= canvas_size.canvaswidth + 50:
@@ -117,6 +124,8 @@ class Pattern1State:
                                                    int(canvas_size.canvaswidth - self.width)), canvas_size.canvasheight // 2 + canvas_size.canvasheight // 4
         self.pattern1_frame = 0
 
+        self.sound=False
+
     def exit(self, event):
         self.pattern_state = 0
 
@@ -130,6 +139,12 @@ class Pattern1State:
             self.pattern0_ready_timer += frame_time
             self.pattern1_x, self.pattern1_y = ramona.Ramona_POS_X, ramona.Ramona_POS_Y
         else:
+            if not self.sound:
+                resource.stage1_effect_sound[3].set_volume(
+                    (resource.stage1_effect_sound_offset[3] * resource.effect) // 2)
+                resource.stage1_effect_sound[3].play(1)
+                self.sound=True
+
             self.pattern_state = 3
             self.x, self.y = distance_funtion(self.x, self.y, self.pattern1_x, self.pattern1_y, frame_time,
                                               self.speed * 6 * self.pattern_speed)
@@ -157,6 +172,7 @@ class Pattern2State:
     def enter(self, event):
         self.attack_timer = 0.0
         self.pattern_num = 2
+
 
     def exit(self, event):
         pass
@@ -194,6 +210,11 @@ class Pattern2State:
 class HitState:
     def enter(self, event):
         self.hit_frame = 0
+
+        if self.hp > 0:
+            resource.stage1_effect_sound[0].set_volume(
+                (resource.stage1_effect_sound_offset[0] * resource.effect) // 2)
+            resource.stage1_effect_sound[0].play(1)
 
     def exit(self, event):
         self.hit_animation = False

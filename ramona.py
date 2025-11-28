@@ -102,9 +102,16 @@ class AttackState:
         self.attack_motion = f'action{attack_num}'
         self.dir = 0
 
+
+
     def exit(self, event):
         global Ramona_smash_toggle
         Ramona_smash_toggle = False
+
+        random_number = random.randint(0, resource.attack_effect_sound_offset.length - 1)
+        resource.attack_effect_sound[random_number].set_volume(
+            (resource.attack_effect_sound_offset[random_number] * resource.effect) // 2)
+        resource.attack_effect_sound[random_number].play(1)
 
     def do(self, frame_time):
         global Ramona_smash, Ramona_smash_toggle
@@ -314,6 +321,11 @@ class HitState:
     def enter(self, event):
         self.frame = 0
         self.hit_timer = 0.2
+        if draw_gesture.f_pressed:
+
+            resource.ramona_effect_sound[3].set_volume(
+                (resource.ramona_effect_sound_offset[3] * resource.effect) // 2)
+            resource.ramona_effect_sound[3].play(1)
 
     def exit(self, event):
         pass
