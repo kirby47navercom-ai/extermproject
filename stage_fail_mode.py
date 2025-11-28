@@ -15,12 +15,19 @@ food = []
 def init():
     # 로고 이미지를 로드
     global black_background,fail,food,fail_no
+
+    resource.ui_effect_sound[9].set_volume(
+        (resource.ui_effect_sound_offset[9] * resource.effect) // 2)
+    resource.ui_effect_sound[9].play(1)
+
     if black_background == None:
         black_background = load_image('배경\\black_background.png')
         fail = load_image('배경\\fail.png')
         food = [load_image('배경\\sugar.png'),load_image('배경\\water.png'),
                 load_image('배경\\lemon.png')]
         fail_no = load_image('배경\\fail_no.png')
+
+
 
 
 
@@ -36,6 +43,9 @@ def update(frame_time,events):
                     resource.boss2 = False
                 elif resource.boss3:
                     resource.boss3 = False
+                resource.ui_effect_sound[4].set_volume(
+                    (resource.ui_effect_sound_offset[4] * resource.effect) // 2)
+                resource.ui_effect_sound[4].play(1)
                 game_framework.pop_mode()
                 game_framework.change_mode(home_mode)
             elif 678 <= x <= 784 and 67 <= y <= 175:
@@ -45,14 +55,23 @@ def update(frame_time,events):
                 if resource.boss1:
                     resource.boss1 = False
                     game_framework.pop_mode()
+                    resource.ui_effect_sound[4].set_volume(
+                        (resource.ui_effect_sound_offset[4] * resource.effect) // 2)
+                    resource.ui_effect_sound[4].play(1)
                     game_framework.change_mode(stage1_manager)
                 elif resource.boss2:
                     resource.boss2 = False
                     game_framework.pop_mode()
+                    resource.ui_effect_sound[4].set_volume(
+                        (resource.ui_effect_sound_offset[4] * resource.effect) // 2)
+                    resource.ui_effect_sound[4].play(1)
                     game_framework.change_mode(stage2_manager)
                 elif resource.boss3:
                     resource.boss3 = False
                     game_framework.pop_mode()
+                    resource.ui_effect_sound[4].set_volume(
+                        (resource.ui_effect_sound_offset[4] * resource.effect) // 2)
+                    resource.ui_effect_sound[4].play(1)
                     game_framework.change_mode(stage3_manager)
 
 

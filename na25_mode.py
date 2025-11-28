@@ -42,19 +42,38 @@ def update(frame_time,events):
         if event.type == SDL_MOUSEBUTTONDOWN:
             x, y = event.x, canvas_size.canvasheight - 1 - event.y
             if 495 <= x <= 855 and 605 <= y <= 670:
+                resource.ui_effect_sound[4].set_volume(
+                    (resource.ui_effect_sound_offset[4] * resource.effect) // 2)
+                resource.ui_effect_sound[4].play(1)
                 game_framework.change_mode(home_mode)
             elif 833 <= x <= 873 and 540 <= y <= 580:
-                resource.nanahira = 1
-                resource.talk = 1
+                if resource.talk !=1:
+                    resource.ui_effect_sound[6].set_volume(
+                        (resource.ui_effect_sound_offset[6] * resource.effect) // 2)
+                    resource.ui_effect_sound[6].play(1)
+                    resource.nanahira = 1
+                    resource.talk = 1
             elif 1060 <= x <= 1100 and 540 <= y <= 580:
-                resource.nanahira = 1
-                resource.talk = 2
+                if resource.talk != 2:
+                    resource.ui_effect_sound[6].set_volume(
+                        (resource.ui_effect_sound_offset[6] * resource.effect) // 2)
+                    resource.ui_effect_sound[6].play(1)
+                    resource.nanahira = 1
+                    resource.talk = 2
             elif 835 <= x <= 875 and 245 <= y <= 285:
-                resource.nanahira = 1
-                resource.talk = 3
+                if resource.talk != 3:
+                    resource.ui_effect_sound[6].set_volume(
+                        (resource.ui_effect_sound_offset[6] * resource.effect) // 2)
+                    resource.ui_effect_sound[6].play(1)
+                    resource.nanahira = 1
+                    resource.talk = 3
             elif 1060 <= x <= 1100 and 245 <= y <= 285:
-                resource.nanahira = 1
-                resource.talk = 4
+                if resource.talk != 4:
+                    resource.ui_effect_sound[6].set_volume(
+                        (resource.ui_effect_sound_offset[6] * resource.effect) // 2)
+                    resource.ui_effect_sound[6].play(1)
+                    resource.nanahira = 1
+                    resource.talk = 4
             elif 860 <= x <= 1010 and 318 <= y <= 390:
                 if resource.weapon1==0:
                     resource.weapon1 = 1
@@ -68,6 +87,10 @@ def update(frame_time,events):
                     ramona.Ramona_attack = 20
 
                     resource.pattern_number=15
+
+                    resource.ui_effect_sound[8].set_volume(
+                        (resource.ui_effect_sound_offset[8] * resource.effect) // 2)
+                    resource.ui_effect_sound[8].play(1)
 
             elif 1090 <= x <= 1240 and 318 <= y <= 390:
                 if resource.weapon2==0:
@@ -83,7 +106,14 @@ def update(frame_time,events):
 
                     resource.pattern_number = 15
 
+                    resource.ui_effect_sound[8].set_volume(
+                        (resource.ui_effect_sound_offset[8] * resource.effect) // 2)
+                    resource.ui_effect_sound[8].play(1)
+
                 elif resource.weapon2==2 and resource.coin>=1:
+                    resource.ui_effect_sound[7].set_volume(
+                        (resource.ui_effect_sound_offset[7] * resource.effect) // 2)
+                    resource.ui_effect_sound[7].play(1)
                     resource.coin-=1
                     resource.weapon2=0
 
@@ -101,7 +131,14 @@ def update(frame_time,events):
 
                     resource.pattern_number = 15
 
+                    resource.ui_effect_sound[8].set_volume(
+                        (resource.ui_effect_sound_offset[8] * resource.effect) // 2)
+                    resource.ui_effect_sound[8].play(1)
+
                 elif resource.weapon3==2 and resource.coin>=2:
+                    resource.ui_effect_sound[7].set_volume(
+                        (resource.ui_effect_sound_offset[7] * resource.effect) // 2)
+                    resource.ui_effect_sound[7].play(1)
                     resource.coin-=2
                     resource.weapon3=0
             elif 1090 <= x <= 1240 and 28 <= y <= 100:
@@ -119,6 +156,9 @@ def update(frame_time,events):
                     resource.pattern_number = 10
 
                 elif resource.weapon4==2 and resource.coin>=3:
+                    resource.ui_effect_sound[7].set_volume(
+                        (resource.ui_effect_sound_offset[7] * resource.effect) // 2)
+                    resource.ui_effect_sound[7].play(1)
                     resource.coin-=3
                     resource.weapon4=0
             else:

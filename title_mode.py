@@ -24,9 +24,15 @@ def update(frame_time,events):
             x, y = event.x, get_canvas_height() - 1 - event.y
             if 410 <= x <= 618 and 30 <= y <= 100:
                 game_framework.change_mode(home_mode)
+                resource.ui_effect_sound[0].set_volume(
+                    (resource.ui_effect_sound_offset[0] * resource.effect) // 2)
+                resource.ui_effect_sound[0].play(1)
 
             elif 660 <= x <= 868 and 30 <= y <= 100:
                 game_framework.push_mode(option_mode)
+                resource.ui_effect_sound[0].set_volume(
+                    (resource.ui_effect_sound_offset[0] * resource.effect) // 2)
+                resource.ui_effect_sound[0].play(1)
 
 def draw():
     # 로고 이미지를 그려준다

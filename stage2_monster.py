@@ -20,7 +20,7 @@ class Stage2_Monster:
             self.boss.attack_start=True
             resource.background_sound[5].stop()
             resource.background_sound[6].set_volume(
-                (resource.background_sound_offset[6] * resource.bgm) // 2)
+                (resource.background_sound_offset[6] * resource.effect) // 2)
             resource.background_sound[6].play(1)
             resource.background_sound[7].set_volume(
                 (resource.background_sound_offset[7] * resource.bgm) // 2)
