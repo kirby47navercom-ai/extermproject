@@ -409,8 +409,8 @@ attack_effect_sound=[]
 attack_effect_sound_offset=[]
 ramona_effect_sound=[]
 ramona_effect_sound_offset=[]
-click_effect_sound=[]
-click_effect_sound_offset=[]
+ui_effect_sound=[]
+ui_effect_sound_offset=[]
 main_effect_sound=[]
 main_effect_sound_offset=[]
 shop_effect_sound=[]
@@ -730,16 +730,31 @@ def load_resources():
     attack_effect_sound.append(load_music('sound\\mixkit-samurai-sword-impact-2789.wav'))
     attack_effect_sound[-1].set_volume(effect_volume[effect])
 
+    ramona_effect_sound.append(load_music('sound\\[31] hop.wav'))
+
+    ramona_effect_sound.append(load_music('sound\\[32] hop2.wav'))
+
+    ramona_effect_sound.append(load_music('sound\\Hit.wav'))
+
+    ramona_effect_sound.append(load_music('sound\\Dash.wav'))
+
+
     stage1_effect_sound.append(load_music('sound\\NPC_Killed_6.wav'))
-    stage1_effect_sound[-1].set_volume(effect_volume[effect])
+
     stage1_effect_sound.append(load_music('sound\\NPC_Killed_52.wav'))
-    stage1_effect_sound[-1].set_volume(effect_volume[effect])
+
     stage1_effect_sound.append(load_music('sound\\NPC_Killed_59.wav'))
-    stage1_effect_sound[-1].set_volume(effect_volume[effect])
+
     stage1_effect_sound.append(load_music('sound\\EoC_Expert_Roar.wav'))
-    stage1_effect_sound[-1].set_volume(effect_volume[effect])
-    stage1_effect_sound.append(load_music('sound\\NPC_Killed_65.wav'))
-    stage1_effect_sound[-1].set_volume(effect_volume[effect])
+
+    stage1_effect_sound.append(load_music('sound\\source_Resources_diesound.wav'))
+
+    stage1_effect_sound.append(load_music('sound\\source_Resources_swipeeffect1.wav'))
+
+    stage1_effect_sound.append(load_music('sound\\source_Resources_swipeeffect2.wav'))
+
+    stage1_effect_sound.append(load_music('sound\\source_Resources_swipeeffect3.wav'))
+
 
     stage2_effect_sound.append(load_music('2stage\\BLAAHLouder.ogg'))
     stage2_effect_sound[-1].set_volume(effect_volume[effect])
@@ -747,10 +762,55 @@ def load_resources():
     stage2_effect_sound[-1].set_volume(effect_volume[effect])
 
 
-    #stage3_effect_sound.append(load_music('3stage\\NPC_Killed_65.wav'))
+    stage3_effect_sound.append(load_music('3stage\\Fox Vine Needle.wav'))
 
-    click_effect_sound.append(load_music('sound\\Minimum_11.wav'))
-    click_effect_sound.append(64)
+    stage3_effect_sound.append(load_music('3stage\\Fox Fox Flame.wav'))
+
+    stage3_effect_sound.append(load_music('3stage\\Fox Land.wav'))
+
+    stage3_effect_sound.append(load_music('3stage\\Fox Jump.wav'))
+
+    stage3_effect_sound.append(load_music('3stage\\Fox Bite.wav'))
+
+    stage3_effect_sound.append(load_music('3stage\\Fox Catch Fire.wav'))
+
+    stage3_effect_sound.append(load_music('3stage\\Fox Extinguish Fire.wav'))
+
+    stage3_effect_sound.append(load_music('3stage\\Fox Fall Down.wav'))
+
+    stage3_effect_sound.append(load_music('3stage\\Fox Howl.wav'))
+
+    stage3_effect_sound.append(load_music('3stage\\Fox Prepare.wav'))
+
+    stage3_effect_sound.append(load_music('3stage\\Fox Rush Burning.wav'))
+
+    stage3_effect_sound.append(load_music('3stage\\Fox Rush Plain.wav'))
+
+    stage3_effect_sound.append(load_music('3stage\\Fox Scratch Rush.wav'))
+
+    stage3_effect_sound.append(load_music('3stage\\Fox Scratch.wav'))
+
+    stage3_effect_sound.append(load_music('3stage\\Fox Summon Fire.wav'))
+
+    stage3_effect_sound.append(load_music('3stage\\Fox Transformation.wav'))
+
+
+
+    ui_effect_sound.append(load_music('sound\\Minimum_11.wav'))
+    ui_effect_sound_offset.append(64)
+    ui_effect_sound.append(load_music('sound\\Click.wav'))
+
+    ui_effect_sound.append(load_music('sound\\Chat.wav'))
+
+    ui_effect_sound.append(load_music('sound\\Coin.wav'))
+
+    ui_effect_sound.append(load_music('sound\\Coin_0.wav'))
+
+    ui_effect_sound.append(load_music('sound\\Coins.wav'))
+
+    ui_effect_sound.append(load_music('sound\\Get Coin.wav'))
+
+    ui_effect_sound.append(load_music('sound\\Paper.wav'))
 
 
     ramona_image = {
