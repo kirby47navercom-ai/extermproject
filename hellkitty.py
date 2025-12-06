@@ -342,7 +342,7 @@ class Boss_Kitty:
             Boss_Kitty.little_image = load_image('2stage\\157.png')
 
         self.x, self.y = canvas_size.canvaswidth - 300, canvas_size.canvasheight // 2
-        self.boss_hp = 300
+        self.boss_hp = 360
         self.hp = self.boss_hp
         self.hp_bar = Boss_HP()
         self.width, self.height = 386 * SIZE, 299 * SIZE

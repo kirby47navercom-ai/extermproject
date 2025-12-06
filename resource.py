@@ -801,6 +801,8 @@ def load_resources():
     stage3_effect_sound_offset.append(32)
     stage3_effect_sound.append(load_wav('3stage\\Fox Transformation.wav'))
     stage3_effect_sound_offset.append(32)
+    stage3_effect_sound.append(load_wav('sound\\Explode.wav'))
+    stage3_effect_sound_offset.append(8)
 
 
     ui_effect_sound.append(load_wav('sound\\Minimum_11.wav'))

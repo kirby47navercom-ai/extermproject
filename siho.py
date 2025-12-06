@@ -157,6 +157,7 @@ class Boss_Siho:
         self.rush_prepare_time=1.0
         self.rush_speed = 2000.0
         self.check=False
+        self.sound_check=False
 
 
 
@@ -249,6 +250,10 @@ class Boss_Siho:
 
                 self.jump_frame = 0
 
+                resource.stage3_effect_sound[4].set_volume(
+                    (resource.stage3_effect_sound_offset[4] * resource.effect) // 2)
+                resource.stage3_effect_sound[4].play(1)
+
         # State 1: 점프 및 상승
         elif self.pattern2_state == 1:
             self.x += self.v_x * frame_time
@@ -258,6 +263,9 @@ class Boss_Siho:
             if self.y_velocity < 0:
                 self.pattern2_state = 2
                 self.jump_frame = 0
+                resource.stage3_effect_sound[9].set_volume(
+                    (resource.stage3_effect_sound_offset[9] * resource.effect) // 2)
+                resource.stage3_effect_sound[9].play(1)
 
         # State 2: 하강 및 착지
         elif self.pattern2_state == 2:
@@ -269,6 +277,9 @@ class Boss_Siho:
 
 
             if self.y <= self.boss_ground_level:
+                resource.stage3_effect_sound[3].set_volume(
+                    (resource.stage3_effect_sound_offset[3] * resource.effect) // 2)
+                resource.stage3_effect_sound[3].play(1)
                 self.y = self.boss_ground_level  #
                 self.y_velocity = 0
                 self.v_x = 0
@@ -360,6 +371,9 @@ class Boss_Siho:
                 self.pattern3_state = 2
                 self.spread_frame = 0
                 self.pattern3_fireball.append([self.x+50,self.y+100,0,0,0,False,False])
+                resource.stage3_effect_sound[16].set_volume(
+                    (resource.stage3_effect_sound_offset[16] * resource.effect) // 2)
+                resource.stage3_effect_sound[16].play(1)
         elif self.pattern3_state == 2:
             self.spread_frame = (self.spread_frame + self.animation_speed * frame_time)%4
             if self.pattern3_fireball[-1][6]:
@@ -385,6 +399,9 @@ class Boss_Siho:
                     if self.current_idx<5:#이거 왜 안댐??
                         self.pattern3_fireball.append([self.x + ball_idx[self.current_idx][0], self.y + ball_idx[self.current_idx][1], 0, 0, 0, False, False])
                         self.current_idx+=1
+                        resource.stage3_effect_sound[16].set_volume(
+                            (resource.stage3_effect_sound_offset[16] * resource.effect) // 2)
+                        resource.stage3_effect_sound[16].play(1)
             elif self.pattern3_fireball[i][6]:
                 self.pattern3_fireball[i][:4]=canvas_size.distance_funtion2(self.pattern3_fireball[i][0],self.pattern3_fireball[i][1],
                 self.pattern3_fireball[i][2],self.pattern3_fireball[i][3],
@@ -410,6 +427,9 @@ class Boss_Siho:
             if not self.pattern4_enter:
                 self.pattern4_player_x = ramona.Ramona_POS_X
                 self.pattern4_enter = True
+                resource.stage3_effect_sound[16].set_volume(
+                    (resource.stage3_effect_sound_offset[16] * resource.effect) // 2)
+                resource.stage3_effect_sound[16].play(1)
             self.pattern4_move_timer += frame_time
             if math.fabs(self.x - ramona.Ramona_POS_X) >0.5:
                 self.x,non=canvas_size.distance_funtion(self.x,0,self.pattern4_player_x,0,frame_time,self.pattern4_speed)
@@ -421,8 +441,11 @@ class Boss_Siho:
                 self.pattern4_enter = False
         elif self.pattern4_state == 1:
             self.scratch_frame = min((self.scratch_frame + self.animation_speed * frame_time),2)
-            if int(self.scratch_frame) == 2:
+            if int(self.scratch_frame) == 2 and not self.pattern4_attack:
                 self.pattern4_attack=True
+                resource.stage3_effect_sound[14].set_volume(
+                    (resource.stage3_effect_sound_offset[14] * resource.effect) // 2)
+                resource.stage3_effect_sound[14].play(1)
 
             if self.pattern4_attack:
                 self.pattern4_attack_frame = (self.pattern4_attack_frame + self.animation_speed * frame_time*2)
@@ -458,6 +481,9 @@ class Boss_Siho:
             self.scratch_frame2 = min((self.scratch_frame2 + self.animation_speed * frame_time),2)
             self.pattern5_attack_prepare_timer += frame_time
             if self.pattern5_attack_prepare_timer >= self.pattern5_attack_prepare_duration:
+                resource.stage3_effect_sound[15].set_volume(
+                    (resource.stage3_effect_sound_offset[15] * resource.effect) // 2)
+                resource.stage3_effect_sound[15].play(1)
                 self.pattern5_state = 1
                 self.pattern5_attack_prepare_timer = 0.0
                 self.scratch_frame2=0
@@ -494,7 +520,11 @@ class Boss_Siho:
         if self.change_phase_1_frame_timer < self.change_phase_1_frame_duration:
             self.change_phase_1_frame = min((self.change_phase_1_frame + self.animation_speed * frame_time), 2)
             self.change_phase_1_frame_timer += frame_time
-        if self.change_phase_1_frame_timer >= self.change_phase_1_frame_duration:
+            if self.change_phase_1_frame_timer >= self.change_phase_1_frame_duration:
+                resource.stage3_effect_sound[17].set_volume(
+                    (resource.stage3_effect_sound_offset[17] * resource.effect) // 2)
+                resource.stage3_effect_sound[17].play(1)
+        elif self.change_phase_1_frame_timer >= self.change_phase_1_frame_duration:
             self.change_phase_1_frame = self.change_phase_1_frame + self.animation_speed * frame_time
             if self.change_phase_1_frame >= 17:
                 self.pattern_num = 7
@@ -531,6 +561,10 @@ class Boss_Siho:
 
                 self.jump_frame = 0
 
+                resource.stage3_effect_sound[4].set_volume(
+                    (resource.stage3_effect_sound_offset[4] * resource.effect) // 2)
+                resource.stage3_effect_sound[4].play(1)
+
         # State 1: 점프 및 상승
         elif self.pattern8_state == 1:
             self.x += self.v_x * frame_time
@@ -540,6 +574,9 @@ class Boss_Siho:
             if self.y_velocity < 0:
                 self.pattern8_state = 2
                 self.jump_frame = 0
+                resource.stage3_effect_sound[4].set_volume(
+                    (resource.stage3_effect_sound_offset[4] * resource.effect) // 2)
+                resource.stage3_effect_sound[4].play(1)
 
         # State 2: 하강 및 착지
         elif self.pattern8_state == 2:
@@ -561,6 +598,10 @@ class Boss_Siho:
                 self.pattern8_timer = 0.0
                 self.jump_frame = 0
                 canvas_size.start_shake(0.5, 2.5)
+
+                resource.stage3_effect_sound[3].set_volume(
+                    (resource.stage3_effect_sound_offset[3] * resource.effect) // 2)
+                resource.stage3_effect_sound[3].play(1)
 
         # State 3: 정리 및 다음 패턴 대기
         elif self.pattern8_state == 3:
@@ -611,6 +652,10 @@ class Boss_Siho:
        for i in range(len(self.pattern9_attack) - 1, -1, -1):
               self.pattern9_attack[i][3] +=frame_time
               if self.pattern9_attack[i][3] >= self.pattern9_attack_prepare_duration:
+                    if self.pattern9_attack[i][2]==0.0:
+                        resource.stage3_effect_sound[15].set_volume(
+                            (resource.stage3_effect_sound_offset[15] * resource.effect) // 2)
+                        resource.stage3_effect_sound[15].play(1)
                     self.pattern9_attack[i][2] = min((self.pattern9_attack[i][2] + self.animation_speed * frame_time*2),3)
                     if self.pattern9_attack[i][2]>=3:
                         self.pattern9_attack[i][4] +=frame_time
@@ -657,6 +702,10 @@ class Boss_Siho:
             if self.pattern10_attack[i][4] or self.pattern10_attack[i - 1][3] > 0.2:
                 self.pattern10_attack[i][3] += frame_time
             if self.pattern10_attack[i][3] >= self.pattern10_attack_prepare_duration:
+                if self.pattern10_attack[i][2] == 0.0:
+                    resource.stage3_effect_sound[5].set_volume(
+                        (resource.stage3_effect_sound_offset[5] * resource.effect) // 2)
+                    resource.stage3_effect_sound[5].play(1)
                 self.pattern10_attack[i][2] = self.pattern10_attack[i][2] + self.animation_speed * frame_time
                 if self.pattern10_attack[i][2] < 3:
                     self.ramonatobite(self.pattern10_attack[i])
@@ -678,8 +727,15 @@ class Boss_Siho:
 
     def pattern11(self, frame_time):
         if self.pattern11_state == 0:
+            if self.change_phase_2_frame == 0.0:
+                resource.stage3_effect_sound[10].set_volume(
+                    (resource.stage3_effect_sound_offset[10] * resource.effect) // 2)
+                resource.stage3_effect_sound[10].play(1)
             self.change_phase_2_frame = self.change_phase_2_frame + self.animation_speed * frame_time
             if self.change_phase_2_frame >= 8:
+                resource.stage3_effect_sound[6].set_volume(
+                    (resource.stage3_effect_sound_offset[6] * resource.effect) // 2)
+                resource.stage3_effect_sound[6].play(1)
                 self.pattern11_state = 1
                 self.change_phase_2_frame=0.0
                 canvas_size.start_shake(3.0, 5.0)
@@ -732,6 +788,13 @@ class Boss_Siho:
             self.rush_prepare_timer += frame_time
             self.ramonatosiho_rush()
             if self.rush_prepare_timer >= self.rush_prepare_time:
+
+                if  not self.sound_check:
+                    self.sound_check=True
+                    resource.stage3_effect_sound[12].set_volume(
+                        (resource.stage3_effect_sound_offset[12] * resource.effect) // 2)
+                    resource.stage3_effect_sound[12].play(1)
+
                 if self.check:
                     self.x+= self.rush_speed * frame_time
                 else:
@@ -750,6 +813,7 @@ class Boss_Siho:
                     self.y = 300 if self.rush_direction[ self.pattern13_state-1] == 0 else 380
                     self.dir = '' if ramona.Ramona_POS_X > self.x else 'h'
                     self.check = self.x < 0
+                    self.sound_check=False
         elif self.pattern13_state == 4:
             self.rush_frame = (self.rush_frame + self.animation_speed * frame_time)
             if self.rush_frame >= 7:
@@ -759,7 +823,7 @@ class Boss_Siho:
 
     def ramonatosiho_rush(self):
         if collide([ramona.Ramona_POS_X, ramona.Ramona_POS_Y, ramona.Ramona_SIZE_X, ramona.Ramona_SIZE_Y],
-                   [self.x, self.y, 192*SIZE,64*SIZE]) and not ramona.Ramona_invincible and not ramona.Ramona_roll_invincible:
+                   [self.x, self.y, 192,64]) and not ramona.Ramona_invincible and not ramona.Ramona_roll_invincible:
             if ramona.CURRENT_HP > 0:
                 ramona.CURRENT_HP -= 1
                 ramona.Ramona_invincible = True
@@ -771,12 +835,18 @@ class Boss_Siho:
             # x y 프레임 방향 스테이트 갈지말지
             self.rush_fire.append([100 if self.rush_fire_direction==0 else 1900, 50, 0.0, self.rush_fire_direction, 0,False])
             self.rush_fire_num-=1
+            resource.stage3_effect_sound[16].set_volume(
+                (resource.stage3_effect_sound_offset[16] * resource.effect) // 2)
+            resource.stage3_effect_sound[16].play(1)
         for i in range(len(self.rush_fire) - 1, -1, -1):
             if self.rush_fire[i][4]==0:
                 self.rush_fire[i][2] = self.rush_fire[i][2] + self.animation_speed * frame_time
                 if self.rush_fire[i][2]>=4 and self.rush_fire_num>0:
                     if self.rush_fire_num>1:
                         self.rush_fire.append([self.rush_fire[i][0]-30 if self.rush_fire_num%2==1 else self.rush_fire[i][0]+30, 50+(15-self.rush_fire_num)*50, 0.0, self.rush_fire_direction, 0,False])
+                        resource.stage3_effect_sound[16].set_volume(
+                            (resource.stage3_effect_sound_offset[16] * resource.effect) // 2)
+                        resource.stage3_effect_sound[16].play(1)
                     self.rush_fire_num-=1
                     self.rush_fire[i][4]=1
                     self.rush_fire[i][2] = 0.0
@@ -799,12 +869,18 @@ class Boss_Siho:
     def pattern14(self, frame_time):
         if self.pattern14_state == 0:
             self.die_frame = min((self.die_frame + self.animation_speed * frame_time),8)
+            resource.stage3_effect_sound[18].set_volume(
+                (resource.stage3_effect_sound_offset[18] * resource.effect) // 2)
+            resource.stage3_effect_sound[18].play(1)
             if self.die_frame >= 8:
                 self.die_timer += frame_time
 
             if self.die_timer >= self.die_time:
                 self.pattern14_state = 1
                 self.die_timer = 0.0
+                resource.stage3_effect_sound[9].set_volume(
+                    (resource.stage3_effect_sound_offset[9] * resource.effect) // 2)
+                resource.stage3_effect_sound[9].play(1)
         elif self.pattern14_state == 1:
             self.die_frame = min((self.die_frame + self.animation_speed * frame_time),17)
             if self.die_frame >= 17:
@@ -1056,7 +1132,7 @@ class Boss_Siho:
 
                 if canvas_size.collide_check and 4 > self.pattern13_state > 0:
                     draw_rectangle(self.x - canvas_size.camera_x - 192/2,
-                                   self.y - canvas_size.camera_y - 64*1.8/2,
+                                   self.y - canvas_size.camera_y - 64/2,
                                    self.x - canvas_size.camera_x + 192/2,
                                    self.y - canvas_size.camera_y + 64/2)
 
