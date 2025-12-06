@@ -722,13 +722,13 @@ def load_resources():
 
 
     attack_effect_sound.append(load_wav('sound\\hamer-90566.mp3'))
-    attack_effect_sound_offset.append(16)
-    attack_effect_sound.append(load_wav('sound\\mixkit-heavy-sword-smashes-metal-2795.wav'))
-    attack_effect_sound_offset.append(16)
-    attack_effect_sound.append(load_wav('sound\\mixkit-metallic-sword-strike-2160.wav'))
-    attack_effect_sound_offset.append(16)
+    attack_effect_sound_offset.append(32)
+    attack_effect_sound.append(load_wav('sound\\Hammer.wav'))
+    attack_effect_sound_offset.append(32)
+    attack_effect_sound.append(load_wav('sound\\Needle Sound.wav'))
+    attack_effect_sound_offset.append(32)
     attack_effect_sound.append(load_wav('sound\\mixkit-samurai-sword-impact-2789.wav'))
-    attack_effect_sound_offset.append(16)
+    attack_effect_sound_offset.append(32)
 
     ramona_effect_sound.append(load_wav('sound\\[31] hop.ogg'))
     ramona_effect_sound_offset.append(64)
@@ -737,63 +737,74 @@ def load_resources():
     ramona_effect_sound.append(load_wav('sound\\Dash.wav'))
     ramona_effect_sound_offset.append(32)
     ramona_effect_sound.append(load_wav('sound\\Hit.wav'))
-
+    ramona_effect_sound_offset.append(32)
+    ramona_effect_sound.append(load_wav('sound\\Explode #32055.wav'))
+    ramona_effect_sound_offset.append(32)
 
 
     stage1_effect_sound.append(load_wav('sound\\NPC_Hit_52.wav'))
-    stage1_effect_sound_offset.append(64)
+    stage1_effect_sound_offset.append(32)
     stage1_effect_sound.append(load_wav('sound\\NPC_Killed_52.wav'))
-    stage1_effect_sound_offset.append(64)
+    stage1_effect_sound_offset.append(32)
     stage1_effect_sound.append(load_wav('sound\\NPC_Killed_59.wav'))
-    stage1_effect_sound_offset.append(64)
+    stage1_effect_sound_offset.append(32)
     stage1_effect_sound.append(load_wav('sound\\EoC_Expert_Roar.wav'))
-    stage1_effect_sound_offset.append(64)
+    stage1_effect_sound_offset.append(32)
     stage1_effect_sound.append(load_wav('sound\\NPC_Killed_6.wav'))
-    stage1_effect_sound_offset.append(64)
+    stage1_effect_sound_offset.append(32)
 
 
+
+    stage2_effect_sound.append(load_wav('sound\\Acorn Dead.wav'))
+    stage2_effect_sound_offset.append(32)
+    stage2_effect_sound.append(load_wav('sound\\Tiny Drill.wav'))
+    stage2_effect_sound_offset.append(32)
     stage2_effect_sound.append(load_wav('2stage\\BLAAHLouder.ogg'))
-    stage2_effect_sound[-1].set_volume(effect_volume[effect])
+    stage2_effect_sound_offset.append(32)
     stage2_effect_sound.append(load_wav('2stage\\explosion.ogg'))
-    stage2_effect_sound[-1].set_volume(effect_volume[effect])
+    stage2_effect_sound_offset.append(32)
 
 
     stage3_effect_sound.append(load_wav('3stage\\Fox Vine Needle.wav'))
-
+    stage3_effect_sound_offset.append(32)
     stage3_effect_sound.append(load_wav('3stage\\Fox Flame.wav'))
-
+    stage3_effect_sound_offset.append(32)
+    stage3_effect_sound.append(load_wav('3stage\\Fox Water.wav'))
+    stage3_effect_sound_offset.append(32)
     stage3_effect_sound.append(load_wav('3stage\\Fox Land.wav'))
-
+    stage3_effect_sound_offset.append(32)
     stage3_effect_sound.append(load_wav('3stage\\Fox Jump.wav'))
-
+    stage3_effect_sound_offset.append(32)
     stage3_effect_sound.append(load_wav('3stage\\Fox Bite.wav'))
-
+    stage3_effect_sound_offset.append(32)
+    stage3_effect_sound.append(load_wav('3stage\\Fox Fire.wav'))
+    stage3_effect_sound_offset.append(32)
     stage3_effect_sound.append(load_wav('3stage\\Fox Catch Fire.wav'))
-
+    stage3_effect_sound_offset.append(32)
     stage3_effect_sound.append(load_wav('3stage\\Fox Extinguish Fire.wav'))
-
+    stage3_effect_sound_offset.append(32)
     stage3_effect_sound.append(load_wav('3stage\\Fox Fall Down.wav'))
-
+    stage3_effect_sound_offset.append(32)
     stage3_effect_sound.append(load_wav('3stage\\Fox Howl.wav'))
-
+    stage3_effect_sound_offset.append(32)
     stage3_effect_sound.append(load_wav('3stage\\Fox Prepare.wav'))
-
+    stage3_effect_sound_offset.append(32)
     stage3_effect_sound.append(load_wav('3stage\\Fox Rush Burning.wav'))
-
+    stage3_effect_sound_offset.append(32)
     stage3_effect_sound.append(load_wav('3stage\\Fox Rush Plain.wav'))
-
+    stage3_effect_sound_offset.append(32)
     stage3_effect_sound.append(load_wav('3stage\\Fox Scratch Rush.wav'))
-
+    stage3_effect_sound_offset.append(32)
     stage3_effect_sound.append(load_wav('3stage\\Fox Scratch.wav'))
-
+    stage3_effect_sound_offset.append(32)
     stage3_effect_sound.append(load_wav('3stage\\Fox Summon Fire.wav'))
-
+    stage3_effect_sound_offset.append(32)
     stage3_effect_sound.append(load_wav('3stage\\Fox Transformation.wav'))
-
+    stage3_effect_sound_offset.append(32)
 
 
     ui_effect_sound.append(load_wav('sound\\Minimum_11.wav'))
-    ui_effect_sound_offset.append(64)
+    ui_effect_sound_offset.append(96)
 
     ui_effect_sound.append(load_wav('sound\\Minimum_50.wav'))
     ui_effect_sound_offset.append(32)

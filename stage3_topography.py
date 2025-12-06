@@ -68,7 +68,7 @@ class Stage3_Terrain:
         self.flame_frame=0
         self.flame_ball_frame = 0
         self.flame_ball_x = -100
-        self.flame_ball_y = -50
+        self.flame_ball_y = 1050
         self.flame_ball_speed = 800
         self.flame_ball_getbb1 = [int(self.flame_ball_x) - self.camerax - 34, int(self.flame_ball_y) - self.cameray + 4,
                                   int(self.flame_ball_x) - self.camerax + 34, int(self.flame_ball_y) - self.cameray + 64]
@@ -119,6 +119,9 @@ class Stage3_Terrain:
             if int(self.vine_needle_appear_frame) == 11:
                 self.vine_needle_mode = 1  # 지속 모드로 전환
                 self.vine_needle_appear_frame = 0  # 프레임 초기화
+                resource.stage3_effect_sound[0].set_volume(
+                    (resource.stage3_effect_sound_offset[0] * resource.effect) // 2)
+                resource.stage3_effect_sound[0].play(1)
         elif self.vine_needle_mode == 1:
             self.vine_needle_duration_timer += frame_time
             self.ramonatoneedle()
@@ -149,8 +152,14 @@ class Stage3_Terrain:
         self.water_wave_x += self.water_wave_speed * frame_time * self.water_wave_dir
         if self.water_wave_x > 2780:
             self.water_wave_dir = -1
+            resource.stage3_effect_sound[2].set_volume(
+                (resource.stage3_effect_sound_offset[2] * resource.effect) // 2)
+            resource.stage3_effect_sound[2].play(1)
         elif self.water_wave_x < -800:
             self.water_wave_dir = 1
+            resource.stage3_effect_sound[2].set_volume(
+                (resource.stage3_effect_sound_offset[2] * resource.effect) // 2)
+            resource.stage3_effect_sound[2].play(1)
 
         self.water_wave_getbb1=[int(self.water_wave_x)-(130 if self.water_wave_dir==-1 else 0)- self.camerax - 20, 260- self.cameray-40,int(self.water_wave_x)-(130 if self.water_wave_dir==-1 else 0)- self.camerax + 150, 260- self.cameray+20]
         self.water_wave_getbb2=[int(self.water_wave_x)-(130 if self.water_wave_dir==-1 else 0)- self.camerax + 70, 260- self.cameray - 50,int(self.water_wave_x)-(130 if self.water_wave_dir==-1 else 0)- self.camerax + 170, 260- self.cameray + 0]
@@ -180,6 +189,9 @@ class Stage3_Terrain:
     def ball_move(self, frame_time):
         self.flame_ball_y += self.flame_ball_speed * frame_time
         if self.flame_ball_y > 900:
+            resource.stage3_effect_sound[1].set_volume(
+                (resource.stage3_effect_sound_offset[1] * resource.effect) // 2)
+            resource.stage3_effect_sound[1].play(1)
             self.flame_ball_x = ramona.Ramona_POS_X
             self.flame_ball_y = -50
             self.flame_ball_speed = 200

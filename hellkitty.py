@@ -56,6 +56,9 @@ class Pattern0_State:  # 하트 유도탄
         if not self.attack_init:
             self.attack1.append([self.x, self.y, 0, ramona.Ramona_POS_X, ramona.Ramona_POS_Y, 0.0])
             canvas_size.start_shake(0.1, 5)
+            resource.stage2_effect_sound[1].set_volume(
+                (resource.stage2_effect_sound_offset[1] * resource.effect) // 2)
+            resource.stage2_effect_sound[1].play(1)
             self.attack_init = True
 
         for i in range(len(self.attack1) - 1, -1, -1):
@@ -76,6 +79,9 @@ class Pattern0_State:  # 하트 유도탄
                 self.attack1.pop(i)
                 if self.attack1_num > 0:
                     self.attack1.append([self.x, self.y, 0, ramona.Ramona_POS_X, ramona.Ramona_POS_Y, 0.0])
+                    resource.stage2_effect_sound[1].set_volume(
+                        (resource.stage2_effect_sound_offset[1] * resource.effect) // 2)
+                    resource.stage2_effect_sound[1].play(1)
 
         if self.attack1_num == 0:
             self.change_state(Pattern1_State, None)
@@ -121,6 +127,9 @@ class Pattern1_State:  # 레이저
                     self.attack2[i][2] += frame_time
                     if self.attack2[i][2] > self.attack2_timer:
                         self.attack2_init = False
+                        resource.stage2_effect_sound[2].set_volume(
+                            (resource.stage2_effect_sound_offset[2] * resource.effect) // 2)
+                        resource.stage2_effect_sound[2].play(1)
                         self.attack2[i][3] = 1
                         self.attack2[i][2] = 0.0
                         self.attack2[i][1] = 0
@@ -231,6 +240,9 @@ class Pattern3_State:  # 부채꼴 탄막
             self.attack4_duration_timer += frame_time
             if self.attack4_spawn_time >= self.attack4_spawn_interval:
                 self.attack4_spawn_time = 0.0
+                resource.stage2_effect_sound[1].set_volume(
+                    (resource.stage2_effect_sound_offset[1] * resource.effect) // 2)
+                resource.stage2_effect_sound[1].play(1)
                 spawn_x = self.x
                 spawn_y = canvas_size.canvasheight // 2
                 angle_deg = random.uniform(135, 225)
@@ -294,6 +306,10 @@ class DieState:
             self.die_frame = (self.die_frame + self.die_animation_speed * frame_time * 2) % 4
             canvas_size.start_shake(0.5, 5)
 
+            resource.stage2_effect_sound[3].set_volume(
+                (resource.stage2_effect_sound_offset[3] * resource.effect) // 2)
+            resource.stage2_effect_sound[3].play(1)
+
     def draw(self):
         left, bottom, width, height = boss_kitty_die_coordinate[0:4]
         self.die_image[int(self.die_frame)].draw(self.x - canvas_size.shake_x, self.y - canvas_size.shake_y,
@@ -326,7 +342,7 @@ class Boss_Kitty:
             Boss_Kitty.little_image = load_image('2stage\\157.png')
 
         self.x, self.y = canvas_size.canvaswidth - 300, canvas_size.canvasheight // 2
-        self.boss_hp = 240
+        self.boss_hp = 300
         self.hp = self.boss_hp
         self.hp_bar = Boss_HP()
         self.width, self.height = 386 * SIZE, 299 * SIZE

@@ -33,6 +33,9 @@ class Stage2_Monster:
 
     def shape_check(self):
         if self.boss.shape.name == draw_gesture.result and self.boss.hp>0:
+            resource.stage2_effect_sound[0].set_volume(
+                (resource.stage2_effect_sound_offset[0] * resource.effect) // 2)
+            resource.stage2_effect_sound[0].play(1)
             self.boss.hp -= ramona.Ramona_attack
             ramona.Ramona_smash = True
             self.boss.hit_animation=True

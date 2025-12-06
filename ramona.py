@@ -71,6 +71,10 @@ class DeadState:
         Ramona_dead = True
         self.knockback_timer = 2.0
 
+        resource.ramona_effect_sound[4].set_volume(
+            (resource.ramona_effect_sound_offset[4] * resource.effect) // 2)
+        resource.ramona_effect_sound[4].play(1)
+
     def exit(self, event):
         pass
 
@@ -98,9 +102,15 @@ class DeadState:
 class AttackState:
     def enter(self, event):
         self.frame = 0
-        attack_num = random.randint(1, 6)
+        attack_num = random.randint(1, 5)
+        if attack_num ==5:
+            attack_num=6
         self.attack_motion = f'action{attack_num}'
         self.dir = 0
+        random_number = random.randint(0, resource.attack_effect_sound_offset.__len__() - 1)
+        resource.attack_effect_sound[random_number].set_volume(
+            (resource.attack_effect_sound_offset[random_number] * resource.effect) // 2)
+        resource.attack_effect_sound[random_number].play(1)
 
 
 
@@ -108,10 +118,7 @@ class AttackState:
         global Ramona_smash_toggle
         Ramona_smash_toggle = False
 
-        random_number = random.randint(0, resource.attack_effect_sound_offset.length - 1)
-        resource.attack_effect_sound[random_number].set_volume(
-            (resource.attack_effect_sound_offset[random_number] * resource.effect) // 2)
-        resource.attack_effect_sound[random_number].play(1)
+
 
     def do(self, frame_time):
         global Ramona_smash, Ramona_smash_toggle
