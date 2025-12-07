@@ -720,6 +720,9 @@ def load_resources():
     background_sound.append(load_music('3stage\\Battle with Fox.wav'))
     background_sound_offset.append(10)
 
+    background_sound.append(load_music('sound\\mari.mp3'))
+    background_sound_offset.append(32)
+
 
     attack_effect_sound.append(load_wav('sound\\hamer-90566.mp3'))
     attack_effect_sound_offset.append(32)

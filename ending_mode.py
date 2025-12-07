@@ -17,6 +17,10 @@ def init():
         black_background = load_image('배경\\black_background.png')
     current_image = 0
     alpha = 0
+    resource.background_sound[1].stop()
+    resource.background_sound[9].set_volume(
+        (resource.background_sound_offset[9] * resource.effect) // 2)
+    resource.background_sound[9].play(-1)
 
 def update(frame_time, events):
     global current_image, alpha
@@ -25,11 +29,21 @@ def update(frame_time, events):
         if event.type == SDL_MOUSEBUTTONDOWN:
             if alpha < 255:
                 alpha = 255  # 현재 이미지 바로 다 보이게
+                resource.ui_effect_sound[0].set_volume(
+                    (resource.ui_effect_sound_offset[0] * resource.effect) // 2)
+                resource.ui_effect_sound[0].play(1)
             else:
                 if current_image < 6:
                     current_image += 1
                     alpha = 0
+                    resource.ui_effect_sound[0].set_volume(
+                        (resource.ui_effect_sound_offset[0] * resource.effect) // 2)
+                    resource.ui_effect_sound[0].play(1)
                 else:
+                    resource.background_sound[9].stop()
+                    resource.background_sound[1].set_volume(
+                        (resource.background_sound_offset[1] * resource.effect) // 2)
+                    resource.background_sound[1].play(-1)
                     game_framework.pop_mode()
 
     if alpha < 255:
